@@ -26,8 +26,27 @@
                   </span>
                 <!--<b class="badge bg-info pull-right">5</b>-->
                 <img src="images/icon_overview.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">云箱概览</span>
+                <span class="font-bold hidden-folded">租户管理</span>
             </a>
+
+            <ul class="nav nav-sub dk">
+                <li ui-sref-active="active">
+                    <a ui-sref="app.realtime">
+                        <span>运输公司</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.instantlocation">
+                        <span>公司管理员</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="app.instantlocation">
+                        <span>公司用户</span>
+                    </a>
+                </li>
+            </ul>
+
         </li>
         <li>
             <a href class="auto">
@@ -37,7 +56,7 @@
                   </span>
                 <!--<b class="badge bg-info pull-right">5</b>-->
                 <img src="images/icon_monitor.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">云箱监控</span>
+                <span class="font-bold hidden-folded">仓库管理</span>
             </a>
             <ul class="nav nav-sub dk">
                 <li ui-sref-active="active">
@@ -91,7 +110,7 @@
                   </span>
                 <!--<b class="badge bg-info pull-right">5</b>-->
                 <img src="images/icon_basic.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">云箱信息管理</span>
+                <span class="font-bold hidden-folded">云箱管理</span>
             </a>
             <ul class="nav nav-sub dk">
                 <li ui-sref-active="active">
@@ -117,20 +136,6 @@
 
             </ul>
         </li>
-        <!--<li class="line dk"></li>-->
-        <!--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-            <span>查询</span>
-        </li>-->
-        <li ui-sref-active="active">
-            <a ui-sref="app.lease">
-                <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <img src="images/icon_lease.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">共享管理</span>
-            </a>
-        </li>
 
         <li>
             <a href class="auto">
@@ -140,18 +145,24 @@
                   </span>
                 <!--<b class="badge bg-info pull-right">5</b>-->
                 <img src="images/icon_ana.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">数据预测分析</span>
+                <span class="font-bold hidden-folded">报表管理</span>
             </a>
             <ul class="nav nav-sub dk">
                 <li ui-sref-active="active">
                     <a ui-sref="app.allhist">
-                        <span>整体历史数据</span>
+                        <span>月报表</span>
                     </a>
                 </li>
             </ul>
         </li>
 
     </div>
+
+
+
+
+
+
     <div class="regular" ng-switch-when="carrier">
         <!--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
             <span>业务</span>

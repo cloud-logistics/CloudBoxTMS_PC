@@ -11,7 +11,7 @@
     function AsideController(ApiServer,$state, StorageService, constdata) {
         /* jshint validthis: true */
         var vm = this;
-        var info = ApiServer.info();
+        //var info = ApiServer.info();
 
         var height = document.body.clientHeight + 'px';
         vm.navStyle = {'height':height};
@@ -20,10 +20,12 @@
         vm.logoutAction = logoutAction;
 
         vm.messages = [];
-        vm.title = '智能云箱';
+        vm.title = '云箱租赁';
 
-        vm.role = StorageService.get(constdata.informationKey).role;
-
+        if(StorageService.get(constdata.informationKey) != null && StorageService.get(constdata.informationKey) != '') {
+            vm.role = StorageService.get(constdata.informationKey).role;
+        }
+        vm.role = 'admin';
         function clearAllMessageAction() {
             vm.messages = [];
             for (var i = 0; i < vm.messages.length; i++){
@@ -31,17 +33,10 @@
                 ApiServer.messageDelete(msg.messageid);
             }
         }
-        
-        ApiServer.messageGetByUserId(function (res) {
-            vm.messages = res.data;
-            if (vm.messages.length > 5){
-                vm.messages = vm.messages.slice(0,5);
-            }
-        },function (err) {
 
-        })
         
         function logoutAction() {
+            console.log('logout....');
             ApiServer.logoutAction();
         }
         

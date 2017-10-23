@@ -1,5 +1,5 @@
 <!-- navbar header -->
-<div class="navbar-header {{app.settings.navbarHeaderColor}}" ng-controller="AsideController as vm">
+<div class="navbar-header {{app.settings.navbarHeaderColor}}" ng-controller="AsideController as vm" style="background-color: #2d9dff;">
     <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
         <i class="glyphicon glyphicon-cog"></i>
     </button>
@@ -7,10 +7,10 @@
         <i class="glyphicon glyphicon-align-justify"></i>
     </button>
     <!-- brand -->
-    <a ui-sref="app.pipelineview" class="navbar-brand text-lt">
+    <a ui-sref="app.dashboard" class="navbar-brand text-lt " >
         <!--<i class="fa fa-btc"></i>-->
         <img src="images/logo.png" alt=".">
-        <span class="hidden-folded m-l-xs small">{{vm.title}}</span>
+        <span class="hidden-folded m-l-xs " style="letter-spacing:3px;">{{vm.title}}</span>
     </a>
     <!-- / brand -->
 </div>
@@ -23,9 +23,9 @@
         <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
             <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw"></i>
         </a>
-        <a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
+  <!--      <a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
             <i class="icon-user fa-fw"></i>
-        </a>
+        </a>-->
     </div>
     <!-- / buttons -->
 

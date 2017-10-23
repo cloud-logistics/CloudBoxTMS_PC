@@ -82,10 +82,8 @@
 
         // $locationProvider.html5Mode(true);
         $urlRouterProvider
-            .otherwise('pipelineview');
+            .otherwise('app');
         $stateProvider
-
-
             .state('app.dashboard', {
                 url: 'dashboard',
                 templateUrl: 'app/components/dashboard/dashboard.html'
@@ -95,11 +93,7 @@
                 url: 'overview',
                 templateUrl: 'app/components/overview/overview.html'
             })
-            //全景视图
-            .state('app.pipelineview',{
-                url: 'pipelineview',
-                templateUrl: 'app/components/pipelineview/pipelineview.html'
-            })
+
             //云箱监控
             .state('app.monitor',{
                 url: 'monitor',

@@ -1,17 +1,12 @@
-# App artifacts
-/_build
-/db
-/deps
-/*.ez
-/tmp
-
-# Generated on crash by the VM
+_build/
+db/
+deps/
+*.ez
+tmp/
 erl_crash.dump
-
-# Static artifacts
-/node_modules
-/lint
-/bower_components
-/build
-/dist
-
+node_modules/
+lint/
+bower_components/
+build/
+dist/
+.idea/
