@@ -19,13 +19,16 @@
             token:'airspc_access_authorization',
             informationKey:'airspc_information',
             refreshInterval: 300000,
-            defaultContainerId : '01-03-17-09-00-22',
+            defaultContainerId : '01-03-17-09-00-22',//constdata.api.uploadFile.qiniuPath
             api:{
                 resource:{
                     vehicle:'resource/vehicle',
                     shippingSchedule:'resource/shippingschedule',
                     container:'resource/container',
                     transportTask:'resource/transporttask'
+                },
+                uploadFile:{
+                  qiniuPath:'uploadFile'
                 },
                 overview: {
                     satelites: 'satellites',

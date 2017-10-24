@@ -58,35 +58,13 @@
         vm.awesomeThings = [];
         vm.classAnimation = '';
         vm.creationDate = 1452231070467;
-        vm.showToastr = showToastr;
-
-
-        function showToastr() {
-            toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-            vm.classAnimation = '';
-        }
 
          if (ApiServer.isAuthed()){
-
-            /*if (url.indexOf('#') === -1 || url.indexOf('access') !== -1){
-                $timeout(function () {
-                    var roleType = ApiServer.roleType();
-                    if (roleType === 'cargoagent'){
-                        $state.go('app.goodorder');
-                    }else if (roleType === 'carrier'){
-                        $state.go('app.carorder');
-                    }else if (roleType === 'shipper'){
-                        $state.go('app.shiporder');
-                    }else{
-                        $state.go('app.pipelineview');
-                    }
-                },10);
-            }*/
-             $state.go('app.dashboard');
+                $state.go('app.overview');
         }else{
-            $timeout(function () {
+            //$timeout(function () {
                 $state.go('access.signin');
-            },10);
+            //},10);
         }
 
     }

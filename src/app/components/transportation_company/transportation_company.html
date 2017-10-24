@@ -1,0 +1,109 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="TransportationCompanyController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <!-- div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h1 class="m-n font-thin h3 text-black">租户信息</h1>
+                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- tasks -->
+
+        <div class="m-l m-r m-t panel panel-default">
+        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
+            <thead>
+            <tr>
+                <th colspan="7">
+                    <button ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>添加</button>
+                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="搜索" type="text"/>
+                </th>
+            </tr>
+            <tr class="font-bold">
+               <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                <th class="text-center">企业名称</th>
+                <th class="text-center">状态</th>
+                <th class="text-center">邮箱</th>
+                <th class="text-center">电话</th>
+                <th class="text-center">创建日期</th>
+               <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+            </tr>
+
+            </thead>
+            <tbody class="">
+
+            <tr ng-repeat="item in vm.displayedCollection">
+              <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
+                <td ng-click="vm.goDetail(item)">{{item.nickName}}</td>
+               <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
+
+                <td ng-click="vm.goDetail(item)">
+                    <label ng-class="vm.labelColor[item.status]" ng-bind="vm.labelContent[item.status]" class="label"></label>
+                </td>
+
+
+               <td ng-click="vm.goDetail(item)">{{item.email}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.hotline}}</td>
+                <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.address}}</td>-->
+                <td ng-click="vm.goDetail(item)">{{item.creationDate| date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+
+
+               <!-- <td ng-click="vm.goDetail(item)">
+                    {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
+                </td>-->
+                <td>
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>{{'u.DETAIL'|T}}</button>
+
+
+
+                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>{{ 'u.EDIT' | T}}</button>
+                    <div class="btn-group " >
+                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
+                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
+                            <!-- <li ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-play m-r-sm"></i>锁定</a></li>
+                             <li  ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-stop m-r-sm"></i>解锁</a></li>-->
+
+                            <li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-lock m-r-sm"></i>锁定</a></li>
+                            <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-unlock m-r-sm"></i>解锁</a></li>
+
+                            <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>
+                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> {{'u.DELETE' | T}}</a></li>
+
+                        </ul>
+                    </div>
+
+
+
+
+
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        </div>
+
+        <!--<div class="btn-group pagination pull-right padder-lg">-->
+            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
+            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
+            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
+        <!--</div>-->
+        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
+        </div>
+        <!-- / tasks -->
+    </div>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div ng-include="'app/components/core/modal.html'"></div>
+</script>

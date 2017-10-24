@@ -64,7 +64,7 @@
                 StorageService.put(authorizationKey,sessionInfo,24 * 7 * 60 * 60);//3 天过期
                 StorageService.put(constdata.informationKey,userInfo,24 * 3 * 60 * 60);
 
-                var appGo = 'app.pipelineview';
+                var appGo = 'app.overview';
 
                 $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
                     parent.location.reload();

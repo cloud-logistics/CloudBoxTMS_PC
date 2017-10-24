@@ -7,51 +7,31 @@
     angular.module('smart_container').controller('DashboardController', DashboardController);
 
     /** @ngInject */
-    function DashboardController($stateParams, ApiServer, MapService, toastr, $state, $timeout, $interval,$scope) {
+    function DashboardController($stateParams, ApiServer, toastr, $state, $timeout, $interval,$scope, NetworkService, constdata) {
         /* jshint validthis: true */
         var vm = this;
-
-        var width = document.body.clientWidth;
-        var height = document.body.clientHeight;
-        var mapCenter = {lat: 31.2891, lng: 121.4648}; 
-        vm.mapSize = {"width": width + 'px', "height": height + 'px'};
-
-        var map = MapService.map_init("dashboard_map", mapCenter, "terrain");
-        var markers = []
-        var circles = []
         vm.operationOverview = {};
-
-        function getContainerInfo() {
-            ApiServer.getContainerOverviewInfo(function (response) {
-                var containers = response.data
-
-                markers = R.compose(
-                    R.map(MapService.addMarker(map, "container")),
-                    R.map(R.prop("position"))
-                )(containers)
-
-            }, function (err) {
-                console.log("Get Container Info Failed", err);
-            });
-        }
-
-        getOperationOverview()
-        function getOperationOverview() {
-            ApiServer.getOperationOverview(function (response) {
-                vm.operationOverview = response.data
-                console.log(vm.operationOverview);
-
-                initPie(vm.operationOverview.container_location);
-
-                initLine(vm.operationOverview.container_on_lease_history, vm.operationOverview.container_on_transportation_history);
-                
-            }, function (err) {
-                console.log("Get getOperationOverview  Info Failed", err);
-            });
-        }
-
+        vm.reqPath = 'operationoverview';
         var pieChart;
         var pieOption;
+        var lineChart;
+        var lineOption;
+        getOperationOverview()
+        function getOperationOverview() {
+            NetworkService.get(vm.reqPath, null,
+                function (response) {
+                    vm.operationOverview = response.data
+                    initPie(vm.operationOverview.container_location);
+                    initLine(vm.operationOverview.container_on_lease_history, vm.operationOverview.container_on_transportation_history);
+
+                }, function (err) {
+                    toastr.error(i18n.t('u.GET_DATA_FAILED') + response.status);
+                });
+
+
+        }
+
+
 
         function initPie(value) {
             pieChart = echarts.init(document.getElementById('pie-chart'));
@@ -115,8 +95,7 @@
         }
 
 
-        var lineChart;
-        var lineOption;
+
 
         function initLine(lease_value, transportation_value){
             var xData = R.map(R.prop("time"))(lease_value)
@@ -252,14 +231,6 @@
             lineChart.setOption(lineOption);
         }
 
-        getContainerInfo();
-        var timer = $interval(function(){
-            getContainerInfo();
-        },5000, 500);
-
-        $scope.$on("$destroy", function(){
-            $interval.cancel(timer);
-        });
     }
 
 })();
