@@ -59,13 +59,14 @@
         vm.classAnimation = '';
         vm.creationDate = 1452231070467;
 
-         if (ApiServer.isAuthed()){
+         /*if (ApiServer.isAuthed()){
                 $state.go('app.overview');
         }else{
             //$timeout(function () {
                 $state.go('access.signin');
             //},10);
-        }
+        }*/
+         console.log('ddddddd');
 
     }
 })();

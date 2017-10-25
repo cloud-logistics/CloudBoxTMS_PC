@@ -21,8 +21,9 @@
             <thead>
             <tr>
                 <th colspan="7">
-                    <button ng-click="vm.goAddItem()" class="btn btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>添加</button>
-                    <input st-search="" class="form-control pull-right m-b-xs w-md" placeholder="搜索" type="text"/>
+                    <button ng-click="vm.goAddItem()" class="btn btn-sm btn-info top-button"><i class="fa fa-plus"></i>添加</button>
+                    <input ng-model="vm.searchItem" class="form-control pull-right search-input" placeholder="请输入公司名称" type="text"/>
+                    <button ng-click="vm.goSearch()" class="btn btn-sm btn-info pull-right top-button"><i class="fa"></i>搜索</button>
                 </th>
             </tr>
             <tr class="font-bold">

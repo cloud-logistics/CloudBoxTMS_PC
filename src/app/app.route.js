@@ -81,8 +81,15 @@
 
         // $locationProvider.html5Mode(true);
         $urlRouterProvider
-            .otherwise('app');
+            .otherwise('/access/signin');
         $stateProvider
+            .state('app', {
+                //abstract: true,
+                url: '/',
+                controller: 'MainController',
+                controllerAs: 'main',
+                templateUrl: 'app/main/main.html'
+            })
             .state('app.dashboard', {
                 url: 'dashboard',
                 templateUrl: 'app/components/dashboard/dashboard.html'
@@ -228,13 +235,13 @@
             /** LOGIN **/
             .state('access', {
                 url: '/access',
-                templateUrl: 'signin.html',
-                controller: 'SigninController',
-                controllerAs: 'vm'
+                template: '<div ui-view class="fade-in-right-big smooth"></div>'
             })
             .state('access.signin', {
                 url: '/signin',
-                templateUrl: 'app/components/signin/signin.html'
+                templateUrl: 'app/components/signin/signin.html',
+                controller: 'SigninController',
+                controllerAs: 'vm'
             })
             .state('access.signup', {
                 url: '/signup',
@@ -254,13 +261,7 @@
             /** ACCOUNT **/
 
             //////用户
-            .state('app', {
-                //abstract: true,
-                url: '/',
-                controller: 'MainController',
-                controllerAs: 'main',
-                templateUrl: 'app/main/main.html'
-            })
+
 
         ;
     }

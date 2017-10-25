@@ -66,9 +66,6 @@
 
                 var appGo = 'app.overview';
 
-                $rootScope.$on('$locationChangeSuccess',function(){//返回前页时，刷新前页
-                    parent.location.reload();
-                });
 
                 $state.go(appGo);
             },function (err) {

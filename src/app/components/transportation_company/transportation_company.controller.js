@@ -29,6 +29,7 @@
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
+        vm.goSearch = goSearch;
 
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
@@ -75,7 +76,9 @@
 
 
 
-
+        function goSearch() {
+            console.log(vm.searchItem);
+        };
 
         function getDatas() {
 
@@ -192,7 +195,7 @@
 
         }
 
-        getDatas();
+        //getDatas();
 
 
         //Model
