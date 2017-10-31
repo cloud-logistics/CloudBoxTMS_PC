@@ -10,12 +10,12 @@
     /** @ngInject */
     function RestService(Restangular, StorageService,logger,constdata) {
         return Restangular.withConfig(function (RestangularConfigurer) {
-            var token = StorageService.get('iot.hnair.cloud.access_token');
-            if (token){
-                token = 'Bearer ' + token;
-                RestangularConfigurer.setDefaultHeaders({Authorization:token});
-            }
-            RestangularConfigurer.setFullResponse(true);
+           // var token = StorageService.get('iot.hnair.cloud.access_token');
+           // if (token){
+                //token = 'Bearer ' + token;
+               // RestangularConfigurer.setDefaultHeaders({Authorization:token});
+            //}
+           // RestangularConfigurer.setFullResponse(true);
         });
     }
 

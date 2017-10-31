@@ -33,7 +33,10 @@
 
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
-        vm.reqBasePath =  'transportasion_company';
+        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list/';
+        vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
+        vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
+        vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.isAdmin = false;
 
 
@@ -82,23 +85,9 @@
 
         function getDatas() {
 
-            NetworkService.get(vm.reqBasePath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.content;
-                vm.displayedCollection = (vm.items);
-                if(vm.displayedCollection) {
-                    for (var i = 0; i < vm.displayedCollection.length; i++) {
-                        if (vm.displayedCollection[i].status == 'enabled') {
-                            vm.displayedCollection[i].isLockEnable = true;
-                            vm.displayedCollection[i].isUnlockEnable = false;
-                        } else if (vm.displayedCollection[i].status == 'locked') {
-                            vm.displayedCollection[i].isLockEnable = false;
-                            vm.displayedCollection[i].isUnlockEnable = true;
-                        }
-                    }
-                }
-
-
-                updatePagination(response.data);
+            NetworkService.get(vm.getBasePath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data.results;
+                vm.displayedCollection = [].concat(vm.items);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
@@ -110,17 +99,17 @@
         };
 
         function goEditItem(item) {
-            $state.go('app.edit_transportation_company',{username:item.id, args:{type:'edit'}});
+            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.edit_transportation_company',{username:item.id, args:{type:'detail'}});
+            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'detail'}});
 
         };
 
 
         function removeItem(item) {
-            NetworkService.delete(vm.reqBasePath + '/' + '/' + item.id,null,function success() {
+            NetworkService.delete(vm.reqBasePath + '/' + '/' + item.enterprise_id,null,function success() {
                 var index = vm.items.indexOf(item);
                 toastr.success('删除成功！');
                 getDatas();
@@ -195,7 +184,7 @@
 
         }
 
-        //getDatas();
+        getDatas();
 
 
         //Model

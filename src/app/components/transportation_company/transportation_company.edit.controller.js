@@ -81,13 +81,20 @@
         };
 
         var type = $stateParams.args.type;
+        var username = $stateParams.username;
+        if (username){
+            vm.isAdd = false;
+        }
         if(type && type=='edit'){
             vm.isEdit = true;
         }
         if(type && type=='detail'){
             vm.isDetail = true;
         }
-        vm.reqBasePath =  'transportasion_company';
+
+        vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
+        vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
+        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/';
 
 
         vm.uploadFile = function (){
@@ -103,7 +110,7 @@
             });
         }
         function getTenantItem() {
-            NetworkService.get(vm.reqBasePath + '/' + username,null,function (response) {
+            NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {
                 vm.user = response.data;
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);

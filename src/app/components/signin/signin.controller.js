@@ -51,7 +51,7 @@
                 var result = response.data;
 
                 var sessionId = result.sessionid;
-                var token = "JWT " + result.token;
+                var token = result.token;
                 var role = result.role;
                 var userInfo = {
                     username: user.username,
