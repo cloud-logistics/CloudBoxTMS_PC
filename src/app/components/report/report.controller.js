@@ -34,7 +34,7 @@
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list/';
+        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
         vm.isAdmin = false;

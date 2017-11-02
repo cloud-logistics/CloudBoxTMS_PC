@@ -34,7 +34,7 @@
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list/';
+        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
         vm.isAdmin = false;
@@ -84,8 +84,8 @@
         };
 
         function getDatas() {
-
-            NetworkService.get(vm.getBasePath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.getBasePath,'',function (response) {
+                console.log(response.data);
                 vm.items = response.data.results;
                 vm.displayedCollection = (vm.items);
                 //vm.displayedCollection = [].concat(vm.items);
@@ -139,7 +139,7 @@
         };
         vm.goPage = function (page) {
             vm.pageCurrent = Number(page);
-            getDatas();
+            //getDatas();
         };
         vm.pageCurrentState = function (page) {
             if (Number(page) == vm.pageCurrent)

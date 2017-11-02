@@ -109,7 +109,7 @@
         vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
         vm.delBasePath =  'rentservice/enterpriseuser/';
 
-        vm.getBaseCompanyPath =  'rentservice/enterprise/enterpriseinfo/list/';
+        vm.getBaseCompanyPath =  'rentservice/enterprise/enterpriseinfo/list';
 
         function getCompanyDatas() {
 
