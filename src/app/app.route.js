@@ -259,6 +259,16 @@
                 params : {args : {}},
                 templateUrl: 'app/components/warehouse/warehouse.edit.html'
             })
+
+            .state('app.report', {
+                url: 'report',
+                templateUrl: 'app/components/report/report.html'
+            })
+            .state('app.edit_report', {
+                url: 'report/edit/:username',
+                params : {args : {}},
+                templateUrl: 'app/components/report/report.edit.html'
+            })
             /** LOGIN **/
             .state('access', {
                 url: '/access',

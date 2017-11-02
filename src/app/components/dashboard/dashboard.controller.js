@@ -16,7 +16,7 @@
         var pieOption;
         var lineChart;
         var lineOption;
-        getOperationOverview()
+        /*getOperationOverview()
         function getOperationOverview() {
             NetworkService.get(vm.reqPath, null,
                 function (response) {
@@ -29,7 +29,7 @@
                 });
 
 
-        }
+        }*/
 
 
 

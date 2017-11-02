@@ -35,6 +35,12 @@
         vm.saveBasicInfoConfig = saveBasicInfoConfig;
         vm.cancelBasicInfoConfig = cancelBasicInfoConfig;
 
+
+        vm.addBasePath =  'basicInfoConfig/';
+        vm.getBasePath =  'basicInfo/list/';
+        vm.updateBasePath =  'basicInfoMod/';
+        vm.delBasePath =  'basicInfo/';
+
         vm.options = {};
         var transformations = undefined;
 
@@ -52,85 +58,39 @@
                     "alertLevel"
                 ];
 
-        ApiServer.getOptions(requiredOptions, function(options) {
-            vm.options = options
 
-            transformations = {
-                intervalTime: optionsTransFunc(vm.options.intervalTime),
-                carrier: optionsTransFunc(vm.options.carrier),
-                factory: optionsTransFunc(vm.options.factory),
-                factoryLocation: optionsTransFunc(vm.options.factoryLocation),
-                batteryInfo: optionsTransFunc(vm.options.batteryInfo),
-                hardwareInfo: optionsTransFunc(vm.options.hardwareInfo),
-                manufactureTime: R.compose(R.toString, Date.parse),
-                temperature : {
-                    min: inputTransFunc,
-                    max: inputTransFunc
-                },
-                humidity : {
-                    min: inputTransFunc,
-                    max: inputTransFunc
-                },
-                collision : {
-                    min: inputTransFunc,
-                    max: inputTransFunc
-                },
-                battery : {
-                    min: inputTransFunc,
-                    max: inputTransFunc
-                },
-                operation : {
-                    min: inputTransFunc,
-                    max: inputTransFunc
-                }
-            };
 
-            vm.newBasicInfoConfig = {
-                carrier : R.compose(R.prop("value"),R.head)(vm.options.carrier),
-                containerType : R.compose(R.prop("value"),R.head)(vm.options.containerType),
-                factory : R.compose(R.prop("value"),R.head)(vm.options.factory),
-                factoryLocation : R.compose(R.prop("value"),R.head)(vm.options.factoryLocation),
-                batteryInfo : R.compose(R.prop("value"),R.head)(vm.options.batteryInfo),
-                hardwareInfo : R.compose(R.prop("value"),R.head)(vm.options.hardwareInfo),
-                manufactureTime: moment(new Date())
-            };
-            vm.newSecurityConfig = {
-                intervalTime : R.compose(R.prop("value"),R.head)(vm.options.intervalTime)
-            };
-            vm.newAlertConfig = {};
-            vm.newIssueConfig = {};
-
-            console.log(options);
-        })
-
-        getBasicInfo();
-        var timer = $interval(function(){
+        /*var timer = $interval(function(){
             getBasicInfo();
         },constdata.refreshInterval, 500);
 
         $scope.$on("$destroy", function(){
             $interval.cancel(timer);
-        });
+        });*/
 
-        // function getBasicInfoManage () {
-        //     ApiServer.getBasicInfoManage(function (response) {
-        //         vm.basicInfoManage = response.data
-        //         console.log(vm.basicInfoManage);
-        //     },function (err) {
-        //         console.log("Get ContainerOverview Info Failed", err);
-        //     });
-        // }
 
-                
-        function getBasicInfo () {
+        /*function getBasicInfo () {
             ApiServer.getBasicInfo({}, function (response) {
                 // console.log(Date.parse(vm.queryParams.startTime).toString());
-                vm.basicInfoManage = response.data.basicInfo
+                console.log(response);
+                vm.basicInfoManage = response.data.basicInfo;
                 console.log(vm.basicInfoManage);
             },function (err) {
                 console.log("Get ContainerOverview Info Failed", err);
             });
+        }*/
+
+
+        function getDatas() {
+
+            NetworkService.get(vm.getBasePath,{page:vm.pageCurrent},function (response) {
+                vm.items = response.data.results;
+                vm.displayedCollection = (vm.items);
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
         }
+        getDatas();
 
         function saveBasicInfoConfig() {
             newBasicInfoConfigPost();
