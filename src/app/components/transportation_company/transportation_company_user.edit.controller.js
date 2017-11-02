@@ -6,7 +6,7 @@
 
     angular
         .module('smart_container')
-        .controller('EditTransportationCompanyController', EditTransportationCompanyController)
+        .controller('EditTransportationCompanyUserController', EditTransportationCompanyUserController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function EditTransportationCompanyController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function EditTransportationCompanyUserController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -33,14 +33,25 @@
         vm.backAction = backAction;
         vm.back = back;
         vm.addUser = {};
-        vm.userType = [
+        vm.userGroup = [
             {
-                title:'管理员',
+                title:'超级管理员',
                 value:'admin'
             },
             {
-                title:'商户',
-                value:'tenant'
+                title:'企业管理员',
+                value:'rentadmin'
+            },
+            {
+                title:'企业用户',
+                value:'rentuser'
+            }
+        ];
+
+        vm.userRole = [
+            {
+                title:'管理员',
+                value:'admin'
             },
             {
                 title:'用户',
@@ -93,10 +104,25 @@
         }
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
-        vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/';
-        vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
-        vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.addBasePath =  'rentservice/enterpriseuser/addenterpriseuser';
+        vm.getBasePath =  'rentservice/enterpriseuser/';
+        vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
+        vm.delBasePath =  'rentservice/enterpriseuser/';
+
+        vm.getBaseCompanyPath =  'rentservice/enterprise/enterpriseinfo/list/';
+
+        function getCompanyDatas() {
+
+            NetworkService.get(vm.getBaseCompanyPath,{page:1},function (response) {
+                vm.companyInfo = response.data.results;
+                //if(vm.isAdd && vm.companyInfo.length > 0){
+                  //  vm.user.enterprise_id = vm.companyInfo[0].enterprise_id;
+                //}
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+        }
+        getCompanyDatas();
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
@@ -110,10 +136,6 @@
                 vm.showSpinner = false;
             });
         }
-
-
-
-
 
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {

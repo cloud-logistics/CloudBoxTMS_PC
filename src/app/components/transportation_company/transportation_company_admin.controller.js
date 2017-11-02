@@ -6,10 +6,10 @@
 
     angular
         .module('smart_container')
-        .controller('TransportationCompanyController', TransportationCompanyController);
+        .controller('TransportationCompanyAdminController', TransportationCompanyAdminController);
 
     /** @ngInject */
-    function TransportationCompanyController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function TransportationCompanyAdminController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -33,10 +33,10 @@
 
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
-        vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list/';
-        vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
-        vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.addBasePath =  'rentservice/enterpriseuser/addenterpriseuser/';
+        vm.getBasePath =  'rentservice/enterpriseuser/list/';
+        vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
+        vm.delBasePath =  'rentservice/enterpriseuser/';
         vm.isAdmin = false;
 
 
@@ -96,15 +96,15 @@
 
 
         function goAddItem() {
-            $state.go('app.edit_transportation_company',{});
+            $state.go('app.edit_transportation_company_admin',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'edit'}});
+            $state.go('app.edit_transportation_company_admin',{username:item.enterprise_id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'detail'}});
+            $state.go('app.edit_transportation_company_admin',{username:item.enterprise_id, args:{type:'detail'}});
 
         };
 

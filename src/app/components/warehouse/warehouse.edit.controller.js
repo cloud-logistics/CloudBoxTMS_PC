@@ -6,7 +6,7 @@
 
     angular
         .module('smart_container')
-        .controller('EditTransportationCompanyController', EditTransportationCompanyController)
+        .controller('EditWarehouseController', EditWarehouseController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function EditTransportationCompanyController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function EditWarehouseController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;

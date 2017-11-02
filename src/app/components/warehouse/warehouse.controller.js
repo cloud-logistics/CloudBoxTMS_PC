@@ -6,10 +6,10 @@
 
     angular
         .module('smart_container')
-        .controller('TransportationCompanyController', TransportationCompanyController);
+        .controller('WarehouseController', WarehouseController);
 
     /** @ngInject */
-    function TransportationCompanyController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function WarehouseController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;

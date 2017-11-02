@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="TransportationCompanyController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="TransportationCompanyUserController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -21,20 +21,24 @@
             <thead>
             <tr>
                 <th colspan="7">
-                    <button ng-click="vm.goAddItem()" class="add-button"
-                    >添加企业</button>
-                    <input st-search="" class="pull-right search-edit font-thin" placeholder="请输入公司名称" type="text"/>
-                    <button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>
+                    <button ng-click="vm.goAddItem()" class="add-button" >添加用户</button>
+<!--
+                    <input ng-model="vm.searchItem" st-search="" class="form-control pull-right search-input" placeholder="请输入公司名称" type="text"/>
+-->
+                    <input st-search="" class="search-edit pull-right font-thin" placeholder="请输入用户名" type="text"/>
+                    <button ng-click="vm.goSearch()" class="search-button pull-right"><i class="fa fa-search" />搜索</button>
+
 
                 </th>
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">企业名称</th>
-                <th class="text-center">企业状态</th>
-                <th class="text-center">企业邮箱</th>
-                <th class="text-center">企业电话</th>
-                <th class="text-center">创建日期</th>
+                <th class="text-center">名称</th>
+                <th class="text-center">密码</th>
+                <th class="text-center">角色</th>
+                <th class="text-center">头像</th>
+                <th class="text-center">电话</th>
+                <th class="text-center">所属企业</th>
                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
             </tr>
 
@@ -42,25 +46,13 @@
             <tbody class="">
 
             <tr ng-repeat="item in vm.displayedCollection">
-              <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.enterprise_name}}</td>
-               <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
+                <td ng-click="vm.goDetail(item)">{{item.username}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.role}}</td>
+               <td ng-click="vm.goDetail(item)">{{item.password}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.avatar_url}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.user_phone}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.user_email}}</td>
 
-                <td ng-click="vm.goDetail(item)">
-                    <label ng-class="vm.labelColor[item.status]" ng-bind="vm.labelContent[item.status]" class="label"></label>
-                </td>
-
-
-               <td ng-click="vm.goDetail(item)">{{item.enterprise_email}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.enterprise_tele}}</td>
-                <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.address}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.register_time| date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-
-
-               <!-- <td ng-click="vm.goDetail(item)">
-                    {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
-                </td>-->
                 <td>
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>详情</button>
 

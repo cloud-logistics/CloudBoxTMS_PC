@@ -15,84 +15,63 @@
 <!--            <div class="row ds-map">
                 <div id="dashboard_map" class="embeded_mapview"></div>
             </div>-->
-            <div class="row ds-calc">
-                <div class="col-md-4">
-                    <div class="ds-total">
-                        <div class="ds-title">
-                            <span>运输公司总数</span>
-                        </div>
-                        <div class="ds-num">
-                            <p><span>{{vm.operationOverview.container_num}}</span>个</p>
-                        </div>
-                        <div class="ds-progress">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 80%;">
-                                    <span class="sr-only">60% Complete</span>
-                                </div>
+            <div class="row ">
+                    <div class="col-md-12">
+                        <a ui-sref="app.transportation_company">
+                        <div class="ds-total bg-company">
+                            <div class="ds-title">
+                                <span>运输公司</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="ds-lease">
-                        <div class="ds-title">
-                            <span>堆场数量</span>
-                        </div>
-                        <div class="ds-num">
-                            <p><span>{{vm.operationOverview.container_on_lease}}</span>个</p>
-                        </div>
-                        <div class="ds-progress">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 80%;">
-                                    <span class="sr-only">60% Complete</span>
-                                </div>
+                            <div class="ds-num">
+                                <span>总数 3445</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="ds-trans">
-                        <div class="ds-title">
-                            <span>云箱在运数量</span>
-                        </div>
-                        <div class="ds-num">
-                            <p><span>{{vm.operationOverview.container_on_transportation}}</span>个</p>
-                        </div>
-                        <div class="ds-progress">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                     aria-valuemax="100" style="width: 80%;">
-                                    <span class="sr-only">60% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row ds-chart">
-                <div class="col-md-6">
-                    <div class="ds-pie">
-                        <div class="ds-pie-title">
-                            <span>运输公司分布国家</span>
-                        </div>
-                        <div class="ds-pie-chart" id="pie-chart">
 
                         </div>
+                            </a>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="ds-line">
-                        <div class="ds-line-title">
-                            <span>云箱租赁情况</span>
-                        </div>
-                        <div class="ds-line-chart" id="line-chart">
+            </div>
 
+            <div class="row ">
+                <div class="col-md-12">
+                    <a ui-sref="app.transportation_company">
+                    <div class="ds-total bg-container">
+                        <div class="ds-title">
+                            <span>云箱</span>
+                        </div>
+                        <div class="ds-num">
+                            <span>在运总数 392,037</span>
                         </div>
                     </div>
+                        </a>
                 </div>
             </div>
+
+
+            <div class="row ">
+                <div class="col-md-12">
+                    <a ui-sref="app.transportation_company">
+                    <div class="ds-total bg-container-zone">
+                        <div class="ds-title">
+                            <span>堆场</span>
+                        </div>
+                        <div class="ds-num">
+                            <span>总数 562</span>
+                        </div>
+
+                    </div>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
 </div>

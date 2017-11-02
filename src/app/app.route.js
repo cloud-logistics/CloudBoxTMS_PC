@@ -231,7 +231,34 @@
                 params : {args : {}},
                 templateUrl: 'app/components/transportation_company/transportation_company.edit.html'
             })
+            .state('app.transportation_company_user', {
+                url: 'transportation_company_user',
+                templateUrl: 'app/components/transportation_company/transportation_company_user.html'
+            })
+            .state('app.edit_transportation_company_user', {
+                url: 'transportation_company_user/edit/:username',
+                params : {args : {}},
+                templateUrl: 'app/components/transportation_company/transportation_company_user.edit.html'
+            })
 
+            .state('app.transportation_company_admin', {
+                url: 'transportation_company_admin',
+                templateUrl: 'app/components/transportation_company/transportation_company_admin.html'
+            })
+            .state('app.edit_transportation_company_admin', {
+                url: 'transportation_company_admin/edit/:username',
+                params : {args : {}},
+                templateUrl: 'app/components/transportation_company/transportation_company_admin.edit.html'
+            })
+            .state('app.warehouse', {
+                url: 'warehouse',
+                templateUrl: 'app/components/warehouse/warehouse.html'
+            })
+            .state('app.edit_warehouse', {
+                url: 'warehouse/edit/:username',
+                params : {args : {}},
+                templateUrl: 'app/components/warehouse/warehouse.edit.html'
+            })
             /** LOGIN **/
             .state('access', {
                 url: '/access',

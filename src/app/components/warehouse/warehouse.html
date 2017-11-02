@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="TransportationCompanyController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="WarehouseController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -22,18 +22,18 @@
             <tr>
                 <th colspan="7">
                     <button ng-click="vm.goAddItem()" class="add-button"
-                    >添加企业</button>
-                    <input st-search="" class="pull-right search-edit font-thin" placeholder="请输入公司名称" type="text"/>
+                    >添加堆场</button>
+                    <input st-search="" class="pull-right search-edit font-thin" placeholder="请输入堆场名称" type="text"/>
                     <button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>
 
                 </th>
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">企业名称</th>
-                <th class="text-center">企业状态</th>
-                <th class="text-center">企业邮箱</th>
-                <th class="text-center">企业电话</th>
+                <th class="text-center">堆场名称</th>
+                <th class="text-center">堆场状态</th>
+                <th class="text-center">堆场邮箱</th>
+                <th class="text-center">堆场电话</th>
                 <th class="text-center">创建日期</th>
                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
             </tr>

@@ -1,4 +1,4 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="EditTransportationCompanyController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="EditTransportationCompanyUserController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
@@ -23,7 +23,7 @@
         <div class="panel panel-default m-l m-r m-t">
 
             <div class="panel-heading">
-                <h3 class="panel-title">公司信息</h3>
+                <h3 class="panel-title">用户信息</h3>
             </div>
             <br/>
             <form name="form" class="form-horizontal form-validation" role="form">
@@ -31,11 +31,11 @@
 
 
 
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业编号</label>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="公司编号" ng-model="vm.user.enterprise_id"  required>
+                               placeholder="用户名" ng-model="vm.user.username"  required>
                     </div>
                 </div>
                 <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
@@ -45,48 +45,17 @@
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业名称</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">密码</label>
                         <div class="col-sm-4">
                             <input class="form-control" type="text"
-                                   placeholder="公司名称" ng-model="vm.user.enterprise_name"  required>
+                                   placeholder="密码" ng-model="vm.user.password"  required>
                         </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
 
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">联系电话</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="联系电话" ng-model="vm.user.enterprise_tele" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">营业执照</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="营业执照" ng-model="vm.user.enterprise_license_id" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-
                 <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">证件图片</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">头像</label>
                     <div class="col-sm-4">
                         <div class="beauty-upload">
                             <div class="lcell span5" style="margin:5px 0px;">
@@ -100,9 +69,9 @@
 
                         </div>
                         <input class="form-control" type="text" style="margin-bottom:10px;"
-                               placeholder="证件图片" ng-model="vm.user.enterprise_license_id_url" ng-disabled="vm.isDetail" >
+                               placeholder="证件图片" ng-model="vm.user.avatar_url" ng-disabled="vm.isDetail" >
                         <div class="img-preview">
-                            <img ng-src="{{vm.user.enterprise_license_id_url}}" alt="">
+                            <img ng-src="{{vm.user.avatar_url}}" alt="">
                         </div>
                     </div>
 
@@ -113,16 +82,30 @@
 
 
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">角色</label>
+                    <div class="col-sm-4">
+                        <select class="form-control font-thin" ng-model="vm.user.role" ng-options="opt.value as opt.title for opt in vm.userRole" ng-disabled="vm.isDetail" ></select>
+                    </div>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
 
 
+                <div  class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">群组</label>
+                    <div class="col-sm-4">
+                        <select class="form-control font-thin" ng-model="vm.user.group" ng-options="opt.value as opt.title for opt in vm.userGroup" ng-disabled="vm.isDetail" ></select>
+                    </div>
+                </div>
+                <div  class="line line-dashed b-b line-lg"></div>
 
 
 
                 <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业法人</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">联系电话</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="企业法人" ng-model="vm.user.enterprise_legal_rep_name" ng-disabled="vm.isDetail">
+                               placeholder="联系电话" ng-model="vm.user.user_phone" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
@@ -130,11 +113,11 @@
 
 
 
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业押金</label>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">邮箱</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="企业押金" ng-model="vm.user.enterprise_deposit" ng-disabled="vm.isDetail">
+                               placeholder="邮箱" ng-model="vm.user.user_email" ng-disabled="vm.isDetail">
                     </div>
 
                 </div>
@@ -142,53 +125,14 @@
 
 
                 <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业邮箱</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">所属企业</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业邮箱" ng-model="vm.user.enterprise_email" ng-disabled="vm.isDetail">
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail" ></select>
+
                     </div>
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业网址</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业网址" ng-model="vm.user.enterprise_url" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业地址</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业地址" ng-model="vm.user.enterprise_address" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-                <!--<div ng-if="vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSWORD' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="password"
-                               placeholder="{{'u.PASSWORD' | translate}}" ng-model="vm.addUser.password" ng-pattern="/^[a-zA-Z0-9_\\-]{8,20}$/" required>
-                    </div>
-                    <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.PASSWORDTIP' | translate}}</i></span>
-                </div>
-                <div ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>-->
-
-
 
 
                 <div ng-if="!vm.isAdd" class="form-group">

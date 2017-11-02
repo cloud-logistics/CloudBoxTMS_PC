@@ -107,10 +107,12 @@
 
             var newResponse = {};
             newResponse.status = response.status;
-            if (response.data && response.data.Error){
-                newResponse.statusText = response.data.Error;
-            }else{
-                newResponse.statusText = '服务器出错了~';//未知错误，先显示成这样
+            newResponse.statusText = '服务器出错，请稍后再试';
+            if (response.data && response.data.message){
+                newResponse.statusText = response.data.message;
+            }
+            if (response.data && response.data.status){
+                newResponse.status = response.status;
             }
             if (failedHandler){
                 failedHandler(newResponse);
