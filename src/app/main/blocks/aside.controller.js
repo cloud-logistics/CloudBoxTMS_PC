@@ -20,7 +20,7 @@
         vm.logoutAction = logoutAction;
 
         vm.messages = [];
-        vm.title = '云箱租赁';
+        vm.title = '智能租赁';
 
         if(StorageService.get(constdata.informationKey) != null && StorageService.get(constdata.informationKey) != '') {
             vm.role = StorageService.get(constdata.informationKey).role;

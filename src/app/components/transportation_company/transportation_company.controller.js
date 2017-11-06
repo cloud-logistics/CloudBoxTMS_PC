@@ -37,32 +37,26 @@
         vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
-        vm.isAdmin = false;
 
+        vm.deposit_confirm =  'rentservice/enterprise/enterpriseinfo';
+        vm.isAdmin = false;
+        vm.limit = 10;
 
         vm.labelColor = {
-            enabled:'bg-success',
-            locked:'bg-danger',
-            'member':'bg-main',
-            'silver':'bg-main',
-            'gold':'bg-main',
-            'platinum':'bg-main',
-            'diamond':'bg-main'
+            1:'bg-success',
+            0:'bg-danger'
         };
         vm.labelContent={
-            enabled:'已启用',
-            locked:'已锁定',
-            'member':'普通会员',
-            'silver':'白银会员',
-            'gold':'黄金会员',
-            'platinum':'铂金会员',
-            'diamond':'钻石会员'
+            0:'未缴',
+            1:'已缴',
         };
-        vm.OperApp = OperApp;
-        function OperApp(index, item) {
-            /*if(index == 3){
 
-                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/lock',null,function (response) {
+        vm.OperApp = OperApp;
+
+        function OperApp(index, item) {
+            if(index == 3){
+
+                NetworkService.post(vm.deposit_confirm + '/'+ item.id,null,function (response) {
                     toastr.success(i18n.t('u.OPERATE_SUC'));
                     getDatas();
                 },function (response) {
@@ -70,7 +64,7 @@
                     toastr.error(vm.authError);
                 });
 
-            }else{
+            }/*else{
                 console.log('error ops:'+index);
             }*/
 
@@ -84,10 +78,12 @@
         };
 
         function getDatas() {
-            NetworkService.get(vm.getBasePath,'',function (response) {
+            console.log(vm.pageCurrent);
+            NetworkService.get(vm.getBasePath,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
                 console.log(response.data);
                 vm.items = response.data.results;
                 vm.displayedCollection = (vm.items);
+                updatePagination(response.data);
                 //vm.displayedCollection = [].concat(vm.items);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
@@ -138,8 +134,10 @@
             getDatas();
         };
         vm.goPage = function (page) {
+            console.log(page);
             vm.pageCurrent = Number(page);
-            //getDatas();
+            console.log(vm.pageCurrent);
+            getDatas();
         };
         vm.pageCurrentState = function (page) {
             if (Number(page) == vm.pageCurrent)
@@ -148,18 +146,16 @@
         };
 
         function updatePagination(pageination) {
-
-            if (!pageination.hasContent){
+            if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;
             }
-
-            var page = pageination.page;
-            var toalPages = pageination.totalPages;
-            vm.totalPages = pageination.totalPages;
-
-            vm.pageNextEnabled = pageination.hasNextPage;
-            vm.pagePreEnabled = pageination.hasPreviousPage;
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
 
 
             if (toalPages < 2){

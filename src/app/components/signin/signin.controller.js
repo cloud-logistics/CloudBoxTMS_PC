@@ -51,7 +51,7 @@
                 var result = response.data;
 
                 var sessionId = result.sessionid;
-                var token = result.token;
+                var token = result.user_token;
                 var role = result.role;
                 var userInfo = {
                     username: user.username,
@@ -64,7 +64,7 @@
                 StorageService.put(authorizationKey,sessionInfo,24 * 7 * 60 * 60);//3 天过期
                 StorageService.put(constdata.informationKey,userInfo,24 * 3 * 60 * 60);
 
-                var appGo = 'app.overview';
+                var appGo = 'app.dashboard';
 
 
                 $state.go(appGo);
@@ -74,6 +74,8 @@
                 toastr.error(errInfo);
                 vm.isLogining = false;
             });
+           // $state.go('app.dashboard');
+
 
         }
         function username() {

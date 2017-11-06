@@ -11,7 +11,7 @@ var dev = require('./dev');
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
 var proxyMiddleware = require('http-proxy-middleware');
-
+var proxy = require('http-proxy-middleware');
 function isOnlyChange(event) {
   return event.type === 'changed';
 }
@@ -38,7 +38,19 @@ function browserSyncInit(baseDir, browser) {
    *
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
    */
-  // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', changeOrigin: true});
+   //server.middleware = proxyMiddleware('/container/api/v1/cloudbox/rentservice/site/detail/1', {target: 'http://106.2.20.186', changeOrigin: true});
+  //'http://106.2.20.186/container/api/v1/cloudbox/',
+/*
+  var middleware = proxy('/aaa', {
+    target: 'http://106.2.20.186',
+    changeOrigin: true,
+    logLevel: 'debug',
+    pathRewrite: {
+      '^/aaa' : '/container/api/v1/cloudbox/rentservice'
+    }
+    //router: proxyTable,
+  });
+  server.middleware = [middleware];*/
 
   browserSync.instance = browserSync.init({
     startPath: '/',

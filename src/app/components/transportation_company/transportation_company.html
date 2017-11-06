@@ -31,7 +31,7 @@
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">企业名称</th>
-                <th class="text-center">企业状态</th>
+                <th class="text-center">押金状态</th>
                 <th class="text-center">企业邮箱</th>
                 <th class="text-center">企业电话</th>
                 <th class="text-center">创建日期</th>
@@ -47,7 +47,8 @@
                <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
 
                 <td ng-click="vm.goDetail(item)">
-                    <label ng-class="vm.labelColor[item.status]" ng-bind="vm.labelContent[item.status]" class="label"></label>
+                    <label ng-class="vm.labelColor[item.enterprise_deposit_status]" ng-bind="vm.labelContent[item.enterprise_deposit_status
+]" class="label"></label>
                 </td>
 
 
@@ -74,8 +75,8 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
-                            <!--<li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-lock m-r-sm"></i>锁定</a></li>
-                            <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-unlock m-r-sm"></i>解锁</a></li>
+                            <li ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-lock m-r-sm"></i>押金确认</a></li>
+                            <!--<li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-unlock m-r-sm"></i>解锁</a></li>
                             <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>-->
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> 删除</a></li>
 

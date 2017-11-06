@@ -30,9 +30,11 @@
             $scope.pages = [];
 
             function getDatas() {
+                console.log('abcd');
                 $scope.$parent.vm.updateDatas($scope.pageCurrent);
             }
             $scope.$watch('pageination',function(newValue,oldValue, scope){
+                console.log('bbbe');
 
                 updatePagination(newValue);
 
@@ -49,33 +51,36 @@
                 getDatas();
             };
             $scope.goPage = function (page) {
+                console.log('bbbbdd');
                 $scope.pageCurrent = Number(page);
                 getDatas();
             };
             $scope.pageCurrentState = function (page) {
+                console.log('eeabde');
                 if (Number(page) == $scope.pageCurrent)
                     return true;
                 return false;
             };
 
             function updatePagination(pageination) {
-
-                if (!pageination || !pageination.hasContent){
+                console.log('aaaaa2');
+                if (pageination.results == null || pageination.results.length < 1){
                     // toastr.error('当前无数据哦~');
                     return;
                 }
-
-                var page = pageination.page;
-                var toalPages = pageination.totalPages;
-
-                $scope.pageNextEnabled = pageination.hasNextPage;
-                $scope.pagePreEnabled = pageination.hasPreviousPage;
+                console.log('ddddd2');
+                var page = parseInt(pageination.offset/pageination.limit +1);
+                var toalPages = parseInt(pageination.count / pageination.limit + 1);
+                vm.totalPages = pageination.totalPages;
+                console.log(page + ';'+ toalPages);
+                vm.pageNextEnabled = false ;
+                vm.pagePreEnabled = false;
 
 
                 if (toalPages < 2){
-                    $scope.pages = ['1'];
+                    vm.pages = ['1'];
                 }else{
-                    $scope.pages = [];
+                    vm.pages = [];
                     var pageControl = 5;
                     var stepStart = page - (pageControl - 1)/2;
                     if (stepStart < 1 || toalPages < pageControl) stepStart = 1;
@@ -89,7 +94,7 @@
                     }
 
                     for (var i=stepStart;i<= (stepEnd > toalPages ? toalPages : stepEnd);i++) {
-                        $scope.pages.push(i);
+                        vm.pages.push(i);
                     }
                 }
 

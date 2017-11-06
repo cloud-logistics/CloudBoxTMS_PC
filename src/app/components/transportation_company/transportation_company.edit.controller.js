@@ -94,17 +94,20 @@
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/detail/';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
 
+        vm.uploadFilePath = 'rentservice/upload';
+
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
+
             vm.showSpinner = true;
-            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+            NetworkService.putFile(vm.uploadFilePath + '/' + vm.myUploadFile.name,vm.myUploadFile,function (response) {
                 toastr.success('上传成功！');
                 vm.showSpinner = false;
-                vm.user.avatar = response.data.url;
+                vm.user.enterprise_license_id_url = response.data.url;
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
                 vm.showSpinner = false;
@@ -116,7 +119,7 @@
 
 
         function getTenantItem() {
-            NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {
+            NetworkService.get(vm.getBasePath + '/' + username+'/',null,function (response) {
                 vm.user = response.data;
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);

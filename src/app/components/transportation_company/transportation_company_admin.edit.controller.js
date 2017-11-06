@@ -104,8 +104,8 @@
         }
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
-        vm.addBasePath =  'rentservice/enterpriseuser/addenterpriseuser';
-        vm.getBasePath =  'rentservice/enterpriseuser/';
+        vm.addBasePath =  'rentservice/enterpriseuser/addenterpriseuser/';
+        vm.getBasePath =  'rentservice/enterpriseuser/detail/';
         vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
         vm.delBasePath =  'rentservice/enterpriseuser/';
 
@@ -113,7 +113,7 @@
 
         function getCompanyDatas() {
 
-            NetworkService.get(vm.getBaseCompanyPath,{page:1},function (response) {
+            NetworkService.get(vm.getBaseCompanyPath,{limit:100, offset:0},function (response) {
                 vm.companyInfo = response.data.results;
                 //if(vm.isAdd && vm.companyInfo.length > 0){
                   //  vm.user.enterprise_id = vm.companyInfo[0].enterprise_id;
@@ -140,6 +140,7 @@
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {
                 vm.user = response.data;
+                vm.user.enterprise_id = vm.user.enterprise;
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
@@ -183,7 +184,9 @@
         if (!vm.isAdd){
             vm.getTenantItem();
         }
-
+        if(vm.isAdd){
+            vm.user.role='admin';
+        }
         function back() {
             // history.back();
             vm.backAction();

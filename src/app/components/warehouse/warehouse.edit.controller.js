@@ -94,9 +94,13 @@
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.getBasePath =  'rentservice/site/detail';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
+
+        var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
+
+
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);
@@ -116,8 +120,94 @@
 
 
         function getTenantItem() {
-            NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {
-                vm.user = response.data;
+            NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
+                vm.user = response.data.site_info;
+
+
+                var point = new BMap.Point(vm.user.longitude, vm.user.latitude);  // 创建点坐标
+                var marker = new BMap.Marker(point);        // 创建标注
+
+                marker.addEventListener("click", function(){
+                    //alert("您点击了标注");
+                    var opts = {
+                        width : 150,     // 信息窗口宽度
+                        height: 70,     // 信息窗口高度
+                        title : '仓库信息:'  // 信息窗口标题
+                    }
+                    var infoWindow = new BMap.InfoWindow(vm.user.location+'\n' + '('+vm.user.longitude+','+vm.user.latitude+')', opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow, point);      // 打开信息窗口
+                });
+
+                map.addOverlay(marker);
+                map.centerAndZoom(point, 10);
+                map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
+
+
+
+
+                vm.allInfo = response.data;
+
+                vm.user.freezerBoxInfo  = {
+                    "availableNum":0,
+                    "allNum":0
+                };
+                vm.user.coolerBoxInfo = {
+                    "availableNum":0,
+                        "allNum":0
+                };
+                vm.user.medicalBoxInfo = {
+                    "availableNum":0,
+                        "allNum":0
+                };
+                vm.user.ordinaryBoxInfo = {
+                    "availableNum":0,
+                        "allNum":0
+                };
+                vm.user.allCurrentBoxInfo = {
+                    "availableNum":0,
+                        "allNum":0
+                };
+
+                vm.user.freezerBoxInfo.availableNum = 0;
+                vm.user.freezerBoxInfo.allNum = 0;
+                vm.user.coolerBoxInfo.availableNum = 0;
+                vm.user.coolerBoxInfo.allNum = 0;
+                vm.user.medicalBoxInfo.availableNum = 0;
+                vm.user.medicalBoxInfo.allNum = 0;
+                vm.user.ordinaryBoxInfo.availableNum = 0;
+                vm.user.ordinaryBoxInfo.allNum = 0;
+                vm.user.allCurrentBoxInfo.availableNum = 0;
+                vm.user.allCurrentBoxInfo.allNum = 0;
+
+
+                //console.log(vm.allInfo.box_counts);
+                if(vm.allInfo.box_counts && vm.allInfo.box_counts.length > 0) {
+                    for (var j = 0; j < vm.allInfo.box_counts.length; j++) {
+                        if (vm.allInfo.box_counts[j].box_type.id == 1) {
+                            vm.user.freezerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
+                            vm.user.freezerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+                        } else if (vm.allInfo.box_counts[j].box_type.id == 2) {
+                            vm.user.coolerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
+                            vm.user.coolerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+
+                        } else if (vm.allInfo.box_counts[j].box_type.id == 3) {
+                            vm.user.medicalBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
+                            vm.user.medicalBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+
+                        } else if (vm.allInfo.box_counts[j].box_type.id == 4) {
+                            vm.user.ordinaryBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
+                            vm.user.ordinaryBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+                        }
+                    }
+                }
+                vm.user.allCurrentBoxInfo.allNum = vm.user.freezerBoxInfo.allNum +  vm.user.coolerBoxInfo.allNum
+                    + vm.user.medicalBoxInfo.allNum + vm.user.ordinaryBoxInfo.allNum;
+                vm.user.allCurrentBoxInfo.availableNum = vm.user.freezerBoxInfo.availableNum +  vm.user.coolerBoxInfo.availableNum
+                    + vm.user.medicalBoxInfo.availableNum + vm.user.ordinaryBoxInfo.availableNum;
+
+                //console.log(vm.user);
+
+
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });

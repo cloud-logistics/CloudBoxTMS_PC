@@ -10,12 +10,15 @@
     /** @ngInject */
     function RestService(Restangular, StorageService,logger,constdata) {
         return Restangular.withConfig(function (RestangularConfigurer) {
-           // var token = StorageService.get('iot.hnair.cloud.access_token');
-           // if (token){
+            /*var token = StorageService.get(constdata.token);
+            console.log('........aaaa');
+            console.log(token);
+            if (token){
                 //token = 'Bearer ' + token;
-               // RestangularConfigurer.setDefaultHeaders({Authorization:token});
-            //}
-           // RestangularConfigurer.setFullResponse(true);
+                RestangularConfigurer.setDefaultHeaders(token);
+            }*/
+            //RestangularConfigurer.setDefaultHeaders({'kxw':'ok', 'kxw2':'ok2'});
+            //RestangularConfigurer.setFullResponse(true);
         });
     }
 
@@ -32,12 +35,39 @@
             post  : post,
             get   : get,
             put   : put,
+            putFile:putFile,
             delete: del
         };
 
         return service;
 
         /////////////////
+
+
+
+        function putFile(path,body,successHandler,failedHandler) {
+            var formdata = new FormData();
+            formdata.append('editormd-image-file',body);
+
+            /*var token = StorageService.get('iot.hnair.cloud.access_token');
+            token = 'Bearer ' + token;
+            var reg = RestService.one(path);
+
+            reg.withHttpConfig({transformRequest: angular.identity}).customPOST(formdata, undefined, undefined, {'Content-Type': undefined,'Authorization':token}).then(
+                successHandler,function (response) {
+                    failedResponse(response,failedHandler,path);
+                }
+            );*/
+
+
+            var account = RestService.one(path);
+            account.customPUT(formdata,"",null,requestHeader()).then(function (response) {
+                successResponse(response,successHandler);
+            },function (response) {
+                failedResponse(response,failedHandler,path);
+            });
+
+        };
 
         function post(path,param,successHandler,failedHandler) {
             var account = RestService.one(path);
@@ -122,7 +152,7 @@
 
         function requestHeader() {
             var sessionInfo = StorageService.get(constdata.token);
-            if (sessionInfo && sessionInfo !== 'undefined'){
+            if (sessionInfo && sessionInfo != 'undefined'){
                 return sessionInfo;
             }
             return {};

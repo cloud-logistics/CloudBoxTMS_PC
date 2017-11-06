@@ -3,7 +3,7 @@
 <ul class="nav" ng-controller="AsideController as vm" ng-switch="vm.role">
     <div class="regular" ng-switch-when="admin">
 
-        <!--<li>
+        <li>
             <a href class="auto" ui-sref="app.dashboard">
                   <span class="pull-right text-muted hidden-folded">
                     <i class="fa fa-fw fa-angle-right text"></i>
@@ -12,7 +12,7 @@
                 <img src="images/icon_dashboard.svg" width="20px" height="20px" style="margin-right: 10px"/>
                 <span class="font-bold hidden-folded">Dashboard</span>
             </a>
-        </li>-->
+        </li>
         <li>
             <a href class="auto" ui-sref="app.transportation_company">
                   <span class="pull-right text-muted hidden-folded">
@@ -21,23 +21,23 @@
                   </span>
                 <!--<b class="badge bg-info pull-right">5</b>-->
                 <img src="images/icon_overview.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">运输公司管理</span>
+                <span class="font-bold hidden-folded">运输企业管理</span>
             </a>
 
             <ul class="nav nav-sub dk">
                 <li ui-sref-active="active">
                     <a ui-sref="app.transportation_company">
-                        <span>运输公司</span>
+                        <span>运输企业</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="app.transportation_company_admin">
-                        <span>公司管理员</span>
+                        <span>企业管理员</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="app.transportation_company_user">
-                        <span>公司用户</span>
+                        <span>企业用户</span>
                     </a>
                 </li>
             </ul>
@@ -51,12 +51,12 @@
                   </span>
                 <!--<b class="badge bg-info pull-right">5</b>-->
                 <img src="images/icon_monitor.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">堆场管理</span>
+                <span class="font-bold hidden-folded">仓库管理</span>
             </a>
             <ul class="nav nav-sub dk">
                 <li ui-sref-active="active">
                     <a ui-sref="app.warehouse">
-                        <span>堆场信息</span>
+                        <span>仓库信息</span>
                     </a>
                 </li>
 

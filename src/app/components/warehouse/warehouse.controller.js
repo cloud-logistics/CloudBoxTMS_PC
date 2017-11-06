@@ -33,12 +33,12 @@
 
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
-        vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list';
-        vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
-        vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.addBasePath =  'sites/';
+        vm.getBasePath =  'rentservice/site/list/province/0/city/0';
+        vm.updateBasePath =  'sites/';
+        vm.delBasePath =  'sites/';
         vm.isAdmin = false;
-
+        vm.limit = 10;
 
         vm.labelColor = {
             enabled:'bg-success',
@@ -58,7 +58,20 @@
             'platinum':'铂金会员',
             'diamond':'钻石会员'
         };
+
+        vm.selectedStyle={
+            true:'bg-selected',
+            false:'bg-unselected'
+        };
+        vm.isViewList = false;
         vm.OperApp = OperApp;
+        vm.selList = function (isList) {
+            vm.isViewList = isList;
+            console.log('dd');
+
+        }
+
+
         function OperApp(index, item) {
             /*if(index == 3){
 
@@ -84,27 +97,83 @@
         };
 
         function getDatas() {
-
-            NetworkService.get(vm.getBasePath,{page:vm.pageCurrent},function (response) {
+            console.log(vm.pageCurrent);
+            NetworkService.get(vm.getBasePath,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+                console.log(response.data);
                 vm.items = response.data.results;
+                if(vm.items.length > 0) {
+                    for (var i = 0; i < vm.items.length; i++) {
+                        var allNum = 0;
+                        vm.items[i].freezerBoxInfo  = {
+                            availableNum:0,
+                            allNum:0
+                        };
+                        vm.items[i].coolerBoxInfo = {
+                            availableNum:0,
+                            allNum:0
+                        };
+                        vm.items[i].medicalBoxInfo = {
+                            availableNum:0,
+                            allNum:0
+                        };
+                        vm.items[i].ordinaryBoxInfo = {
+                            availableNum:0,
+                            allNum:0
+                        };
+                        vm.items[i].allCurrentBoxInfo = {
+                            availableNum:0,
+                            allNum:0
+                        };
+
+
+                        for( var j = 0;  j < vm.items[i].box_num.length; j ++){
+                            if(vm.items[i].box_num[j].box_type.id == 1) {
+                                vm.items[i].freezerBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
+                                vm.items[i].freezerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                            }else if(vm.items[i].box_num[j].box_type.id == 2) {
+                                vm.items[i].coolerBoxInfo.allNum = vm.items[i].box_num[j].ava_num +  vm.items[i].box_num[j].reserve_num;
+                                vm.items[i].coolerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+
+                            }else if(vm.items[i].box_num[j].box_type.id == 3) {
+                                vm.items[i].medicalBoxInfo.allNum = vm.items[i].box_num[j].ava_num +  vm.items[i].box_num[j].reserve_num;
+                                vm.items[i].medicalBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+
+                            }else if(vm.items[i].box_num[j].box_type.id == 4) {
+                                vm.items[i].ordinaryBoxInfo.allNum = vm.items[i].box_num[j].ava_num +  vm.items[i].box_num[j].reserve_num;
+                                vm.items[i].ordinaryBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                            }
+                        }
+
+                        vm.items[i].allCurrentBoxInfo.allNum = vm.items[i].freezerBoxInfo.allNum +  vm.items[i].coolerBoxInfo.allNum
+                                                                + vm.items[i].medicalBoxInfo.allNum + vm.items[i].ordinaryBoxInfo.allNum;
+                        vm.items[i].allCurrentBoxInfo.availableNum = vm.items[i].freezerBoxInfo.availableNum +  vm.items[i].coolerBoxInfo.availableNum
+                            + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum;
+
+
+                    }
+                }
                 vm.displayedCollection = (vm.items);
+                updatePagination(response.data);
                 //vm.displayedCollection = [].concat(vm.items);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
+
+
+
         }
 
 
         function goAddItem() {
-            $state.go('app.edit_transportation_company',{});
+            $state.go('app.edit_warehouse',{});
         };
 
         function goEditItem(item) {
-            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'edit'}});
+            $state.go('app.edit_warehouse',{username:item.id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'detail'}});
+            $state.go('app.edit_warehouse',{username:item.id, args:{type:'detail'}});
 
         };
 
@@ -138,7 +207,9 @@
             getDatas();
         };
         vm.goPage = function (page) {
+            console.log(page);
             vm.pageCurrent = Number(page);
+            console.log(vm.pageCurrent);
             getDatas();
         };
         vm.pageCurrentState = function (page) {
@@ -148,18 +219,16 @@
         };
 
         function updatePagination(pageination) {
-
-            if (!pageination.hasContent){
+            if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;
             }
-
-            var page = pageination.page;
-            var toalPages = pageination.totalPages;
-            vm.totalPages = pageination.totalPages;
-
-            vm.pageNextEnabled = pageination.hasNextPage;
-            vm.pagePreEnabled = pageination.hasPreviousPage;
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
 
 
             if (toalPages < 2){

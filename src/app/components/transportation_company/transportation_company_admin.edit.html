@@ -35,7 +35,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="用户名" ng-model="vm.user.username"  required>
+                               placeholder="用户名" ng-model="vm.user.user_name"  required>
                     </div>
                 </div>
                 <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
@@ -47,8 +47,8 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">密码</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text"
-                                   placeholder="密码" ng-model="vm.user.password"  required>
+                            <input class="form-control" type="password"
+                                   placeholder="密码" ng-model="vm.user.user_password"  required>
                         </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -85,7 +85,7 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">角色</label>
                     <div class="col-sm-4">
-                        <select class="form-control font-thin" ng-model="vm.user.role" ng-options="opt.value as opt.title for opt in vm.userRole" ng-disabled="vm.isDetail" ></select>
+                        <select class="form-control font-thin" ng-model="vm.user.role" ng-options="opt.value as opt.title for opt in vm.userRole" ng-disabled=true ></select>
                     </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>

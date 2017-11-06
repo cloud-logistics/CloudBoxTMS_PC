@@ -39,7 +39,7 @@
                     pipelines: "pipelines",
                     alertLevel:"alertLevel"
                 },
-                auth:'auth',
+                auth:'auth/auth',
                 containerhistory : "containerhistory",
                 containerInstantInfo : "containerInstantInfo",
                 containerReportHistory : "containerReportHistory",

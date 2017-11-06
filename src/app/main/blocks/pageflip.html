@@ -8,7 +8,7 @@
         <button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>
         <button type="button" class="btn btn-default" ng-click="vm.goPage(vm.totalPages)" ng-disabled= !vm.pageNextEnabled>Last Page</button>
 
-        <div class="pull-right"><input type="number" placeholder="{{vm.pageCurrent}}" min="1" max="{{vm.totalPages}}" ng-model="vm.tagretPage" >
+        <div class="pull-right"><input type="number" placeholder="{{vm.pageCurrent}}" min="1" max="{{vm.totalPages}}" ng-model="vm.targetPage" >
             <button type="button"  class="btn btn-default" ng-click="vm.goPage(vm.targetPage)">GoTo</button>
         </div>
 </div>

@@ -34,7 +34,7 @@
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
         vm.addBasePath =  'rentservice/enterpriseuser/addenterpriseuser/';
-        vm.getBasePath =  'rentservice/enterpriseuser/list/';
+        vm.getBasePath =  'rentservice/enterpriseuser/list';
         vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
         vm.delBasePath =  'rentservice/enterpriseuser/';
         vm.isAdmin = false;
@@ -50,15 +50,11 @@
             'diamond':'bg-main'
         };
         vm.labelContent={
-            enabled:'已启用',
-            locked:'已锁定',
-            'member':'普通会员',
-            'silver':'白银会员',
-            'gold':'黄金会员',
-            'platinum':'铂金会员',
-            'diamond':'钻石会员'
+            'admin':'企业管理员',
+            'user':'企业用户'
         };
         vm.OperApp = OperApp;
+        vm.limit = 10;
         function OperApp(index, item) {
             /*if(index == 3){
 
@@ -85,7 +81,7 @@
 
         function getDatas() {
 
-            NetworkService.get(vm.getBasePath,{page:vm.pageCurrent},function (response) {
+            NetworkService.get(vm.getBasePath,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
                 vm.items = response.data.results;
                 vm.displayedCollection = (vm.items);
                 //vm.displayedCollection = [].concat(vm.items);
@@ -100,17 +96,17 @@
         };
 
         function goEditItem(item) {
-            $state.go('app.edit_transportation_company_user',{username:item.enterprise_id, args:{type:'edit'}});
+            $state.go('app.edit_transportation_company_user',{username:item.user_id, args:{type:'edit'}});
         };
 
         function goDetail(item) {
-            $state.go('app.edit_transportation_company_user',{username:item.enterprise_id, args:{type:'detail'}});
+            $state.go('app.edit_transportation_company_user',{username:item.user_id, args:{type:'detail'}});
 
         };
 
 
         function removeItem(item) {
-            NetworkService.delete(vm.delBasePath  + '/' + item.enterprise_id,null,function success() {
+            NetworkService.delete(vm.delBasePath  + '/' + item.user_id,null,function success() {
                 var index = vm.items.indexOf(item);
                 toastr.success('删除成功！');
                 getDatas();
@@ -148,18 +144,16 @@
         };
 
         function updatePagination(pageination) {
-
-            if (!pageination.hasContent){
+            if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;
             }
-
-            var page = pageination.page;
-            var toalPages = pageination.totalPages;
-            vm.totalPages = pageination.totalPages;
-
-            vm.pageNextEnabled = pageination.hasNextPage;
-            vm.pagePreEnabled = pageination.hasPreviousPage;
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
 
 
             if (toalPages < 2){
@@ -183,7 +177,7 @@
                 }
             }
 
-        }
+        };
 
         getDatas();
 
