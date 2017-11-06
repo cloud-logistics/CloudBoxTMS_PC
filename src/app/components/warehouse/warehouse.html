@@ -62,9 +62,12 @@
         <div class="m-l m-r m-t panel panel-default">
             <div class="warehouse-grid inline" ng-class="'warehouse-grid-bg-'+$index" ng-repeat="item in vm.displayedCollection">
                 <div class="title">{{item.location}}</div>
+                <div class="middle-info">
                 <div class="specs">可用/总数</div>
                 <div class="num">{{item.allCurrentBoxInfo.availableNum + '/' + item.allCurrentBoxInfo.allNum}}</div>
-                <div class="pull-right">
+                </div>
+
+                <div class="pull-right pull-bottom right-info">
                 <div class="location ">{{item.latitude+'/'+item.longitude}}</div>
                 <div class="address ">{{item.location}}</div>
                 </div>
