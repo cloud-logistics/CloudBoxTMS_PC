@@ -93,7 +93,7 @@
                                 <div class="upload">
                                     <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
                                     <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
-                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" accept="image/*" name=""/>
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file"/>
                                     <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
                                 </div>
                             </div>
@@ -192,7 +192,7 @@
 
 
                 <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">状态</label>
+                    <label class="col-sm-1 control-label m-l-lg font-bold">押金状态</label>
                     <div class="col-sm-4">
 
                         <!--<input class="form-control" type="text"
@@ -203,6 +203,8 @@
                         <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.status]" ng-bind="vm.labelContent[vm.user.status]" class="label"></label>
 
 
+                        <label ng-class="vm.labelColor[vm.user.enterprise_deposit_status]" ng-bind="vm.labelContent[vm.user.enterprise_deposit_status
+]" class="label"></label>
                     </div>
                 </div>
                 <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>

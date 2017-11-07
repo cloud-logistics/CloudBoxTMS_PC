@@ -88,7 +88,10 @@
             'silver':'白银会员',
             'gold':'黄金会员',
             'platinum':'铂金会员',
-            'diamond':'钻石会员'
+            'diamond':'钻石会员',
+            'admin':'超级管理员',
+            'rentadmin':'企业管理员',
+            'rentuser':'企业用户'
         };
 
         var type = $stateParams.args.type;
@@ -125,17 +128,17 @@
         getCompanyDatas();
 
         vm.uploadFile = function (){
-            console.log(vm.myUploadFile);
             vm.showSpinner = true;
-            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
+            NetworkService.putFile(vm.myUploadFile.name,vm.myUploadFile,function (response) {
                 toastr.success('上传成功！');
                 vm.showSpinner = false;
-                vm.user.avatar = response.data.url;
+                console.log(response);
+                vm.user.avatar_url = 'http://'+response.data.data.url;
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
                 vm.showSpinner = false;
             });
-        }
+        };
 
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {

@@ -62,22 +62,12 @@
 
 
         vm.labelColor = {
-            enabled:'bg-success',
-            locked:'bg-danger',
-            'member':'bg-main',
-            'silver':'bg-main',
-            'gold':'bg-main',
-            'platinum':'bg-main',
-            'diamond':'bg-main'
+            1:'bg-success',
+            0:'bg-danger'
         };
         vm.labelContent={
-            enabled:'已启用',
-            locked:'已锁定',
-            'member':'普通会员',
-            'silver':'白银会员',
-            'gold':'黄金会员',
-            'platinum':'铂金会员',
-            'diamond':'钻石会员'
+            0:'未缴',
+            1:'已缴',
         };
 
         var type = $stateParams.args.type;
@@ -101,8 +91,6 @@
         vm.uploadFilePath = 'rentservice/upload';
 
         vm.uploadFile = function (){
-            console.log(vm.myUploadFile);
-
             vm.showSpinner = true;
             NetworkService.putFile(vm.uploadFilePath + '/' + vm.myUploadFile.name,vm.myUploadFile,function (response) {
                 toastr.success('上传成功！');

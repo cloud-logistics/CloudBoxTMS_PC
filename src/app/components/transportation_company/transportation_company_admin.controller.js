@@ -53,6 +53,11 @@
             'admin':'企业管理员',
             'user':'企业用户'
         };
+        vm.labelGroupContent={
+            'admin':'超级管理员',
+            'rentadmin':'企业管理员',
+            'rentuser':'企业用户'
+        };
         vm.OperApp = OperApp;
         vm.limit = 10;
         function OperApp(index, item) {
