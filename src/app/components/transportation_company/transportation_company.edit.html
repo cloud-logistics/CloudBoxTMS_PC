@@ -93,7 +93,7 @@
                                 <div class="upload">
                                     <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
                                     <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
-                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" accept="image/*" name=""/>
                                     <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
                                 </div>
                             </div>

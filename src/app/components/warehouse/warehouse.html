@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="pull-right pull-bottom right-info">
-                <div class="location ">{{item.latitude+'/'+item.longitude}}</div>
+                <div class="location ">{{item.latitude > 0 ? '北纬':'南纬'}}{{item.latitude | number:2}}/{{item.longitude > 0 ? '东经':'西经'}}{{item.longitude|number:2}}</div>
                 <div class="address ">{{item.location}}</div>
                 </div>
             </div>

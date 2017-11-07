@@ -8,7 +8,7 @@
 
     // REST service based on Restangular  that uses setFullResponse
     /** @ngInject */
-    function RestService(Restangular, StorageService,logger,constdata) {
+    function RestService(Restangular, StorageService,logger,constdata, $http) {
         return Restangular.withConfig(function (RestangularConfigurer) {
             /*var token = StorageService.get(constdata.token);
             console.log('........aaaa');
@@ -28,7 +28,7 @@
         .factory('NetworkService', NetworkService);
 
     /** @ngInject */
-    function NetworkService(RestService,StorageService,logger,$rootScope,constdata) {
+    function NetworkService(RestService,StorageService,logger,$rootScope,constdata, $http) {
 
 
         var service = {
@@ -47,6 +47,7 @@
 
         function putFile(path,body,successHandler,failedHandler) {
             var formdata = new FormData();
+            console.log(body);
             formdata.append('editormd-image-file',body);
 
             /*var token = StorageService.get('iot.hnair.cloud.access_token');
@@ -59,13 +60,31 @@
                 }
             );*/
 
-
+            //body.name = '';
             var account = RestService.one(path);
-            account.customPUT(formdata,"",null,requestHeader()).then(function (response) {
+            console.log(body);
+
+            var imgUpload = '/';
+            if(constdata.debugMode){
+                imgUpload = 'http://106.2.20.186/';
+            }
+            var uploadPath = imgUpload + 'container/api/v1/cloudbox/rentservice/upload/';
+
+            $http.put(uploadPath + body.name, body).then(
+                function (response) {
+                    successResponse(response,successHandler);
+                },function (response) {
+                    failedResponse(response,failedHandler,uploadPath);
+                }
+            );
+
+
+
+            /*account.customPUT(formdata,"",null,{'Content-Type': undefined}).then(function (response) {
                 successResponse(response,successHandler);
             },function (response) {
                 failedResponse(response,failedHandler,path);
-            });
+            });*/
 
         };
 

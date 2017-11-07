@@ -41,12 +41,12 @@ function browserSyncInit(baseDir, browser) {
    //server.middleware = proxyMiddleware('/container/api/v1/cloudbox/rentservice/site/detail/1', {target: 'http://106.2.20.186', changeOrigin: true});
   //'http://106.2.20.186/container/api/v1/cloudbox/',
 /*
-  var middleware = proxy('/aaa', {
+  var middleware = proxy('/container/api/v1/cloudbox/rentservice/upload', {
     target: 'http://106.2.20.186',
     changeOrigin: true,
     logLevel: 'debug',
     pathRewrite: {
-      '^/aaa' : '/container/api/v1/cloudbox/rentservice'
+      '^/container/api/v1/cloudbox/rentservice/upload' : '/container/api/v1/cloudbox/rentservice/upload'
     }
     //router: proxyTable,
   });

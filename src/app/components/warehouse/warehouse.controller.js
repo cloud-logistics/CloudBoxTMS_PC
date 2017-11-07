@@ -38,7 +38,7 @@
         vm.updateBasePath =  'sites/';
         vm.delBasePath =  'sites/';
         vm.isAdmin = false;
-        vm.limit = 10;
+        vm.limit = 8;
 
         vm.labelColor = {
             enabled:'bg-success',

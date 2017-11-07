@@ -107,7 +107,8 @@
             NetworkService.putFile(vm.uploadFilePath + '/' + vm.myUploadFile.name,vm.myUploadFile,function (response) {
                 toastr.success('上传成功！');
                 vm.showSpinner = false;
-                vm.user.enterprise_license_id_url = response.data.url;
+                console.log(response);
+                vm.user.enterprise_license_id_url = 'http://'+response.data.data.url;
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
                 vm.showSpinner = false;
