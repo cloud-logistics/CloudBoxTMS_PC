@@ -3,313 +3,372 @@
     app.settings.asideDock = false;
 ">
     <!-- main -->
-    <div class="col">
-        <span us-spinner spinner-on="vm.showSpinner"></span>
-        <!-- main header -->
-        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
-                    <small class="text-muted">HNA EcoTech Internet of Things</small>
-                </div>
-               
-            </div>
-        </div> -->
 
-        <!-- tasks -->
+    <div class="tab-platform">
 
+        <div >
 
+            <ul>
+                <li ng-repeat="tab in vm.tabItem">
+                    <a href ng-click="vm.sel(tab.id)" ng-class="{'tab-active':tab.active}">{{tab.title}}</a>
+                </li>
 
-        <div class="panel panel-default m-l m-r m-t">
+            </ul>
 
-            <div class="panel-heading">
-                <h3 class="panel-title">仓库信息</h3>
-            </div>
-            <br/>
-            <form name="form" class="form-horizontal form-validation" role="form">
 
+            <div class="tab-container">
 
+                <div class="plat-mgr" ng-show="vm.tabItem[0].active">
+                    <div class="col">
+                        <span us-spinner spinner-on="vm.showSpinner"></span>
 
+                        <div class="panel panel-default m-l m-r m-t">
 
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">名称</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text"
-                                   placeholder="名称" ng-model="vm.user.location"  required>
-                        </div>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
 
+                            <br/>
+                            <form name="form" class="form-horizontal form-validation" role="form">
 
-                <div class = "map-panel" style="">
-                <div  class="form-group">
-                    <div class="zone-title">位置信息</div>
-                </div>
-                <div class="form-group">
 
-                    <label class="col-sm-1 control-label m-l-lg font-bold">国家</label>
-                    <div class="col-sm-2">
-                        <input class="form-control" type="text"
-                               placeholder="国家" ng-model="vm.user.city.nation_name" ng-disabled="vm.isDetail">
-                    </div>
-                    <label class="col-sm-1 control-label m-l-lg font-bold">省份</label>
-                    <div class="col-sm-2">
-                        <input class="form-control" type="text"
-                               placeholder="省份" ng-model="vm.user.city.state_name" ng-disabled="vm.isDetail">
-                    </div>
 
-                    <label class="col-sm-1 control-label m-l-lg font-bold">城市</label>
-                    <div class="col-sm-2">
-                        <input class="form-control" type="text"
-                               placeholder="城市" ng-model="vm.user.city.city_name" ng-disabled="vm.isDetail">
-                    </div>
 
-                </div>
-
-                    </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-
-                <div class = "map-panel" style="">
-                    <div  class="form-group">
-                        <div class="zone-title">坐标</div>
-                    </div>
-                    <div  class="form-group" style="">
-
-                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
-
-                        <div class="col-sm-2">
-                            <input class="form-control" type="text"
-                                   placeholder="经度" ng-model="vm.user.longitude" ng-disabled="vm.isDetail">
-                        </div>
-
-                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
-                        <div class="col-sm-2">
-                            <input class="form-control" type="text"
-                                   placeholder="纬度" ng-model="vm.user.latitude" ng-disabled="vm.isDetail">
-                        </div>
-                    </div>
-
-
-
-
-                    <div  class="form-group">
-                        <label class="col-sm-1 control-label m-l-lg font-bold">地图显示</label>
-                        <div class="col-md-10">
-
-                            <div >
-                                <div id="map-div" style="height: 300px;width: 500px;"></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-
-                    <label class="col-sm-1 control-label m-l-lg font-bold">冷藏箱信息</label>
-
-                    <label class="col-sm-1 control-label  font-bold">总数</label>
-                    <div class="col-sm-2">
-
-                        <label class="label label-pos bg-finished" ng-bind="vm.user.freezerBoxInfo.allNum"></label>
-                    </div>
-
-                    <label class="col-sm-1 control-label  font-bold">可用数</label>
-                    <div class="col-sm-2">
-                        <label class="label label-pos bg-success" ng-bind="vm.user.freezerBoxInfo.availableNum"></label>
-                    </div>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">冷冻箱信息</label>
-
-                    <label class="col-sm-1 control-label  font-bold">总数</label>
-                    <div class="col-sm-2">
-                        <!--<input class="form-control" type="text"
-                               placeholder="总数" ng-model="vm.user.coolerBoxInfo.allNum" ng-disabled="vm.isDetail">-->
-                        <label class="label label-pos bg-finished" ng-bind="vm.user.coolerBoxInfo.allNum"></label>
-                    </div>
-
-                    <label class="col-sm-1 control-label  font-bold">可用数</label>
-                    <div class="col-sm-2">
-                        <!--<input class="form-control" type="text"
-                               placeholder="可用数" ng-model="vm.user.coolerBoxInfo.availableNum" ng-disabled="vm.isDetail">-->
-                        <label class="label label-pos bg-success" ng-bind="vm.user.coolerBoxInfo.availableNum"></label>
-                </div>
-                </div>
-
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">医药箱信息</label>
-
-                    <label class="col-sm-1 control-label  font-bold">总数</label>
-                    <div class="col-sm-2">
-                        <label class="label label-pos bg-finished" ng-bind="vm.user.medicalBoxInfo.allNum"></label>
-                    </div>
-
-                    <label class="col-sm-1 control-label  font-bold">可用数</label>
-                    <div class="col-sm-2">
-                        <label class="label label-pos bg-success" ng-bind="vm.user.medicalBoxInfo.availableNum"></label>
-                    </div>
-                </div>
-
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">普通箱信息</label>
-
-                    <label class="col-sm-1 control-label  font-bold">总数</label>
-                    <div class="col-sm-2">
-                    <label class="label label-pos bg-finished" ng-bind="vm.user.ordinaryBoxInfo.allNum"></label>
-                        </div>
-
-                    <label class="col-sm-1 control-label  font-bold">可用数</label>
-                    <div class="col-sm-2">
-                        <label class="label label-pos bg-success" ng-bind="vm.user.ordinaryBoxInfo.availableNum"></label>
-                    </div>
-
-                </div>
-
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                <!--
-
-                                <div class="form-group">
-                                    <label class="col-sm-1 control-label m-l-lg font-bold">证件图片</label>
+                                <div  class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">名称</label>
                                     <div class="col-sm-4">
-                                        <div class="beauty-upload">
-                                            <div class="lcell span5" style="margin:5px 0px;">
-                                                <div class="upload">
-                                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
-                                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
-                                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
-                                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
-                                                </div>
-                                            </div>
+                                        <input class="form-control" type="text"
+                                               placeholder="名称" ng-model="vm.user.location"  required>
+                                    </div>
+                                </div>
+                                <div  class="line line-dashed b-b line-lg"></div>
 
+
+                                <div class = "map-panel" style="">
+                                    <div  class="form-group">
+                                        <div class="zone-title">位置信息</div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">国家</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="text"
+                                                   placeholder="国家" ng-model="vm.user.city.nation_name" ng-disabled="vm.isDetail">
                                         </div>
-                                        <input class="form-control" type="text" style="margin-bottom:10px;"
-                                               placeholder="证件图片" ng-model="vm.user.enterprise_license_id_url" ng-disabled="vm.isDetail" >
-                                        <div class="img-preview">
-                                            <img ng-src="{{vm.user.enterprise_license_id_url}}" alt="">
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">省份</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="text"
+                                                   placeholder="省份" ng-model="vm.user.city.state_name" ng-disabled="vm.isDetail">
                                         </div>
+
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">城市</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="text"
+                                                   placeholder="城市" ng-model="vm.user.city.city_name" ng-disabled="vm.isDetail">
+                                        </div>
+
                                     </div>
 
                                 </div>
                                 <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+                                <div class = "map-panel" style="">
+                                    <div  class="form-group">
+                                        <div class="zone-title">坐标</div>
+                                    </div>
+                                    <div  class="form-group" style="">
+
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
+
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="text"
+                                                   placeholder="经度" ng-model="vm.user.longitude" ng-disabled="vm.isDetail">
+                                        </div>
+
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" type="text"
+                                                   placeholder="纬度" ng-model="vm.user.latitude" ng-disabled="vm.isDetail">
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div  class="form-group">
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">地图显示</label>
+                                        <div class="col-md-10">
+
+                                            <div >
+                                                <div id="map-div" style="height: 300px;width: 500px;"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                                <div  class="form-group">
+
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">冷藏箱信息</label>
+
+                                    <label class="col-sm-1 control-label  font-bold">总数</label>
+                                    <div class="col-sm-2">
+
+                                        <label class="label label-pos bg-finished" ng-bind="vm.user.freezerBoxInfo.allNum"></label>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label  font-bold">可用数</label>
+                                    <div class="col-sm-2">
+                                        <label class="label label-pos bg-success" ng-bind="vm.user.freezerBoxInfo.availableNum"></label>
+                                    </div>
+                                </div>
+                                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                                <div  class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">冷冻箱信息</label>
+
+                                    <label class="col-sm-1 control-label  font-bold">总数</label>
+                                    <div class="col-sm-2">
+                                        <!--<input class="form-control" type="text"
+                                               placeholder="总数" ng-model="vm.user.coolerBoxInfo.allNum" ng-disabled="vm.isDetail">-->
+                                        <label class="label label-pos bg-finished" ng-bind="vm.user.coolerBoxInfo.allNum"></label>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label  font-bold">可用数</label>
+                                    <div class="col-sm-2">
+                                        <!--<input class="form-control" type="text"
+                                               placeholder="可用数" ng-model="vm.user.coolerBoxInfo.availableNum" ng-disabled="vm.isDetail">-->
+                                        <label class="label label-pos bg-success" ng-bind="vm.user.coolerBoxInfo.availableNum"></label>
+                                    </div>
+                                </div>
+
+                                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                                <div  class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">医药箱信息</label>
+
+                                    <label class="col-sm-1 control-label  font-bold">总数</label>
+                                    <div class="col-sm-2">
+                                        <label class="label label-pos bg-finished" ng-bind="vm.user.medicalBoxInfo.allNum"></label>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label  font-bold">可用数</label>
+                                    <div class="col-sm-2">
+                                        <label class="label label-pos bg-success" ng-bind="vm.user.medicalBoxInfo.availableNum"></label>
+                                    </div>
+                                </div>
+
+                                <div  class="line line-dashed b-b line-lg"></div>
+
+
+                                <div  class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">普通箱信息</label>
+
+                                    <label class="col-sm-1 control-label  font-bold">总数</label>
+                                    <div class="col-sm-2">
+                                        <label class="label label-pos bg-finished" ng-bind="vm.user.ordinaryBoxInfo.allNum"></label>
+                                    </div>
+
+                                    <label class="col-sm-1 control-label  font-bold">可用数</label>
+                                    <div class="col-sm-2">
+                                        <label class="label label-pos bg-success" ng-bind="vm.user.ordinaryBoxInfo.availableNum"></label>
+                                    </div>
+
+                                </div>
+
+                                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+                                <!--
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-1 control-label m-l-lg font-bold">证件图片</label>
+                                                    <div class="col-sm-4">
+                                                        <div class="beauty-upload">
+                                                            <div class="lcell span5" style="margin:5px 0px;">
+                                                                <div class="upload">
+                                                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
+                                                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
+                                                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <input class="form-control" type="text" style="margin-bottom:10px;"
+                                                               placeholder="证件图片" ng-model="vm.user.enterprise_license_id_url" ng-disabled="vm.isDetail" >
+                                                        <div class="img-preview">
+                                                            <img ng-src="{{vm.user.enterprise_license_id_url}}" alt="">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div  class="line line-dashed b-b line-lg"></div>
+                                -->
+
+
+
+
+
+
+
+
+
+
+                                <div  class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">仓库编码</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text"
+                                               placeholder="企业法人" ng-model="vm.user.site_code" ng-disabled="vm.isDetail">
+                                    </div>
+
+                                </div>
+                                <div  class="line line-dashed b-b line-lg"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <!--<div ng-if="vm.isAdd" class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSWORD' | translate}}</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="password"
+                                               placeholder="{{'u.PASSWORD' | translate}}" ng-model="vm.addUser.password" ng-pattern="/^[a-zA-Z0-9_\\-]{8,20}$/" required>
+                                    </div>
+                                    <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.PASSWORDTIP' | translate}}</i></span>
+                                </div>
+                                <div ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>-->
+
+
+
+
+                                <div ng-if="!vm.isAdd" class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">状态</label>
+                                    <div class="col-sm-4">
+
+                                        <!--<input class="form-control" type="text"
+                                               placeholder="{{'u.STATUS' | translate}}" ng-model="vm.user.status" ng-disabled="vm.isDetail" >-->
+
+                                        <!--<select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="s.value as s.title for s in vm.statusType" ng-disabled="vm.isDetail" ></select>
                 -->
+                                        <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.status]" ng-bind="vm.labelContent[vm.user.status]" class="label"></label>
+
+
+                                    </div>
+                                </div>
+                                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
+
+
+
+
+                                <div ng-if="vm.isDetail" class="form-group">
+                                    <label class="col-sm-1 control-label m-l-lg font-bold">创建日期</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control" type="text"
+                                               placeholder="创建日期" ng-model="vm.user.register_time" ng-disabled="vm.isDetail" >
+                                    </div>
+
+                                </div>
+                                <div ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
+
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-3">
+
+                                        <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>返回</button>
+
+                                    </div>
+                                </div>
 
 
 
 
 
 
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">仓库编码</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业法人" ng-model="vm.user.site_code" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!--<div ng-if="vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSWORD' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="password"
-                               placeholder="{{'u.PASSWORD' | translate}}" ng-model="vm.addUser.password" ng-pattern="/^[a-zA-Z0-9_\\-]{8,20}$/" required>
-                    </div>
-                    <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.PASSWORDTIP' | translate}}</i></span>
-                </div>
-                <div ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>-->
-
-
-
-
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">状态</label>
-                    <div class="col-sm-4">
-
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.STATUS' | translate}}" ng-model="vm.user.status" ng-disabled="vm.isDetail" >-->
-
-                        <!--<select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="s.value as s.title for s in vm.statusType" ng-disabled="vm.isDetail" ></select>
--->
-                        <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.status]" ng-bind="vm.labelContent[vm.user.status]" class="label"></label>
-
-
-                    </div>
-                </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div ng-if="vm.isDetail" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">创建日期</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="创建日期" ng-model="vm.user.register_time" ng-disabled="vm.isDetail" >
-                    </div>
-
-                </div>
-                <div ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
-
-
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-3">
-
-                        <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>返回</button>
-
+                            </form>
+                        </div>
                     </div>
                 </div>
 
+                <div class="plat-mgr" ng-show="vm.tabItem[1].active">
 
 
+                    <div class="m-l m-r panel panel-default">
+                        <table  st-table="vm.warehouseHistory" st-safe-src="vm.warehouseHistory" class="table table-bordered table-striped table-hover bg-white text-center">
+                            <thead>
+                            <tr class="font-bold">
+                                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                                <th class="text-center">时间</th>
+                                <th class="text-center">总转入</th>
+                                <th class="text-center">总转出</th>
+                                <th class="text-center">冷藏箱转入</th>
+                                <th class="text-center">冷藏箱转出</th>
+                                <th class="text-center">冷冻箱转入</th>
+                                <th class="text-center">冷冻箱转出</th>
+                                <th class="text-center">医药箱转入</th>
+                                <th class="text-center">医药箱转出</th>
+                                <th class="text-center">普通箱转入</th>
+                                <th class="text-center">普通箱转出</th>
+                                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+                            </tr>
 
+                            </thead>
+                            <tbody class="">
 
+                            <tr ng-repeat="item in vm.warehouseHistory">
+                                <td ng-click="vm.goDetail(item)">{{item.date}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputAll}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.outputAll}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputFreezer}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.outputFreezer}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputCooler}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.outputCooler}}</td>
 
-            </form>
+                                <td ng-click="vm.goDetail(item)">{{item.inputMedical}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.outputMedical}}</td>
+
+                                <td ng-click="vm.goDetail(item)">{{item.inputOrdinary}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.outputOrdinary}}</td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
+                    </div>
+
+                </div>
+
+            </div>
         </div>
+
     </div>
+
+
+
 </div>
 

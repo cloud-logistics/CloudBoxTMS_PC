@@ -92,6 +92,51 @@
             vm.isDetail = true;
         }
 
+
+        vm.tabItem =
+            [{
+                title:'仓库详情',
+                active:true,
+                id:1
+
+            }, {
+                title:'历史明细',
+                active:false,
+                id:2
+            }
+
+            ];
+
+        vm.warehouseHistory = [];
+        vm.sel = function(oper){
+            for(var i = 0; i < vm.tabItem.length; i ++){
+                if(vm.tabItem[i].id == oper){
+                    vm.tabItem[i].active = true;
+                }else{
+                    vm.tabItem[i].active = false;
+                }
+            }
+
+            /*if(oper == 1){
+                getPlatMgr();
+            }else if(oper == 2){
+                getPointBasic();
+                getPointRule();
+            }else if(oper == 3){
+                getQuickFlightRule();
+            }*/
+
+            if(oper == 2){
+                getWarehouseHistory();
+            }
+
+
+
+        };
+
+
+
+        vm.sel(1);
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
         vm.getBasePath =  'rentservice/site/detail';
@@ -100,7 +145,112 @@
 
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
+        function getWarehouseHistory(){
 
+            /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
+                vm.user = response.data.site_info;
+
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });*/
+            vm.warehouseHistory = [
+                {
+                    date:'2017-11-06',
+                    inputAll:5,
+                    outputAll:3,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                },
+                {
+                    date:'2017-11-05',
+                    inputAll:5,
+                    outputAll:3,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                },
+                {
+                    date:'2017-11-04',
+                    inputAll:5,
+                    outputAll:3,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                },
+                {
+                    date:'2017-11-03',
+                    inputAll:15,
+                    outputAll:13,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                },
+                {
+                    date:'2017-11-02',
+                    inputAll:15,
+                    outputAll:13,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                },
+                {
+                    date:'2017-11-01',
+                    inputAll:15,
+                    outputAll:13,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                },
+                {
+                    date:'2017-10-30',
+                    inputAll:15,
+                    outputAll:13,
+                    inputFreezer:5,
+                    outputFreezer:3,
+                    inputCooler:5,
+                    outputCooler:3,
+                    inputMedical:5,
+                    outputMedical:3,
+                    inputOrdinary:5,
+                    outputOrdinary:3
+                }
+
+
+
+            ]
+
+        }
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);

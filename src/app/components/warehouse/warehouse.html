@@ -4,6 +4,7 @@
 ">
 
 
+
     <div class="warehouse-head"><a href ng-click="vm.sel(tab.id)" ng-class="{'tab-active':tab.active}">{{tab.title}}</a>
         <div class="title inline">仓库管理</div>
         <div  class="view-type inline" ><a href ng-class="vm.selectedStyle[vm.isViewList]" ng-click="vm.selList(true)"><i class="fa fa-list icon-m-r"/>列表展示</a></div>
@@ -60,7 +61,7 @@
 
     <div ng-if="!vm.isViewList">
         <div class="m-l m-r m-t panel panel-default">
-            <div class="warehouse-grid inline" ng-class="'warehouse-grid-bg-'+$index" ng-repeat="item in vm.displayedCollection">
+            <div class="warehouse-grid inline" ng-class="'warehouse-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.displayedCollection">
                 <div class="title">{{item.location}}</div>
                 <div class="middle-info">
                 <div class="specs">可用/总数</div>
