@@ -5,6 +5,7 @@
     <!-- main -->
 
     <div class="tab-platform">
+        <span us-spinner spinner-on="vm.showSpinner"></span>
 
         <div >
 
@@ -19,17 +20,82 @@
             <div class="tab-container">
 
                 <div class="plat-mgr" ng-show="vm.tabItem[0].active">
-                    <div class="col">
-                        <span us-spinner spinner-on="vm.showSpinner"></span>
 
-                        <div class="panel panel-default m-l m-r m-t">
+                    <div class="warehouse-detail-card-banner m-l m-r m-b">
+                        <div class="warehouse-detail-card warehouse-detail-card-0">
+                            <div class="title">
+                                云箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.allCurrentBoxInfo.allNum}}/{{vm.user.allCurrentBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.allCurrentBoxInfo.availableNum/vm.user.allCurrentBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-1">
+                            <div class="title">
+                                冷藏箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.freezerBoxInfo.allNum}}/{{vm.user.freezerBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.freezerBoxInfo.availableNum/vm.user.freezerBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-2">
+                            <div class="title">
+                                冷冻箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.coolerBoxInfo.allNum}}/{{vm.user.coolerBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.coolerBoxInfo.availableNum/vm.user.coolerBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-3">
+                            <div class="title">
+                                医药箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.medicalBoxInfo.allNum}}/{{vm.user.medicalBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.medicalBoxInfo.availableNum/vm.user.medicalBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-3">
+                            <div class="title">
+                                普通箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.ordinaryBoxInfo.allNum}}/{{vm.user.ordinaryBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="panel panel-default m-l m-r ">
 
 
                             <br/>
+
+
                             <form name="form" class="form-horizontal form-validation" role="form">
-
-
-
 
                                 <div  class="form-group">
                                     <label class="col-sm-1 control-label m-l-lg font-bold">名称</label>
@@ -310,11 +376,77 @@
 
                             </form>
                         </div>
-                    </div>
+
                 </div>
 
                 <div class="plat-mgr" ng-show="vm.tabItem[1].active">
+                    <div class="warehouse-detail-card-banner m-l m-r m-b">
+                        <div class="warehouse-detail-card warehouse-detail-card-0">
+                            <div class="title">
+                                云箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.allCurrentBoxInfo.allNum}}/{{vm.user.allCurrentBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.allCurrentBoxInfo.availableNum/vm.user.allCurrentBoxInfo.allNum+'%'}}" >
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-1">
+                            <div class="title">
+                                冷藏箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.freezerBoxInfo.allNum}}/{{vm.user.freezerBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.freezerBoxInfo.availableNum/vm.user.freezerBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-2">
+                            <div class="title">
+                                冷冻箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.coolerBoxInfo.allNum}}/{{vm.user.coolerBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.coolerBoxInfo.availableNum/vm.user.coolerBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-3">
+                            <div class="title">
+                                医药箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.medicalBoxInfo.allNum}}/{{vm.user.medicalBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.medicalBoxInfo.availableNum/vm.user.medicalBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-3">
+                            <div class="title">
+                                普通箱总数/可用数量
+                            </div>
+                            <div class="num">
+                                {{vm.user.ordinaryBoxInfo.allNum}}/{{vm.user.ordinaryBoxInfo.availableNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + 100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="m-l m-r panel panel-default">
                         <table  st-table="vm.warehouseHistory" st-safe-src="vm.warehouseHistory" class="table table-bordered table-striped table-hover bg-white text-center">
