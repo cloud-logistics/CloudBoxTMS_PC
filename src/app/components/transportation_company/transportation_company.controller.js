@@ -38,7 +38,7 @@
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
 
-        vm.deposit_confirm =  'rentservice/enterprise/enterpriseinfo';
+        vm.deposit_confirm =  'rentservice/enterprise/enterpriseinfo/depositconfirm';
         vm.isAdmin = false;
         vm.limit = 10;
 
@@ -56,13 +56,7 @@
         function OperApp(index, item) {
             if(index == 3){
 
-                NetworkService.post(vm.deposit_confirm + '/'+ item.id,null,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(vm.authError);
-                });
+                vm.openOper('sm', item);
 
             }/*else{
                 console.log('error ops:'+index);
@@ -72,7 +66,15 @@
         }
 
 
-
+        vm.confirmDeposit = function(item)
+        {
+            NetworkService.put(vm.deposit_confirm,{enterprise_id:item.enterprise_id},function (response) {
+                toastr.success('操作成功');
+                getDatas();
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+        }
         function goSearch() {
             console.log(vm.searchItem);
         };
@@ -186,8 +188,11 @@
 
         //Model
 
-        vm.tipsInfo = delmodaltip;
+
+
+
         vm.openAlert = function (size,model) {
+            vm.tipsInfo = delmodaltip;
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
@@ -202,6 +207,29 @@
                 vm.removeItem(model);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+
+        vm.openOper = function (size,model) {
+            var tip = {
+                title: '押金确认',
+                content: '请确认押金已经交付'
+            };
+            vm.tipsInfo = tip;
+            var modalInstance = $uibModal.open({
+                templateUrl: 'myModalContent.html',
+                size: size,
+                controller:'ModalInstanceCtrl',
+                resolve: {
+                    tipsInfo: function () {
+                        return vm.tipsInfo;
+                    }
+                }
+            });
+            modalInstance.result.then(function (param) {
+                vm.confirmDeposit(model);
+            }, function () {
             });
         }
 
