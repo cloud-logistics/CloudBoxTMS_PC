@@ -32,8 +32,10 @@
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                 <th class="text-center">企业名称</th>
                 <th class="text-center">押金状态</th>
+                <th class="text-center">押金金额</th>
                 <th class="text-center">企业邮箱</th>
                 <th class="text-center">企业电话</th>
+
                 <th class="text-center">创建日期</th>
                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
             </tr>
@@ -51,8 +53,10 @@
 ]" class="label"></label>
                 </td>
 
-
+                <td ng-click="vm.goDetail(item)">{{item.enterprise_deposit_status == 0 ? '--' : item.enterprise_deposit}}</td>
                <td ng-click="vm.goDetail(item)">{{item.enterprise_email}}</td>
+
+
                 <td ng-click="vm.goDetail(item)">{{item.enterprise_tele}}</td>
                 <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
                 <td ng-click="vm.goDetail(item)">{{item.address}}</td>-->
