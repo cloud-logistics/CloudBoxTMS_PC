@@ -19,9 +19,8 @@
             <thead>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                <th class="text-center">名称</th>
                 <th class="text-center">地址</th>
-                <th class="text-center">经度</th>
-                <th class="text-center">纬度</th>
                 <th class="text-center">仓库编码</th>
                 <th class="text-center">云箱总数</th>
                 <th class="text-center">云箱可用数</th>
@@ -32,9 +31,9 @@
             <tbody class="">
 
             <tr ng-repeat="item in vm.displayedCollection">
-                <td ng-click="vm.goDetail(item)">{{item.location}}</td>
-               <td ng-click="vm.goDetail(item)">{{item.longitude}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.latitude}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.name}}</td>
+               <td ng-click="vm.goDetail(item)">{{item.location}}</td>
+
                 <td ng-click="vm.goDetail(item)">{{item.site_code}}</td>
                 <td ng-click="vm.goDetail(item)">
                     <label  ng-bind="item.allCurrentBoxInfo.allNum" class="label bg-finished"></label>
@@ -62,7 +61,7 @@
     <div ng-if="!vm.isViewList">
         <div class="m-l m-r m-t panel panel-default">
             <div class="warehouse-grid inline" ng-class="'warehouse-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.displayedCollection">
-                <div class="title">{{item.location}}</div>
+                <div class="title">{{item.name}}</div>
                 <div class="middle-info">
                 <div class="specs">可用/总数</div>
                 <div class="num">{{item.allCurrentBoxInfo.availableNum + '/' + item.allCurrentBoxInfo.allNum}}</div>

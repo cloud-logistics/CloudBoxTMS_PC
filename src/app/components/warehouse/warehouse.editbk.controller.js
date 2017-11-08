@@ -6,7 +6,7 @@
 
     angular
         .module('smart_container')
-        .controller('EditWarehouseController', EditWarehouseController)
+        .controller('EditWarehouseControllerbk', EditWarehouseControllerbk)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function EditWarehouseController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function EditWarehouseControllerbk(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -108,10 +108,35 @@
             ];
 
         vm.warehouseHistory = [];
+        vm.sel = function(oper){
+            for(var i = 0; i < vm.tabItem.length; i ++){
+                if(vm.tabItem[i].id == oper){
+                    vm.tabItem[i].active = true;
+                }else{
+                    vm.tabItem[i].active = false;
+                }
+            }
+
+            /*if(oper == 1){
+                getPlatMgr();
+            }else if(oper == 2){
+                getPointBasic();
+                getPointRule();
+            }else if(oper == 3){
+                getQuickFlightRule();
+            }*/
+
+            if(oper == 2){
+                getWarehouseHistory();
+            }
 
 
 
+        };
 
+
+
+        vm.sel(1);
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
         vm.getBasePath =  'rentservice/site/detail';
@@ -251,23 +276,23 @@
 
                 var point = new BMap.Point(vm.user.longitude, vm.user.latitude);  // 创建点坐标
                 var marker = new BMap.Marker(point);        // 创建标注
+
+                marker.addEventListener("click", function(){
+                    //alert("您点击了标注");
+                    var opts = {
+                        width : 150,     // 信息窗口宽度
+                        height: 70,     // 信息窗口高度
+                        title : '仓库信息:'  // 信息窗口标题
+                    }
+                    var infoWindow = new BMap.InfoWindow(vm.user.location+'\n' + '('+vm.user.longitude+','+vm.user.latitude+')', opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow, point);      // 打开信息窗口
+                });
+
                 map.addOverlay(marker);
+                map.centerAndZoom(point, 10);
+                map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
 
-                //map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
 
-                var opts = {
-                    width : 100,     // 信息窗口宽度
-                    height: 50,     // 信息窗口高度
-                    title : ''  // 信息窗口标题
-                };
-                var lat = vm.user.latitude > 0 ? '北纬':'南纬';
-                var infoWindow = new BMap.InfoWindow('地址：'+vm.user.location + '<br />' + '坐标：(' + vm.user.latitude + ',' + vm.user.longitude+')', opts);  // 创建信息窗口对象
-                map.openInfoWindow(infoWindow, point);
-
-                var disPoint  = new BMap.Point(vm.user.longitude, parseFloat(vm.user.latitude) + 10);
-                console.log(vm.user.latitude);
-                //console.log(parseFloat(vm.user.latitude)+5);
-                map.centerAndZoom(disPoint, 10);
 
 
                 vm.allInfo = response.data;
@@ -375,7 +400,6 @@
 
         if (!vm.isAdd){
             vm.getTenantItem();
-            getWarehouseHistory();
         }
 
         function back() {

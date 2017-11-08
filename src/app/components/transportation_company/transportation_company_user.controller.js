@@ -88,7 +88,7 @@
 
         function getDatas() {
 
-            NetworkService.get(vm.getBasePath,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+            NetworkService.get(vm.getBasePath+'/rentuser',{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
                 vm.items = response.data.results;
                 vm.displayedCollection = (vm.items);
                 //vm.displayedCollection = [].concat(vm.items);
