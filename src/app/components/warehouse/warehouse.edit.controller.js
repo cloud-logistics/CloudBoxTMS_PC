@@ -225,7 +225,7 @@
 
             ]
 
-        }
+        };
 
         vm.uploadFile = function (){
             console.log(vm.myUploadFile);

@@ -120,13 +120,13 @@
             });
 
         };
+
+
+
         function backAction() {
             // $state.go('app.tenant');
             $rootScope.backPre();
         }
-
-        vm.displayedCollection = [].concat(vm.items);
-
 
         // 分页 Start
         vm.preAction = function () {

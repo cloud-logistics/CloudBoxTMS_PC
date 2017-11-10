@@ -62,7 +62,7 @@
         vm.enterprise_id = $stateParams.args.enterprise_id;
         vm.enterprise_name = $stateParams.args.enterprise_name;
 
-       // console.log(enterprise_id);
+        console.log(vm.enterprise_id);
         vm.OperApp = OperApp;
         vm.limit = 10;
         function OperApp(index, item) {
@@ -91,7 +91,7 @@
 
         function getDatas() {
 
-            NetworkService.get(vm.getBasePath+'/rentuser',{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+            NetworkService.get(vm.getBasePath+'/enterprise/'+vm.enterprise_id,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
                 vm.items = response.data.results;
                 vm.displayedCollection = (vm.items);
                 //vm.displayedCollection = [].concat(vm.items);
