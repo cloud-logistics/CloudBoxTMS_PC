@@ -28,6 +28,7 @@
         vm.isAdd = true;
         vm.isEdit = false;
         vm.isDetail = false;
+        vm.isFromCompany = false;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
         vm.backAction = backAction;
@@ -101,6 +102,12 @@
         }
         if(type && type=='detail'){
             vm.isDetail = true;
+        }
+
+        if(type && type=='edit_from_company'){
+            vm.isFromCompany = true;
+            vm.enterprise_id = $stateParams.args.enterprise_id;
+            vm.enterprise_name = $stateParams.args.enterprise_name;
         }
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
@@ -187,6 +194,9 @@
         if(vm.isAdd){
             vm.user.role='user';
             vm.user.group = 'rentuser';
+            if(vm.isFromCompany){
+                vm.user.enterprise_id = vm.enterprise_id;
+            }
         }
 
         function back() {

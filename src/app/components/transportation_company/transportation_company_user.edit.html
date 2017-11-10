@@ -85,11 +85,12 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">角色</label>
                     <div class="col-sm-4">
+
+                        <select class="form-control font-thin" ng-model="vm.user.role" ng-options="opt.value as opt.title for opt in vm.userRole" ng-disabled="vm.isDetail" ></select>
+
 <!--
-                        <select class="form-control font-thin" ng-model="vm.user.role" ng-options="opt.value as opt.title for opt in vm.userRole" ng-disabled=true ></select>
--->
-                        <!--<label class="bg-succes label" ng-binding="vm.user.role"></label>-->
                         <label class="bg-success label" ng-bind="vm.labelContent[vm.user.role]"></label>
+-->
                     </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -98,10 +99,10 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">群组</label>
                     <div class="col-sm-4">
-<!--
-                        <select class="form-control font-thin" ng-model="vm.user.group" ng-options="opt.value as opt.title for opt in vm.userGroup" ng-disabled=true ></select>
--->
-                        <label class="bg-success label" ng-bind="vm.labelGroupContent[vm.user.group]"></label>
+
+                        <select class="form-control font-thin" ng-model="vm.user.group" ng-options="opt.value as opt.title for opt in vm.userGroup" ng-disabled="vm.isDetail" ></select>
+
+                        <!--<label class="bg-success label" ng-bind="vm.labelGroupContent[vm.user.group]"></label>-->
                     </div>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>

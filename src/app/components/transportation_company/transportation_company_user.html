@@ -21,10 +21,11 @@
             <thead>
             <tr>
                 <th colspan="7">
-                    <button ng-click="vm.goAddItem()" class="add-button" >添加用户</button>
+                    <div class="company-title">公司名称：{{vm.enterprise_name}}</div>
+
 <!--
                     <input ng-model="vm.searchItem" st-search="" class="form-control pull-right search-input" placeholder="请输入公司名称" type="text"/>
--->
+-->                 <button ng-click="vm.goAddItem()" class="add-button pull-right m-l" >添加用户</button>
                     <input st-search="" class="search-edit pull-right font-thin" placeholder="请输入用户名称" type="text"/>
                     <button ng-click="vm.goSearch()" class="search-button pull-right"><i class="fa fa-search"></i>搜索</button>
 
@@ -33,7 +34,7 @@
             </tr>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">名称</th>
+                <th class="text-center">用户名称</th>
                <!-- <th class="text-center">密码</th>-->
                 <th class="text-center">角色</th>
                 <th class="text-center">群组</th>

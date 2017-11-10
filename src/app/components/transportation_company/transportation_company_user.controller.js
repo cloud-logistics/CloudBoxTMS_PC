@@ -9,7 +9,7 @@
         .controller('TransportationCompanyUserController', TransportationCompanyUserController);
 
     /** @ngInject */
-    function TransportationCompanyUserController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function TransportationCompanyUserController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip, $stateParams) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -59,7 +59,10 @@
             'rentadmin':'企业管理员',
             'rentuser':'企业用户'
         };
+        vm.enterprise_id = $stateParams.args.enterprise_id;
+        vm.enterprise_name = $stateParams.args.enterprise_name;
 
+       // console.log(enterprise_id);
         vm.OperApp = OperApp;
         vm.limit = 10;
         function OperApp(index, item) {
