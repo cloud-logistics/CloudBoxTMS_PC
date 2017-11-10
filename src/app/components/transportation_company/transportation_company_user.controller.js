@@ -50,8 +50,8 @@
             'diamond':'bg-main'
         };
         vm.labelContent={
-            'admin':'企业管理员',
-            'user':'企业用户',
+            'admin':'管理员',
+            'user':'用户',
 
         };
         vm.labelGroupContent={

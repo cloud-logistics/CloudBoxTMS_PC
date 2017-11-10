@@ -58,9 +58,12 @@
 
                 vm.openOper('sm', item);
 
-            }/*else{
-                console.log('error ops:'+index);
-            }*/
+            }else  if(index == 4){
+                $state.go('app.edit_transportation_company_user',{username:item.enterprise_id, args:{type:'edit_from_company'}});
+            }else  if(index == 5){
+                $state.go('app.transportation_company_user', {username:item.enterprise_id});
+            }
+
 
             //$state.go('app.applicationedit');
         }

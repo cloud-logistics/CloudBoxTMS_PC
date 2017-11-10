@@ -82,13 +82,10 @@
             'diamond':'bg-main'
         };
         vm.labelContent={
-            enabled:'已启用',
-            locked:'已锁定',
-            'member':'普通会员',
-            'silver':'白银会员',
-            'gold':'黄金会员',
-            'platinum':'铂金会员',
-            'diamond':'钻石会员',
+            'admin':'管理员',
+            'user':'用户'
+        };
+        vm.labelGroupContent={
             'admin':'超级管理员',
             'rentadmin':'企业管理员',
             'rentuser':'企业用户'
@@ -189,6 +186,7 @@
         }
         if(vm.isAdd){
             vm.user.role='user';
+            vm.user.group = 'rentuser';
         }
 
         function back() {

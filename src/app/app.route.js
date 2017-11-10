@@ -233,6 +233,7 @@
             })
             .state('app.transportation_company_user', {
                 url: 'transportation_company_user',
+                params : {args : {}},
                 templateUrl: 'app/components/transportation_company/transportation_company_user.html'
             })
             .state('app.edit_transportation_company_user', {
