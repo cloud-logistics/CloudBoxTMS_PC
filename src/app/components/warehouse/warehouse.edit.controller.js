@@ -117,18 +117,64 @@
         vm.getBasePath =  'rentservice/site/detail';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
-
+        vm.getWarehouseHisPath = 'rentservice/site/stat/';
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
         function getWarehouseHistory(){
 
-            /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
-                vm.user = response.data.site_info;
+            NetworkService.get(vm.getWarehouseHisPath + '/' + username,null,function (response) {
+                vm.userHis = response.data.results;
+                //console.log(vm.userHis);
+                vm.warehouseHistory = [];
+                if(vm.userHis != null && vm.userHis.length > 0){
+                    for(var i = 0; i < vm.userHis.length; i ++){
+                        vm.warehouseHistory[i] = {};
+                        vm.warehouseHistory[i].date = vm.userHis[i].stat_day;
+                        vm.warehouseHistory[i].inputAll = vm.userHis[i].total_in;
+                        vm.warehouseHistory[i].outputAll = vm.userHis[i].total_out;
+
+                        vm.warehouseHistory[i].inputFreezer = 0;
+                        vm.warehouseHistory[i].outputFreezer = 0;
+                        vm.warehouseHistory[i].inputCooler = 0;
+                        vm.warehouseHistory[i].outputCooler = 0;
+                        vm.warehouseHistory[i].inputMedical = 0;
+                        vm.warehouseHistory[i].outputMedical = 0;
+                        vm.warehouseHistory[i].inputOrdinary = 0;
+                        vm.warehouseHistory[i].outputOrdinary = 0;
+                        vm.warehouseHistory[i].inputSpecial = 0;
+                        vm.warehouseHistory[i].outputSpecial = 0;
+
+
+
+                        if(vm.userHis[i].detail && vm.userHis[i].detail.length > 0){
+                            for (var j = 0;  j < vm.userHis[i].detail.length; j ++){
+                                if(vm.userHis[i].detail[j].box_type.id == 1){
+                                    vm.warehouseHistory[i].inputFreezer = vm.userHis[i].detail[j].box_in;
+                                    vm.warehouseHistory[i].outputFreezer = vm.userHis[i].detail[j].box_out;
+                                }else if(vm.userHis[i].detail[j].box_type.id == 2){
+                                    vm.warehouseHistory[i].inputCooler = vm.userHis[i].detail[j].box_in;
+                                    vm.warehouseHistory[i].outputCooler = vm.userHis[i].detail[j].box_out;
+                                }else if(vm.userHis[i].detail[j].box_type.id == 3){
+                                    vm.warehouseHistory[i].inputMedical = vm.userHis[i].detail[j].box_in;
+                                    vm.warehouseHistory[i].outputMedical = vm.userHis[i].detail[j].box_out;
+                                }else if(vm.userHis[i].detail[j].box_type.id == 4){
+                                    vm.warehouseHistory[i].inputOrdinary = vm.userHis[i].detail[j].box_in;
+                                    vm.warehouseHistory[i].outputOrdinary = vm.userHis[i].detail[j].box_out;
+                                }else if(vm.userHis[i].detail[j].box_type.id == 5){
+                                    vm.warehouseHistory[i].inputSpecial = vm.userHis[i].detail[j].box_in;
+                                    vm.warehouseHistory[i].outputSpecial = vm.userHis[i].detail[j].box_out;
+                                }
+                            }
+                        }
+
+
+                    }
+                }
 
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });*/
-            vm.warehouseHistory = [
+            });
+            /*vm.warehouseHistory = [
                 {
                     date:'2017-11-06',
                     inputAll:5,
@@ -223,7 +269,7 @@
 
 
 
-            ]
+            ]*/
 
         };
 
