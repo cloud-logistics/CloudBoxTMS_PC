@@ -18,6 +18,7 @@ exports.server={
 }
 exports.pkg = pkg;
 exports.module='smart_container';
+exports.buildName='LEAW';
 
 /**
  *  The main paths of your project handle these with care

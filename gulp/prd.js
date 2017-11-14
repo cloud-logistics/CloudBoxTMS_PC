@@ -260,13 +260,32 @@ gulp.task('gz', function () {
 });
 
 
+function getWeekNumber() {
+    // Copy date so don't modify original
+    var d = new Date();
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    // Set to nearest Thursday: current date + 4 - current day number
+    // Make Sunday's day number 7
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+    // Get first day of year
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    // Calculate full weeks to nearest Thursday
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    // Return array of year and week number
+    return weekNo;
+};
+
 /**
- * Create a distribution package zip
+ * Create a distribution package zip LEAW.746.100.001
  */
 gulp.task('dist', ['build:clean', 'build'], function () {
     var date = new Date().toISOString().replace(/[^0-9]/g, '');
+
+    var y = date.substr(3,1);
+    var w = getWeekNumber();
+    date = date.substr(0,12);
     return gulp.src(path.join(conf.paths.build, '/**/*'))
-        .pipe($.zip(conf.pkg.name + "-" + conf.pkg.version + "-BUILD" + date + ".zip"))
+        .pipe($.zip(conf.buildName + "." + y + ''+ w + '.100.001.' + date + ".zip"))
         .pipe(gulp.dest(conf.paths.dist));
 });
 
