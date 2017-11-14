@@ -1,0 +1,106 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="BoxBasicEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+                    <span us-spinner spinner-on="vm.showSpinner"></span>
+
+
+                <div class="container-guide-bar">
+                    <a href class="auto" ui-sref="app.boxbasic">
+                        <span class="title" ><u><b>云箱管理</b></u></span>
+                    </a>
+                    <span>></span>
+                         <span class="name"><b>ID</b> {{vm.user.deviceid}}</span>
+
+
+                    <span class="type">{{vm.user.type.box_type_name}}</span>
+                        <span class="status">{{vm.containerStatusSpec[vm.user.curStatus]}}</span>
+
+                </div>
+
+                     <div class="panel panel-default   ">
+                            <div id="map-div" style="height: 300px;width: 100%; z-index:555;"></div>
+                    </div>
+                    <div class="container-detail-card-banner m-l m-r m-b">
+
+                        <div class="container-detail-card container-detail-card-1">
+                            <div class="title">
+                                本周次数/时长
+                            </div>
+                            <div class="num">
+                                23<span>次</span>/970<span>小时</span>
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar container-detail-card-1" style="{{'width:'+'50%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-detail-card container-detail-card-2">
+                            <div class="title">
+                                本月次数/时长
+                            </div>
+                            <div class="num">
+                                65<span>次</span>/13393<span>小时</span>
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar container-detail-card-2" style="{{'width:'+'50%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-detail-card container-detail-card-3">
+                            <div class="title">
+                                全年次数/时长
+                            </div>
+                            <div class="num">
+                                790<span>次</span>/4613993<span>小时</span>
+                            </div>
+                            <div class="progress-all-bar">
+                                <!--<div class="progress-percent-bar" style="{{'width:' + 100*vm.user.medicalBoxInfo.availableNum/vm.user.medicalBoxInfo.allNum+'%'}}" >
+
+                                </div>-->
+                                <div class="progress-percent-bar container-detail-card-3" style="{{'width:'+'50%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="m-l m-r panel panel-default">
+                        <table  st-table="vm.warehouseHistory" st-safe-src="vm.containerHistory" class="table table-bordered table-striped table-hover bg-white text-center">
+                            <thead>
+                            <tr class="font-bold">
+                                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                                <th class="text-center">开始时间</th>
+                                <th class="text-center">结束时间</th>
+                                <th class="text-center">使用人</th>
+                                <th class="text-center">出发地</th>
+                                <th class="text-center">目的地</th>
+
+                                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+                            </tr>
+
+                            </thead>
+                            <tbody class="">
+
+                            <tr ng-repeat="item in vm.containerHistory">
+                                <td ng-click="vm.goDetail(item)">{{item.startDate}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.endDate}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.user}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.departure}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
+                    </div>
+
+</div>
+

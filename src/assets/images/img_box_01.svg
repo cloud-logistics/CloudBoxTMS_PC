@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="45px" height="52px" viewBox="0 0 45 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>img_box_01</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-12.2%" y="-105.4%" width="124.3%" height="310.9%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="1.58154576" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <linearGradient x1="25.1550909%" y1="27.3497938%" x2="100%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FCA27B" offset="0%"></stop>
+            <stop stop-color="#FA7032" offset="100%"></stop>
+        </linearGradient>
+        <path d="M17.8942163,21.2482218 L17.8942163,42.3 L3.90798505e-14,33.2008465 L3.90798505e-14,11.3541346 L17.8942163,21.2482218 Z M39.0004938,11.5657986 L38.8681073,33.2124416 L21.0115959,42.4290878 L21.141175,21.2414892 L39.0004938,11.5657986 Z M1.76315664,8.80048727 L19.5085515,0 L37.2342847,9.25284894 L19.5085515,18.8873082 L1.76315664,8.80048727 Z" id="path-3"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="登录" transform="translate(-677.000000, -433.000000)">
+            <g id="圈" transform="translate(468.000000, 373.000000)">
+                <g id="img_box_01" transform="translate(212.000000, 63.000000)">
+                    <ellipse id="Oval-3" fill="#4668E7" filter="url(#filter-1)" cx="19.5" cy="42.75" rx="19.5" ry="2.25"></ellipse>
+                    <g id="Combined-Shape">
+                        <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <path stroke="#FFFFFF" stroke-width="1.84500003" d="M18.8167163,20.7041674 L18.8167163,43.804004 L-0.922500014,33.7666736 L-0.922500014,9.78994112 L18.8167163,20.7041674 Z M39.9325159,10.0116684 L39.7871768,33.7761984 L20.0797882,43.9481756 L20.2220289,20.6902713 L39.9325159,10.0116684 Z M-0.201262123,8.74498991 L19.5192676,-1.0350275 L39.1962938,9.23639821 L19.4985181,19.9427208 L-0.201262123,8.74498991 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

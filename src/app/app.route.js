@@ -178,6 +178,12 @@
                 templateUrl: 'app/components/basic/boxbasic.html'
             })
 
+            .state('app.edit_boxbasic', {
+                url: 'boxbasic/edit/:username',
+                params : {args : {}},
+                templateUrl: 'app/components/basic/boxbasic.edit.html'
+            })
+
             //云箱报警处理设置
             .state('app.boxalert',{
                 url: 'boxalert',

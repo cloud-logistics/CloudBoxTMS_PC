@@ -15,6 +15,39 @@
         vm.reports = [];
         vm.queryParams = {};
         $scope.transDetail = false;
+
+
+
+        vm.selectedStyle={
+            true:'bg-selected',
+            false:'bg-unselected'
+        };
+
+        vm.containerStatusSpec = {
+            1:'可租用',
+            2:'运输中',
+            3:'不可用'
+        };
+        vm.containerStatusLabel = {
+            1:'bg-available',
+            2:'bg-transporting',
+            3:'bg-not-available'
+        };
+
+
+
+        vm.isViewList = false;
+        vm.selList = function (isList) {
+            vm.isViewList = isList;
+            console.log('dd');
+
+        }
+
+
+        vm.goDetail= function(item) {
+            $state.go('app.edit_boxbasic',{username:item.deviceid, args:{type:'detail', data:item}});
+
+        };
         $scope.basicUpdate = function(item){
             vm.options = R.merge(vm.options, {
                 title: "云箱详情",
@@ -203,13 +236,25 @@
                 "province_id":0,
                 "city_id":0,
                 "site_id":0,
-                "ava_flag":"Y",
+                "ava_flag":"",
                 limit:vm.limit,
                 offset:(vm.pageCurrent - 1) * vm.limit,
 
             },function (response) {
                 vm.items = response.data.results;
-                console.log(response.data);
+
+                if(vm.items.length > 0){
+                    for(var i = 0; i < vm.items.length; i ++){
+                        if(vm.items[i].ava_flag == 'N'){
+                            vm.items[i].curStatus = 3;
+                        }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
+                            vm.items[i].curStatus = 2;
+                        }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
+                            vm.items[i].curStatus = 1;
+                        }
+                    }
+                }
+                //console.log(response.data);
                 vm.displayedCollection = (vm.items);
 
                 updatePagination(response.data);
