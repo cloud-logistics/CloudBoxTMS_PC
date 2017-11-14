@@ -24,6 +24,12 @@
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
+        vm.pageCurrent = 1;
+        vm.targetPage = 1;
+        vm.pagePreEnabled = false;
+        vm.pageNextEnabled = false;
+        vm.pages = [];
+        vm.limit = 10;
         vm.user = {};
         vm.isAdd = true;
         vm.isEdit = false;
@@ -120,7 +126,7 @@
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/site/detail';
+        vm.getBasePath =  'rentservice/boxinfo/detail/';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
 
@@ -198,10 +204,10 @@
 
 
         function getTenantItem() {
-           // NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
-                //vm.user = response.data.site_info;
+            NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
+                vm.user = response.data;
 
-                vm.user = refItem;
+                //vm.user = refItem;
 
 
                 if(vm.user.ava_flag == 'N'){
@@ -235,9 +241,9 @@
 
 
 
-           /* },function (response) {
+            },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });*/
+            });
         }
 
 
@@ -283,6 +289,64 @@
         function back() {
             // history.back();
             vm.backAction();
+        }
+
+
+        vm.preAction = function () {
+            vm.pageCurrent --;
+            if (vm.pageCurrent < 1) vm.pageCurrent = 1;
+            getDatas();
+        };
+        vm.nextAction = function () {
+            vm.pageCurrent ++;
+            getDatas();
+        };
+        vm.goPage = function (page) {
+            console.log(page);
+            vm.pageCurrent = Number(page);
+            console.log(vm.pageCurrent);
+            getDatas();
+        };
+        vm.pageCurrentState = function (page) {
+            if (Number(page) == vm.pageCurrent)
+                return true;
+            return false;
+        };
+
+        function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                // toastr.error('当前无数据哦~');
+                return;
+            }
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
+
+
+            if (toalPages < 2){
+                vm.pages = ['1'];
+            }else{
+                vm.pages = [];
+                var pageControl = 5;
+                var stepStart = page - (pageControl - 1)/2;
+                if (stepStart < 1 || toalPages < pageControl) stepStart = 1;
+                var stepEnd = stepStart + pageControl - 1;
+                if (stepEnd > toalPages) {
+                    stepEnd = toalPages;
+                    stepStart = toalPages - pageControl + 1;
+                    if (stepStart < 1){
+                        stepStart = 1;
+                    }
+                }
+
+                for (var i=stepStart;i<= (stepEnd > toalPages ? toalPages : stepEnd);i++) {
+                    vm.pages.push(i);
+                }
+            }
+
         }
 
     }

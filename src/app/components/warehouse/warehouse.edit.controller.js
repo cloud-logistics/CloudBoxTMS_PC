@@ -28,6 +28,12 @@
         vm.isAdd = true;
         vm.isEdit = false;
         vm.isDetail = false;
+        vm.pageCurrent = 1;
+        vm.targetPage = 1;
+        vm.pagePreEnabled = false;
+        vm.pageNextEnabled = false;
+        vm.pages = [];
+        vm.limit = 10;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
         vm.backAction = backAction;
@@ -120,9 +126,12 @@
         vm.getWarehouseHisPath = 'rentservice/site/stat/';
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
+        function getDatas(){
+            getWarehouseHistory();
+        }
         function getWarehouseHistory(){
 
-            NetworkService.get(vm.getWarehouseHisPath + '/' + username,null,function (response) {
+            NetworkService.get(vm.getWarehouseHisPath + '/' + username,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
                 vm.userHis = response.data.results;
                 //console.log(vm.userHis);
                 vm.warehouseHistory = [];
@@ -170,6 +179,7 @@
 
                     }
                 }
+                updatePagination(response.data);
 
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
@@ -427,6 +437,68 @@
         function back() {
             // history.back();
             vm.backAction();
+        }
+
+
+
+
+
+
+        vm.preAction = function () {
+            vm.pageCurrent --;
+            if (vm.pageCurrent < 1) vm.pageCurrent = 1;
+            getDatas();
+        };
+        vm.nextAction = function () {
+            vm.pageCurrent ++;
+            getDatas();
+        };
+        vm.goPage = function (page) {
+            console.log(page);
+            vm.pageCurrent = Number(page);
+            console.log(vm.pageCurrent);
+            getDatas();
+        };
+        vm.pageCurrentState = function (page) {
+            if (Number(page) == vm.pageCurrent)
+                return true;
+            return false;
+        };
+
+        function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                // toastr.error('当前无数据哦~');
+                return;
+            }
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
+
+
+            if (toalPages < 2){
+                vm.pages = ['1'];
+            }else{
+                vm.pages = [];
+                var pageControl = 5;
+                var stepStart = page - (pageControl - 1)/2;
+                if (stepStart < 1 || toalPages < pageControl) stepStart = 1;
+                var stepEnd = stepStart + pageControl - 1;
+                if (stepEnd > toalPages) {
+                    stepEnd = toalPages;
+                    stepStart = toalPages - pageControl + 1;
+                    if (stepStart < 1){
+                        stepStart = 1;
+                    }
+                }
+
+                for (var i=stepStart;i<= (stepEnd > toalPages ? toalPages : stepEnd);i++) {
+                    vm.pages.push(i);
+                }
+            }
+
         }
 
     }

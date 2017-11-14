@@ -19,6 +19,7 @@
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
+        vm.limit = 8;
 
         vm.items = [];
         vm.showItems = [];
@@ -38,7 +39,7 @@
         vm.updateBasePath =  'sites/';
         vm.delBasePath =  'sites/';
         vm.isAdmin = false;
-        vm.limit = 8;
+
 
         vm.labelColor = {
             enabled:'bg-success',
