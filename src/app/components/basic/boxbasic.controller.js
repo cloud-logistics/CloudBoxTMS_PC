@@ -195,6 +195,7 @@
 
         vm.getProvincePath = 'rentservice/regions/provinces';
         vm.getCityPath = 'rentservice/regions/cities/';
+        vm.getWarehousePath =  'rentservice/site/list/province/';
 
         vm.options = {};
         var transformations = undefined;
@@ -219,40 +220,85 @@
         vm.searchProvince = 1;
         vm.searchCity = 1;
         vm.searchWarehouse = 1;
-        /*var timer = $interval(function(){
-            getBasicInfo();
-        },constdata.refreshInterval, 500);
 
-        $scope.$on("$destroy", function(){
-            $interval.cancel(timer);
-        });*/
+        vm.goSearch = function(){
+            NetworkService.post(vm.getBasePath,{
+                "province_id":vm.searchProvince,
+                "city_id":vm.searchCity,
+                "site_id":vm.searchWarehouse,
+                "ava_flag":"",
+                limit:vm.limit,
+                offset:(vm.pageCurrent - 1) * vm.limit,
 
+            },function (response) {
+                vm.items = response.data.results;
 
-        /*function getBasicInfo () {
-            ApiServer.getBasicInfo({}, function (response) {
-                // console.log(Date.parse(vm.queryParams.startTime).toString());
-                console.log(response);
-                vm.basicInfoManage = response.data.basicInfo;
-                console.log(vm.basicInfoManage);
-            },function (err) {
-                console.log("Get ContainerOverview Info Failed", err);
+                if(vm.items.length > 0){
+                    for(var i = 0; i < vm.items.length; i ++){
+                        if(vm.items[i].ava_flag == 'N'){
+                            vm.items[i].curStatus = 3;
+                        }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
+                            vm.items[i].curStatus = 2;
+                        }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
+                            vm.items[i].curStatus = 1;
+                        }
+                    }
+                }
+                //console.log(response.data);
+                vm.displayedCollection = (vm.items);
+
+                updatePagination(response.data);
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
             });
-        }*/
 
-        vm.updateCityList = function()
+
+
+
+        }
+
+        vm.updateProvinceList = function(oper)
         {
-            //vm.searchProvince;
-
-            NetworkService.get(vm.getCityPath + vm.searchProvince,null,function (response) {
-                vm.cityInfo = response.data;
-                vm.searchCity = vm.cityInfo[0].id;
-                vm.updateWarehouseList();
+            NetworkService.get(vm.getProvincePath,null,function (response) {
+                vm.provinceInfo = response.data;
+                if(oper == 0) {
+                    vm.searchProvince = vm.provinceInfo[0].province_id;
+                }
+                vm.updateCityList();
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
         }
 
-        vm.updateWarehouseList = function () {
+
+        vm.updateCityList = function(oper)
+        {
+            //vm.searchProvince;
+
+            NetworkService.get(vm.getCityPath + vm.searchProvince,null,function (response) {
+                vm.cityInfo = response.data;
+                if(oper == 0) {
+                    vm.searchCity = vm.cityInfo[0].id;
+                }
+                vm.updateWarehouseList(0);
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+        }
+
+        vm.updateWarehouseList = function (oper) {
+
+
+
+            NetworkService.get(vm.getWarehousePath+vm.searchProvince+'/city/' + vm.searchCity,{limit:100, offset:0},function (response) {
+                vm.warehouseInfo = response.data.results;
+                if(oper == 0) {
+                    vm.searchWarehouse = vm.warehouseInfo[0].id;
+                }
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+
 
         }
         function getDatas() {
@@ -290,14 +336,7 @@
             });
 
 
-
-            NetworkService.get(vm.getProvincePath,null,function (response) {
-                vm.provinceInfo = response.data;
-                vm.searchProvince = vm.provinceInfo[0].province_id;
-                vm.updateCityList();
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
+            vm.updateProvinceList(0);
 
         }
 

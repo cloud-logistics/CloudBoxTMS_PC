@@ -151,15 +151,15 @@
                 <div class="right-search">
 
                 <div class="search-select-province inline">
-                        <select class="search-select-list-province" ng-model="vm.searchProvince" ng-change="vm.updateCityList()" ng-options="opt.province_id as opt.province_name for opt in vm.provinceInfo" ng-disabled="!vm.isProvinceEnable" ></select>
+                        <select class="search-select-list-province" ng-model="vm.searchProvince" ng-change="vm.updateCityList(0)" ng-options="opt.province_id as opt.province_name for opt in vm.provinceInfo" ng-disabled="!vm.isProvinceEnable" ></select>
                 </div>
                 <div class="search-select-city inline">
-                    <select class="search-select-list-city" ng-model="vm.searchCity" value="选择市" ng-change="vm.updateWarehouseList()" ng-options="opt.id as opt.city_name for opt in vm.cityInfo" ng-disabled="!vm.isCityEnable" >
+                    <select class="search-select-list-city" ng-model="vm.searchCity" value="选择市" ng-change="vm.updateWarehouseList(0)" ng-options="opt.id as opt.city_name for opt in vm.cityInfo" ng-disabled="!vm.isCityEnable" >
 
                     </select>
                 </div>
                 <div class="search-select-warehouse inline">
-                    <select class="search-select-list-warehouse" ng-model="vm.searchWarehouse" ng-options="opt.id as opt.name for opt in vm.warehouseInfo" ng-disabled="!vm.isWarehouseEnable" ></select>
+                    <select class="search-select-list-warehouse" ng-model="vm.searchWarehouse"  ng-options="opt.id as opt.name for opt in vm.warehouseInfo" ng-disabled="!vm.isWarehouseEnable" ></select>
                 </div>
 
                 <input st-search="" class=" search-edit search-input font-thin" placeholder="请输入云箱编号" type="text"/>

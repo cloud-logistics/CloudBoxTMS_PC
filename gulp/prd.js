@@ -275,17 +275,47 @@ function getWeekNumber() {
     return weekNo;
 };
 
+function PrefixInteger(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+};
 /**
  * Create a distribution package zip LEAW.746.100.001
  */
 gulp.task('dist', ['build:clean', 'build'], function () {
+
+    var verFile = 'version.txt';
     var date = new Date().toISOString().replace(/[^0-9]/g, '');
 
     var y = date.substr(3,1);
     var w = getWeekNumber();
     date = date.substr(0,12);
-    return gulp.src(path.join(conf.paths.build, '/**/*'))
-        .pipe($.zip(conf.buildName + "." + y + ''+ w + '.100.001.' + date + ".zip"))
-        .pipe(gulp.dest(conf.paths.dist));
+    var version = conf.buildName + "." + y + ''+ w + '.100.' + '001.' + date;
+    var curVersion = version;
+
+    fs.readFile(verFile, 'utf8', function (err,data) {
+        if (err) {
+            console.log(err);
+        }
+        if(!err) {
+            var refVersion = data;
+            var refVerNo = refVersion.substr(13, 3);
+            var curVerNo = PrefixInteger(parseInt(refVerNo) + 1, 3);
+
+            curVersion = curVersion.substr(0, 13) + curVerNo + '.' + date;
+
+        }
+        console.log('Building version:' + curVersion);
+        fs.writeFile('version.txt', curVersion, function (err) {
+            if(err) {
+                console.log(err);
+            }
+        });
+
+        return gulp.src(path.join(conf.paths.build, '/**/*'))
+            .pipe($.zip(curVersion + ".zip"))
+            .pipe(gulp.dest(conf.paths.dist));
+
+    });
+
 });
 
