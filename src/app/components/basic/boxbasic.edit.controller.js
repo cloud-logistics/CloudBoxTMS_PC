@@ -208,7 +208,8 @@
                 vm.user = response.data;
 
                 //vm.user = refItem;
-
+                //vm.user.siteinfo = null;
+                var disPoint = new BMap.Point(116.404, 39.915);
 
                 if(vm.user.ava_flag == 'N'){
                     vm.user.curStatus = 3;
@@ -218,27 +219,25 @@
                     vm.user.curStatus = 1;
                 }
 
-                var point = new BMap.Point(vm.user.siteinfo.longitude, vm.user.siteinfo.latitude);  // 创建点坐标
-                var marker = new BMap.Marker(point);        // 创建标注
-                map.addOverlay(marker);
 
-                //map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
+                if(vm.user.siteinfo != '' && vm.user.siteinfo != null) {
+                    var point = new BMap.Point(vm.user.siteinfo.longitude, vm.user.siteinfo.latitude);  // 创建点坐标
+                    var marker = new BMap.Marker(point);        // 创建标注
+                    map.addOverlay(marker);
+                    var opts = {
+                        width: 100,     // 信息窗口宽度
+                        height: 50,     // 信息窗口高度
+                        title: '',  // 信息窗口标题
+                        background: '#122341'
+                    };
 
-                var opts = {
-                    width : 100,     // 信息窗口宽度
-                    height: 50,     // 信息窗口高度
-                    title : '',  // 信息窗口标题
-                    background:'#122341'
-                };
+                    var infoWindow = new BMap.InfoWindow('RFID ' + vm.user.tid + '<br />' + '使用人 ' + '大货运公司' + '<br />' + '当前位置：' + vm.user.siteinfo.location + '<br />', opts);  // 创建信息窗口对象
+                    map.openInfoWindow(infoWindow, point);
 
-                var infoWindow = new BMap.InfoWindow('RFID '+ vm.user.tid+'<br />'+ '使用人 ' + '大货运公司' + '<br />' + '当前位置：'+vm.user.siteinfo.location + '<br />', opts);  // 创建信息窗口对象
-                map.openInfoWindow(infoWindow, point);
+                    disPoint = new BMap.Point(vm.user.siteinfo.longitude, parseFloat(vm.user.siteinfo.latitude) + 10);
 
-                var disPoint  = new BMap.Point(vm.user.siteinfo.longitude, parseFloat(vm.user.siteinfo.latitude) + 10);
-                console.log(vm.user.siteinfo.latitude);
-                //console.log(parseFloat(vm.user.latitude)+5);
+                }
                 map.centerAndZoom(disPoint, 10);
-
 
 
             },function (response) {

@@ -148,13 +148,24 @@
                 <div  class="view-type inline" ><a href ng-class="vm.selectedStyle[vm.isViewList]" ng-click="vm.selList(true)"><i class="fa fa-list icon-m-r"/>列表展示</a></div>
                 <div  class="view-type inline"><a href ng-class="vm.selectedStyle[!vm.isViewList]" ng-click="vm.selList(false)"><i class="fa fa-th icon-m-r" />方格展示</a></div>
 
-               <!-- <div class="search-select">
-                        <select class=" " ng-model="vm.user.enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail" ></select>
-                </div>-->
+                <div class="right-search">
 
+                <div class="search-select-province inline">
+                        <select class="search-select-list-province" ng-model="vm.searchProvince" ng-change="vm.updateCityList()" ng-options="opt.province_id as opt.province_name for opt in vm.provinceInfo" ng-disabled="!vm.isProvinceEnable" ></select>
+                </div>
+                <div class="search-select-city inline">
+                    <select class="search-select-list-city" ng-model="vm.searchCity" value="选择市" ng-change="vm.updateWarehouseList()" ng-options="opt.id as opt.city_name for opt in vm.cityInfo" ng-disabled="!vm.isCityEnable" >
 
-                <input st-search="" class="pull-right search-edit search-input font-thin" placeholder="请输入云箱编号" type="text"/>
-                <button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>
+                    </select>
+                </div>
+                <div class="search-select-warehouse inline">
+                    <select class="search-select-list-warehouse" ng-model="vm.searchWarehouse" ng-options="opt.id as opt.name for opt in vm.warehouseInfo" ng-disabled="!vm.isWarehouseEnable" ></select>
+                </div>
+
+                <input st-search="" class=" search-edit search-input font-thin" placeholder="请输入云箱编号" type="text"/>
+                <button ng-click="vm.goSearch()" class=" search-button"><i class="fa fa-search" />搜索</button>
+
+                </div>
             </div>
 
             <div ng-if="vm.isViewList">
@@ -212,7 +223,7 @@
             <div class="m-l m-r  panel panel-default">
                 <div class="container-grid inline" ng-class="'container-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.items">
                     <div class="title">ID {{item.deviceid}}</div>
-                    <div ng-class="'container-label-'+(item.type.id%3)"></div>
+                    <div ng-class="'container-label-'+(item.type.id%3+1)"></div>
                     <div class="type">{{item.type.box_type_name}}</div>
 
                     <div class="status" ng-class="'status-bg-color-'+item.curStatus"><span>{{vm.containerStatusSpec[item.curStatus]}}</span></div>

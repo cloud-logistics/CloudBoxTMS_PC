@@ -44,6 +44,9 @@
         }
 
 
+
+
+
         vm.goDetail= function(item) {
             $state.go('app.edit_boxbasic',{username:item.deviceid, args:{type:'detail', data:item}});
 
@@ -190,6 +193,9 @@
         vm.updateBasePath =  'basicInfoMod/';
         vm.delBasePath =  'basicInfo/';
 
+        vm.getProvincePath = 'rentservice/regions/provinces';
+        vm.getCityPath = 'rentservice/regions/cities/';
+
         vm.options = {};
         var transformations = undefined;
 
@@ -207,8 +213,12 @@
                     "alertLevel"
                 ];
 
-
-
+        vm.isProvinceEnable = true;
+        vm.isCityEnable = true;
+        vm.isWarehouseEnable = true;
+        vm.searchProvince = 1;
+        vm.searchCity = 1;
+        vm.searchWarehouse = 1;
         /*var timer = $interval(function(){
             getBasicInfo();
         },constdata.refreshInterval, 500);
@@ -229,8 +239,25 @@
             });
         }*/
 
+        vm.updateCityList = function()
+        {
+            //vm.searchProvince;
 
+            NetworkService.get(vm.getCityPath + vm.searchProvince,null,function (response) {
+                vm.cityInfo = response.data;
+                vm.searchCity = vm.cityInfo[0].id;
+                vm.updateWarehouseList();
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+        }
+
+        vm.updateWarehouseList = function () {
+
+        }
         function getDatas() {
+
+
 
             NetworkService.post(vm.getBasePath,{
                 "province_id":0,
@@ -261,6 +288,17 @@
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
+
+
+
+            NetworkService.get(vm.getProvincePath,null,function (response) {
+                vm.provinceInfo = response.data;
+                vm.searchProvince = vm.provinceInfo[0].province_id;
+                vm.updateCityList();
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+
         }
 
 
