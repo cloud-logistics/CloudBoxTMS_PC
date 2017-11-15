@@ -60,17 +60,17 @@
 
     <div ng-if="!vm.isViewList">
         <div class="m-l m-r  panel panel-default">
-            <div class="warehouse-grid inline" ng-class="'warehouse-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.displayedCollection">
+            <div class="warehouse-grid " ng-class="'warehouse-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.displayedCollection">
                 <div class="title">{{item.name}}</div>
-                <div class="middle-info">
+
                 <div class="specs">可用/总数</div>
                 <div class="num">{{item.allCurrentBoxInfo.availableNum + '/' + item.allCurrentBoxInfo.allNum}}</div>
-                </div>
 
-                <div class="pull-right pull-bottom right-info">
+
+
                 <div class="location ">{{item.latitude > 0 ? '北纬':'南纬'}}{{item.latitude | number:2}}/{{item.longitude > 0 ? '东经':'西经'}}{{item.longitude|number:2}}</div>
                 <div class="address ">{{item.location}}</div>
-                </div>
+
             </div>
         </div>
         <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
