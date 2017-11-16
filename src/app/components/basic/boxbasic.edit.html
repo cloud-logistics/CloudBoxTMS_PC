@@ -29,7 +29,7 @@
                                 本周次数/时长
                             </div>
                             <div class="num">
-                                23<span>次</span>/970<span>小时</span>
+                                {{vm.containerStat.week_count}}<span>次</span>/{{vm.containerStat.week_time|number:2}}<span>小时</span>
                             </div>
                             <div class="progress-all-bar">
                                 <div class="progress-percent-bar container-detail-card-1" style="{{'width:'+'50%'}}" >
@@ -42,7 +42,7 @@
                                 本月次数/时长
                             </div>
                             <div class="num">
-                                65<span>次</span>/13393<span>小时</span>
+                                {{vm.containerStat.month_count}}<span>次</span>/{{vm.containerStat.month_time|number:2}}<span>小时</span>
                             </div>
                             <div class="progress-all-bar">
                                 <div class="progress-percent-bar container-detail-card-2" style="{{'width:'+'50%'}}" >
@@ -55,7 +55,7 @@
                                 全年次数/时长
                             </div>
                             <div class="num">
-                                790<span>次</span>/4613993<span>小时</span>
+                                {{vm.containerStat.year_count}}<span>次</span>/{{vm.containerStat.year_time|number:2}}<span>小时</span>
                             </div>
                             <div class="progress-all-bar">
                                 <!--<div class="progress-percent-bar" style="{{'width:' + 100*vm.user.medicalBoxInfo.availableNum/vm.user.medicalBoxInfo.allNum+'%'}}" >

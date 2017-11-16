@@ -129,10 +129,28 @@
         vm.getBasePath =  'rentservice/boxinfo/detail/';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
 
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
-        function getWarehouseHistory(){
+        function getCointainerStat(){
+
+            vm.containerStat = {};
+            vm.containerStat.month_count = 0;
+            vm.containerStat.month_time = 0;
+            vm.containerStat.year_count = 0;
+            vm.containerStat.year_time = 0;
+            vm.containerStat.week_time = 0;
+            vm.containerStat.week_count = 0;
+
+            NetworkService.get(vm.getContainerStatPath  + username,null,function (response) {
+             vm.containerStat = response.data;
+             },function (response) {
+             toastr.error(response.status + ' ' + response.statusText);
+             });
+
+        }
+        function getContainerHistory(){
 
             /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data.site_info;
@@ -282,7 +300,9 @@
 
         if (!vm.isAdd){
             vm.getTenantItem();
-            getWarehouseHistory();
+            getCointainerStat();
+            getContainerHistory();
+
         }
 
         function back() {
