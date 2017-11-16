@@ -162,7 +162,7 @@
                     <select class="search-select-list-warehouse" ng-model="vm.searchWarehouse"  ng-options="opt.id as opt.name for opt in vm.warehouseInfo" ng-disabled="!vm.isWarehouseEnable" ></select>
                 </div>
 
-                <input st-search="" class=" search-edit search-input font-thin" placeholder="请输入云箱编号" type="text"/>
+                <input st-search="" ng-model="vm.searchContainerId" class=" search-edit search-input font-thin" placeholder="请输入云箱编号" type="text"/>
                 <button ng-click="vm.goSearch()" class=" search-button"><i class="fa fa-search" />搜索</button>
 
                 </div>

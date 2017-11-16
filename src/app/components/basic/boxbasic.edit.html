@@ -87,11 +87,11 @@
                             <tbody class="">
 
                             <tr ng-repeat="item in vm.containerHistory">
-                                <td ng-click="vm.goDetail(item)">{{item.startDate}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.endDate}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.user}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.departure}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.arrival}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.lease_start_time| date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.lease_end_time| date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.enterprise.enterprise_name}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.off_site.location}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.on_site.location}}</td>
                             </tr>
 
                             </tbody>

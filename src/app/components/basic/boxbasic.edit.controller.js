@@ -121,7 +121,7 @@
 
         vm.warehouseHistory = [];
 
-
+        vm.limit = 10;
 
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
@@ -150,15 +150,23 @@
              });
 
         }
+        function getDatas(){
+            getContainerHistory();
+        }
         function getContainerHistory(){
 
-            /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
-                vm.user = response.data.site_info;
+
+            NetworkService.get('rentservice/boxinfo/leaselist/' + username,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+                vm.containerHistory = response.data.results;
+                updatePagination(response.data);
 
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });*/
-            vm.containerHistory = [
+            });
+
+
+
+            /*vm.containerHistory = [
                 {
                     startDate:'2017-11-06 11:30',
                     endDate:'2017-11-07 15:30',
@@ -200,7 +208,7 @@
                     departure:'上海011仓库',
                     arrival:'北京003仓库',
                 }
-            ]
+            ]*/
 
         };
 

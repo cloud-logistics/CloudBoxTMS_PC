@@ -227,6 +227,7 @@
                 "city_id":vm.searchCity,
                 "site_id":vm.searchWarehouse,
                 "ava_flag":"",
+                "box_id":vm.searchContainerId,
                 limit:vm.limit,
                 offset:(vm.pageCurrent - 1) * vm.limit,
 
@@ -310,6 +311,7 @@
                 "city_id":0,
                 "site_id":0,
                 "ava_flag":"",
+                "box_id":"",
                 limit:vm.limit,
                 offset:(vm.pageCurrent - 1) * vm.limit,
 
