@@ -6,7 +6,7 @@
 
     angular
         .module('smart_container')
-        .controller('EditReportController', EditReportController)
+        .controller('ReportEditController', ReportEditController)
         .filter('userType',function(i18n) {
         return function(input) {
             var out = '';
@@ -20,10 +20,16 @@
     });
 
     /** @ngInject */
-    function EditReportController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function ReportEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
+        vm.pageCurrent = 1;
+        vm.targetPage = 1;
+        vm.pagePreEnabled = false;
+        vm.pageNextEnabled = false;
+        vm.pages = [];
+        vm.limit = 10;
         vm.user = {};
         vm.isAdd = true;
         vm.isEdit = false;
@@ -82,6 +88,8 @@
 
         var type = $stateParams.args.type;
         var username = $stateParams.username;
+        vm.refItem = $stateParams.args.data;
+
         if (username){
             vm.isAdd = false;
         }
@@ -92,56 +100,223 @@
             vm.isDetail = true;
         }
 
+        vm.containerStatusSpec = {
+            1:'可租用',
+            2:'运输中',
+            3:'不可用'
+        };
+        vm.reportHistory = [];
+
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.getBasePath =  'rentservice/boxinfo/detail/';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
+        vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
 
-        vm.uploadFile = function (){
-            console.log(vm.myUploadFile);
-            vm.showSpinner = true;
-            NetworkService.postForm(constdata.api.uploadFile.qiniuPath,vm.myUploadFile,function (response) {
-                toastr.success('上传成功！');
-                vm.showSpinner = false;
-                vm.user.avatar = response.data.url;
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-                vm.showSpinner = false;
-            });
+        var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
+
+
+        function getDatas(){
+            getReportDetailHistory();
         }
 
+        function getReportDetailHistory()
+        {
 
-
-
+        }
 
         function getTenantItem() {
-            NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {
+            /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data;
+
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });
+            });*/
+
+
+            vm.user = [
+                {
+                    time:'2017-01',
+                    usedContainer:32,
+                    amount:2323.32,
+                },
+                {
+                    time:'2017-02',
+                    usedContainer:93,
+                    amount:10326.79,
+                },
+                {
+                    time:'2017-03',
+                    usedContainer:32,
+                    amount:2323.32,
+                },
+                {
+                    time:'2017-04',
+                    usedContainer:93,
+                    amount:10326.79,
+                },
+                {
+                    time:'2017-05',
+                    usedContainer:32,
+                    amount:2323.32,
+                },
+                {
+                    time:'2017-06',
+                    usedContainer:93,
+                    amount:10326.79,
+                },
+                {
+                    time:'2017-07',
+                    usedContainer:32,
+                    amount:2323.32,
+                },
+                {
+                    time:'2017-08',
+                    usedContainer:93,
+                    amount:10326.79,
+                },
+                {
+                    time:'2017-09',
+                    usedContainer:32,
+                    amount:2323.32,
+                },
+                {
+                    time:'2017-10',
+                    usedContainer:93,
+                    amount:10326.79,
+                },
+                {
+                    time:'2017-11',
+                    usedContainer:93,
+                    amount:10326.79,
+                }
+
+
+            ];
+            vm.selectedMonth = 11;
+
+
+            var containerNum = [];
+            var amount = [];
+            var month = [];
+            for(var i = 0; i < vm.user.length; i ++){
+
+                containerNum.push(vm.user[i].usedContainer);
+                amount.push(vm.user[i].amount);
+                month.push(vm.user[i].time);
+            }
+
+            console.log(containerNum);
+            console.log(amount);
+            console.log(month);
+            vm.reportOption = {
+                title : {
+                    text : '历史记录',
+                },
+                tooltip : {
+                    trigger : 'axis',
+                    showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    x: 'left',               // 水平安放位置，默认为全图居中，可选为：
+                    y: 'bottom',
+                    data:['该月归还数', '该月金额']
+                },
+                xAxis : [{
+                    type : 'category',
+                    data : month,
+                    axisLabel:{
+                        textStyle:{
+                            color:"#222"
+                        }
+                    }
+                }],
+                yAxis : [{
+                    type : 'value'
+                },
+                    {
+                        type : 'value'
+                    }],
+                series : [
+                    {
+                        yAxisIndex:0,
+                        name:'该月归还数',
+                        type:'line',
+                        itemStyle : { normal: {color:'#b6a2de'}},
+                        data:containerNum
+                    },
+                    {
+                        yAxisIndex:1,
+                        name:'该月金额',
+                        type:'bar',
+                        itemStyle : { normal: {color:'#2ec7c9'}},
+                        data:amount
+                    }
+                ]
+            };
+
+            //vm.reportOption = option;
+
+            console.log(vm.reportOption);
+
+
+            vm.containerReportHistory = [
+                {
+                    containerId:'HNA123223112',
+                    type:'冷链箱',
+                    startTime:'2017-10-11 11:30',
+                    endTime:'2017-10-13 21:20',
+                    amount:1232
+                },
+                {
+                    containerId:'HNA322123',
+                    type:'冷藏箱',
+                    startTime:'2017-10-09 03:10',
+                    endTime:'2017-10-110 09:50',
+                    amount:32232.5
+                },
+                {
+                    containerId:'HNA123223112',
+                    type:'冷链箱',
+                    startTime:'2017-10-11 11:30',
+                    endTime:'2017-10-13 21:20',
+                    amount:1232
+                },
+                {
+                    containerId:'HNA322123',
+                    type:'冷藏箱',
+                    startTime:'2017-10-09 03:10',
+                    endTime:'2017-10-110 09:50',
+                    amount:32232.5
+                },
+
+                {
+                    containerId:'HNA123223112',
+                    type:'冷链箱',
+                    startTime:'2017-10-11 11:30',
+                    endTime:'2017-10-13 21:20',
+                    amount:1232
+                },
+                {
+                    containerId:'HNA322123',
+                    type:'冷藏箱',
+                    startTime:'2017-10-09 03:10',
+                    endTime:'2017-10-110 09:50',
+                    amount:32232.5
+                }
+
+
+            ];
+
+
         }
 
 
-        function addItem() {
-            NetworkService.post(vm.addBasePath,vm.user,function (response) {
-                toastr.success('添加成功！');
-                vm.backAction();
-            },function (response) {
-                console.log(response);
-                toastr.error(response.status + ' ' + response.statusText);
-            });
-        }
 
-        function editItem() {
-            NetworkService.post(vm.updateBasePath,vm.user,function (response) {
-                toastr.success('操作成功！');
-                vm.backAction();
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
-        }
         function submitAction() {
             if (vm.isAdd){
                 addItem();
@@ -165,6 +340,64 @@
         function back() {
             // history.back();
             vm.backAction();
+        }
+
+
+        vm.preAction = function () {
+            vm.pageCurrent --;
+            if (vm.pageCurrent < 1) vm.pageCurrent = 1;
+            getDatas();
+        };
+        vm.nextAction = function () {
+            vm.pageCurrent ++;
+            getDatas();
+        };
+        vm.goPage = function (page) {
+            console.log(page);
+            vm.pageCurrent = Number(page);
+            console.log(vm.pageCurrent);
+            getDatas();
+        };
+        vm.pageCurrentState = function (page) {
+            if (Number(page) == vm.pageCurrent)
+                return true;
+            return false;
+        };
+
+        function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                // toastr.error('当前无数据哦~');
+                return;
+            }
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
+
+
+            if (toalPages < 2){
+                vm.pages = ['1'];
+            }else{
+                vm.pages = [];
+                var pageControl = 5;
+                var stepStart = page - (pageControl - 1)/2;
+                if (stepStart < 1 || toalPages < pageControl) stepStart = 1;
+                var stepEnd = stepStart + pageControl - 1;
+                if (stepEnd > toalPages) {
+                    stepEnd = toalPages;
+                    stepStart = toalPages - pageControl + 1;
+                    if (stepStart < 1){
+                        stepStart = 1;
+                    }
+                }
+
+                for (var i=stepStart;i<= (stepEnd > toalPages ? toalPages : stepEnd);i++) {
+                    vm.pages.push(i);
+                }
+            }
+
         }
 
     }

@@ -1,131 +1,218 @@
 /**
- * Created by Otherplayer on 16/7/25.
+ * Created by guankai on 02/06/2017.
  */
 (function () {
     'use strict';
 
-    angular
-        .module('smart_container')
-        .controller('ReportController', ReportController);
+    angular.module('smart_container').controller('ReportController', ReportController);
 
     /** @ngInject */
-    function ReportController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function ReportController(constdata, NetworkService, $stateParams, ApiServer, toastr, $state, $timeout, $interval, $scope, optionsTransFunc) {
         /* jshint validthis: true */
         var vm = this;
-        vm.authError = null;
+
+        vm.title = '报警监控';
+        vm.reports = [];
+        vm.queryParams = {};
+        $scope.transDetail = false;
 
         vm.pageCurrent = 1;
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
+        vm.limit = 10;
 
-        vm.items = [];
-        vm.showItems = [];
-
-        vm.goAddItem = goAddItem;
-        vm.goEditItem = goEditItem;
-        vm.goDetail = goDetail;
-        vm.removeItem = removeItem;
-        vm.curItem = {};
-        vm.backAction = backAction;
-        vm.goSearch = goSearch;
-
-        vm.displayedCollection = [];
-        vm.subPath = 'accounts';
-        vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
-        vm.getBasePath =  'rentservice/enterprise/enterpriseinfo/list';
-        vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
-        vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
-        vm.isAdmin = false;
-
-
-        vm.labelColor = {
-            enabled:'bg-success',
-            locked:'bg-danger',
-            'member':'bg-main',
-            'silver':'bg-main',
-            'gold':'bg-main',
-            'platinum':'bg-main',
-            'diamond':'bg-main'
+        vm.selectedStyle={
+            true:'bg-selected',
+            false:'bg-unselected'
         };
-        vm.labelContent={
-            enabled:'已启用',
-            locked:'已锁定',
-            'member':'普通会员',
-            'silver':'白银会员',
-            'gold':'黄金会员',
-            'platinum':'铂金会员',
-            'diamond':'钻石会员'
+
+        vm.containerStatusSpec = {
+            1:'可租用',
+            2:'运输中',
+            3:'不可用'
         };
-        vm.OperApp = OperApp;
-        function OperApp(index, item) {
-            /*if(index == 3){
+        vm.containerStatusLabel = {
+            1:'bg-available',
+            2:'bg-transporting',
+            3:'bg-not-available'
+        };
 
-                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/lock',null,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(vm.authError);
-                });
 
-            }else{
-                console.log('error ops:'+index);
-            }*/
 
-            //$state.go('app.applicationedit');
+        vm.isViewList = false;
+        vm.selList = function (isList) {
+            vm.isViewList = isList;
+            console.log('dd');
+
         }
 
 
 
-        function goSearch() {
-            console.log(vm.searchItem);
+
+
+        vm.goDetail= function(item) {
+            $state.go('app.edit_report',{username:item.id, args:{type:'detail', data:item}});
+
         };
+        $scope.basicUpdate = function(item){
+            vm.options = R.merge(vm.options, {
+                title: "云箱详情",
+                is_insert: false
+            })
+
+            $scope.bbUpdate = !$scope.bbUpdate;
+            vm.currentItem = item;
+            // $scope.modalUpdate = !$scope.modalUpdate;
+        };
+
+        vm.newBasicInfoConfig = {};
+        vm.basicInfoManage = {
+            basicInfoConfig : {},
+            alertConfig: {},
+            issueConfig: {}
+        };
+
+        vm.saveBasicInfoConfig = saveBasicInfoConfig;
+        vm.cancelBasicInfoConfig = cancelBasicInfoConfig;
+        vm.targetPage = 1;
+        vm.pageCurrent = 1;
+
+        vm.addBasePath =  'basicInfoConfig/';
+        vm.getBasePath =  'rentservice/boxinfo/query';
+        vm.updateBasePath =  'basicInfoMod/';
+        vm.delBasePath =  'basicInfo/';
+
+        vm.getProvincePath = 'rentservice/regions/provinces';
+        vm.getCityPath = 'rentservice/regions/cities/';
+        vm.getWarehousePath =  'rentservice/site/list/province/';
+
+        vm.options = {};
+        var transformations = undefined;
+
+        var requiredOptions = [
+                    "carrier",
+                    "factory",
+                    "factoryLocation",
+                    "batteryInfo",
+                    "hardwareInfo",
+                    "intervalTime",
+                    "maintenanceLocation",
+                    "containerType",
+                    "alertCode",
+                    "alertType",
+                    "alertLevel"
+                ];
+
+        vm.isProvinceEnable = true;
+        vm.isCityEnable = true;
+        vm.isWarehouseEnable = true;
+        vm.searchProvince = 1;
+        vm.searchCity = 1;
+        vm.searchWarehouse = 1;
+
+        vm.goSearch = function(){
+            NetworkService.post(vm.getBasePath,{
+                "province_id":vm.searchProvince,
+                "city_id":vm.searchCity,
+                "site_id":vm.searchWarehouse,
+                "ava_flag":"",
+                "box_id":vm.searchContainerId,
+                limit:vm.limit,
+                offset:(vm.pageCurrent - 1) * vm.limit,
+
+            },function (response) {
+                vm.items = response.data.results;
+
+                if(vm.items.length > 0){
+                    for(var i = 0; i < vm.items.length; i ++){
+                        if(vm.items[i].ava_flag == 'N'){
+                            vm.items[i].curStatus = 3;
+                        }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
+                            vm.items[i].curStatus = 2;
+                        }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
+                            vm.items[i].curStatus = 1;
+                        }
+                    }
+                }
+                //console.log(response.data);
+                vm.displayedCollection = (vm.items);
+
+                updatePagination(response.data);
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+
+
+
+
+        }
+
 
         function getDatas() {
 
-            NetworkService.get(vm.getBasePath,{page:vm.pageCurrent},function (response) {
-                vm.items = response.data.results;
-                vm.displayedCollection = (vm.items);
-                //vm.displayedCollection = [].concat(vm.items);
+            /*NetworkService.get('rentservice/boxinfo/leaselist/' + username,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+                vm.containerHistory = response.data.results;
+                updatePagination(response.data);
+
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });
+            });*/
+
+            vm.items = [
+                {
+                    id:1,
+                    enterpriseName:'大秦货运物流集团',
+                    usingContainerNum:'230',
+                    usedContainerNum:'320',
+                    amount:'23212.5'
+                },
+                {
+                    id:1,
+                    enterpriseName:'海航海运集团',
+                    usingContainerNum:'1320',
+                    usedContainerNum:'872',
+                    amount:'323252'
+                },
+                {
+                    enterpriseName:'大秦货运物流集团',
+                    usingContainerNum:'230',
+                    usedContainerNum:'320',
+                    amount:'23212.5'
+                },
+                {
+                    id:1,
+                    enterpriseName:'海航海运集团',
+                    usingContainerNum:'1320',
+                    usedContainerNum:'872',
+                    amount:'323252'
+                },
+                {
+                    id:1,
+                    enterpriseName:'大秦货运物流集团',
+                    usingContainerNum:'230',
+                    usedContainerNum:'320',
+                    amount:'23212.5'
+                },
+                {
+                    id:1,
+                    enterpriseName:'海航海运集团',
+                    usingContainerNum:'1320',
+                    usedContainerNum:'872',
+                    amount:'323252'
+                }
+            ]
+
         }
 
 
-        function goAddItem() {
-            $state.go('app.edit_transportation_company',{});
-        };
-
-        function goEditItem(item) {
-            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'edit'}});
-        };
-
-        function goDetail(item) {
-            $state.go('app.edit_transportation_company',{username:item.enterprise_id, args:{type:'detail'}});
-
-        };
 
 
-        function removeItem(item) {
-            NetworkService.delete(vm.delBasePath  + '/' + item.enterprise_id,null,function success() {
-                var index = vm.items.indexOf(item);
-                toastr.success('删除成功！');
-                getDatas();
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
-
-        };
         function backAction() {
             // $state.go('app.tenant');
             $rootScope.backPre();
         }
-
-        vm.displayedCollection = [].concat(vm.items);
-
 
         // 分页 Start
         vm.preAction = function () {
@@ -138,7 +225,9 @@
             getDatas();
         };
         vm.goPage = function (page) {
+            console.log(page);
             vm.pageCurrent = Number(page);
+            console.log(vm.pageCurrent);
             getDatas();
         };
         vm.pageCurrentState = function (page) {
@@ -148,18 +237,16 @@
         };
 
         function updatePagination(pageination) {
-
-            if (!pageination.hasContent){
+            if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;
             }
-
-            var page = pageination.page;
-            var toalPages = pageination.totalPages;
-            vm.totalPages = pageination.totalPages;
-
-            vm.pageNextEnabled = pageination.hasNextPage;
-            vm.pagePreEnabled = pageination.hasPreviousPage;
+            var page = parseInt(pageination.offset/pageination.limit +1);
+            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            vm.totalPages = toalPages;
+            console.log(page + ';'+ toalPages);
+            vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
+            vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
 
 
             if (toalPages < 2){
@@ -185,32 +272,32 @@
 
         }
 
+
+
         getDatas();
 
+        function saveBasicInfoConfig() {
+            newBasicInfoConfigPost();
+            $scope.bbUpdate = false;
+        }
 
-        //Model
+        function cancelBasicInfoConfig() {
+            $scope.bbUpdate = false;
+        }
 
-        vm.tipsInfo = delmodaltip;
-        vm.openAlert = function (size,model) {
-            var modalInstance = $uibModal.open({
-                templateUrl: 'myModalContent.html',
-                size: size,
-                controller:'ModalInstanceCtrl',
-                resolve: {
-                    tipsInfo: function () {
-                        return vm.tipsInfo;
-                    }
-                }
-            });
-            modalInstance.result.then(function (param) {
-                vm.removeItem(model);
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
+        function newBasicInfoConfigPost () {
+            var config = R.evolve(transformations)(vm.newBasicInfoConfig)
+            console.log("new basicInfo params: ", config);
+            ApiServer.newBasicInfoConfig(config, function (response) {
+                console.log(response.data.code);
+            },function (err) {
+                console.log("Get ContainerOverview Info Failed", err);
             });
         }
 
-
-
+        function inputTransFunc (num) {
+            return parseInt(num, 10)
+        }
 
     }
 

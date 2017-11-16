@@ -1,108 +1,62 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ReportController as vm" ng-init="
-    app.settings.asideFolded = false;
-    app.settings.asideDock = false;
-">
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ReportController as vm"
+     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;">
     <!-- main -->
     <div class="col">
         <!-- main header -->
-        <!-- div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">租户信息</h1>
-                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+        <!--<div class="bg-light lter b-b wrapper-xs">-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+        <!--<h1 class="font-thin h3 text-black m-l m-t-sm">{{vm.title}}</h1>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+            <div class="report-head">
+                <div class="title inline">报表管理</div>
+
+                <div class="right-search">
+
+                <input st-search="" ng-model="vm.searchContainerId" class=" search-edit search-input font-thin" placeholder="请输入企业名称" type="text"/>
+                <button ng-click="vm.goSearch()" class=" search-button"><i class="fa fa-search" />搜索</button>
+
                 </div>
             </div>
-        </div> -->
-
-        <!-- tasks -->
-
-        <div class="m-l m-r m-t panel panel-default">
-        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
-            <thead>
-            <tr>
-                <th colspan="7">
-                    <button ng-click="vm.goAddItem()" class="add-button"
-                    >添加堆场</button>
-                    <input st-search="" class="pull-right search-edit font-thin" placeholder="请输入堆场名称" type="text"/>
-                    <button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>
-
-                </th>
-            </tr>
-            <tr class="font-bold">
-               <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                <th class="text-center">堆场名称</th>
-                <th class="text-center">堆场状态</th>
-                <th class="text-center">堆场邮箱</th>
-                <th class="text-center">堆场电话</th>
-                <th class="text-center">创建日期</th>
-               <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
-            </tr>
-
-            </thead>
-            <tbody class="">
-
-            <tr ng-repeat="item in vm.displayedCollection">
-              <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.enterprise_name}}</td>
-               <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
-
-                <td ng-click="vm.goDetail(item)">
-                    <label ng-class="vm.labelColor[item.status]" ng-bind="vm.labelContent[item.status]" class="label"></label>
-                </td>
 
 
-               <td ng-click="vm.goDetail(item)">{{item.enterprise_email}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.enterprise_tele}}</td>
-                <!-- <td ng-click="vm.goDetail(item)">{{item.website}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.address}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.register_time| date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                <div class="m-l m-r m-t panel panel-default">
+                <div class="row bb-table m-l m-r" style="background-color: #fff;margin-top: 30px">
+                    <table st-table="vm.items" st-safe-src="vm.items" class="table table-striped table-hover m-t">
+                        <thead>
+                        <tr>
+                            <th>企业名称</th>
+                            <th>在云箱数</th>
+                            <th>当月归还箱数</th>
+                            <th>当月金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in vm.items track by $index">
+                            <td style="vertical-align: middle;">{{item.enterpriseName}}</td>
+                            <td style="vertical-align: middle;">{{item.usingContainerNum}}</td>
+                            <td style="vertical-align: middle;">{{item.usedContainerNum}}</td>
+                            <td style="vertical-align: middle;">{{item.amount}}</td>
+                            <td style="vertical-align: middle;">
+                                <span class="bb-edit-btn" ng-click="vm.goDetail(item)">历史详情</span>
+<!--
+                                <span class="bb-del-btn"  ng-click="transportDetail(item)">运输明细</span>
+-->
+                            </td>
 
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--<div auto-pagination pageination="vm.pageination"></div>-->
 
-               <!-- <td ng-click="vm.goDetail(item)">
-                    {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
-                </td>-->
-                <td>
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>详情</button>
+                </div>
+                <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
+                </div>
 
-
-
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>编辑</button>
-                    <div class="btn-group " >
-                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
-                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:100px;position:absolute;">
-                            <!--<li ng-class="{disabled: !item.isLockEnable}" ng-click="vm.OperApp(3, item)" ><a><i class="fa fa-lock m-r-sm"></i>锁定</a></li>
-                            <li ng-class="{disabled: !item.isUnlockEnable}" ng-click="vm.OperApp(4, item)" ><a><i class="fa fa-unlock m-r-sm"></i>解锁</a></li>
-                            <li  ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-play m-r-sm"></i>重置密码</a></li>-->
-                            <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> 删除</a></li>
-
-                        </ul>
-                    </div>
-
-
-
-
-
-                </td>
-            </tr>
-
-            </tbody>
-        </table>
-        </div>
-
-        <!--<div class="btn-group pagination pull-right padder-lg">-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
-            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
-        <!--</div>-->
-        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-        </div>
-        <!-- / tasks -->
     </div>
+
 </div>
-<script type="text/ng-template" id="myModalContent.html">
-    <div ng-include="'app/components/core/modal.html'"></div>
-</script>
+

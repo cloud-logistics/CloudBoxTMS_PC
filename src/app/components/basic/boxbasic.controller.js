@@ -14,6 +14,12 @@
         vm.title = '报警监控';
         vm.reports = [];
         vm.queryParams = {};
+        vm.pageCurrent = 1;
+        vm.targetPage = 1;
+        vm.pagePreEnabled = false;
+        vm.pageNextEnabled = false;
+        vm.pages = [];
+        vm.limit = 10;
         $scope.transDetail = false;
 
 
@@ -62,120 +68,6 @@
             // $scope.modalUpdate = !$scope.modalUpdate;
         };
 
-
-        $scope.transportDetail = function(item){
-            vm.currentItem = item;
-            $scope.transDetail = !$scope.transDetail;
-            $scope.getContainerHistory(item.deviceid);
-
-        };
-
-        $scope.getContainerHistory = function(containerId){
-
-            /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
-             vm.user = response.data.site_info;
-
-             },function (response) {
-             toastr.error(response.status + ' ' + response.statusText);
-             });*/
-            vm.containerTransDetail = [
-                {
-                    date:'2017-11-06',
-                    inputAll:5,
-                    outputAll:3,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-05',
-                    inputAll:5,
-                    outputAll:3,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-04',
-                    inputAll:5,
-                    outputAll:3,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-03',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-02',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-01',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-10-30',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                }
-
-
-
-            ]
-
-        };
         vm.newBasicInfoConfig = {};
         vm.basicInfoManage = {
             basicInfoConfig : {},
@@ -185,8 +77,7 @@
 
         vm.saveBasicInfoConfig = saveBasicInfoConfig;
         vm.cancelBasicInfoConfig = cancelBasicInfoConfig;
-        vm.targetPage = 1;
-        vm.pageCurrent = 1;
+
 
         vm.addBasePath =  'basicInfoConfig/';
         vm.getBasePath =  'rentservice/boxinfo/query';

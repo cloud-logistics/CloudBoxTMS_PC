@@ -1,246 +1,61 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="EditReportController as vm" ng-init="
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ReportEditController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
 ">
     <!-- main -->
-    <div class="col">
-        <span us-spinner spinner-on="vm.showSpinner"></span>
-        <!-- main header -->
-        <!-- <div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">{{vm.title}}</h1>
-                    <small class="text-muted">HNA EcoTech Internet of Things</small>
+                    <span us-spinner spinner-on="vm.showSpinner"></span>
+
+
+                <div class="report-guide-bar">
+                    <a href class="auto" ui-sref="app.report">
+                        <span class="title" ><u><b>报表管理</b></u></span>
+                    </a>
+                    <span>></span>
+                         <span class="name">{{vm.refItem.enterpriseName}}</span>
                 </div>
-               
-            </div>
-        </div> -->
-
-        <!-- tasks -->
 
 
 
-        <div class="panel panel-default m-l m-r m-t">
+               <!-- <div class="report-chart" e-chart e-data="vm.reportOption">
 
-            <div class="panel-heading">
-                <h3 class="panel-title">公司信息</h3>
-            </div>
-            <br/>
-            <form name="form" class="form-horizontal form-validation" role="form">
+                </div>-->
 
-
+                <div class="panel-body">
+                    <div style="height: 340px; background:#fff;"  e-chart e-data="vm.reportOption">ddd</div>
+                </div>
 
 
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业编号</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="公司编号" ng-model="vm.user.enterprise_id"  required>
+                    <div class="m-l m-r m-t panel panel-default">
+                        <table  st-table="vm.containerReportHistory" st-safe-src="vm.containerReportHistory" class="table table-bordered table-striped table-hover bg-white text-center">
+                            <thead>
+                            <tr class="font-bold">
+                                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                                <th class="text-center">云箱 ID</th>
+                                <th class="text-center">类型</th>
+                                <th class="text-center">开始</th>
+                                <th class="text-center">结束</th>
+                                <th class="text-center">金额</th>
+
+                                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+                            </tr>
+
+                            </thead>
+
+                            <tbody class="">
+
+                            <tr ng-repeat="item in vm.containerReportHistory">
+                                <td ng-click="vm.goDetail(item)">{{item.containerId}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.type}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.startTime}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.endTime}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.amount}}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业名称</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text"
-                                   placeholder="公司名称" ng-model="vm.user.enterprise_name"  required>
-                        </div>
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">联系电话</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="联系电话" ng-model="vm.user.enterprise_tele" ng-disabled="vm.isDetail">
+                    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
                     </div>
 
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">营业执照</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="营业执照" ng-model="vm.user.enterprise_license_id" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">证件图片</label>
-                    <div class="col-sm-4">
-                        <div class="beauty-upload">
-                            <div class="lcell span5" style="margin:5px 0px;">
-                                <div class="upload">
-                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
-                                    <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
-                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
-                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
-                                </div>
-                            </div>
-
-                        </div>
-                        <input class="form-control" type="text" style="margin-bottom:10px;"
-                               placeholder="证件图片" ng-model="vm.user.enterprise_license_id_url" ng-disabled="vm.isDetail" >
-                        <div class="img-preview">
-                            <img ng-src="{{vm.user.enterprise_license_id_url}}" alt="">
-                        </div>
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业法人</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业法人" ng-model="vm.user.enterprise_legal_rep_name" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                <div  class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业押金</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业押金" ng-model="vm.user.enterprise_deposit" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业邮箱</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业邮箱" ng-model="vm.user.enterprise_email" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业网址</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业网址" ng-model="vm.user.enterprise_url" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-                <div class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业地址</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业地址" ng-model="vm.user.enterprise_address" ng-disabled="vm.isDetail">
-                    </div>
-
-                </div>
-                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-                <!--<div ng-if="vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">{{'u.PASSWORD' | translate}}</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="password"
-                               placeholder="{{'u.PASSWORD' | translate}}" ng-model="vm.addUser.password" ng-pattern="/^[a-zA-Z0-9_\\-]{8,20}$/" required>
-                    </div>
-                    <span><i style="color:red;font-size:20px;">* </i><i style="font-style:normal; color:#999;">{{'tenant.PASSWORDTIP' | translate}}</i></span>
-                </div>
-                <div ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>-->
-
-
-
-
-                <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">状态</label>
-                    <div class="col-sm-4">
-
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.STATUS' | translate}}" ng-model="vm.user.status" ng-disabled="vm.isDetail" >-->
-
-                        <!--<select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="s.value as s.title for s in vm.statusType" ng-disabled="vm.isDetail" ></select>
--->
-                        <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.status]" ng-bind="vm.labelContent[vm.user.status]" class="label"></label>
-
-
-                    </div>
-                </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>
-
-
-
-
-                <div ng-if="vm.isDetail" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">创建日期</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="创建日期" ng-model="vm.user.register_time" ng-disabled="vm.isDetail" >
-                    </div>
-
-                </div>
-                <div ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
-
-
-
-
-
-
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-3">
-                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>取消 </button>
-                        <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>确认 </button>
-                        <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>返回</button>
-
-                    </div>
-                </div>
-
-
-
-
-
-
-            </form>
-        </div>
-    </div>
 </div>
 

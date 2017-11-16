@@ -121,7 +121,7 @@
 
         vm.warehouseHistory = [];
 
-        vm.limit = 10;
+
 
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
