@@ -19,7 +19,7 @@
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
         vm.pages = [];
-        vm.limit = 10;
+        vm.limit = 8;
         $scope.transDetail = false;
 
 

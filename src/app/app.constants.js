@@ -12,7 +12,7 @@
             apiHost_ONLINE:'/container/api/v1/cloudbox/', //http://54.223.162.108:9090/ production1
             // apiHost_OFFLINE:'http://52.80.40.26:9090/',//http://54.223.29.24:9090/ production2
             // local JSON-server:
-            apiHost_OFFLINE:'http://106.2.20.185/container/api/v1/cloudbox/', //http://54.223.162.108:9090/ production1
+            apiHost_OFFLINE:'http://106.2.20.186/container/api/v1/cloudbox/', //http://54.223.162.108:9090/ production1
             //apiHost_OFFLINE:'/container/api/v1/cloudbox/', //http://54.223.162.108:9090/ production1
 
             //apiHost_OFFLINE:'http://localhost:5000/container/api/v1/cloudbox/',
@@ -81,6 +81,8 @@
                 }
             }
         }).directive('eChart', function($http, $window) {
+
+
         function link($scope, element, attrs) {
             var myChart = echarts.init(element[0]);
             $scope.$watch(attrs['eData'], function() {

@@ -125,7 +125,9 @@
         {
 
         }
-
+        vm.onChart = function (){
+            console.log('eeeee');
+        }
         function getTenantItem() {
             /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data;
@@ -144,52 +146,52 @@
                 {
                     time:'2017-02',
                     usedContainer:93,
-                    amount:10326.79,
+                    amount:8326.79,
                 },
                 {
                     time:'2017-03',
-                    usedContainer:32,
-                    amount:2323.32,
+                    usedContainer:123,
+                    amount:12323.32,
                 },
                 {
                     time:'2017-04',
-                    usedContainer:93,
-                    amount:10326.79,
+                    usedContainer:45,
+                    amount:5326.79,
                 },
                 {
                     time:'2017-05',
-                    usedContainer:32,
-                    amount:2323.32,
+                    usedContainer:82,
+                    amount:4223.32,
                 },
                 {
                     time:'2017-06',
                     usedContainer:93,
-                    amount:10326.79,
+                    amount:14326.79,
                 },
                 {
                     time:'2017-07',
-                    usedContainer:32,
-                    amount:2323.32,
+                    usedContainer:523,
+                    amount:25555.32,
                 },
                 {
                     time:'2017-08',
-                    usedContainer:93,
-                    amount:10326.79,
+                    usedContainer:322,
+                    amount:4326.79,
                 },
                 {
                     time:'2017-09',
-                    usedContainer:32,
-                    amount:2323.32,
+                    usedContainer:243,
+                    amount:1323.32,
                 },
                 {
                     time:'2017-10',
-                    usedContainer:93,
+                    usedContainer:221,
                     amount:10326.79,
                 },
                 {
                     time:'2017-11',
-                    usedContainer:93,
-                    amount:10326.79,
+                    usedContainer:150,
+                    amount:4326.79,
                 }
 
 
@@ -213,7 +215,21 @@
             vm.reportOption = {
                 title : {
                     text : '历史记录',
+                    textStyle:{//标题内容的样式
+                        color:'#4668E7',//京东红
+                        fontStyle:'normal',//主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
+                        fontWeight:"bold",//可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
+                        fontFamily:"PingFangSC-Medium",//主题文字字体，默认微软雅黑
+                        fontSize:24//主题文字字体大小，默认为18px
+                    },
+                    textAlign:'left',//标题文本水平对齐方式，建议不要设置，就让他默认，想居中显示的话，建议往下看
+                    textBaseline:"top",//默认就好,垂直对齐方式,不要设置
+                    left:100
                 },
+
+                event: [
+                    {click:vm.onChart}
+                    ],
                 tooltip : {
                     trigger : 'axis',
                     showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
@@ -224,7 +240,8 @@
                 legend: {
                     x: 'left',               // 水平安放位置，默认为全图居中，可选为：
                     y: 'bottom',
-                    data:['该月归还数', '该月金额']
+                    data:['该月归还数', '该月金额'],
+                    left:100
                 },
                 xAxis : [{
                     type : 'category',
@@ -239,7 +256,11 @@
                     type : 'value'
                 },
                     {
-                        type : 'value'
+                        type : 'value',
+                        //show: false
+                        splitLine:{
+                            show:false
+                        }
                     }],
                 series : [
                     {
