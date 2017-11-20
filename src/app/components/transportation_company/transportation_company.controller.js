@@ -69,6 +69,12 @@
         }
 
 
+        vm.enterEvent = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                goSearch();
+            }
+        }
         vm.confirmDeposit = function(item)
         {
             NetworkService.put(vm.deposit_confirm,{enterprise_id:item.enterprise_id},function (response) {

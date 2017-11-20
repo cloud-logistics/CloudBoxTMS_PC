@@ -23,8 +23,8 @@
                 <th colspan="7">
                     <button ng-click="vm.goAddItem()" class="add-button"
                     >添加企业</button>
-                    <input st-search="" class="pull-right search-edit font-thin" placeholder="请输入公司名称" type="text"/>
-                    <button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>
+                    <input st-search="" ng-keyup="vm.enterEvent($event)" class="pull-right search-edit font-thin" ng-model="vm.searchItem" placeholder="请输入公司名称" type="text"/>
+                    <!--<button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>-->
 
                 </th>
             </tr>

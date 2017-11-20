@@ -294,7 +294,7 @@
 
 
             .state('app.profile', {
-                url: 'user/profile',
+                url: 'profile',
                 templateUrl: 'app/components/profile/profile.html'
             })
             .state('app.company', {

@@ -125,8 +125,11 @@
         {
 
         }
-        vm.onChart = function (){
-            console.log('eeeee');
+
+        vm.onChartClick = function(param){
+            console.log(param);
+            console.log(param.name);
+
         }
         function getTenantItem() {
             /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {

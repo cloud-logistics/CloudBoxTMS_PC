@@ -109,10 +109,10 @@
                         <div class="beauty-upload">
                             <div class="lcell span5" style="margin:5px 0px;">
                                 <div class="upload">
-                                    <input type="button" class="btn btn-default upload-btn" value="浏览文件"></input>
+                                    <input type="button" class="btn btn-default" value="浏览文件"></input>
                                     <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
                                     <input type="file" file-model = "vm.myUploadFile" class="upload-input-file"/>
-                                    <button style="float:right;background:#23b7e5;border-radius:3px;" class="btn btn-default" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                    <button class="btn btn-default btn-upload" ng-click="vm.uploadFile()"> <i class="fa fa-check"></i> 上传 </button>
                                 </div>
                             </div>
 

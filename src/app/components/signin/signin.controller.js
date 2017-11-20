@@ -46,8 +46,7 @@
 
             ApiServer.userLogin(user,function (response) {
 
-                console.log('login success');
-                console.log(response);
+
                 var result = response.data;
 
                 var sessionId = result.sessionid;
@@ -55,12 +54,15 @@
                 var role = result.role;
                 var userInfo = {
                     username: user.username,
-                    role: role
+                    role: role,
+                    userId:result.user_id,
+                    userRealName:result.user_real_name,
+                    userNickName:result.user_nickname
                 }
 
                 // var sessionInfo = {username: user.username, Authorization:token};
                 var sessionInfo = {Authorization:token};
-
+                console.log(userInfo);
                 StorageService.put(authorizationKey,sessionInfo,24 * 7 * 60 * 60);//3 天过期
                 StorageService.put(constdata.informationKey,userInfo,24 * 3 * 60 * 60);
 
