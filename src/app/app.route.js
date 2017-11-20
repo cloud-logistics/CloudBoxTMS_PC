@@ -94,84 +94,6 @@
                 url: 'dashboard',
                 templateUrl: 'app/components/dashboard/dashboard.html'
             })
-            //全景地图
-            .state('app.overview', {
-                url: 'overview',
-                templateUrl: 'app/components/overview/overview.html'
-            })
-
-            //云箱监控
-            .state('app.monitor',{
-                url: 'monitor',
-                templateUrl: 'app/components/monitor/monitor.html'
-            })
-            //告警详情
-            .state('app.alert',{
-                url: 'alert/:containerId/:alertLevel/:alertType/:alertCode',
-                templateUrl: 'app/components/monitor/alert.html'
-            })
-            //云箱状态汇总
-            .state('app.boxstatus',{
-                url: 'boxstatus/:containerId/:alertLevel/:alertType',
-                templateUrl: 'app/components/monitor/boxstatus.html'
-            })
-            //历史报文查询
-            .state('app.history',{
-                url: 'history/:containerId/:containerType/:startTime/:endTime',
-                templateUrl: 'app/components/monitor/history.html'
-            })
-            //基础信息查询
-            .state('app.basicinfo',{
-                url: 'basicinfo/:containerId/:containerType/:factory',
-                templateUrl: 'app/components/monitor/basicinfo.html'
-            })
-
-            //实时报文详情
-            .state('app.realtime',{
-                url: 'realtime/:containerId',
-                templateUrl: 'app/components/monitor/realtime.html'
-            })
-            //机器人监控
-            .state('app.robots',{
-                url: 'robots',
-                templateUrl: 'app/components/monitor/robots.html'
-            })
-
-            //租赁admin
-            .state('app.lease',{
-                url: 'lease',
-                templateUrl: 'app/components/lease/lease.html'
-            })
-            //租赁管理
-            .state('app.leasemanage',{
-                url: 'leasemanage',
-                templateUrl: 'app/components/lease/leaseManage.html'
-            })
-
-            //租赁承运商
-            .state('app.mylease',{
-                url: 'mylease',
-                templateUrl: 'app/components/lease/mylease.html'
-            })
-
-            //基础信息查询
-            .state('app.basicmanage',{
-                url: 'basicmanage',
-                templateUrl: 'app/components/monitor/basicmanage.html'
-            })
-
-            //云箱信息查询
-            .state('app.boxdetail',{
-                url: 'boxdetail',
-                templateUrl: 'app/components/monitor/boxDetail.html'
-            })
-
-            //云箱参数设置
-            .state('app.boxparam',{
-                url: 'boxparam',
-                templateUrl: 'app/components/basic/boxparam.html'
-            })
-
             //云箱基础信息管理
             .state('app.boxbasic',{
                 url: 'boxbasic',
@@ -182,51 +104,6 @@
                 url: 'boxbasic/edit/:username',
                 params : {args : {}},
                 templateUrl: 'app/components/basic/boxbasic.edit.html'
-            })
-
-            //云箱报警处理设置
-            .state('app.boxalert',{
-                url: 'boxalert',
-                templateUrl: 'app/components/basic/boxalert.html'
-            })
-
-            //云箱故障库设置
-            .state('app.boxmalfun',{
-                url: 'boxmalfun',
-                templateUrl: 'app/components/basic/boxmalfun.html'
-            })
-
-            .state('app.satellite',{
-                url: 'satellite',
-                templateUrl: 'app/components/satellite/satellite.html'
-            })
-
-            .state('app.container_overview',{
-                url: 'container_overview',
-                templateUrl: 'app/components/container_overview/container_overview.html'
-            })
-
-            .state('app.historylocation',{
-                url: 'historylocation/:containerId/:startTime/:endTime',
-                templateUrl: 'app/components/monitor/historylocation.html'
-            })
-
-            .state('app.instantlocation',{
-                url: 'instantlocation/:containerId',
-                templateUrl: 'app/components/monitor/instantlocation.html'
-            })
-
-            .state('app.command',{
-                url: 'command/:containerId/:endpointId',
-                templateUrl: 'app/components/monitor/command.html'
-            })
-            .state('app.allhist',{
-                url: 'allhist',
-                templateUrl: 'app/components/analysis/allHist.html'
-            })
-            .state('app.sitehist',{
-                url: 'sitehist',
-                templateUrl: 'app/components/analysis/siteHist.html'
             })
             .state('app.transportation_company', {
                 url: 'transportation_company',
@@ -276,7 +153,6 @@
                 params : {args : {}},
                 templateUrl: 'app/components/report/report.edit.html'
             })
-            /** LOGIN **/
             .state('access', {
                 url: '/access',
                 template: '<div ui-view class="fade-in-right-big smooth"></div>'
@@ -291,8 +167,6 @@
                 url: '/signup',
                 templateUrl: 'app/components/signin/signup.html'
             })
-
-
             .state('app.profile', {
                 url: 'profile',
                 templateUrl: 'app/components/profile/profile.html'
@@ -300,14 +174,7 @@
             .state('app.company', {
                 url: 'regular/company?type',
                 templateUrl: 'app/components/company/company.html'
-            })
-
-            /** ACCOUNT **/
-
-            //////用户
-
-
-        ;
+            });
     }
 
 })();

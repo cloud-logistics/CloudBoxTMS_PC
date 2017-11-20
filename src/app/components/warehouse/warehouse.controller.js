@@ -71,7 +71,12 @@
             console.log('dd');
 
         }
-
+        vm.enterEvent = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                vm.goSearch();
+            }
+        }
 
         function OperApp(index, item) {
             /*if(index == 3){
@@ -94,7 +99,7 @@
 
 
         function goSearch() {
-            console.log(vm.searchItem);
+            console.log(vm.searchWarehouse);
         };
 
         function getDatas() {

@@ -112,37 +112,15 @@
         vm.searchCity = 1;
         vm.searchWarehouse = 1;
 
+        vm.enterEvent = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                vm.goSearch();
+            }
+        }
+
         vm.goSearch = function(){
-            NetworkService.post(vm.getBasePath,{
-                "province_id":vm.searchProvince,
-                "city_id":vm.searchCity,
-                "site_id":vm.searchWarehouse,
-                "ava_flag":"",
-                "box_id":vm.searchContainerId,
-                limit:vm.limit,
-                offset:(vm.pageCurrent - 1) * vm.limit,
-
-            },function (response) {
-                vm.items = response.data.results;
-
-                if(vm.items.length > 0){
-                    for(var i = 0; i < vm.items.length; i ++){
-                        if(vm.items[i].ava_flag == 'N'){
-                            vm.items[i].curStatus = 3;
-                        }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
-                            vm.items[i].curStatus = 2;
-                        }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
-                            vm.items[i].curStatus = 1;
-                        }
-                    }
-                }
-                //console.log(response.data);
-                vm.displayedCollection = (vm.items);
-
-                updatePagination(response.data);
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
+            console.log(vm.searchItem);
 
 
 

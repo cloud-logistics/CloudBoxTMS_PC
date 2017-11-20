@@ -112,7 +112,16 @@
         vm.searchCity = 1;
         vm.searchWarehouse = 1;
 
+        vm.enterEvent = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                vm.goSearch();
+            }
+        }
         vm.goSearch = function(){
+            if(vm.searchContainerId == undefined || vm.searchContainerId == null){
+                vm.searchContainerId = '';
+            }
             NetworkService.post(vm.getBasePath,{
                 "province_id":vm.searchProvince,
                 "city_id":vm.searchCity,
