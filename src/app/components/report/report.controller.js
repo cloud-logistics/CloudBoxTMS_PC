@@ -129,59 +129,25 @@
 
 
         function getDatas() {
-
-            /*NetworkService.get('rentservice/boxinfo/leaselist/' + username,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
-                vm.containerHistory = response.data.results;
+           //http://106.2.20.185:8000/container/api/v1/cloudbox/rentservice/boxbill/realtimebill
+            NetworkService.get('rentservice/boxbill/realtimebill',{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+                vm.itemsTmp = response.data.results;
                 updatePagination(response.data);
+                vm.items = [];
+                if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
+                    for(var i = 0; i < vm.itemsTmp.length; i ++){
+                        vm.items[i] = {};
+                        vm.items[i].id = vm.itemsTmp[i].enterprise_id;
+                        vm.items[i].enterpriseName = vm.itemsTmp[i].enterprise_name;
+                        vm.items[i].usingContainerNum = vm.itemsTmp[i].off_num;
+                        vm.items[i].usedContainerNum = vm.itemsTmp[i].on_num;
+                        vm.items[i].amount = vm.itemsTmp[i].fee;
+                    }
+                }
 
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });*/
-
-            vm.items = [
-                {
-                    id:1,
-                    enterpriseName:'大秦货运物流集团',
-                    usingContainerNum:'230',
-                    usedContainerNum:'320',
-                    amount:'23212.5'
-                },
-                {
-                    id:1,
-                    enterpriseName:'海航海运集团',
-                    usingContainerNum:'1320',
-                    usedContainerNum:'872',
-                    amount:'323252'
-                },
-                {
-                    id:1,
-                    enterpriseName:'大秦货运物流集团',
-                    usingContainerNum:'230',
-                    usedContainerNum:'320',
-                    amount:'23212.5'
-                },
-                {
-                    id:1,
-                    enterpriseName:'海航海运集团',
-                    usingContainerNum:'1320',
-                    usedContainerNum:'872',
-                    amount:'323252'
-                },
-                {
-                    id:1,
-                    enterpriseName:'大秦货运物流集团',
-                    usingContainerNum:'230',
-                    usedContainerNum:'320',
-                    amount:'23212.5'
-                },
-                {
-                    id:1,
-                    enterpriseName:'海航海运集团',
-                    usingContainerNum:'1320',
-                    usedContainerNum:'872',
-                    amount:'323252'
-                }
-            ]
+            });
 
         }
 

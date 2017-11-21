@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function ReportEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function ReportEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr,$timeout) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -106,14 +106,14 @@
             3:'不可用'
         };
         vm.reportHistory = [];
-
+        vm.searchTime = '2017-09';
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
         vm.getBasePath =  'rentservice/boxinfo/detail/';
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
         vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
-
+        vm.user = [];
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
 
@@ -129,212 +129,173 @@
         vm.onChartClick = function(param){
             console.log(param);
             console.log(param.name);
+            $timeout(function () {
+                vm.searchTime = param.name;
+
+
+
+            });
+
+
+
 
         }
+        function refreshChart()
+        {
+            if(vm.userTmp != null && vm.userTmp.length > 0){
+
+                for(var i = 0; i < vm.userTmp.length; i ++){
+                    vm.user[i] = {};
+                    vm.user[i].time = vm.userTmp[i].date;
+                    vm.user[i].usedContainer = vm.userTmp[i].on_site_nums;
+                    vm.user[i].amount = vm.userTmp[i].rent_fee;
+
+                }
+
+
+
+                var containerNum = [];
+                var amount = [];
+                var month = [];
+                for(var i = 0; i < vm.user.length; i ++){
+
+                    containerNum.push(vm.user[i].usedContainer);
+                    amount.push(vm.user[i].amount);
+                    month.push(vm.user[i].time);
+                }
+
+                vm.reportOption = {
+                    title : {
+                        text : '历史记录',
+                        textStyle:{//标题内容的样式
+                            color:'#4668E7',//京东红
+                            fontStyle:'normal',//主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
+                            fontWeight:"bold",//可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
+                            fontFamily:"PingFangSC-Medium",//主题文字字体，默认微软雅黑
+                            fontSize:24//主题文字字体大小，默认为18px
+                        },
+                        textAlign:'left',//标题文本水平对齐方式，建议不要设置，就让他默认，想居中显示的话，建议往下看
+                        textBaseline:"top",//默认就好,垂直对齐方式,不要设置
+                        left:100
+                    },
+
+                    event: [
+                        {click:vm.onChart}
+                    ],
+                    tooltip : {
+                        trigger : 'axis',
+                        showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        x: 'left',               // 水平安放位置，默认为全图居中，可选为：
+                        y: 'bottom',
+                        data:['该月归还数', '该月金额'],
+                        left:100
+                    },
+                    xAxis : [{
+                        type : 'category',
+                        data : month,
+                        axisLabel:{
+                            textStyle:{
+                                color:"#222"
+                            }
+                        }
+                    }],
+                    yAxis : [{
+                        type : 'value'
+                    },
+                        {
+                            type : 'value',
+                            //show: false
+                            splitLine:{
+                                show:false
+                            }
+                        }],
+                    series : [
+                        {
+                            yAxisIndex:0,
+                            name:'该月归还数',
+                            type:'line',
+                            itemStyle : { normal: {color:'#b6a2de'}},
+                            data:containerNum
+                        },
+                        {
+                            yAxisIndex:1,
+                            name:'该月金额',
+                            type:'bar',
+                            itemStyle : { normal: {color:'#2ec7c9'}},
+                            data:amount
+                        }
+                    ]
+                };
+                vm.containerReportHistory = [
+                    {
+                        containerId:'HNA123223112',
+                        type:'冷链箱',
+                        startTime:'2017-10-11 11:30',
+                        endTime:'2017-10-13 21:20',
+                        amount:1232
+                    },
+                    {
+                        containerId:'HNA322123',
+                        type:'冷藏箱',
+                        startTime:'2017-10-09 03:10',
+                        endTime:'2017-10-110 09:50',
+                        amount:32232.5
+                    },
+                    {
+                        containerId:'HNA123223112',
+                        type:'冷链箱',
+                        startTime:'2017-10-11 11:30',
+                        endTime:'2017-10-13 21:20',
+                        amount:1232
+                    },
+                    {
+                        containerId:'HNA322123',
+                        type:'冷藏箱',
+                        startTime:'2017-10-09 03:10',
+                        endTime:'2017-10-110 09:50',
+                        amount:32232.5
+                    },
+
+                    {
+                        containerId:'HNA123223112',
+                        type:'冷链箱',
+                        startTime:'2017-10-11 11:30',
+                        endTime:'2017-10-13 21:20',
+                        amount:1232
+                    },
+                    {
+                        containerId:'HNA322123',
+                        type:'冷藏箱',
+                        startTime:'2017-10-09 03:10',
+                        endTime:'2017-10-110 09:50',
+                        amount:32232.5
+                    }
+
+
+                ];
+
+            }
+        }
         function getTenantItem() {
-            /*NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
-                vm.user = response.data;
+
+           // http://106.2.20.185:8000/container/api/v1/cloudbox/rentservice/boxbill/monthbill/dbaac0c6-bea9-11e7-888f-525400d25920
+            NetworkService.get('rentservice/boxbill/monthbill/'  + username,null,function (response) {
+                vm.userTmp = response.data.results;
+                refreshChart();
 
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
-            });*/
+            });
 
-
-            vm.user = [
-                {
-                    time:'2017-01',
-                    usedContainer:32,
-                    amount:2323.32,
-                },
-                {
-                    time:'2017-02',
-                    usedContainer:93,
-                    amount:8326.79,
-                },
-                {
-                    time:'2017-03',
-                    usedContainer:123,
-                    amount:12323.32,
-                },
-                {
-                    time:'2017-04',
-                    usedContainer:45,
-                    amount:5326.79,
-                },
-                {
-                    time:'2017-05',
-                    usedContainer:82,
-                    amount:4223.32,
-                },
-                {
-                    time:'2017-06',
-                    usedContainer:93,
-                    amount:14326.79,
-                },
-                {
-                    time:'2017-07',
-                    usedContainer:523,
-                    amount:25555.32,
-                },
-                {
-                    time:'2017-08',
-                    usedContainer:322,
-                    amount:4326.79,
-                },
-                {
-                    time:'2017-09',
-                    usedContainer:243,
-                    amount:1323.32,
-                },
-                {
-                    time:'2017-10',
-                    usedContainer:221,
-                    amount:10326.79,
-                },
-                {
-                    time:'2017-11',
-                    usedContainer:150,
-                    amount:4326.79,
-                }
-
-
-            ];
             vm.selectedMonth = 11;
 
 
-            var containerNum = [];
-            var amount = [];
-            var month = [];
-            for(var i = 0; i < vm.user.length; i ++){
 
-                containerNum.push(vm.user[i].usedContainer);
-                amount.push(vm.user[i].amount);
-                month.push(vm.user[i].time);
-            }
-
-            console.log(containerNum);
-            console.log(amount);
-            console.log(month);
-            vm.reportOption = {
-                title : {
-                    text : '历史记录',
-                    textStyle:{//标题内容的样式
-                        color:'#4668E7',//京东红
-                        fontStyle:'normal',//主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
-                        fontWeight:"bold",//可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
-                        fontFamily:"PingFangSC-Medium",//主题文字字体，默认微软雅黑
-                        fontSize:24//主题文字字体大小，默认为18px
-                    },
-                    textAlign:'left',//标题文本水平对齐方式，建议不要设置，就让他默认，想居中显示的话，建议往下看
-                    textBaseline:"top",//默认就好,垂直对齐方式,不要设置
-                    left:100
-                },
-
-                event: [
-                    {click:vm.onChart}
-                    ],
-                tooltip : {
-                    trigger : 'axis',
-                    showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
-                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    }
-                },
-                legend: {
-                    x: 'left',               // 水平安放位置，默认为全图居中，可选为：
-                    y: 'bottom',
-                    data:['该月归还数', '该月金额'],
-                    left:100
-                },
-                xAxis : [{
-                    type : 'category',
-                    data : month,
-                    axisLabel:{
-                        textStyle:{
-                            color:"#222"
-                        }
-                    }
-                }],
-                yAxis : [{
-                    type : 'value'
-                },
-                    {
-                        type : 'value',
-                        //show: false
-                        splitLine:{
-                            show:false
-                        }
-                    }],
-                series : [
-                    {
-                        yAxisIndex:0,
-                        name:'该月归还数',
-                        type:'line',
-                        itemStyle : { normal: {color:'#b6a2de'}},
-                        data:containerNum
-                    },
-                    {
-                        yAxisIndex:1,
-                        name:'该月金额',
-                        type:'bar',
-                        itemStyle : { normal: {color:'#2ec7c9'}},
-                        data:amount
-                    }
-                ]
-            };
-
-            //vm.reportOption = option;
-
-            console.log(vm.reportOption);
-
-
-            vm.containerReportHistory = [
-                {
-                    containerId:'HNA123223112',
-                    type:'冷链箱',
-                    startTime:'2017-10-11 11:30',
-                    endTime:'2017-10-13 21:20',
-                    amount:1232
-                },
-                {
-                    containerId:'HNA322123',
-                    type:'冷藏箱',
-                    startTime:'2017-10-09 03:10',
-                    endTime:'2017-10-110 09:50',
-                    amount:32232.5
-                },
-                {
-                    containerId:'HNA123223112',
-                    type:'冷链箱',
-                    startTime:'2017-10-11 11:30',
-                    endTime:'2017-10-13 21:20',
-                    amount:1232
-                },
-                {
-                    containerId:'HNA322123',
-                    type:'冷藏箱',
-                    startTime:'2017-10-09 03:10',
-                    endTime:'2017-10-110 09:50',
-                    amount:32232.5
-                },
-
-                {
-                    containerId:'HNA123223112',
-                    type:'冷链箱',
-                    startTime:'2017-10-11 11:30',
-                    endTime:'2017-10-13 21:20',
-                    amount:1232
-                },
-                {
-                    containerId:'HNA322123',
-                    type:'冷藏箱',
-                    startTime:'2017-10-09 03:10',
-                    endTime:'2017-10-110 09:50',
-                    amount:32232.5
-                }
-
-
-            ];
 
 
         }
