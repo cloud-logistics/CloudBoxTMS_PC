@@ -9,8 +9,14 @@
         <div class="title inline">仓库管理</div>
         <div  class="view-type inline" ><a href ng-class="vm.selectedStyle[vm.isViewList]" ng-click="vm.selList(true)"><i class="fa fa-list icon-m-r"/>列表展示</a></div>
         <div  class="view-type inline"><a href ng-class="vm.selectedStyle[!vm.isViewList]" ng-click="vm.selList(false)"><i class="fa fa-th icon-m-r" />方格展示</a></div>
+
+        <div class="right-search">
+            <button class="search-icon" ng-click="vm.goSearch()">
+                <i class="fa fa-search"></i>
+            </button>
         <input st-search="" ng-keyup="vm.enterEvent($event)" ng-model="vm.searchWarehouse" class="pull-right search-edit search-input font-thin" placeholder="请输入仓库名称" type="text"/>
-        <!--<button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>-->
+        </div>
+            <!--<button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>-->
     </div>
     <!-- main -->
     <div ng-if="vm.isViewList">

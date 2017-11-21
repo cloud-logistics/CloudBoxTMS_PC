@@ -29,7 +29,6 @@
         vm.removeItem = removeItem;
         vm.curItem = {};
         vm.backAction = backAction;
-        vm.goSearch = goSearch;
 
         vm.displayedCollection = [];
         vm.subPath = 'accounts';
@@ -72,7 +71,7 @@
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-                goSearch();
+                vm.goSearch();
             }
         }
         vm.confirmDeposit = function(item)
@@ -84,7 +83,7 @@
                 toastr.error(response.status + ' ' + response.statusText);
             });
         }
-        function goSearch() {
+         vm.goSearch = function() {
             console.log(vm.searchItem);
         };
 
