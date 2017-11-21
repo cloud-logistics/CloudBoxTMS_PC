@@ -4,17 +4,11 @@
 ">
     <!-- main -->
     <div class="col">
-        <!-- main header -->
-        <!-- div class="bg-light lter b-b wrapper-md" ng-hide="isRoleAdmin">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <h1 class="m-n font-thin h3 text-black">租户信息</h1>
-                    <small class="text-muted">HNA EcoTech Internet of Things</small>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- tasks -->
+        <div class="warehouse-head">
+            <button ng-click="vm.goAddItem()" class="add-enterprise-button"
+            >添加用户</button>
+            <input st-search="" ng-keyup="vm.enterEvent($event)" ng-model="vm.searchItem" class="pull-right search-edit search-input font-thin" placeholder="请输入用户名称" type="text"/>
+        </div>
 
         <div class="m-l m-r m-t panel panel-default">
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
@@ -22,14 +16,6 @@
             <tr>
                 <th colspan="7">
                     <div class="company-title">公司名称：{{vm.enterprise_name}}</div>
-
-<!--
-                    <input ng-model="vm.searchItem" st-search="" class="form-control pull-right search-input" placeholder="请输入公司名称" type="text"/>
--->                 <button ng-click="vm.goAddItem()" class="add-button pull-right m-l" >添加用户</button>
-                    <input st-search="" class="search-edit pull-right font-thin" placeholder="请输入用户名称" type="text"/>
-                    <button ng-click="vm.goSearch()" class="search-button pull-right"><i class="fa fa-search"></i>搜索</button>
-
-
                 </th>
             </tr>
             <tr class="font-bold">

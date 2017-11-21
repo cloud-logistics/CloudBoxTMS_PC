@@ -25,7 +25,7 @@
                 </div>-->
 
                 <div class="report-month">
-                    {{vm.searchTime | date:'yyyy-MM' }} 详情记录
+                    {{vm.selectedDate | date:'yyyy-MM' }} 详情记录
                 </div>
                     <div class="report-detail-table m-t panel panel-default">
                         <table  st-table="vm.containerReportHistory" st-safe-src="vm.containerReportHistory" class="table table-bordered table-striped table-hover bg-white text-center">
@@ -48,8 +48,8 @@
                             <tr ng-repeat="item in vm.containerReportHistory">
                                 <td ng-click="vm.goDetail(item)">{{item.containerId}}</td>
                                 <td ng-click="vm.goDetail(item)">{{item.type}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.startTime}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.endTime}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.startTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.endTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                 <td ng-click="vm.goDetail(item)">{{item.amount}}</td>
                             </tr>
 

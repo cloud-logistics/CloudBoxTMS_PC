@@ -83,7 +83,12 @@
             //$state.go('app.applicationedit');
         }
 
-
+        vm.enterEvent = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                goSearch();
+            }
+        }
 
         function goSearch() {
             console.log(vm.searchItem);

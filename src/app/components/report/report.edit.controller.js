@@ -106,7 +106,6 @@
             3:'不可用'
         };
         vm.reportHistory = [];
-        vm.searchTime = '2017-09';
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
         vm.getBasePath =  'rentservice/boxinfo/detail/';
@@ -114,6 +113,8 @@
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
         vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
         vm.user = [];
+        vm.containerReportHistory = [];
+        vm.selectedDate = '2017-11';
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
 
@@ -129,8 +130,31 @@
         vm.onChartClick = function(param){
             console.log(param);
             console.log(param.name);
+            //var year-month =
             $timeout(function () {
                 vm.searchTime = param.name;
+                vm.selectedDate = param.name.substr(0,7);
+                console.log(vm.searchTime);
+                vm.containerReportHistory = [];
+                NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,null,function (response) {
+
+                    var tmp = response.data.results;
+                    if(tmp != null && tmp.length > 0){
+                        for(var i = 0; i < tmp.length; i ++){
+                            vm.containerReportHistory[i] = {};
+                            vm.containerReportHistory[i].containerId = tmp[i].box.deviceid;
+                            vm.containerReportHistory[i].type = tmp[i].box.type.box_type_name;
+                            vm.containerReportHistory[i].startTime = tmp[i].lease_start_time;
+                            vm.containerReportHistory[i].endTime = tmp[i].lease_end_time;
+                            vm.containerReportHistory[i].amount = tmp[i].rent;
+
+                        }
+                    }
+
+
+                },function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
 
 
 
@@ -163,7 +187,8 @@
                     amount.push(vm.user[i].amount);
                     month.push(vm.user[i].time);
                 }
-
+                console.log(month[month.length-1]);
+                vm.selectedDate = month[month.length-1].substr(0,7);
                 vm.reportOption = {
                     title : {
                         text : '历史记录',
@@ -231,55 +256,35 @@
                         }
                     ]
                 };
-                vm.containerReportHistory = [
-                    {
-                        containerId:'HNA123223112',
-                        type:'冷链箱',
-                        startTime:'2017-10-11 11:30',
-                        endTime:'2017-10-13 21:20',
-                        amount:1232
-                    },
-                    {
-                        containerId:'HNA322123',
-                        type:'冷藏箱',
-                        startTime:'2017-10-09 03:10',
-                        endTime:'2017-10-110 09:50',
-                        amount:32232.5
-                    },
-                    {
-                        containerId:'HNA123223112',
-                        type:'冷链箱',
-                        startTime:'2017-10-11 11:30',
-                        endTime:'2017-10-13 21:20',
-                        amount:1232
-                    },
-                    {
-                        containerId:'HNA322123',
-                        type:'冷藏箱',
-                        startTime:'2017-10-09 03:10',
-                        endTime:'2017-10-110 09:50',
-                        amount:32232.5
-                    },
 
-                    {
-                        containerId:'HNA123223112',
-                        type:'冷链箱',
-                        startTime:'2017-10-11 11:30',
-                        endTime:'2017-10-13 21:20',
-                        amount:1232
-                    },
-                    {
-                        containerId:'HNA322123',
-                        type:'冷藏箱',
-                        startTime:'2017-10-09 03:10',
-                        endTime:'2017-10-110 09:50',
-                        amount:32232.5
-                    }
-
-
-                ];
 
             }
+
+
+
+            console.log(vm.selectedDate);
+            vm.containerReportHistory = [];
+            NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,null,function (response) {
+
+                var tmp = response.data.results;
+                if(tmp != null && tmp.length > 0){
+                    for(var i = 0; i < tmp.length; i ++){
+                        vm.containerReportHistory[i] = {};
+                        vm.containerReportHistory[i].containerId = tmp[i].box.deviceid;
+                        vm.containerReportHistory[i].type = tmp[i].box.type.box_type_name;
+                        vm.containerReportHistory[i].startTime = tmp[i].lease_start_time;
+                        vm.containerReportHistory[i].endTime = tmp[i].lease_end_time;
+                        vm.containerReportHistory[i].amount = tmp[i].rent;
+
+                    }
+                }
+
+
+            },function (response) {
+                toastr.error(response.status + ' ' + response.statusText);
+            });
+
+
         }
         function getTenantItem() {
 
@@ -292,7 +297,7 @@
                 toastr.error(response.status + ' ' + response.statusText);
             });
 
-            vm.selectedMonth = 11;
+
 
 
 
