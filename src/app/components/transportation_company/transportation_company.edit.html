@@ -29,27 +29,13 @@
             <form name="form" class="form-horizontal form-validation" role="form">
 
 
-
-
-               <!-- <div ng-if="!vm.isAdd" class="form-group">
-                    <label class="col-sm-1 control-label m-l-lg font-bold">企业编号</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="公司编号" ng-model="vm.user.enterprise_id"  required>
-                    </div>
-                </div>
-                <div ng-if="!vm.isAdd" class="line line-dashed b-b line-lg"></div>-->
-
-
-
-
-
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业名称</label>
                         <div class="col-sm-4">
                             <input class="form-control" type="text"
-                                   placeholder="公司名称" ng-model="vm.user.enterprise_name"  required>
+                                   placeholder="公司名称" name="enterprise_name" ng-model="vm.user.enterprise_name"  required>
                         </div>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_name.$invalid">请输入企业名称</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -60,11 +46,6 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">押金状态</label>
                     <div class="col-sm-4">
 
-                        <!--<input class="form-control" type="text"
-                               placeholder="{{'u.STATUS' | translate}}" ng-model="vm.user.status" ng-disabled="vm.isDetail" >-->
-
-                        <!--<select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.status" ng-options="s.value as s.title for s in vm.statusType" ng-disabled="vm.isDetail" ></select>
--->
                         <label style="position: relative;top:4px;" ng-class="vm.labelColor[vm.user.status]" ng-bind="vm.labelContent[vm.user.status]" class="label"></label>
 
 
@@ -78,9 +59,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">联系电话</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="联系电话" ng-model="vm.user.enterprise_tele" ng-disabled="vm.isDetail">
+                               placeholder="联系电话" ng-model="vm.user.enterprise_tele" name="enterprise_tele" ng-disabled="vm.isDetail" ng-pattern="/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/" required>
                     </div>
-
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_tele.$invalid">请输入合法的联系电话</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -91,8 +72,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">营业执照</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="营业执照" ng-model="vm.user.enterprise_license_id" ng-disabled="vm.isDetail">
+                               placeholder="营业执照序号" ng-model="vm.user.enterprise_license_id" name="enterprise_license_id" ng-disabled="vm.isDetail" required>
                     </div>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_license_id.$invalid">请输入营业执照序号</i></span>
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -118,12 +100,15 @@
                             </div>
 
                         </div>
-                        <input class="form-control" type="text" style="margin-bottom:10px;"
-                               placeholder="图片" ng-model="vm.user.enterprise_license_id_url" ng-disabled="vm.isDetail" >
+                        <input class="form-control" type="url" style="margin-bottom:10px;"
+                               placeholder="图片" ng-model="vm.user.enterprise_license_id_url" name="enterprise_license_id_url" ng-disabled="vm.isDetail" required>
+
                         <div class="img-preview">
                             <img ng-src="{{vm.user.enterprise_license_id_url}}" alt="">
                         </div>
                     </div>
+                    <span class="blank-tips pic-blank-tips" ><i>* </i><i ng-show="form.enterprise_license_id_url.$invalid">请输入合法的头像路径</i></span>
+
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -141,9 +126,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业法人</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="企业法人" ng-model="vm.user.enterprise_legal_rep_name" ng-disabled="vm.isDetail">
+                               placeholder="企业法人" ng-model="vm.user.enterprise_legal_rep_name" name="enterprise_legal_rep_name" ng-disabled="vm.isDetail" required>
                     </div>
-
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_legal_rep_name.$invalid">请输入企业法人</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -152,10 +137,10 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业押金</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业押金" ng-model="vm.user.enterprise_deposit" ng-disabled="vm.isDetail">
+                        <input class="form-control" type="number"
+                               placeholder="企业押金" ng-model="vm.user.enterprise_deposit" name="enterprise_deposit"  ng-disabled="vm.isDetail" maxlength=10  required>
                     </div>
-
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_deposit.$invalid">请输入押金数额</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -163,10 +148,10 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业邮箱</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业邮箱" ng-model="vm.user.enterprise_email" ng-disabled="vm.isDetail">
+                        <input class="form-control" type="email"
+                               placeholder="企业邮箱" ng-model="vm.user.enterprise_email" name="enterprise_email"  ng-disabled="vm.isDetail" required>
                     </div>
-
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_email.$invalid">请输入合法的企业邮箱</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -176,10 +161,10 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业网址</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="企业网址" ng-model="vm.user.enterprise_url" ng-disabled="vm.isDetail">
+                        <input class="form-control" type="url"
+                               placeholder="企业网址" ng-model="vm.user.enterprise_url" name = "enterprise_url" ng-disabled="vm.isDetail" required>
                     </div>
-
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_url.$invalid">请输入合法的企业网址</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -187,9 +172,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业地址</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="企业地址" ng-model="vm.user.enterprise_address" ng-disabled="vm.isDetail">
+                               placeholder="企业地址" ng-model="vm.user.enterprise_address" name="enterprise_address"  ng-disabled="vm.isDetail" required>
                     </div>
-
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_address.$invalid">请输入企业地址</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 

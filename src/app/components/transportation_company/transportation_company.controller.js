@@ -90,11 +90,9 @@
             //console.log(vm.searchItem);
              vm.isSearch = true;
              var params = {
-                 keyword:vm.searchItem,
-                 limit:vm.limit,
-                 offset:(vm.pageCurrent - 1) * vm.limit
+                 keyword:vm.searchItem
              };
-             NetworkService.post('rentservice/enterprise/enterpriseinfo/fuzzy',params,function (response) {
+             NetworkService.post('rentservice/enterprise/enterpriseinfo/fuzzy?'+'limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
                  console.log(response.data);
                  vm.items = response.data.results;
                  vm.displayedCollection = (vm.items);
