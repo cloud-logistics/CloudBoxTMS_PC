@@ -303,28 +303,32 @@
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data.site_info;
-
-
                 var point = new BMap.Point(vm.user.longitude, vm.user.latitude);  // 创建点坐标
                 var marker = new BMap.Marker(point);        // 创建标注
+                marker.addEventListener("click", function(){
+                    showInfo();
+                });
                 map.addOverlay(marker);
 
-                //map.enableScrollWheelZoom(false);     //开启鼠标滚轮缩放
-
-                var opts = {
-                    width : 100,     // 信息窗口宽度
-                    height: 50,     // 信息窗口高度
-                    title : ''  // 信息窗口标题
-                };
-                var lat = vm.user.latitude > 0 ? '北纬':'南纬';
-                var infoWindow = new BMap.InfoWindow('地址：'+vm.user.location + '<br />' + '坐标：(' + vm.user.latitude + ',' + vm.user.longitude+')', opts);  // 创建信息窗口对象
-                map.openInfoWindow(infoWindow, point);
-
-                var disPoint  = new BMap.Point(vm.user.longitude, parseFloat(vm.user.latitude) + 10);
-                console.log(vm.user.latitude);
-                //console.log(parseFloat(vm.user.latitude)+5);
+                var disPoint = new BMap.Point(vm.user.longitude, parseFloat(vm.user.latitude) + 10);
                 map.centerAndZoom(disPoint, 10);
 
+                function showInfo() {
+                    var opts = {
+                        width: 100,     // 信息窗口宽度
+                        height: 50,     // 信息窗口高度
+                        title: ''  // 信息窗口标题
+                    };
+
+
+                    var lat = vm.user.latitude > 0 ? '北纬' : '南纬';
+                    var infoWindow = new BMap.InfoWindow('地址：' + vm.user.location + '<br />' + '坐标：(' + vm.user.latitude + ',' + vm.user.longitude + ')', opts);  // 创建信息窗口对象
+                    infoWindow.addEventListener("close", function () {
+                    });
+                    map.openInfoWindow(infoWindow, point);
+
+                };
+                showInfo();
 
                 vm.allInfo = response.data;
 

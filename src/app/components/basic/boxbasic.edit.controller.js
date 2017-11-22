@@ -244,12 +244,7 @@
                 }else if(vm.user.ava_flag=='Y' && vm.user.siteinfo != '' && vm.user.siteinfo != null ){
                     vm.user.curStatus = 1;
                 }
-
-
-                if(vm.user.siteinfo != '' && vm.user.siteinfo != null) {
-                    var point = new BMap.Point(vm.user.siteinfo.longitude, vm.user.siteinfo.latitude);  // 创建点坐标
-                    var marker = new BMap.Marker(point);        // 创建标注
-                    map.addOverlay(marker);
+                function showInfo(){
                     var opts = {
                         width: 100,     // 信息窗口宽度
                         height: 50,     // 信息窗口高度
@@ -258,8 +253,20 @@
                     };
 
                     var infoWindow = new BMap.InfoWindow('RFID ' + vm.user.tid + '<br />' + '使用人 ' + '大货运公司' + '<br />' + '当前位置：' + vm.user.siteinfo.location + '<br />', opts);  // 创建信息窗口对象
+                    infoWindow.addEventListener("close", function () {
+                    });
                     map.openInfoWindow(infoWindow, point);
+                }
 
+                if(vm.user.siteinfo != '' && vm.user.siteinfo != null) {
+
+
+                    var point = new BMap.Point(vm.user.siteinfo.longitude, vm.user.siteinfo.latitude);  // 创建点坐标
+                    var marker = new BMap.Marker(point);        // 创建标注
+                    marker.addEventListener("click", showInfo);
+                    map.addOverlay(marker);
+                    showInfo();
+                    
                     disPoint = new BMap.Point(vm.user.siteinfo.longitude, parseFloat(vm.user.siteinfo.latitude) + 10);
 
                 }
