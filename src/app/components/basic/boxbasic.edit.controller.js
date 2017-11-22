@@ -266,7 +266,7 @@
                     marker.addEventListener("click", showInfo);
                     map.addOverlay(marker);
                     showInfo();
-                    
+
                     disPoint = new BMap.Point(vm.user.siteinfo.longitude, parseFloat(vm.user.siteinfo.latitude) + 10);
 
                 }
@@ -330,16 +330,19 @@
             vm.pageCurrent --;
             if (vm.pageCurrent < 1) vm.pageCurrent = 1;
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.nextAction = function () {
             vm.pageCurrent ++;
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.goPage = function (page) {
             console.log(page);
             vm.pageCurrent = Number(page);
             console.log(vm.pageCurrent);
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.pageCurrentState = function (page) {
             if (Number(page) == vm.pageCurrent)
@@ -353,7 +356,7 @@
                 return;
             }
             var page = parseInt(pageination.offset/pageination.limit +1);
-            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            var toalPages = pageination.count % pageination.limit == 0 ?  parseInt(pageination.count / pageination.limit):parseInt(pageination.count / pageination.limit + 1);
             vm.totalPages = toalPages;
             console.log(page + ';'+ toalPages);
             vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);

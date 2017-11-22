@@ -35,7 +35,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="用户名" ng-model="vm.user.user_name"  required>
+                               placeholder="用户名" ng-model="vm.user.user_name"  ng-disabled = "!vm.isAdd">
                     </div>
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
@@ -44,7 +44,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">真实姓名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="真实姓名" ng-model="vm.user.user_real_name"  required>
+                               placeholder="真实姓名" ng-model="vm.user.user_real_name"  ng-disabled = "!vm.isAdd">
                     </div>
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
@@ -80,7 +80,7 @@
 
                         </div>
                         <input class="form-control" type="text" style="margin-bottom:10px;"
-                               placeholder="证件图片" ng-model="vm.user.avatar_url" ng-disabled="vm.isDetail" >
+                               placeholder="图片" ng-model="vm.user.avatar_url" ng-disabled="vm.isDetail" >
                         <div class="img-preview">
                             <img ng-src="{{vm.user.avatar_url}}" alt="">
                         </div>

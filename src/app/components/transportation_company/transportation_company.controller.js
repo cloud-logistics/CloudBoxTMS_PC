@@ -9,7 +9,7 @@
         .controller('TransportationCompanyController', TransportationCompanyController);
 
     /** @ngInject */
-    function TransportationCompanyController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function TransportationCompanyController($scope, NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -49,6 +49,8 @@
             0:'未缴',
             1:'已缴',
         };
+        vm.searchItem = '';
+        vm.isSearch = false;
 
         vm.OperApp = OperApp;
 
@@ -84,20 +86,43 @@
             });
         }
          vm.goSearch = function() {
-            console.log(vm.searchItem);
+             //rentservice/enterprise/enterpriseinfo/fuzzy
+            //console.log(vm.searchItem);
+             vm.isSearch = true;
+             var params = {
+                 keyword:vm.searchItem,
+                 limit:vm.limit,
+                 offset:(vm.pageCurrent - 1) * vm.limit
+             };
+             NetworkService.post('rentservice/enterprise/enterpriseinfo/fuzzy',params,function (response) {
+                 console.log(response.data);
+                 vm.items = response.data.results;
+                 vm.displayedCollection = (vm.items);
+                 updatePagination(response.data);
+                 //vm.displayedCollection = [].concat(vm.items);
+             },function (response) {
+                 toastr.error(response.status + ' ' + response.statusText);
+             });
         };
 
         function getDatas() {
-            console.log(vm.pageCurrent);
-            NetworkService.get(vm.getBasePath,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
-                console.log(response.data);
-                vm.items = response.data.results;
-                vm.displayedCollection = (vm.items);
-                updatePagination(response.data);
-                //vm.displayedCollection = [].concat(vm.items);
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
+            if(vm.isSearch ){
+                vm.goSearch();
+            }else {
+                console.log(vm.pageCurrent);
+                NetworkService.get(vm.getBasePath, {
+                    limit: vm.limit,
+                    offset: (vm.pageCurrent - 1) * vm.limit
+                }, function (response) {
+                    console.log(response.data);
+                    vm.items = response.data.results;
+                    vm.displayedCollection = (vm.items);
+                    updatePagination(response.data);
+                    //vm.displayedCollection = [].concat(vm.items);
+                }, function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
+            }
         }
 
 
@@ -133,21 +158,26 @@
             $rootScope.backPre();
         }
 
+
         // 分页 Start
         vm.preAction = function () {
             vm.pageCurrent --;
             if (vm.pageCurrent < 1) vm.pageCurrent = 1;
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.nextAction = function () {
             vm.pageCurrent ++;
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
+
         vm.goPage = function (page) {
             console.log(page);
             vm.pageCurrent = Number(page);
             console.log(vm.pageCurrent);
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.pageCurrentState = function (page) {
             if (Number(page) == vm.pageCurrent)
@@ -161,7 +191,7 @@
                 return;
             }
             var page = parseInt(pageination.offset/pageination.limit +1);
-            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            var toalPages = pageination.count % pageination.limit == 0 ?  parseInt(pageination.count / pageination.limit):parseInt(pageination.count / pageination.limit + 1);
             vm.totalPages = toalPages;
             console.log(page + ';'+ toalPages);
             vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);

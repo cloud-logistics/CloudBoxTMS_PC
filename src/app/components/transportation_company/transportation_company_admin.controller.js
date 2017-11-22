@@ -154,7 +154,7 @@
                 return;
             }
             var page = parseInt(pageination.offset/pageination.limit +1);
-            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            var toalPages = pageination.count % pageination.limit == 0 ?  parseInt(pageination.count / pageination.limit):parseInt(pageination.count / pageination.limit + 1);
             vm.totalPages = toalPages;
             console.log(page + ';'+ toalPages);
             vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);

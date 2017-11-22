@@ -77,97 +77,105 @@
                 vm.goSearch();
             }
         }
-
+        vm.searchWarehouse = '';
         function OperApp(index, item) {
-            /*if(index == 3){
-
-                NetworkService.post(vm.reqPath + '/' + vm.subPath  +'/'+ item.id + '/lock',null,function (response) {
-                    toastr.success(i18n.t('u.OPERATE_SUC'));
-                    getDatas();
-                },function (response) {
-                    vm.authError = response.statusText + '(' + response.status + ')';
-                    toastr.error(vm.authError);
-                });
-
-            }else{
-                console.log('error ops:'+index);
-            }*/
-
-            //$state.go('app.applicationedit');
         }
+        vm.isSearch = false;
+
+        vm.processDatas = function (response){
+            vm.items = response.data.results;
+            if(vm.items.length > 0) {
+                for (var i = 0; i < vm.items.length; i++) {
+                    var allNum = 0;
+                    vm.items[i].freezerBoxInfo  = {
+                        availableNum:0,
+                        allNum:0
+                    };
+                    vm.items[i].coolerBoxInfo = {
+                        availableNum:0,
+                        allNum:0
+                    };
+                    vm.items[i].medicalBoxInfo = {
+                        availableNum:0,
+                        allNum:0
+                    };
+                    vm.items[i].ordinaryBoxInfo = {
+                        availableNum:0,
+                        allNum:0
+                    };
+                    vm.items[i].allCurrentBoxInfo = {
+                        availableNum:0,
+                        allNum:0
+                    };
+
+                if(vm.items[i].box_num != null && vm.items[i].box_num.length > 0) {
+                    for (var j = 0; j < vm.items[i].box_num.length; j++) {
+                        if (vm.items[i].box_num[j].box_type.id == 1) {
+                            vm.items[i].freezerBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
+                            vm.items[i].freezerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                        } else if (vm.items[i].box_num[j].box_type.id == 2) {
+                            vm.items[i].coolerBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
+                            vm.items[i].coolerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+
+                        } else if (vm.items[i].box_num[j].box_type.id == 3) {
+                            vm.items[i].medicalBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
+                            vm.items[i].medicalBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+
+                        } else if (vm.items[i].box_num[j].box_type.id == 4) {
+                            vm.items[i].ordinaryBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
+                            vm.items[i].ordinaryBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                        }
+                    }
+                }
+
+                    vm.items[i].allCurrentBoxInfo.allNum = vm.items[i].freezerBoxInfo.allNum +  vm.items[i].coolerBoxInfo.allNum
+                        + vm.items[i].medicalBoxInfo.allNum + vm.items[i].ordinaryBoxInfo.allNum;
+                    vm.items[i].allCurrentBoxInfo.availableNum = vm.items[i].freezerBoxInfo.availableNum +  vm.items[i].coolerBoxInfo.availableNum
+                        + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum;
+
+
+                }
+            }
+            vm.displayedCollection = (vm.items);
+            updatePagination(response.data);
+        };
 
 
 
         function goSearch() {
+            vm.isSearch = true;
             console.log(vm.searchWarehouse);
+            var params = {
+                site_name:vm.searchWarehouse,
+                limit:vm.limit,
+                offset:(vm.pageCurrent - 1) * vm.limit
+            }
+            NetworkService.post('rentservice/site/filter',params,function (response) {
+                vm.processDatas(response);
+            },function (response) {
+                vm.authError = response.statusText + '(' + response.status + ')';
+                toastr.error(vm.authError);
+            });
+
         };
 
         function getDatas() {
-            console.log(vm.pageCurrent);
-            NetworkService.get(vm.getBasePath,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
-                console.log(response.data);
-                vm.items = response.data.results;
-                if(vm.items.length > 0) {
-                    for (var i = 0; i < vm.items.length; i++) {
-                        var allNum = 0;
-                        vm.items[i].freezerBoxInfo  = {
-                            availableNum:0,
-                            allNum:0
-                        };
-                        vm.items[i].coolerBoxInfo = {
-                            availableNum:0,
-                            allNum:0
-                        };
-                        vm.items[i].medicalBoxInfo = {
-                            availableNum:0,
-                            allNum:0
-                        };
-                        vm.items[i].ordinaryBoxInfo = {
-                            availableNum:0,
-                            allNum:0
-                        };
-                        vm.items[i].allCurrentBoxInfo = {
-                            availableNum:0,
-                            allNum:0
-                        };
-
-
-                        for( var j = 0;  j < vm.items[i].box_num.length; j ++){
-                            if(vm.items[i].box_num[j].box_type.id == 1) {
-                                vm.items[i].freezerBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
-                                vm.items[i].freezerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
-                            }else if(vm.items[i].box_num[j].box_type.id == 2) {
-                                vm.items[i].coolerBoxInfo.allNum = vm.items[i].box_num[j].ava_num +  vm.items[i].box_num[j].reserve_num;
-                                vm.items[i].coolerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
-
-                            }else if(vm.items[i].box_num[j].box_type.id == 3) {
-                                vm.items[i].medicalBoxInfo.allNum = vm.items[i].box_num[j].ava_num +  vm.items[i].box_num[j].reserve_num;
-                                vm.items[i].medicalBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
-
-                            }else if(vm.items[i].box_num[j].box_type.id == 4) {
-                                vm.items[i].ordinaryBoxInfo.allNum = vm.items[i].box_num[j].ava_num +  vm.items[i].box_num[j].reserve_num;
-                                vm.items[i].ordinaryBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
-                            }
-                        }
-
-                        vm.items[i].allCurrentBoxInfo.allNum = vm.items[i].freezerBoxInfo.allNum +  vm.items[i].coolerBoxInfo.allNum
-                                                                + vm.items[i].medicalBoxInfo.allNum + vm.items[i].ordinaryBoxInfo.allNum;
-                        vm.items[i].allCurrentBoxInfo.availableNum = vm.items[i].freezerBoxInfo.availableNum +  vm.items[i].coolerBoxInfo.availableNum
-                            + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum;
-
-
-                    }
-                }
-                vm.displayedCollection = (vm.items);
-                updatePagination(response.data);
-                //vm.displayedCollection = [].concat(vm.items);
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
-
-
-
-        }
+            if(vm.isSearch){
+                vm.goSearch();
+            }else {
+                console.log(vm.pageCurrent);
+                NetworkService.get(vm.getBasePath, {
+                    limit: vm.limit,
+                    offset: (vm.pageCurrent - 1) * vm.limit
+                }, function (response) {
+                    console.log(response.data);
+                    vm.processDatas(response);
+                    //vm.displayedCollection = [].concat(vm.items);
+                }, function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
+            }
+        };
 
 
         function goAddItem() {
@@ -207,16 +215,19 @@
             vm.pageCurrent --;
             if (vm.pageCurrent < 1) vm.pageCurrent = 1;
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.nextAction = function () {
             vm.pageCurrent ++;
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.goPage = function (page) {
             console.log(page);
             vm.pageCurrent = Number(page);
             console.log(vm.pageCurrent);
             getDatas();
+            vm.targetPage = vm.pageCurrent;
         };
         vm.pageCurrentState = function (page) {
             if (Number(page) == vm.pageCurrent)
@@ -230,7 +241,7 @@
                 return;
             }
             var page = parseInt(pageination.offset/pageination.limit +1);
-            var toalPages = parseInt(pageination.count / pageination.limit + 1);
+            var toalPages = pageination.count % pageination.limit == 0 ?  parseInt(pageination.count / pageination.limit):parseInt(pageination.count / pageination.limit + 1);
             vm.totalPages = toalPages;
             console.log(page + ';'+ toalPages);
             vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);

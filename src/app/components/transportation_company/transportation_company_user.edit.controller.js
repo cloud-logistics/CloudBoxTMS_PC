@@ -108,6 +108,8 @@
             vm.isFromCompany = true;
             vm.enterprise_id = $stateParams.args.enterprise_id;
             vm.enterprise_name = $stateParams.args.enterprise_name;
+            vm.isAdd = true;
+            console.log(vm.isAdd);
         }
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
