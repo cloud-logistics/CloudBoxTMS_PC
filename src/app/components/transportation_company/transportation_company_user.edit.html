@@ -72,9 +72,11 @@
                                     <input type="button" class="btn btn-default " value="浏览文件"></input>
                                     <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
                                     <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
-                                    <button  class="btn btn-default btn-upload" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
                                 </div>
+                                <button type="button" class="btn btn-default btn-upload" ng-click="vm.uploadFile()"> <i class="fa fa-check"></i> 上传 </button>
+
                             </div>
+
 
                         </div>
                         <input class="form-control" type="text" style="margin-bottom:10px;"
