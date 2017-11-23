@@ -37,7 +37,7 @@
 
             <tr ng-repeat="item in vm.displayedCollection">
               <!--  <td ng-click="vm.goDetail(item)">{{item.id}}</td>-->
-                <td ng-click="vm.goDetail(item)">{{item.enterprise_name}}</td>
+                <td ng-click="vm.goDetail(item)">{{item.enterprise_name.length > 14 ? item.enterprise_name.substr(0,14)+'...':item.enterprise_name}}</td>
                <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
 
                 <td ng-click="vm.goDetail(item)">

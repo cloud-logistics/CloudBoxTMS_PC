@@ -103,7 +103,7 @@
         function editItem() {
             NetworkService.post(vm.updateBasePath,vm.user,function (response) {
                 toastr.success('操作成功！');
-                vm.backAction();
+                $state.go('app.dashboard');
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });

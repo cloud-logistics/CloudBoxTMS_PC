@@ -170,7 +170,7 @@
 
                 for(var i = 0; i < vm.userTmp.length; i ++){
                     vm.user[i] = {};
-                    vm.user[i].time = vm.userTmp[i].date;
+                    vm.user[i].time = vm.userTmp[i].date.length > 7 ? vm.userTmp[i].date.substr(0,7):vm.userTmp[i].date;
                     vm.user[i].usedContainer = vm.userTmp[i].on_site_nums;
                     vm.user[i].amount = vm.userTmp[i].rent_fee;
 
@@ -187,7 +187,6 @@
                     amount.push(vm.user[i].amount);
                     month.push(vm.user[i].time);
                 }
-                console.log(month[month.length-1]);
                 vm.selectedDate = month[month.length-1].substr(0,7);
                 vm.reportOption = {
                     title : {

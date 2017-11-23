@@ -224,7 +224,7 @@
         <div ng-if="!vm.isViewList">
             <div class="m-l m-r  panel panel-default">
                 <div class="container-grid inline" ng-class="'container-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.items">
-                    <div class="title">ID {{item.deviceid}}</div>
+                    <div class="title">ID {{item.deviceid.length > 16 ? item.deviceid.substr(item.deviceid.length-16,16) : item.deviceid}}</div>
                     <div ng-class="'container-label-'+(item.type.id%3+1)"></div>
                     <div class="type">{{item.type.box_type_name}}</div>
 

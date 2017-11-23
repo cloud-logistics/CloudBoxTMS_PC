@@ -35,8 +35,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="用户名" ng-model="vm.user.user_name"  ng-disabled = "!vm.isAdd">
+                               placeholder="用户名" ng-model="vm.user.user_name" name="user_name" ng-disabled = "!vm.isAdd" required>
                     </div>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_name.$invalid">请输入用户名，提交后无法更改</i></span>
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
 
@@ -44,8 +45,10 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">真实姓名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="真实姓名" ng-model="vm.user.user_real_name"  ng-disabled = "!vm.isAdd">
+                               placeholder="真实姓名" ng-model="vm.user.user_real_name" name="user_real_name" ng-disabled = "!vm.isAdd" required>
                     </div>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_real_name.$invalid">请输入真实姓名，提交后无法更改</i></span>
+
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
 
@@ -57,8 +60,10 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">密码</label>
                         <div class="col-sm-4">
                             <input class="form-control" type="password"
-                                   placeholder="密码" ng-model="vm.user.user_password"  required>
+                                   placeholder="密码" ng-model="vm.user.user_password"  name="user_password" ng-minlength="5" required>
                         </div>
+                        <span class="blank-tips" ><i>* </i><i ng-show="form.user_password.$invalid">请输入密码，长度至少为5位</i></span>
+
                 </div>
                 <div  ng-if="vm.isAdd" class="line line-dashed b-b line-lg"></div>
 
@@ -79,12 +84,16 @@
 
 
                         </div>
-                        <input class="form-control" type="text" style="margin-bottom:10px;"
-                               placeholder="图片" ng-model="vm.user.avatar_url" ng-disabled="vm.isDetail" >
+                        <input class="form-control" type="url" style="margin-bottom:10px;"
+                               placeholder="图片" ng-model="vm.user.avatar_url" name="avatar_url" ng-disabled="vm.isDetail" required>
                         <div class="img-preview">
                             <img ng-src="{{vm.user.avatar_url}}" alt="">
                         </div>
+
+
                     </div>
+                    <span class="blank-tips pic-blank-tips" ><i>* </i><i ng-show="form.avatar_url.$invalid">请输入合法的头像路径</i></span>
+
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -124,8 +133,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">联系电话</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="联系电话" ng-model="vm.user.user_phone" ng-disabled="vm.isDetail">
+                               placeholder="联系电话" ng-model="vm.user.user_phone" name="user_phone" ng-pattern="/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/" ng-disabled="vm.isDetail">
                     </div>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_phone.$invalid">请输入合法的联系电话</i></span>
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -135,9 +145,10 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">邮箱</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text"
-                               placeholder="邮箱" ng-model="vm.user.user_email" ng-disabled="vm.isDetail">
+                        <input class="form-control" type="email"
+                               placeholder="邮箱" ng-model="vm.user.user_email" name="user_email" ng-disabled="vm.isDetail">
                     </div>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_email.$invalid">请输入合法的企业邮箱</i></span>
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
@@ -146,9 +157,11 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">所属企业</label>
                     <div class="col-sm-4">
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail" ></select>
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" name="enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail" required></select>
 
                     </div>
+
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_id.$invalid">请选择所属企业</i></span>
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
