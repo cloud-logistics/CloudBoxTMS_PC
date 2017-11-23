@@ -9,5 +9,4 @@ lint/
 bower_components/
 build/
 dist/
-.idea/
 version.txt

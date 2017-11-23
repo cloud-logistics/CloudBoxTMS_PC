@@ -20,19 +20,19 @@
 
 
 
-        <div class="panel panel-default m-l m-r m-t">
+        <div class="panel panel-default m-l m-r m-t" >
 
             <div class="panel-heading">
                 <h3 class="panel-title">公司信息</h3>
             </div>
             <br/>
-            <form name="form" class="form-horizontal form-validation" role="form">
+            <form name="form" class="form-horizontal form-validation" role="form" >
 
 
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业名称</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text"
+                            <input ng-keypress="vm.onKeyUp($event)" ng-keyup="vm.onKeyUp($event)" ng-keydown="vm.onKeyUp($event)" class="form-control" type="text"
                                    placeholder="公司名称" name="enterprise_name" ng-model="vm.user.enterprise_name"  required>
                         </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_name.$invalid">请输入企业名称</i></span>
@@ -217,7 +217,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-3">
-                        <button ng-if="!vm.isDetail" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()"> <i class="fa fa-ban text-danger"></i>取消 </button>
+                        <button ng-if="!vm.isDetail" type="button" class="btn btn-default btn-sm m-l-lg btn-addon bg-light" ng-click="vm.backAction()" > <i class="fa fa-ban text-danger"></i>取消 </button>
                         <button ng-if="!vm.isDetail" class="btn btn-sm btn-info btn-addon" type="submit" ng-click="vm.submitAction()" ng-disabled='form.$invalid'> <i class="fa fa-check-circle"></i>确认 </button>
                         <button ng-if="vm.isDetail" ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>返回</button>
 

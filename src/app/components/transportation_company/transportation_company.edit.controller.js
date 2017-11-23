@@ -90,6 +90,16 @@
 
         vm.uploadFilePath = 'rentservice/upload';
 
+
+        vm.onKeyUp = function(e){
+            /*var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                vm.goSearch();
+            }*/
+            var keycode = window.event?e.keyCode:e.which;
+            console.log(keycode);
+        }
+
         vm.uploadFile = function (){
             vm.showSpinner = true;
             NetworkService.putFile(vm.uploadFilePath + '/' + vm.myUploadFile.name,vm.myUploadFile,function (response) {

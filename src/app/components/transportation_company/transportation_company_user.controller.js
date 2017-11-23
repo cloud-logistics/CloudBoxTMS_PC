@@ -65,6 +65,8 @@
         console.log(vm.enterprise_id);
         vm.OperApp = OperApp;
         vm.limit = 10;
+        vm.searchItem = '';
+        vm.isSearch = false;
         function OperApp(index, item) {
             /*if(index == 3){
 
@@ -92,17 +94,39 @@
 
         function goSearch() {
             console.log(vm.searchItem);
-        };
-
-        function getDatas() {
-
-            NetworkService.get(vm.getBasePath+'/enterprise/'+vm.enterprise_id,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+            vm.isSearch = true;
+           // http://127.0.0.1:8000/container/api/v1/cloudbox/rentservice/enterprise/enterpriseinfo/userfuzzy
+            var param = {
+                "keyword":vm.searchItem,
+                "enterprise_id":vm.enterprise_id
+            }
+            NetworkService.post('rentservice/enterprise/enterpriseinfo/userfuzzy?'+'limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),param,function (response) {
                 vm.items = response.data.results;
                 vm.displayedCollection = (vm.items);
                 //vm.displayedCollection = [].concat(vm.items);
+                updatePagination(response.data);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
+        };
+
+        function getDatas() {
+            if(vm.isSearch){
+                vm.goSearch();
+            }else {
+
+                NetworkService.get(vm.getBasePath + '/enterprise/' + vm.enterprise_id, {
+                    limit: vm.limit,
+                    offset: (vm.pageCurrent - 1) * vm.limit
+                }, function (response) {
+                    vm.items = response.data.results;
+                    vm.displayedCollection = (vm.items);
+                    //vm.displayedCollection = [].concat(vm.items);
+                    updatePagination(response.data);
+                }, function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
+            }
         }
 
 
