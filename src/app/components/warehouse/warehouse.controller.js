@@ -146,11 +146,12 @@
             vm.isSearch = true;
             console.log(vm.searchWarehouse);
             var params = {
-                site_name:vm.searchWarehouse,
+                site_name:vm.searchWarehouse
+                /*,
                 limit:vm.limit,
-                offset:(vm.pageCurrent - 1) * vm.limit
+                offset:(vm.pageCurrent - 1) * vm.limit*/
             }
-            NetworkService.post('rentservice/site/filter',params,function (response) {
+            NetworkService.post('rentservice/site/filter?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
                 vm.processDatas(response);
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';

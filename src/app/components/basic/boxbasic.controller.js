@@ -206,14 +206,12 @@
 
 
 
-            NetworkService.post(vm.getBasePath,{
+            NetworkService.post(vm.getBasePath+'?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),{
                 "province_id":0,
                 "city_id":0,
                 "site_id":0,
                 "ava_flag":"",
-                "box_id":"",
-                limit:vm.limit,
-                offset:(vm.pageCurrent - 1) * vm.limit,
+                "box_id":""
 
             },function (response) {
                 vm.items = response.data.results;

@@ -251,8 +251,9 @@
                         title: '',  // 信息窗口标题
                         background: '#122341'
                     };
-
-                    var infoWindow = new BMap.InfoWindow('RFID ' + vm.user.tid + '<br />' + '使用人 ' + '大货运公司' + '<br />' + '当前位置：' + vm.user.siteinfo.location + '<br />', opts);  // 创建信息窗口对象
+                    var infoWindow;
+                   // if()
+                     infoWindow = new BMap.InfoWindow('RFID ' + vm.user.tid + '<br />' + '所在仓库：' + vm.user.siteinfo.name + '<br />' + '当前位置：' + vm.user.siteinfo.location + '<br />', opts);  // 创建信息窗口对象
                     infoWindow.addEventListener("close", function () {
                     });
                     map.openInfoWindow(infoWindow, point);
