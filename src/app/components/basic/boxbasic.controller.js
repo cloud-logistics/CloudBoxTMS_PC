@@ -7,7 +7,7 @@
     angular.module('smart_container').controller('BoxBasicController', BoxBasicController);
 
     /** @ngInject */
-    function BoxBasicController(constdata, NetworkService, $stateParams, ApiServer, toastr, $state, $timeout, $interval, $scope, optionsTransFunc) {
+    function BoxBasicController(constdata,StorageService, NetworkService, $stateParams, ApiServer, toastr, $state, $timeout, $interval, $scope, optionsTransFunc) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -43,9 +43,26 @@
 
 
         vm.isViewList = false;
+        vm.infoKey = 'container.info';
+        vm.storeInfo = {
+            isViewList:vm.isViewList
+        }
+
+        if(StorageService.get(vm.infoKey) == null){
+            StorageService.put(vm.infoKey, vm.storeInfo, 24 * 3 * 60 * 60);
+        }
+        vm.storeInfo = StorageService.get(vm.infoKey);
+        vm.isViewList = vm.storeInfo.isViewList;
+
+
+
+
         vm.selList = function (isList) {
             vm.isViewList = isList;
-            console.log('dd');
+            vm.storeInfo = {
+                isViewList:vm.isViewList
+            }
+            StorageService.put(vm.infoKey, vm.storeInfo, 24 * 3 * 60 * 60);
 
         }
 

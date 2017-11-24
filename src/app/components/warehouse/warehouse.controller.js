@@ -64,11 +64,29 @@
             true:'bg-selected',
             false:'bg-unselected'
         };
+
+
         vm.isViewList = false;
+        vm.infoKey = 'warehouse.info';
+        vm.storeInfo = {
+            isViewList:vm.isViewList
+        }
+
+        if(StorageService.get(vm.infoKey) == null){
+            StorageService.put(vm.infoKey, vm.storeInfo, 24 * 3 * 60 * 60);
+        }
+        vm.storeInfo = StorageService.get(vm.infoKey);
+        vm.isViewList = vm.storeInfo.isViewList;
+
+
         vm.OperApp = OperApp;
         vm.selList = function (isList) {
             vm.isViewList = isList;
-            console.log('dd');
+            vm.storeInfo = {
+                isViewList:vm.isViewList
+            }
+            StorageService.put(vm.infoKey, vm.storeInfo, 24 * 3 * 60 * 60);
+
 
         }
         vm.enterEvent = function(e){
@@ -111,19 +129,19 @@
                 if(vm.items[i].box_num != null && vm.items[i].box_num.length > 0) {
                     for (var j = 0; j < vm.items[i].box_num.length; j++) {
                         if (vm.items[i].box_num[j].box_type.id == 1) {
-                            vm.items[i].freezerBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
-                            vm.items[i].freezerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].freezerBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].freezerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;
                         } else if (vm.items[i].box_num[j].box_type.id == 2) {
-                            vm.items[i].coolerBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
-                            vm.items[i].coolerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].coolerBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].coolerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num -  vm.items[i].box_num[j].reserve_num;
 
                         } else if (vm.items[i].box_num[j].box_type.id == 3) {
-                            vm.items[i].medicalBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
-                            vm.items[i].medicalBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].medicalBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].medicalBoxInfo.availableNum = vm.items[i].box_num[j].ava_num -  vm.items[i].box_num[j].reserve_num;;
 
                         } else if (vm.items[i].box_num[j].box_type.id == 4) {
-                            vm.items[i].ordinaryBoxInfo.allNum = vm.items[i].box_num[j].ava_num + vm.items[i].box_num[j].reserve_num;
-                            vm.items[i].ordinaryBoxInfo.availableNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].ordinaryBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].ordinaryBoxInfo.availableNum = vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;;
                         }
                     }
                 }

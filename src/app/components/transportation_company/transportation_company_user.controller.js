@@ -59,8 +59,20 @@
             'rentadmin':'企业管理员',
             'rentuser':'企业用户'
         };
-        vm.enterprise_id = $stateParams.args.enterprise_id;
-        vm.enterprise_name = $stateParams.args.enterprise_name;
+
+        vm.infoKey = 'all.info';
+
+        if($stateParams.args.enterprise_id != null){
+            var entInfo = {
+                enterprise_id:$stateParams.args.enterprise_id,
+                enterprise_name:$stateParams.args.enterprise_name
+            }
+            StorageService.put(vm.infoKey, entInfo, 24 * 3 * 60 * 60);
+        }
+        var storeInfo = StorageService.get(vm.infoKey);
+        vm.enterprise_id = storeInfo.enterprise_id;
+        vm.enterprise_name = storeInfo.enterprise_name;
+
 
         console.log(vm.enterprise_id);
         vm.OperApp = OperApp;

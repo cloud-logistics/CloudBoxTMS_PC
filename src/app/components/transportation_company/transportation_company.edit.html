@@ -101,7 +101,7 @@
 
                         </div>
                         <input class="form-control" type="url" style="margin-bottom:10px;"
-                               placeholder="图片" ng-model="vm.user.enterprise_license_id_url" name="enterprise_license_id_url" ng-disabled="vm.isDetail" required>
+                               placeholder="例如：http://www.abc.com/a.png" ng-model="vm.user.enterprise_license_id_url" name="enterprise_license_id_url" ng-disabled="vm.isDetail" required>
 
                         <div class="img-preview">
                             <img ng-src="{{vm.user.enterprise_license_id_url}}" alt="">
@@ -137,7 +137,7 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业押金</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="number"
+                        <input class="form-control" type="number" min="0"
                                placeholder="企业押金" ng-model="vm.user.enterprise_deposit" name="enterprise_deposit"  ng-disabled="vm.isDetail" maxlength=10  required>
                     </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_deposit.$invalid">请输入押金数额</i></span>
@@ -149,7 +149,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业邮箱</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="email"
-                               placeholder="企业邮箱" ng-model="vm.user.enterprise_email" name="enterprise_email"  ng-disabled="vm.isDetail" required>
+                               placeholder="例如：test@example.com" ng-model="vm.user.enterprise_email" name="enterprise_email"  ng-disabled="vm.isDetail" required>
                     </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_email.$invalid">请输入合法的企业邮箱</i></span>
                 </div>
@@ -162,7 +162,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业网址</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="url"
-                               placeholder="企业网址" ng-model="vm.user.enterprise_url" name = "enterprise_url" ng-disabled="vm.isDetail" required>
+                               placeholder="例如：http://www.abc.com" ng-model="vm.user.enterprise_url" name = "enterprise_url" ng-disabled="vm.isDetail" required>
                     </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_url.$invalid">请输入合法的企业网址</i></span>
                 </div>

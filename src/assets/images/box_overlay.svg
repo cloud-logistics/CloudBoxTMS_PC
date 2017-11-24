@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>箱子 copy 8</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-33.0%" y="-187.2%" width="166.1%" height="474.3%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="3.74330357" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <filter x="-33.0%" y="-187.2%" width="166.1%" height="474.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="3.74330357" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <linearGradient x1="13.6697974%" y1="16.7500982%" x2="100%" y2="88.4545024%" id="linearGradient-3">
+            <stop stop-color="#8BC2FF" offset="0%"></stop>
+            <stop stop-color="#2D9DFF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M17.3975585,37.0204496 L0.922574739,29.3138217 L0.922574739,10.0248371 L17.3975585,18.2481922 L17.3975585,37.0204496 Z M19.4505663,18.1904079 L35.888286,9.98849088 L35.888286,28.3669553 L19.4505663,36.9621591 L19.4505663,18.1904079 Z M2.13525885,8.46290001 L18.4240624,0 L34.6743915,8.37319842 L18.4240624,16.6760563 L2.13525885,8.46290001 Z" id="path-4"></path>
+        <filter x="-22.9%" y="-16.2%" width="145.8%" height="143.2%" filterUnits="objectBoundingBox" id="filter-5">
+            <feMorphology radius="1" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="云箱管理-查看堆场" transform="translate(-849.000000, -401.000000)">
+            <g id="方案地图" transform="translate(271.000000, 79.000000)">
+                <g id="信息">
+                    <g id="箱子-copy-8" transform="translate(585.000000, 324.000000)">
+                        <ellipse id="Oval-3" fill="#FBFCFF" filter="url(#filter-1)" cx="18" cy="36" rx="17" ry="3"></ellipse>
+                        <ellipse id="Oval-3-Copy" fill="#0035FF" filter="url(#filter-2)" cx="18" cy="36" rx="17" ry="3"></ellipse>
+                        <g id="Combined-Shape">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                            <use fill="url(#linearGradient-3)" fill-rule="evenodd" xlink:href="#path-4"></use>
+                            <path stroke="#FFFFFF" stroke-width="1" d="M17.8975585,37.8063383 L0.422574739,29.6319329 L0.422574739,9.21644091 L17.8975585,17.938938 L17.8975585,37.8063383 Z M18.9505663,17.8811058 L36.388286,9.18021954 L36.388286,28.6697372 L18.9505663,37.7878361 L18.9505663,17.8811058 Z M1.03792593,8.46956576 L18.4231099,-0.562962195 L35.7696526,8.37507486 L18.4255591,17.236775 L1.03792593,8.46956576 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -184,102 +184,6 @@
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
-            /*vm.warehouseHistory = [
-                {
-                    date:'2017-11-06',
-                    inputAll:5,
-                    outputAll:3,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-05',
-                    inputAll:5,
-                    outputAll:3,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-04',
-                    inputAll:5,
-                    outputAll:3,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-03',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-02',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-11-01',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                },
-                {
-                    date:'2017-10-30',
-                    inputAll:15,
-                    outputAll:13,
-                    inputFreezer:5,
-                    outputFreezer:3,
-                    inputCooler:5,
-                    outputCooler:3,
-                    inputMedical:5,
-                    outputMedical:3,
-                    inputOrdinary:5,
-                    outputOrdinary:3
-                }
-
-
-
-            ]*/
 
         };
 
@@ -300,15 +204,80 @@
 
 
 
+        function SquareOverlay(center, length, color){
+            this._center = center;
+            this._length = length;
+            this._color = color;
+        }
+// 继承API的BMap.Overlay
+        SquareOverlay.prototype = new BMap.Overlay();
+
+
+        SquareOverlay.prototype.initialize = function(map){
+            // 保存map对象实例
+            this._map = map;
+            // 创建div元素，作为自定义覆盖物的容器
+            var div = document.createElement("div");
+            div.style.position = "absolute";
+            // 可以根据参数设置元素外观
+            div.style.width = this._length + "px";
+            div.style.height = this._length + "px";
+            div.style.backgroundImage = 'url(../images/icon_warehouse_bd.svg)';
+            div.style.backgroundSize='cover';
+            // 将div添加到覆盖物容器中
+            map.getPanes().markerPane.appendChild(div);
+            // 保存div实例
+            this._div = div;
+            // 需要将div元素作为方法的返回值，当调用该覆盖物的show、
+            // hide方法，或者对覆盖物进行移除时，API都将操作此元素。
+            return div;
+        }
+
+
+        // 实现绘制方法
+        SquareOverlay.prototype.draw = function(){
+// 根据地理坐标转换为像素坐标，并设置给容器
+            var position = this._map.pointToOverlayPixel(this._center);
+            this._div.style.left = position.x - this._length / 2 + "px";
+            this._div.style.top = position.y - this._length / 2 + "px";
+        }
+
+
+        // 实现显示方法
+        SquareOverlay.prototype.show = function(){
+            if (this._div){
+                this._div.style.display = "";
+            }
+        }
+// 实现隐藏方法
+        SquareOverlay.prototype.hide = function(){
+            if (this._div){
+                this._div.style.display = "none";
+            }
+        }
+
+
+        SquareOverlay.prototype.addEventListener = function(event,fun){
+            console.log(this._div);
+            this._div['on'+event] = fun;
+        }
+
+
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data.site_info;
                 var point = new BMap.Point(vm.user.longitude, vm.user.latitude);  // 创建点坐标
-                var marker = new BMap.Marker(point);        // 创建标注
+                /*var marker = new BMap.Marker(point);        // 创建标注
                 marker.addEventListener("click", function(){
                     showInfo();
                 });
-                map.addOverlay(marker);
+                map.addOverlay(marker);*/
+
+                var mySquare = new SquareOverlay(point, 59, "red");
+                map.addOverlay(mySquare);
+                mySquare.addEventListener("click", showInfo);
+
+
 
                 var disPoint = new BMap.Point(vm.user.longitude, parseFloat(vm.user.latitude) + 10);
                 map.centerAndZoom(disPoint, 10);
@@ -369,19 +338,19 @@
                 if(vm.allInfo.box_counts && vm.allInfo.box_counts.length > 0) {
                     for (var j = 0; j < vm.allInfo.box_counts.length; j++) {
                         if (vm.allInfo.box_counts[j].box_type.id == 1) {
-                            vm.user.freezerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
-                            vm.user.freezerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.freezerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.freezerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
                         } else if (vm.allInfo.box_counts[j].box_type.id == 2) {
-                            vm.user.coolerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
-                            vm.user.coolerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.coolerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.coolerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
 
                         } else if (vm.allInfo.box_counts[j].box_type.id == 3) {
-                            vm.user.medicalBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
-                            vm.user.medicalBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.medicalBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.medicalBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
 
                         } else if (vm.allInfo.box_counts[j].box_type.id == 4) {
-                            vm.user.ordinaryBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num + vm.allInfo.box_counts[j].reserve_num;
-                            vm.user.ordinaryBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.ordinaryBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.ordinaryBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
                         }
                     }
                 }

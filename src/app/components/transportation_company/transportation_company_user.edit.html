@@ -85,7 +85,7 @@
 
                         </div>
                         <input class="form-control" type="url" style="margin-bottom:10px;"
-                               placeholder="图片" ng-model="vm.user.avatar_url" name="avatar_url" ng-disabled="vm.isDetail" required>
+                               placeholder="例如：http://www.abc.com/a.png" ng-model="vm.user.avatar_url" name="avatar_url" ng-disabled="vm.isDetail" required>
                         <div class="img-preview">
                             <img ng-src="{{vm.user.avatar_url}}" alt="">
                         </div>
@@ -146,9 +146,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">邮箱</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="email"
-                               placeholder="邮箱" ng-model="vm.user.user_email" name="user_email" ng-disabled="vm.isDetail">
+                               placeholder="例如：test@example.com" ng-model="vm.user.user_email" name="user_email" ng-disabled="vm.isDetail">
                     </div>
-                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_email.$invalid">请输入合法的企业邮箱</i></span>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_email.$invalid">请输入合法的邮箱</i></span>
 
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>

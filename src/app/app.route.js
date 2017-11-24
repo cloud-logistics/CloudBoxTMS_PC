@@ -171,6 +171,10 @@
                 url: 'profile',
                 templateUrl: 'app/components/profile/profile.html'
             })
+            .state('app.config', {
+                url: 'config',
+                templateUrl: 'app/components/config/config.html'
+            })
             .state('app.company', {
                 url: 'regular/company?type',
                 templateUrl: 'app/components/company/company.html'

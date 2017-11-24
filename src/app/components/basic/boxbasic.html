@@ -229,8 +229,8 @@
                     <div class="type">{{item.type.box_type_name}}</div>
 
                     <div class="status" ng-class="'status-bg-color-'+item.curStatus"><span>{{vm.containerStatusSpec[item.curStatus]}}</span></div>
-                    <div class="rfid">RFID {{item.tid}}</div>
-                    <div class="location">{{item.siteinfo.location}}</div>
+                    <div class="rfid">RFID {{item.tid.length > 16 ? item.tid.substr(0,16)+'...' : item.tid}}</div>
+                    <div class="location">{{item.siteinfo.name.length > 10 ? item.siteinfo.name.substr(0,10)+'...':item.siteinfo.name}}</div>
 
                 </div>
             </div>

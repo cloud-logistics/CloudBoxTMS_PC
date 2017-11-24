@@ -111,7 +111,8 @@
         vm.searchProvince = 1;
         vm.searchCity = 1;
         vm.searchWarehouse = 1;
-
+        vm.isSearch = false;
+        vm.searchItem = '';
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
@@ -120,17 +121,15 @@
         }
 
         vm.goSearch = function(){
+            vm.isSearch = true;
             console.log(vm.searchItem);
 
 
+            var params = {
+                keyword:vm.searchItem
+            };
 
-
-        }
-
-
-        function getDatas() {
-           //http://106.2.20.185:8000/container/api/v1/cloudbox/rentservice/boxbill/realtimebill
-            NetworkService.get('rentservice/boxbill/realtimebill',{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+            NetworkService.post('rentservice/boxbill/filtertotalbill?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
                 vm.itemsTmp = response.data.results;
                 updatePagination(response.data);
                 vm.items = [];
@@ -148,6 +147,40 @@
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
+
+
+
+
+        }
+
+
+        function getDatas() {
+            if(vm.isSearch){
+                vm.goSearch();
+            }else {
+                //http://106.2.20.185:8000/container/api/v1/cloudbox/rentservice/boxbill/realtimebill
+                NetworkService.get('rentservice/boxbill/realtimebill', {
+                    limit: vm.limit,
+                    offset: (vm.pageCurrent - 1) * vm.limit
+                }, function (response) {
+                    vm.itemsTmp = response.data.results;
+                    updatePagination(response.data);
+                    vm.items = [];
+                    if (vm.itemsTmp != null && vm.itemsTmp.length > 0) {
+                        for (var i = 0; i < vm.itemsTmp.length; i++) {
+                            vm.items[i] = {};
+                            vm.items[i].id = vm.itemsTmp[i].enterprise_id;
+                            vm.items[i].enterpriseName = vm.itemsTmp[i].enterprise_name;
+                            vm.items[i].usingContainerNum = vm.itemsTmp[i].off_num;
+                            vm.items[i].usedContainerNum = vm.itemsTmp[i].on_num;
+                            vm.items[i].amount = vm.itemsTmp[i].fee;
+                        }
+                    }
+
+                }, function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
+            }
 
         }
 
