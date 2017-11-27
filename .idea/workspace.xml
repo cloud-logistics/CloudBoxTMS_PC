@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f54e1b1d-f388-4121-95d0-34cfa81254d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.module.js" afterPath="$PROJECT_DIR$/src/app/app.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/common/services/api.service.js" afterPath="$PROJECT_DIR$/src/app/common/services/api.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" afterPath="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/basic/boxbasic.edit.controller.js" afterPath="$PROJECT_DIR$/src/app/components/basic/boxbasic.edit.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/config/config.controller.js" afterPath="$PROJECT_DIR$/src/app/components/config/config.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/config/config.html" afterPath="$PROJECT_DIR$/src/app/components/config/config.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/profile/profile.html" afterPath="$PROJECT_DIR$/src/app/components/profile/profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/signin/signin.controller.js" afterPath="$PROJECT_DIR$/src/app/components/signin/signin.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" afterPath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.edit.controller.js" afterPath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.edit.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/main/blocks/nav.html" afterPath="$PROJECT_DIR$/src/app/main/blocks/nav.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/styles/less/app.less" afterPath="$PROJECT_DIR$/src/assets/styles/less/app.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version.txt" afterPath="$PROJECT_DIR$/version.txt" />
     </list>
     <ignored path="operation_platform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="config.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/components/config/config.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="50" column="54" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
+            <state relative-caret-position="254">
+              <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
               <folding />
             </state>
           </provider>
@@ -76,7 +62,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signin.controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="signin.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/components/signin/signin.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
@@ -195,13 +181,13 @@
         <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
         <option value="$PROJECT_DIR$/src/app/main/blocks/nav.html" />
         <option value="$PROJECT_DIR$/src/assets/styles/less/app.less" />
-        <option value="$PROJECT_DIR$/src/app/components/config/config.html" />
         <option value="$PROJECT_DIR$/src/app/components/config/config.controller.js" />
         <option value="$PROJECT_DIR$/src/assets/styles/less/config.less" />
         <option value="$PROJECT_DIR$/src/app/app.module.js" />
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/src/app/common/services/api.service.js" />
         <option value="$PROJECT_DIR$/src/app/components/signin/signin.controller.js" />
+        <option value="$PROJECT_DIR$/src/app/components/config/config.html" />
       </list>
     </option>
   </component>
@@ -550,12 +536,12 @@
       <workItem from="1510823934238" duration="6351000" />
       <workItem from="1511141431531" duration="74382000" />
       <workItem from="1511747416121" duration="2649000" />
-      <workItem from="1511752657384" duration="10658000" />
+      <workItem from="1511752657384" duration="10925000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="315392000" />
+    <option name="totallyTimeSpent" value="315659000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="23" width="1440" height="790" extended-state="0" />
@@ -917,14 +903,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/config/config.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="50" column="54" selection-start-line="50" selection-start-column="54" selection-end-line="50" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/basic/boxbasic.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -985,6 +963,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="42" column="58" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/config/config.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="47" column="96" selection-start-line="47" selection-start-column="96" selection-end-line="47" selection-end-column="96" />
           <folding />
         </state>
       </provider>

@@ -45,7 +45,7 @@
 
                                         <label class="col-sm-1 control-label m-l-lg font-bold">{{item.box_type_name}}</label>
 
-                                            <input class="form-control input-edit" type="number"
+                                            <input class="form-control input-edit" type="number" min="0"
                                                    placeholder="{{item.box_type_name}}费率" ng-model="item.price" ng-disabled="!item.isEdit">
 
                                             <span>元/小时</span>
