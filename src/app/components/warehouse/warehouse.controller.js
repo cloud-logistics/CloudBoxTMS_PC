@@ -155,6 +155,7 @@
                 }
             }
             vm.displayedCollection = (vm.items);
+
             updatePagination(response.data);
         };
 

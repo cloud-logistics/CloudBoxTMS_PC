@@ -31,7 +31,8 @@
             'w5c.validator',
             'datePicker',
             'moment-picker',
-            'angularSpinner'
+            'angularSpinner',
+             'angular-md5'
 
     ]);
 

@@ -45,6 +45,7 @@
     "w5c-validator": "angular-w5c-validator#^2.4.21",
     "angular-datepicker": "^2.0.3",
     "angular-moment-picker": "moment-picker#^0.10.1",
+    "angular-md5": "^0.1.10",
     "angular-spinner": "^1.0.1"
   },
   "devDependencies": {

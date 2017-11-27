@@ -7,7 +7,7 @@
     <div class="tab-platform">
         <span us-spinner spinner-on="vm.showSpinner"></span>
 
-        <div >
+        <div class="config">
 
             <ul>
                 <li ng-repeat="tab in vm.tabItem">
@@ -22,185 +22,47 @@
                 <div class="plat-mgr" ng-show="vm.tabItem[0].active">
 
 
+
+
+
+
                         <div class="panel panel-default m-l m-r ">
-
-
                             <br/>
 
 
                             <form name="form" class="form-horizontal form-validation" role="form">
 
-                                <div  class="form-group">
-                                    <label class="col-sm-1 control-label m-l-lg font-bold">名称</label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" type="text"
-                                               placeholder="名称" ng-model="vm.user.location"  required>
-                                    </div>
-                                </div>
-                                <div  class="line line-dashed b-b line-lg"></div>
 
 
-                                <div class = "map-panel" style="">
+
+
+
                                     <div  class="form-group">
-                                        <div class="zone-title">位置信息</div>
+                                        <div class="zone-title">费率设置</div>
                                     </div>
+                                <div class="" ng-repeat="item in vm.containerItems">
                                     <div class="form-group">
 
-                                        <label class="col-sm-1 control-label m-l-lg font-bold">国家</label>
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="text"
-                                                   placeholder="国家" ng-model="vm.user.city.nation_name" ng-disabled="vm.isDetail">
-                                        </div>
-                                        <label class="col-sm-1 control-label m-l-lg font-bold">省份</label>
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="text"
-                                                   placeholder="省份" ng-model="vm.user.city.state_name" ng-disabled="vm.isDetail">
-                                        </div>
+                                        <label class="col-sm-1 control-label m-l-lg font-bold">{{item.box_type_name}}</label>
 
-                                        <label class="col-sm-1 control-label m-l-lg font-bold">城市</label>
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="text"
-                                                   placeholder="城市" ng-model="vm.user.city.city_name" ng-disabled="vm.isDetail">
-                                        </div>
+                                            <input class="form-control input-edit" type="number"
+                                                   placeholder="{{item.box_type_name}}费率" ng-model="item.price" ng-disabled="!item.isEdit">
 
-                                    </div>
-
-                                </div>
-                                <div  class="line line-dashed b-b line-lg"></div>
+                                            <span>元/小时</span>
 
 
+                                        <button ng-disabled="!item.isEdit" class="btn btn-cancel" ng-click="vm.cancel(item)"> 取消 </button>
+                                        <button class="btn btn-edit" type="submit" ng-click="vm.edit(item)" ng-disabled='form.$invalid'> {{item.editTitle}}</button>
 
-
-
-
-
-                                <div class = "map-panel" style="">
-                                    <div  class="form-group">
-                                        <div class="zone-title">坐标</div>
-                                    </div>
-                                    <div  class="form-group" style="">
-
-                                        <label class="col-sm-1 control-label m-l-lg font-bold">经度</label>
-
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="text"
-                                                   placeholder="经度" ng-model="vm.user.longitude" ng-disabled="vm.isDetail">
-                                        </div>
-
-                                        <label class="col-sm-1 control-label m-l-lg font-bold">纬度</label>
-                                        <div class="col-sm-2">
-                                            <input class="form-control" type="text"
-                                                   placeholder="纬度" ng-model="vm.user.latitude" ng-disabled="vm.isDetail">
-                                        </div>
-                                    </div>
-
-
-
-
-                                    <div  class="form-group">
-                                        <label class="col-sm-1 control-label m-l-lg font-bold">地图显示</label>
-                                        <div class="col-md-10">
-
-                                            <div >
-                                                <div id="map-div" style="height: 300px;width: 500px;"></div>
-                                            </div>
-
-                                        </div>
 
                                     </div>
                                 </div>
-
-
-                                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                                <div  class="form-group">
-                                    <label class="col-sm-1 control-label m-l-lg font-bold">仓库编码</label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" type="text"
-                                               placeholder="企业法人" ng-model="vm.user.site_code" ng-disabled="vm.isDetail">
-                                    </div>
-
-                                </div>
-                                <div  class="line line-dashed b-b line-lg"></div>
-
-
-
-                                <div ng-if="vm.isDetail" class="form-group">
-                                    <label class="col-sm-1 control-label m-l-lg font-bold">创建日期</label>
-                                    <div class="col-sm-4">
-                                        <input class="form-control" type="text"
-                                               placeholder="创建日期" ng-model="vm.user.register_time" ng-disabled="vm.isDetail" >
-                                    </div>
-
-                                </div>
-                                <div ng-if="vm.isDetail" class="line line-dashed b-b line-lg"></div>
-
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-1 col-sm-3">
-
-                                        <button ng-click="vm.backAction()" class="btn m-b-xs btn-sm btn-info btn-addon pull-left"><i class="glyphicon glyphicon-arrow-left"></i>返回</button>
-
-                                    </div>
-                                </div>
-
-
 
 
 
 
                             </form>
                         </div>
-
-                </div>
-
-                <div class="plat-mgr" ng-show="vm.tabItem[1].active">
-                    <div class="m-l m-r panel panel-default">
-                        <table  st-table="vm.warehouseHistory" st-safe-src="vm.warehouseHistory" class="table table-bordered table-striped table-hover bg-white text-center">
-                            <thead>
-                            <tr class="font-bold">
-                                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                                <th class="text-center">时间</th>
-                                <th class="text-center">总转入</th>
-                                <th class="text-center">总转出</th>
-                                <th class="text-center">冷藏箱转入</th>
-                                <th class="text-center">冷藏箱转出</th>
-                                <th class="text-center">冷冻箱转入</th>
-                                <th class="text-center">冷冻箱转出</th>
-                                <th class="text-center">医药箱转入</th>
-                                <th class="text-center">医药箱转出</th>
-                                <th class="text-center">普通箱转入</th>
-                                <th class="text-center">普通箱转出</th>
-                                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
-                            </tr>
-
-                            </thead>
-                            <tbody class="">
-
-                            <tr ng-repeat="item in vm.warehouseHistory">
-                                <td ng-click="vm.goDetail(item)">{{item.date}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputAll}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputAll}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputFreezer}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputFreezer}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputCooler}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputCooler}}</td>
-
-                                <td ng-click="vm.goDetail(item)">{{item.inputMedical}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputMedical}}</td>
-
-                                <td ng-click="vm.goDetail(item)">{{item.inputOrdinary}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputOrdinary}}</td>
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-                    </div>
 
                 </div>
 

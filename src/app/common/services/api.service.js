@@ -375,7 +375,7 @@
 
         function userLogin(param,successHandler,failedHandler) {
             console.log("user login");
-            NetworkService.post(constdata.api.auth, param,successHandler,failedHandler);
+            NetworkService.post(constdata.api.auth+'salt', param,successHandler,failedHandler);
         }
         function userRefresh(successHandler,failedHandler) {
             NetworkService.put(constdata.api.user + '/session/refresh',null,successHandler,failedHandler);

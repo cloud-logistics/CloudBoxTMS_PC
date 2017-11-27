@@ -132,8 +132,8 @@
         vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
 
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:18});          // 创建地图实例
-        map.enableScrollWheelZoom(true);
-        map.enableDragging();
+        //map.enableScrollWheelZoom(true);
+        //map.enableDragging();
 
         function getCointainerStat(){
 
@@ -249,7 +249,7 @@
             // 可以根据参数设置元素外观
             div.style.width = this._length + "px";
             div.style.height = this._length + "px";
-            div.style.backgroundImage = 'url(../images/box_overlay.svg)';
+            div.style.backgroundImage = 'url(images/box_overlay.svg)';
             div.style.backgroundSize='cover';
             // 将div添加到覆盖物容器中
             map.getPanes().markerPane.appendChild(div);

@@ -164,7 +164,7 @@
                 }
                 //console.log(response.data);
                 vm.displayedCollection = (vm.items);
-
+                //vm.targetPage = vm.pageCurrent = 1;
                 updatePagination(response.data);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
@@ -179,10 +179,16 @@
         {
             NetworkService.get(vm.getProvincePath,null,function (response) {
                 vm.provinceInfo = response.data;
+                vm.provinceInfo.unshift({
+                    nation:1,
+                    province_id:0,
+                    province_name:"所有",
+                    zip_code:"000000"
+                });
                 if(oper == 0) {
                     vm.searchProvince = vm.provinceInfo[0].province_id;
                 }
-                vm.updateCityList();
+                vm.updateCityList(0);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });
@@ -192,30 +198,67 @@
         vm.updateCityList = function(oper)
         {
             //vm.searchProvince;
+            console.log(vm.searchProvince);
+            if(vm.searchProvince != 0) {
 
-            NetworkService.get(vm.getCityPath + vm.searchProvince,null,function (response) {
-                vm.cityInfo = response.data;
-                if(oper == 0) {
+                console.log(vm.searchProvince);
+                NetworkService.get(vm.getCityPath + vm.searchProvince, null, function (response) {
+                    vm.cityInfo = response.data;
+                    if (oper == 0) {
+                        vm.searchCity = vm.cityInfo[0].id;
+                    }
+                    vm.updateWarehouseList(0);
+                }, function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
+            }else{
+                vm.cityInfo = [
+                    {
+                        nation:1,
+                        id:0,
+                        city_name:"所有"
+                    }
+
+                ];
+
+                if (oper == 0) {
+
                     vm.searchCity = vm.cityInfo[0].id;
                 }
                 vm.updateWarehouseList(0);
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
+            }
         }
 
         vm.updateWarehouseList = function (oper) {
 
 
+            if(vm.searchCity != 0) {
 
-            NetworkService.get(vm.getWarehousePath+vm.searchProvince+'/city/' + vm.searchCity,{limit:100, offset:0},function (response) {
-                vm.warehouseInfo = response.data.results;
-                if(oper == 0) {
+                console.log(vm.searchCity);
+                NetworkService.get(vm.getWarehousePath + vm.searchProvince + '/city/' + vm.searchCity, {
+                    limit: 100,
+                    offset: 0
+                }, function (response) {
+                    vm.warehouseInfo = response.data.results;
+                    if (oper == 0) {
+                        vm.searchWarehouse = vm.warehouseInfo[0].id;
+                    }
+                }, function (response) {
+                    toastr.error(response.status + ' ' + response.statusText);
+                });
+            }else{
+                vm.warehouseInfo = [
+                    {
+                        id:0,
+                        name:"所有"
+                    }
+
+                ];
+
+                if (oper == 0) {
                     vm.searchWarehouse = vm.warehouseInfo[0].id;
                 }
-            },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
-            });
+            }
 
 
         }
@@ -302,7 +345,7 @@
             vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
             vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
 
-
+            //vm.targetPage = vm.pageCurrent = 1;
             if (toalPages < 2){
                 vm.pages = ['1'];
             }else{
