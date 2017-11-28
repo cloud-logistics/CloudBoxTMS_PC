@@ -240,6 +240,13 @@
                     offset: 0
                 }, function (response) {
                     vm.warehouseInfo = response.data.results;
+                    if(vm.warehouseInfo && vm.warehouseInfo.length > 0) {
+                        for (var i = 0; i < vm.warehouseInfo.length; i++) {
+                            if (vm.warehouseInfo[i].name.length > 8) {
+                                vm.warehouseInfo[i].name = vm.warehouseInfo[i].name.substr(0, 8) + '...';
+                            }
+                        }
+                    }
                     if (oper == 0) {
                         vm.searchWarehouse = vm.warehouseInfo[0].id;
                     }
