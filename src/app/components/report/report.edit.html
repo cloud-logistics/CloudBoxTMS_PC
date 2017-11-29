@@ -15,9 +15,10 @@
                 </div>
 
 
-
-                <div class="report-chart"  e-chart e-data="vm.reportOption" >
-
+            <div ng-if="!vm.showChart" class="report-chart empty-tips">
+                <span>该企业暂无月报表统计数据</span>
+            </div>
+                <div ng-if="vm.showChart" class="report-chart"  e-chart e-data="vm.reportOption" >
                 </div>
 
                 <!--<div class="panel-body">

@@ -21,11 +21,12 @@ var _ = require('lodash');
 var intercept = require('gulp-intercept');
 // var lineReader = require('line-reader');
 var replace = require('gulp-replace-pro');
+var scp = require('gulp-scp2');
 var $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-var qiniu = require('gulp-qiniu');
+var qiniu = require('gulp-qiniu-upload');
 
 var revision = '_v' + conf.pkg.version;
 
@@ -422,14 +423,25 @@ gulp.task('dist', ['build:clean', 'build'], function () {
 
 });
 
+
+
+
+var replace_param = {};
+var cur_dist_file = 'LEAW.748.100.007.201711290755.zip';
 gulp.task('qiniu', function () {
-    fs.writeFileSync(conf.paths.tmp + '/tmp_path.txt', '');
+    //fs.writeFileSync(conf.paths.tmp + '/tmp_path.txt', '');
+    var cdn_url = 'http://ozv4m1lo0.bkt.clouddn.com/assets/cdn';
     return gulp.src([conf.paths.build + '/scripts/*.js', conf.paths.build + '/styles/*.css'])
         .pipe(intercept(function (file) {
-            fs.appendFileSync(conf.paths.tmp + '/tmp_path.txt', file.path + '\r');
-            // console.log('OLD CONTENT: ' + file.contents.toString() );
-            // file.contents = new Buffer( "Hello!!!" );
-            // console.log('NEW CONTENT: ' + file.contents.toString() );
+            //fs.appendFileSync(conf.paths.tmp + '/tmp_path.txt', file.path + '\r');
+            //return file;
+
+            console.log(file.path);
+            var tmp_arr = file.path.split('/');
+            var tmp_reverse = tmp_arr.reverse();
+            var refFile = tmp_reverse[1] + '/' + tmp_reverse[0];
+            replace_param[refFile] = cdn_url + '/' + tmp_reverse[0];
+            console.log(refFile+':'+cdn_url + '/' + tmp_reverse[0]);
             return file;
         }))
         .pipe(qiniu({
@@ -441,19 +453,15 @@ gulp.task('qiniu', function () {
             dir: 'assets/cdn',
             concurrent: 10
         }))
-})
+});
 
-gulp.task('cdn', function () {
-    var ver = require('../cdn.json');
-    var replace_param = {};
-    console.log('cdn is start...');
-    var cdn_url = `http://ozv4m1lo0.bkt.clouddn.com/assets/cdn`;
-    // read all lines:
+gulp.task('replace-cdn', function () {
+    console.log('replace-cdn is start...');
+    /*var replace_param = {};
 
+    var cdn_url = 'http://ozv4m1lo0.bkt.clouddn.com/assets/cdn';
     var text = fs.readFileSync(conf.paths.tmp + '/tmp_path.txt', 'utf8');
-
     var text_arr = text.split('\r');
-
     for (var i = 0; i < text_arr.length - 1; i++) {
         console.log(text_arr[i]);
         var tmp_arr = text_arr[i].split('/');
@@ -461,7 +469,7 @@ gulp.task('cdn', function () {
         var newline = tmp_reverse[1] + '/' + tmp_reverse[0];
         replace_param[newline] = cdn_url + '/' + tmp_reverse[0];
     }
-
+    */
     console.log('the param is ' + replace_param);
 
     gulp.src([conf.paths.build + '/index.html'])
@@ -469,4 +477,84 @@ gulp.task('cdn', function () {
         .pipe(gulp.dest(conf.paths.build));
 
 
-})
+});
+
+gulp.task('dist-zip', function (cb) {
+
+    var verFile = 'version.txt';
+    var date = new Date().toISOString().replace(/[^0-9]/g, '');
+
+    var y = date.substr(3, 1);
+    var w = getWeekNumber();
+    date = date.substr(0, 12);
+    var version = conf.buildName + "." + y + '' + w + '.100.' + '001.' + date;
+    var curVersion = version;
+
+    fs.readFile(verFile, 'utf8', function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        if (!err) {
+            var refVersion = data;
+            var refVerNo = refVersion.substr(13, 3);
+            var curVerNo = PrefixInteger(parseInt(refVerNo) + 1, 3);
+
+            curVersion = curVersion.substr(0, 13) + curVerNo + '.' + date;
+
+        }
+        console.log('Building version:' + curVersion);
+        fs.writeFile('version.txt', curVersion, function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+
+        cur_dist_file = curVersion + '.zip';
+
+        gulp.src(path.join(conf.paths.build, '/**/*'))
+            .pipe($.zip(cur_dist_file))
+            .pipe(gulp.dest(conf.paths.dist));
+        cb();
+
+    });
+
+});
+
+gulp.task('dist-scp', function (cb) {
+    console.log('uploading to dev....' + conf.paths.dist+'/'+cur_dist_file);
+    return gulp.src(conf.paths.dist+'/'+cur_dist_file)
+        .pipe(scp({
+            host: '106.2.20.186',
+            username: 'root',
+            password: 'txlqfdkpjs',
+            dest: '/usr/share/nginx/html/lease'
+        }))
+    .on('error', function(err) {
+        console.log(err);
+    });
+    //cb();
+
+
+    /*
+     .pipe(scp({
+     host: '106.2.20.185',
+     username: 'root',
+     password: 'pkzngmcxsf',
+     dest: '/usr/share/nginx/html/lease'
+     })).on('error', function(err) {
+     console.log(err);
+     });
+
+     console.log('uploading to prd....' + conf.paths.dist+'/'+cur_dist_file);
+     gulp.src(conf.paths.dist+'/'+cur_dist_file)*/
+});
+
+
+gulp.task('dist-cdn',  function(cb) {
+    runSequence(
+        'build',
+        'qiniu',
+        'replace-cdn',
+        'dist-zip',
+        cb);
+});

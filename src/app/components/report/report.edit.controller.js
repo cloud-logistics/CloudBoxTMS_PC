@@ -85,7 +85,7 @@
             'platinum':'铂金会员',
             'diamond':'钻石会员'
         };
-
+        vm.showChart = false;
         var type = $stateParams.args.type;
         var username = $stateParams.username;
         vm.refItem = $stateParams.args.data;
@@ -184,7 +184,7 @@
             var amount = [];
             var month = [];
             if(vm.userTmp != null && vm.userTmp.length > 0) {
-
+                vm.showChart = true;
                 for (var i = 0; i < vm.userTmp.length; i++) {
                     vm.user[i] = {};
                     vm.user[i].time = vm.userTmp[i].date.length > 7 ? vm.userTmp[i].date.substr(0, 7) : vm.userTmp[i].date;
@@ -200,78 +200,81 @@
                     amount.push(vm.user[i].amount);
                     month.push(vm.user[i].time);
                 }
-            }
-            if(month.length > 0) {
-                vm.selectedDate = month[month.length - 1].substr(0, 7);
-            }
-            console.log(vm.selectedDate);
+
+                if (month.length > 0) {
+                    vm.selectedDate = month[month.length - 1].substr(0, 7);
+                }
+                console.log(vm.selectedDate);
                 vm.reportOption = {
-                    title : {
-                        text : '历史记录',
-                        textStyle:{//标题内容的样式
-                            color:'#4668E7',//京东红
-                            fontStyle:'normal',//主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
-                            fontWeight:"bold",//可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
-                            fontFamily:"PingFangSC-Medium",//主题文字字体，默认微软雅黑
-                            fontSize:24//主题文字字体大小，默认为18px
+                    title: {
+                        text: '历史记录',
+                        textStyle: {//标题内容的样式
+                            color: '#4668E7',//京东红
+                            fontStyle: 'normal',//主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
+                            fontWeight: "bold",//可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
+                            fontFamily: "PingFangSC-Medium",//主题文字字体，默认微软雅黑
+                            fontSize: 24//主题文字字体大小，默认为18px
                         },
-                        textAlign:'left',//标题文本水平对齐方式，建议不要设置，就让他默认，想居中显示的话，建议往下看
-                        textBaseline:"top",//默认就好,垂直对齐方式,不要设置
-                        left:100
+                        textAlign: 'left',//标题文本水平对齐方式，建议不要设置，就让他默认，想居中显示的话，建议往下看
+                        textBaseline: "top",//默认就好,垂直对齐方式,不要设置
+                        left: 100
                     },
 
                     event: [
-                        {click:vm.onChart}
+                        {click: vm.onChart}
                     ],
-                    tooltip : {
-                        trigger : 'axis',
-                        showDelay : 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    tooltip: {
+                        trigger: 'axis',
+                        showDelay: 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                         }
                     },
                     legend: {
                         x: 'left',               // 水平安放位置，默认为全图居中，可选为：
                         y: 'bottom',
-                        data:['该月归还数', '该月金额'],
-                        left:100
+                        data: ['该月归还数', '该月金额'],
+                        left: 100
                     },
-                    xAxis : [{
-                        type : 'category',
-                        data : month,
-                        axisLabel:{
-                            textStyle:{
-                                color:"#222"
+                    xAxis: [{
+                        type: 'category',
+                        data: month,
+                        axisLabel: {
+                            textStyle: {
+                                color: "#222"
                             }
                         }
                     }],
-                    yAxis : [{
-                        type : 'value'
+                    yAxis: [{
+                        type: 'value'
                     },
                         {
-                            type : 'value',
+                            type: 'value',
                             //show: false
-                            splitLine:{
-                                show:false
+                            splitLine: {
+                                show: false
                             }
                         }],
-                    series : [
+                    series: [
                         {
-                            yAxisIndex:0,
-                            name:'该月归还数',
-                            type:'line',
-                            itemStyle : { normal: {color:'#b6a2de'}},
-                            data:containerNum
+                            yAxisIndex: 0,
+                            name: '该月归还数',
+                            type: 'line',
+                            itemStyle: {normal: {color: '#b6a2de'}},
+                            data: containerNum
                         },
                         {
-                            yAxisIndex:1,
-                            name:'该月金额',
-                            type:'bar',
-                            itemStyle : { normal: {color:'#2ec7c9'}},
-                            data:amount
+                            yAxisIndex: 1,
+                            name: '该月金额',
+                            type: 'bar',
+                            itemStyle: {normal: {color: '#2ec7c9'}},
+                            data: amount
                         }
                     ]
                 };
+
+
+            }
 
             vm.containerReportHistory = [];
             NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,null,function (response) {
