@@ -438,9 +438,7 @@ gulp.task('qiniu', function () {
             bucket: "uploads",
             private: false
         }, {
-            dir: 'assets/',
-            versioning: true,
-            versionFile: './cdn.json',
+            dir: 'assets/cdn',
             concurrent: 10
         }))
 })
@@ -449,7 +447,7 @@ gulp.task('cdn', function () {
     var ver = require('../cdn.json');
     var replace_param = {};
     console.log('cdn is start...');
-    var cdn_url = `http://ozv4m1lo0.bkt.clouddn.com/assets/${ver.version}`;
+    var cdn_url = `http://ozv4m1lo0.bkt.clouddn.com/assets/cdn`;
     // read all lines:
 
     var text = fs.readFileSync(conf.paths.tmp + '/tmp_path.txt', 'utf8');

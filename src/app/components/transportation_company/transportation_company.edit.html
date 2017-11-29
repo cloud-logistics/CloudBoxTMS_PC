@@ -33,7 +33,7 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业名称</label>
                         <div class="col-sm-4">
                             <input  class="form-control" type="text"
-                                   placeholder="公司名称" name="enterprise_name" ng-model="vm.user.enterprise_name"  required>
+                                   placeholder="公司名称" name="enterprise_name" ng-model="vm.user.enterprise_name"  ng-disabled="vm.isDetail"  required>
                         </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_name.$invalid">请输入企业名称</i></span>
                 </div>
@@ -91,11 +91,11 @@
                         <div class="beauty-upload">
                             <div class="lcell span5" style="margin:5px 0px;">
                                 <div class="upload">
-                                    <input type="button" class="btn btn-default" value="浏览文件" />
+                                    <input type="button" class="btn btn-default" value="浏览文件" ng-disabled="vm.isDetail" />
                                     <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
                                     <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
                                 </div>
-                                <button type="button" class="btn btn-default btn-upload" ng-click="vm.uploadFile()"> <i class="fa fa-check"></i> 上传 </button>
+                                <button type="button" class="btn btn-default btn-upload" ng-click="vm.uploadFile()" ng-disabled="vm.isDetail" > <i class="fa fa-check"></i> 上传 </button>
 
                             </div>
 

@@ -249,7 +249,7 @@
             // 可以根据参数设置元素外观
             div.style.width = this._length + "px";
             div.style.height = this._length + "px";
-            div.style.backgroundImage = 'url(images/box_overlay.svg)';
+            div.style.backgroundImage = 'url(http://ozv4m1lo0.bkt.clouddn.com/assets/images/box_overlay.svg)';
             div.style.backgroundSize='cover';
             // 将div添加到覆盖物容器中
             map.getPanes().markerPane.appendChild(div);
@@ -298,32 +298,43 @@
                 //vm.user.siteinfo = null;
                 var disPoint = new BMap.Point(116.404, 39.915);
 
-                if(vm.user.ava_flag == 'N'){
+                if(vm.user.box_info.ava_flag == 'N'){
                     vm.user.curStatus = 3;
-                }else if(vm.user.ava_flag=='Y' && (vm.user.siteinfo == '' || vm.user.siteinfo == null)){
+                }else if(vm.user.box_info.ava_flag=='Y' && (vm.user.box_info.siteinfo == '' || vm.user.box_info.siteinfo == null)){
                     vm.user.curStatus = 2;
-                }else if(vm.user.ava_flag=='Y' && vm.user.siteinfo != '' && vm.user.siteinfo != null ){
+                }else if(vm.user.box_info.ava_flag=='Y' && vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null ){
                     vm.user.curStatus = 1;
                 }
+
+                console.log(vm.user.box_info.siteinfo);
                 function showInfo(){
                     var opts = {
                         width: 100,     // 信息窗口宽度
-                        height: 50,     // 信息窗口高度
+                        height: 80,     // 信息窗口高度
                         title: '',  // 信息窗口标题
                         background: '#122341'
                     };
                     var infoWindow;
-                   // if()
-                     infoWindow = new BMap.InfoWindow('RFID ' + vm.user.tid + '<br />' + '所在仓库：' + vm.user.siteinfo.name + '<br />' + '当前位置：' + vm.user.siteinfo.location + '<br />', opts);  // 创建信息窗口对象
-                    infoWindow.addEventListener("close", function () {
-                    });
+                    if(vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null) {
+                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '仓库名称：' + vm.user.box_info.siteinfo.name + '<br />' + '当前位置：' + parseFloat(vm.user.location.longitude).toFixed(2) + ',' + parseFloat(vm.user.location.latitude).toFixed(2) + '<br />', opts);  // 创建信息窗口对象
+                    }else{
+                         opts = {
+                            width: 100,     // 信息窗口宽度
+                            height: 50,     // 信息窗口高度
+                            title: '',  // 信息窗口标题
+                            background: '#122341'
+                        };
+                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '当前位置：' + parseFloat(vm.user.location.longitude).toFixed(2) + ',' + parseFloat(vm.user.location.latitude).toFixed(2) + '<br />', opts);  // 创建信息窗口对象
+                    }
+                    infoWindow.addEventListener("close", function () {});
                     map.openInfoWindow(infoWindow, point);
                 }
 
-                if(vm.user.siteinfo != '' && vm.user.siteinfo != null) {
+                //if(vm.user.siteinfo != '' && vm.user.siteinfo != null)
+                {
 
 
-                    var point = new BMap.Point(vm.user.siteinfo.longitude, vm.user.siteinfo.latitude);  // 创建点坐标
+                    var point = new BMap.Point(vm.user.location.longitude, vm.user.location.latitude);  // 创建点坐标
 
 
                     var mySquare = new SquareOverlay(point, 36, "red");
@@ -332,7 +343,7 @@
 
 
                     showInfo();
-                    disPoint = new BMap.Point(vm.user.siteinfo.longitude, parseFloat(vm.user.siteinfo.latitude) + 10);
+                    disPoint = new BMap.Point(vm.user.location.longitude, parseFloat(vm.user.location.latitude) + 10);
 
                 }
                 map.centerAndZoom(disPoint, 10);

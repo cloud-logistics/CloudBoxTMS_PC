@@ -42,6 +42,7 @@
                 toastr.error(response.status + ' ' + response.statusText);
             });
         }
+        vm.getDatas();
 
     }
 

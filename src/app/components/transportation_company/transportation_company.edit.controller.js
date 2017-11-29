@@ -120,6 +120,7 @@
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username+'/',null,function (response) {
                 vm.user = response.data;
+                vm.user.register_time = vm.user.register_time.substr(0,10);
             },function (response) {
                 toastr.error(response.status + ' ' + response.statusText);
             });

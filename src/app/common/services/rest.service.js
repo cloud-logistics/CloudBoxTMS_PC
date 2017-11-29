@@ -8,7 +8,7 @@
 
     // REST service based on Restangular  that uses setFullResponse
     /** @ngInject */
-    function RestService(Restangular, StorageService,logger,constdata, $http) {
+    function RestService(Restangular, StorageService,logger,constdata, $http,$state,toastr) {
         return Restangular.withConfig(function (RestangularConfigurer) {
             /*var token = StorageService.get(constdata.token);
             console.log('........aaaa');
@@ -28,7 +28,7 @@
         .factory('NetworkService', NetworkService);
 
     /** @ngInject */
-    function NetworkService(RestService,StorageService,logger,$rootScope,constdata, $http) {
+    function NetworkService(RestService,StorageService,logger,$rootScope,constdata, $http,$state,toastr) {
 
 
         var service = {
@@ -108,6 +108,7 @@
             account.customGET("",param,requestHeader()).then(function (response) {
                 successResponse(response,successHandler);
             },function (response) {
+                console.log(response);
                 failedResponse(response,failedHandler,path);
             });
         }
@@ -157,13 +158,22 @@
             var newResponse = {};
             newResponse.status = response.status;
             newResponse.statusText = '服务器出错，请稍后再试';
-            if (response.data && response.data.message){
-                newResponse.statusText = response.data.message;
-            }
-            if (response.data && response.data.status){
-                newResponse.status = response.status;
-            }
-            if (failedHandler){
+
+                if (response.data && response.data.message) {
+                    newResponse.statusText = response.data.message;
+
+                }
+                if (response.data && response.data.status) {
+                    newResponse.status = response.status;
+                }
+                if (response.data && response.data.code) {
+                    newResponse.code = response.data.code;
+
+                }
+            if(response.data.code == '0401'){
+                toastr.error(response.data.message);
+                $state.go('access.signin');
+            }else if (failedHandler){
                 failedHandler(newResponse);
             }
 

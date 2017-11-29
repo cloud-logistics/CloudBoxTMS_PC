@@ -222,7 +222,7 @@
             // 可以根据参数设置元素外观
             div.style.width = this._length + "px";
             div.style.height = this._length + "px";
-            div.style.backgroundImage = 'url(images/icon_warehouse_bd.svg)';
+            div.style.backgroundImage = 'url(http://ozv4m1lo0.bkt.clouddn.com/assets/images/icon_warehouse_bd.svg)';
             div.style.backgroundSize='cover';
             // 将div添加到覆盖物容器中
             map.getPanes().markerPane.appendChild(div);
