@@ -192,7 +192,7 @@
                     vm.processDatas(response);
                     //vm.displayedCollection = [].concat(vm.items);
                 }, function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
             }
         };
@@ -218,7 +218,7 @@
                 toastr.success('删除成功！');
                 getDatas();
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
         };

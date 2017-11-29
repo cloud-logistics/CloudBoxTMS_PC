@@ -39,7 +39,7 @@
 
 
             }, function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
         vm.getDatas();

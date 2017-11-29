@@ -118,7 +118,7 @@
                 //vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         };
 
@@ -136,7 +136,7 @@
                     //vm.displayedCollection = [].concat(vm.items);
                     updatePagination(response.data);
                 }, function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
             }
         }
@@ -162,7 +162,7 @@
                 toastr.success('删除成功！');
                 getDatas();
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
         };

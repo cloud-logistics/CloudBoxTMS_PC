@@ -167,7 +167,7 @@
                 //vm.targetPage = vm.pageCurrent = 1;
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
 
@@ -190,7 +190,7 @@
                 }
                 vm.updateCityList(0);
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -209,7 +209,7 @@
                     }
                     vm.updateWarehouseList(0);
                 }, function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
             }else{
                 vm.cityInfo = [
@@ -251,7 +251,7 @@
                         vm.searchWarehouse = vm.warehouseInfo[0].id;
                     }
                 }, function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
             }else{
                 vm.warehouseInfo = [
@@ -299,7 +299,7 @@
 
                 updatePagination(response.data);
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
 

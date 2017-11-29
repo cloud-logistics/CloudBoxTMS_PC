@@ -145,7 +145,7 @@
                 }
 
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
 
@@ -178,7 +178,7 @@
                     }
 
                 }, function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
             }
 

@@ -128,7 +128,7 @@
                   //  vm.user.enterprise_id = vm.companyInfo[0].enterprise_id;
                 //}
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
         getCompanyDatas();
@@ -141,7 +141,7 @@
                 console.log(response);
                 vm.user.avatar_url = 'http://'+response.data.data.url;
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
                 vm.showSpinner = false;
             });
         };
@@ -151,7 +151,7 @@
                 vm.user = response.data;
                 vm.user.enterprise_id = vm.user.enterprise;
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -162,7 +162,7 @@
                 vm.backAction();
             },function (response) {
                 console.log(response);
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -171,7 +171,7 @@
                 toastr.success('操作成功！');
                 vm.backAction();
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
         function submitAction() {

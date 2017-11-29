@@ -121,7 +121,7 @@
                     toastr.success('保存成功！');
                     vm.getTenantItem();
                 },function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
             }
         };
@@ -140,7 +140,7 @@
                 vm.showSpinner = false;
                 vm.user.avatar = response.data.url;
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
                 vm.showSpinner = false;
             });
         }
@@ -162,7 +162,7 @@
                 console.log(vm.containerItems);
 
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -173,7 +173,7 @@
                 vm.backAction();
             },function (response) {
                 console.log(response);
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -182,7 +182,7 @@
                 toastr.success('操作成功！');
                 vm.backAction();
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
         function submitAction() {

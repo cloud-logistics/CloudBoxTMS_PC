@@ -114,9 +114,22 @@
         vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
         vm.user = [];
         vm.containerReportHistory = [];
-        vm.selectedDate = '2017-11';
+
+        vm.selectedDate = formatDate();
         var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
 
+
+        function formatDate() {
+            var d = new Date(),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month].join('-');
+        }
 
         function getDatas(){
             getReportDetailHistory();
@@ -153,7 +166,7 @@
 
 
                 },function (response) {
-                    toastr.error(response.status + ' ' + response.statusText);
+                    toastr.error(response.statusText);
                 });
 
 
@@ -166,28 +179,32 @@
         }
         function refreshChart()
         {
-            if(vm.userTmp != null && vm.userTmp.length > 0){
 
-                for(var i = 0; i < vm.userTmp.length; i ++){
+            var containerNum = [];
+            var amount = [];
+            var month = [];
+            if(vm.userTmp != null && vm.userTmp.length > 0) {
+
+                for (var i = 0; i < vm.userTmp.length; i++) {
                     vm.user[i] = {};
-                    vm.user[i].time = vm.userTmp[i].date.length > 7 ? vm.userTmp[i].date.substr(0,7):vm.userTmp[i].date;
+                    vm.user[i].time = vm.userTmp[i].date.length > 7 ? vm.userTmp[i].date.substr(0, 7) : vm.userTmp[i].date;
                     vm.user[i].usedContainer = vm.userTmp[i].on_site_nums;
                     vm.user[i].amount = vm.userTmp[i].rent_fee;
 
                 }
 
 
-
-                var containerNum = [];
-                var amount = [];
-                var month = [];
-                for(var i = 0; i < vm.user.length; i ++){
+                for (var i = 0; i < vm.user.length; i++) {
 
                     containerNum.push(vm.user[i].usedContainer);
                     amount.push(vm.user[i].amount);
                     month.push(vm.user[i].time);
                 }
-                vm.selectedDate = month[month.length-1].substr(0,7);
+            }
+            if(month.length > 0) {
+                vm.selectedDate = month[month.length - 1].substr(0, 7);
+            }
+            console.log(vm.selectedDate);
                 vm.reportOption = {
                     title : {
                         text : '历史记录',
@@ -256,12 +273,6 @@
                     ]
                 };
 
-
-            }
-
-
-
-            console.log(vm.selectedDate);
             vm.containerReportHistory = [];
             NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,null,function (response) {
 
@@ -280,7 +291,7 @@
 
 
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
 
@@ -293,7 +304,7 @@
                 refreshChart();
 
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
 
 

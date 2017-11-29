@@ -108,7 +108,7 @@
                 console.log(response);
                 vm.user.enterprise_license_id_url = 'http://'+response.data.data.url;
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
                 vm.showSpinner = false;
             });
         }
@@ -122,7 +122,7 @@
                 vm.user = response.data;
                 vm.user.register_time = vm.user.register_time.substr(0,10);
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -133,7 +133,7 @@
                 vm.backAction();
             },function (response) {
                 console.log(response);
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
 
@@ -142,7 +142,7 @@
                 toastr.success('操作成功！');
                 vm.backAction();
             },function (response) {
-                toastr.error(response.status + ' ' + response.statusText);
+                toastr.error(response.statusText);
             });
         }
         function submitAction() {
