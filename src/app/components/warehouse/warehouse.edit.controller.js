@@ -291,7 +291,10 @@
 
 
                     var lat = vm.user.latitude > 0 ? '北纬' : '南纬';
-                    var infoWindow = new BMap.InfoWindow('地址：' + vm.user.location + '<br />' + '坐标：(' + vm.user.latitude + ',' + vm.user.longitude + ')', opts);  // 创建信息窗口对象
+
+
+                    var posStr = (vm.user.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.latitude).toFixed(2)  + '/'+(vm.user.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.longitude).toFixed(2);
+                    var infoWindow = new BMap.InfoWindow('地址：' + vm.user.location + '<br />' + '坐标：'+posStr, opts);  // 创建信息窗口对象
                     infoWindow.addEventListener("close", function () {
                     });
                     map.openInfoWindow(infoWindow, point);
@@ -316,6 +319,10 @@
                 vm.user.ordinaryBoxInfo = {
                     "availableNum":0,
                         "allNum":0
+                };
+                vm.user.specialBoxInfo = {
+                    "availableNum":0,
+                    "allNum":0
                 };
                 vm.user.allCurrentBoxInfo = {
                     "availableNum":0,
@@ -351,13 +358,16 @@
                         } else if (vm.allInfo.box_counts[j].box_type.id == 4) {
                             vm.user.ordinaryBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
                             vm.user.ordinaryBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
+                        } else if (vm.allInfo.box_counts[j].box_type.id == 5) {
+                            vm.user.specialBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
+                            vm.user.specialBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
                         }
                     }
                 }
                 vm.user.allCurrentBoxInfo.allNum = vm.user.freezerBoxInfo.allNum +  vm.user.coolerBoxInfo.allNum
-                    + vm.user.medicalBoxInfo.allNum + vm.user.ordinaryBoxInfo.allNum;
+                    + vm.user.medicalBoxInfo.allNum + vm.user.ordinaryBoxInfo.allNum+ vm.user.specialBoxInfo.allNum;
                 vm.user.allCurrentBoxInfo.availableNum = vm.user.freezerBoxInfo.availableNum +  vm.user.coolerBoxInfo.availableNum
-                    + vm.user.medicalBoxInfo.availableNum + vm.user.ordinaryBoxInfo.availableNum;
+                    + vm.user.medicalBoxInfo.availableNum + vm.user.ordinaryBoxInfo.availableNum+ vm.user.specialBoxInfo.availableNum;
 
                 //console.log(vm.user);
 

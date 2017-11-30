@@ -315,8 +315,12 @@
                         background: '#122341'
                     };
                     var infoWindow;
+
+                    var posStr = (vm.user.location.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.location.latitude).toFixed(2)  + '/'+(vm.user.location.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.location.longitude).toFixed(2);
+
+
                     if(vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null) {
-                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '仓库名称：' + vm.user.box_info.siteinfo.name + '<br />' + '当前位置：' + parseFloat(vm.user.location.longitude).toFixed(2) + ',' + parseFloat(vm.user.location.latitude).toFixed(2) + '<br />', opts);  // 创建信息窗口对象
+                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '仓库名称：' + vm.user.box_info.siteinfo.name + '<br />' + '当前位置：' + posStr + '<br />', opts);  // 创建信息窗口对象
                     }else{
                          opts = {
                             width: 100,     // 信息窗口宽度
@@ -324,7 +328,7 @@
                             title: '',  // 信息窗口标题
                             background: '#122341'
                         };
-                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '当前位置：' + parseFloat(vm.user.location.longitude).toFixed(2) + ',' + parseFloat(vm.user.location.latitude).toFixed(2) + '<br />', opts);  // 创建信息窗口对象
+                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '当前位置：' + posStr + '<br />', opts);  // 创建信息窗口对象
                     }
                     infoWindow.addEventListener("close", function () {});
                     map.openInfoWindow(infoWindow, point);

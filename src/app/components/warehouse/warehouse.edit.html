@@ -23,7 +23,7 @@
                     <div class="warehouse-detail-card-banner m-l m-r m-b">
                         <div class="warehouse-detail-card warehouse-detail-card-0">
                             <div class="title">
-                                云箱可用数量/总数
+                                云箱可用数/总数
                             </div>
                             <div class="num">
                                 {{vm.user.allCurrentBoxInfo.availableNum}}/{{vm.user.allCurrentBoxInfo.allNum}}
@@ -36,7 +36,7 @@
                         </div>
                         <div class="warehouse-detail-card warehouse-detail-card-1">
                             <div class="title">
-                                冷藏箱可用数量/总数
+                                冷藏箱可用数/总数
                             </div>
                             <div class="num">
                                 {{vm.user.freezerBoxInfo.availableNum}}/{{vm.user.freezerBoxInfo.allNum}}
@@ -49,7 +49,7 @@
                         </div>
                         <div class="warehouse-detail-card warehouse-detail-card-2">
                             <div class="title">
-                                冷冻箱可用数量/总数
+                                冷冻箱可用数/总数
                             </div>
                             <div class="num">
                                 {{vm.user.coolerBoxInfo.availableNum}}/{{vm.user.coolerBoxInfo.allNum}}
@@ -62,7 +62,7 @@
                         </div>
                         <div class="warehouse-detail-card warehouse-detail-card-3">
                             <div class="title">
-                                医药箱可用数量/总数
+                                医药箱可用数/总数
                             </div>
                             <div class="num">
                                 {{vm.user.medicalBoxInfo.availableNum}}/{{vm.user.medicalBoxInfo.allNum}}
@@ -75,10 +75,23 @@
                         </div>
                         <div class="warehouse-detail-card warehouse-detail-card-4">
                             <div class="title">
-                                普通箱可用数量/总数
+                                普通箱可用数/总数
                             </div>
                             <div class="num">
                                 {{vm.user.ordinaryBoxInfo.availableNum}}/{{vm.user.ordinaryBoxInfo.allNum}}
+                            </div>
+                            <div class="progress-all-bar">
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.ordinaryBoxInfo.allNum==0 ? 0:100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum)+'%'}}" >
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="warehouse-detail-card warehouse-detail-card-5">
+                            <div class="title">
+                                特殊箱可用数/总数
+                            </div>
+                            <div class="num">
+                                {{vm.user.specialBoxInfo.availableNum}}/{{vm.user.specialBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
                                 <div class="progress-percent-bar" style="{{'width:' + (vm.user.ordinaryBoxInfo.allNum==0 ? 0:100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum)+'%'}}" >

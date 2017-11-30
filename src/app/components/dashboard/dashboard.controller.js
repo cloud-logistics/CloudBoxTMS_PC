@@ -28,9 +28,9 @@
 
         }*/
         vm.statsInfo = {
-            box_count: 9,
-            site_count: 16,
-            enterprise_count: 17
+            box_count: 0,
+            site_count: 0,
+            enterprise_count: 0
         }
         vm.getDatas = function() {
             NetworkService.get(vm.getBasePath, null, function (response) {
