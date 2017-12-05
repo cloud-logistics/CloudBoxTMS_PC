@@ -10,90 +10,6 @@
         <!--</div>-->
         <!--</div>-->
         <!--</div>-->
-
-
-        <modal-dialog show='bbUpdate' width='600px' height='350px'>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="bm-update-header">
-                        <span class="pull-left">{{vm.options.title}}</span>
-                    </div>
-                </div>
-                <div class="row bm-input m-b-md">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label form-control-static">云箱ID</label>
-                            <div class="col-md-8">
-                                <input ng-model="vm.currentItem.deviceid" type="text" class="form-control" placeholder="请输入">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label form-control-static">云箱型号</label>
-                            <div class="col-md-8">
-                                <input ng-model="vm.currentItem.type.box_type_name" type="text" class="form-control" placeholder="请输入">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row bm-input m-b-md">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label form-control-static">生产地点</label>
-                            <div class="col-md-8">
-                                    <input ng-model="vm.currentItem.produce_area" type="text" class="form-control" placeholder="请输入">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label form-control-static">生产厂家</label>
-                            <div class="col-md-8">
-                                <input ng-model="vm.currentItem.manufacturer" type="text" class="form-control" placeholder="请输入">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row bm-input m-b-md">
-                    <div class="col-md-6">
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label form-control-static">生产日期</label>
-                            <div class="col-md-8">
-                                <input date-time ng-model="vm.currentItem.date_of_production" class="form-control m-b" min-view="hours" format="YYYY-MM-DD HH:mm">
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label form-control-static">电源信息</label>
-                            <div class="col-md-8">
-                                <input ng-model="vm.currentItem.battery" type="text" class="form-control" placeholder="请输入">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="bm-input-bottom" style="text-align:center;">
-                        <button class="bm-cancel" ng-click="vm.cancelBasicInfoConfig()" >关闭</button>
-                    </div>
-                </div>
-            </div>
-        </modal-dialog>
-
-
-
-
         <modal-dialog show='transDetail' width='900px'>
             <div class="m-l m-r panel panel-default">
                 <table  st-table="vm.containerTransDetail" st-safe-src="vm.containerTransDetail" class="table table-bordered table-striped table-hover bg-white text-center">
@@ -222,7 +138,7 @@
 
 
         <div ng-if="!vm.isViewList">
-            <div class="m-l m-r  panel panel-default">
+            <div class="panel panel-default" style="padding-left:20px;">
                 <div class="container-grid inline" ng-class="'container-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.items">
                     <div class="title">ID {{item.deviceid.length > 16 ? item.deviceid.substr(item.deviceid.length-16,16) : item.deviceid}}</div>
                     <div ng-class="'container-label-'+(item.type.id%3+1)"></div>

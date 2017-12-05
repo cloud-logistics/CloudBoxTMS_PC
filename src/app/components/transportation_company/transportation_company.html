@@ -18,7 +18,7 @@
         </div>
 
         <div class="m-l m-r m-t panel panel-default">
-        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
+        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table  table-striped table-hover bg-white text-center">
             <thead>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
@@ -59,17 +59,22 @@
                     {{item.enabled ? ('u.ACTIVITY'|T ):('u.UNACTIVITY'|T)}}
                 </td>-->
                 <td>
-                    <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>详情</button>
-
-
-
+                    <!--<button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>详情</button>
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goEditItem(item)"><i class="fa fa-edit"></i>编辑</button>
+                   -->
+                    <button class="warehouse-detail-button" style="width: 80px;border: none;" ng-click="vm.goDetail(item)">详情</button>
+                    <button class="warehouse-detail-button" style="width: 80px;border: none;" ng-click="vm.goEditItem(item)">编辑</button>
+
+
+
                     <div class="btn-group " >
-                        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-sliders"></i>  操作</button>
-                        <button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="oper-group">
+                        <button type="button" class=" transport-company-oper-button  ">  操作</button>
+                        <button type="button" class=" transport-company-oper-button-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
+
                         <ul class="dropdown-menu" style="overflow:visible; z-index:1010;width:110px;position:absolute;">
                             <li ng-click="vm.OperApp(3, item)" ng-class="{disabled: item.enterprise_deposit_status == 1}"><a><i class="fa fa-check-square m-r-sm"></i>押金确认</a></li>
                             <li ng-click="vm.OperApp(5, item)" ><a><i class="fa fa-list m-r-sm"></i>查看用户</a></li>
@@ -79,6 +84,7 @@
                             <li  ng-click="vm.openAlert('sm',item)" ><a><i class="fa fa-trash-o m-r-sm"></i> 删除</a></li>
 
                         </ul>
+                        </div>
                     </div>
 
 

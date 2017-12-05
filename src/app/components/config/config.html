@@ -21,50 +21,48 @@
 
                 <div class="plat-mgr" ng-show="vm.tabItem[0].active">
 
-
-
-
-
-
                         <div class="panel panel-default m-l m-r ">
                             <br/>
-
-
-                            <form name="form" class="form-horizontal form-validation" role="form">
-
-
-
-
-
-
-                                    <div  class="form-group">
-                                        <div class="zone-title">费率设置</div>
-                                    </div>
-                                <div class="" ng-repeat="item in vm.containerItems">
+                            <div  class="form-group">
+                                <div class="zone-title">费率设置</div>
+                            </div>
+                            <form name="form" class="form-horizontal form-validation" role="form" ng-repeat="item in vm.containerItems">
                                     <div class="form-group">
-
                                         <label class="col-sm-1 control-label m-l-lg font-bold">{{item.box_type_name}}</label>
-
                                             <input class="form-control input-edit" type="number" min="0"
-                                                   placeholder="{{item.box_type_name}}费率" ng-model="item.price" ng-disabled="!item.isEdit">
-
+                                                   placeholder="费率" ng-model="item.price" ng-disabled="!item.isEdit" required>
                                             <span>元/小时</span>
-
-
                                         <button ng-disabled="!item.isEdit" class="btn btn-cancel" ng-click="vm.cancel(item)"> 取消 </button>
                                         <button class="btn btn-edit" type="submit" ng-click="vm.edit(item)" ng-disabled='form.$invalid'> {{item.editTitle}}</button>
-
-
                                     </div>
-                                </div>
-
-
-
-
                             </form>
                         </div>
+                </div>
+
+
+                <div class="plat-mgr" ng-show="vm.tabItem[1].active">
+
+                    <div class="panel panel-default m-l m-r ">
+                        <br/>
+                        <div  class="form-group">
+                            <div class="zone-title">参数设置</div>
+                        </div>
+                        <form name="form" class="form-horizontal form-validation" role="form" ng-repeat="item in vm.userParam">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label m-l-lg font-bold">{{vm.paramDesc [item.param_key]}}</label>
+                                <input class="form-control input-edit" type="text"
+                                       placeholder="版本" ng-model="item.param_value" ng-disabled="!item.isEdit" required>
+
+                                <button ng-disabled="!item.isEdit" class="btn btn-cancel" ng-click="vm.cancel(item)"> 取消 </button>
+                                <button class="btn btn-edit" type="submit" ng-click="vm.edit(item)" ng-disabled='form.$invalid'> {{item.editTitle}}</button>
+                            </div>
+
+                        </form>
+
+                    </div>
 
                 </div>
+
 
             </div>
         </div>

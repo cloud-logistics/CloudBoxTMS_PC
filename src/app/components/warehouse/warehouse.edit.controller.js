@@ -20,7 +20,7 @@
     });
 
     /** @ngInject */
-    function EditWarehouseController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function EditWarehouseController($scope,NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -124,8 +124,9 @@
         vm.updateBasePath =  'rentservice/enterprise/enterpriseinfo/updateenterpriseinfo/';
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
         vm.getWarehouseHisPath = 'rentservice/site/stat/';
-        var map = new BMap.Map("map-div",{minZoom:8,maxZoom:8});          // 创建地图实例
-
+        var map = new BMap.Map("map-div",{minZoom:6,maxZoom:10});          // 创建地图实例
+        map.enableScrollWheelZoom(true);
+        $scope.parseFloat = parseFloat;
         function getDatas(){
             getWarehouseHistory();
         }
@@ -266,6 +267,8 @@
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data.site_info;
+                //vm.user.name='测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试';
+                //vm.user.location='测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试';
                 var point = new BMap.Point(vm.user.longitude, vm.user.latitude);  // 创建点坐标
                 /*var marker = new BMap.Marker(point);        // 创建标注
                 marker.addEventListener("click", function(){
@@ -279,7 +282,7 @@
 
 
 
-                var disPoint = new BMap.Point(vm.user.longitude, parseFloat(vm.user.latitude) + 10);
+                var disPoint = new BMap.Point(vm.user.longitude, parseFloat(vm.user.latitude) + 0.22);
                 map.centerAndZoom(disPoint, 10);
 
                 function showInfo() {
@@ -293,11 +296,25 @@
                     var lat = vm.user.latitude > 0 ? '北纬' : '南纬';
 
 
-                    var posStr = (vm.user.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.latitude).toFixed(2)  + '/'+(vm.user.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.longitude).toFixed(2);
-                    var infoWindow = new BMap.InfoWindow('地址：' + vm.user.location + '<br />' + '坐标：'+posStr, opts);  // 创建信息窗口对象
+                    var posStr = (vm.user.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.latitude).toFixed(2) +'°'  + '/'+(vm.user.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.longitude).toFixed(2)+'°' ;
+                    /*var infoWindow = new BMap.InfoWindow('地址：' + (vm.user.location.length > 20 ? vm.user.location.substr(0,20)+'...':vm.user.location) + '<br />' + '坐标：'+posStr, opts);  // 创建信息窗口对象
                     infoWindow.addEventListener("close", function () {
                     });
-                    map.openInfoWindow(infoWindow, point);
+                    map.openInfoWindow(infoWindow, point);*/
+
+
+
+
+                    var sname = '', divContent = '';
+
+                    sname = vm.user.location.length > 13 ? vm.user.location.substr(0,11)+'...':vm.user.location;
+
+                    divContent = "<div class='tip-all-warehouse'> <div class='tip-layout'>   <div class='tip-line'><div class='tip-title'>地址</div> <div class='tip-value'>#user</div></div>      <div class='tip-line'><div class='tip-title'>坐标</div> <div class='tip-value'>#curpos</div></div>      </div> <div class='tip-trangle' /> </div>";
+                    divContent = divContent.replace('#user', sname);
+                    divContent = divContent.replace('#curpos', posStr );
+
+                    var infoBox = new BMapLib.InfoBox(map,divContent, {enableAutoPan: true,alignBottom: false});
+                    infoBox.open(point);
 
                 };
                 showInfo();

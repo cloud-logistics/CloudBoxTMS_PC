@@ -61,7 +61,8 @@
                     role: role,
                     userId:result.user_id,
                     userRealName:result.user_real_name,
-                    userNickName:result.user_nickname
+                    userNickName:result.user_nickname,
+                    avatarUrl:result.avatar_url
                 }
 
                 // var sessionInfo = {username: user.username, Authorization:token};
@@ -71,12 +72,25 @@
                 StorageService.put(constdata.informationKey,userInfo,24 * 3 * 60 * 60);
 
                 var appGo = 'app.dashboard';
-
-
                 $state.go(appGo);
+                //vm.getBasePath =  'rentservice/enterpriseuser/detail/';
+                /*NetworkService.get('rentservice/enterpriseuser/detail/' + result.user_id + '/',null,function (response) {
+                    vm.userDetail = response.data;
+                    vm.user.enterprise_id = vm.user.enterprise;
+                    StorageService.put(constdata.userDetailKey,vm.userDetail,24 * 3 * 60 * 60);
+
+                },function (response) {
+                    toastr.error(response.statusText);
+                });*/
+
+
+
+
+
+
             },function (err) {
                 console.log(err);
-                var errInfo = '登录失败：' + err.statusText + ' (' + err.status +')';
+                var errInfo = '登录失败：' + err.statusText;
                 toastr.error(errInfo);
                 vm.isLogining = false;
             });

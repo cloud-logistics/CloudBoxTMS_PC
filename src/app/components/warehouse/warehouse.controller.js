@@ -9,7 +9,7 @@
         .controller('WarehouseController', WarehouseController);
 
     /** @ngInject */
-    function WarehouseController(NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
+    function WarehouseController($scope, NetworkService,StorageService,constdata,$state,$rootScope, $uibModal,$log,toastr,i18n, delmodaltip) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
@@ -99,11 +99,13 @@
         function OperApp(index, item) {
         }
         vm.isSearch = false;
+        $scope.parseFloat = parseFloat;
 
         vm.processDatas = function (response){
             vm.items = response.data.results;
             if(vm.items.length > 0) {
                 for (var i = 0; i < vm.items.length; i++) {
+
                     var allNum = 0;
                     vm.items[i].freezerBoxInfo  = {
                         availableNum:0,

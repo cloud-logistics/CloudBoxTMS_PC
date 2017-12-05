@@ -71,7 +71,16 @@
             }
         ];
 
-
+        vm.userGender = [
+            {
+                title:'男',
+                value:'男'
+            },
+            {
+                title:'女',
+                value:'女'
+            }
+        ];
 
         vm.labelColor = {
             enabled:'bg-success',
@@ -196,6 +205,7 @@
         if(vm.isAdd){
             vm.user.role='user';
             vm.user.group = 'rentuser';
+            vm.user.user_gender = '男';
             if(vm.isFromCompany){
                 vm.user.enterprise_id = vm.enterprise_id;
             }

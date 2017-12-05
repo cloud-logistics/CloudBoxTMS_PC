@@ -143,7 +143,7 @@
 
 
         function goAddItem() {
-            $state.go('app.edit_transportation_company_user',{});
+            $state.go('app.edit_transportation_company_user',{args:{type:'edit_from_company'}});
         };
 
         function goEditItem(item) {

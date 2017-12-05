@@ -32,6 +32,7 @@
         vm.submitAction = submitAction;
         vm.backAction = backAction;
         vm.back = back;
+        vm.curSel = 1;
         vm.addUser = {};
         vm.userType = [
             {
@@ -87,7 +88,13 @@
                 active:true,
                 id:1
 
-            }
+            },
+                {
+                    title:'参数设置',
+                    active:false,
+                    id:2
+
+                }
             ];
 
 
@@ -105,29 +112,80 @@
                     vm.tabItem[i].active = false;
                 }
             }
+            if(oper == 1){
+                vm.getTenantItem();
+            }else{
+                vm.getParams();
+            }
+            vm.curSel = oper;
+        };
+        //106.2.20.185/container/api/v1/cloudbox/rentservice/param/all
+        vm.paramDesc =
+        {
+            version:'应用版本号'
         };
 
+
+
+        vm.getParams = function () {
+            NetworkService.get('rentservice/param/all',null,function (response) {
+                vm.userParam = response.data;
+                if(vm.userParam != null && vm.userParam.length > 0) {
+                    for (var i = 0; i < vm.userParam.length; i++) {
+                        vm.userParam[i].isEdit = false;
+                        vm.userParam[i].editTitle = '编辑';
+                    }
+                }
+                //vm.containerItems = vm.user;
+            },function (response) {
+                toastr.error(response.statusText);
+            });
+        }
 
         vm.edit = function(item){
             if(item.editTitle == '编辑') {
                 item.isEdit = true;
                 item.editTitle = '保存';
             }else{
-                var param = {
-                    type_id:item.id,
-                    fee_per_hour:item.price
-                };
-                NetworkService.post('rentservice/boxrentservice/boxtypefee',param,function (response) {
-                    toastr.success('保存成功！');
-                    vm.getTenantItem();
-                },function (response) {
-                    toastr.error(response.statusText);
-                });
+                if(vm.curSel == 1) {
+                    var param = {
+                        type_id: item.id,
+                        fee_per_hour: item.price
+                    };
+                    NetworkService.post('rentservice/boxrentservice/boxtypefee', param, function (response) {
+                        toastr.success('保存成功！');
+                        vm.getTenantItem();
+                    }, function (response) {
+                        toastr.error(response.statusText);
+                    });
+                }else{
+
+
+
+                    var param = {
+                        param_key: item.param_key,
+                        param_value: item.param_value,
+                        param_desc:item.param_desc
+
+                    };
+                    NetworkService.post('rentservice/param/set', param, function (response) {
+                        toastr.success('保存成功！');
+                        vm.getParams();
+                    }, function (response) {
+                        toastr.error(response.statusText);
+                    });
+
+                }
             }
         };
         vm.cancel = function(item){
             item.isEdit = false;
             item.editTitle = '编辑';
+            if(vm.curSel == 1) {
+                vm.getTenantItem();
+            }else{
+                vm.getParams();
+            }
         }
         vm.sel(1);
 
@@ -159,7 +217,7 @@
                     }
                 }
                 vm.containerItems = vm.user;
-                console.log(vm.containerItems);
+                //console.log(vm.containerItems);
 
             },function (response) {
                 toastr.error(response.statusText);
@@ -199,7 +257,7 @@
             $rootScope.backPre();
         }
 
-        vm.getTenantItem();
+
 
         function back() {
             // history.back();

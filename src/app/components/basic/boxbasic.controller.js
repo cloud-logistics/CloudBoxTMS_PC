@@ -199,14 +199,27 @@
         {
             //vm.searchProvince;
             console.log(vm.searchProvince);
-            if(vm.searchProvince != 0) {
+            if(vm.searchProvince != 0)
+            {
 
                 console.log(vm.searchProvince);
                 NetworkService.get(vm.getCityPath + vm.searchProvince, null, function (response) {
                     vm.cityInfo = response.data;
+
+
+                    //if(vm.searchProvince == 0){
+                        vm.cityInfo.unshift({
+                            nation:1,
+                            id:0,
+                            city_name:"所有"
+                        });
+                   //}
+
+
                     if (oper == 0) {
                         vm.searchCity = vm.cityInfo[0].id;
                     }
+
                     vm.updateWarehouseList(0);
                 }, function (response) {
                     toastr.error(response.statusText);
@@ -247,6 +260,13 @@
                             }
                         }
                     }
+
+
+                    vm.warehouseInfo.unshift({
+                        id:0,
+                        name:"所有"
+                    });
+
                     if (oper == 0) {
                         vm.searchWarehouse = vm.warehouseInfo[0].id;
                     }

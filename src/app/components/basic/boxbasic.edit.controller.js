@@ -131,8 +131,8 @@
         vm.delBasePath =  'rentservice/enterprise/enterpriseinfo/';
         vm.getContainerStatPath = 'rentservice/boxinfo/stat/'
 
-        var map = new BMap.Map("map-div",{minZoom:8,maxZoom:18});          // 创建地图实例
-        //map.enableScrollWheelZoom(true);
+        var map = new BMap.Map("map-div",{minZoom:6,maxZoom:10});          // 创建地图实例
+        map.enableScrollWheelZoom(true);
         //map.enableDragging();
 
         function getCointainerStat(){
@@ -166,51 +166,6 @@
                 toastr.error(response.statusText);
             });
 
-
-
-            /*vm.containerHistory = [
-                {
-                    startDate:'2017-11-06 11:30',
-                    endDate:'2017-11-07 15:30',
-                    user:'海航货运集团',
-                    departure:'陕西西安099仓库',
-                    arrival:'海口023仓库',
-                },
-                {
-                    startDate:'2017-11-03 11:30',
-                    endDate:'2017-11-04 15:30',
-                    user:'大货运集团',
-                    departure:'上海011仓库',
-                    arrival:'北京003仓库',
-                },
-                {
-                    startDate:'2017-11-06 11:30',
-                    endDate:'2017-11-07 15:30',
-                    user:'海航货运集团',
-                    departure:'陕西西安099仓库',
-                    arrival:'海口023仓库',
-                },
-                {
-                    startDate:'2017-11-03 11:30',
-                    endDate:'2017-11-04 15:30',
-                    user:'大货运集团',
-                    departure:'上海011仓库',
-                    arrival:'北京003仓库',
-                },{
-                    startDate:'2017-11-06 11:30',
-                    endDate:'2017-11-07 15:30',
-                    user:'海航货运集团',
-                    departure:'陕西西安099仓库',
-                    arrival:'海口023仓库',
-                },
-                {
-                    startDate:'2017-11-03 11:30',
-                    endDate:'2017-11-04 15:30',
-                    user:'大货运集团',
-                    departure:'上海011仓库',
-                    arrival:'北京003仓库',
-                }
-            ]*/
 
         };
 
@@ -316,11 +271,21 @@
                     };
                     var infoWindow;
 
-                    var posStr = (vm.user.location.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.location.latitude).toFixed(2)  + '/'+(vm.user.location.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.location.longitude).toFixed(2);
+                    var posStr = (vm.user.location.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.location.latitude).toFixed(2)  +'°' + '/'+(vm.user.location.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.location.longitude).toFixed(2)+'°' ;
 
+                    var tid = '', sname = '', divContent = '';
 
                     if(vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null) {
-                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '仓库名称：' + vm.user.box_info.siteinfo.name + '<br />' + '当前位置：' + posStr + '<br />', opts);  // 创建信息窗口对象
+                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '仓库名称 ' + vm.user.box_info.siteinfo.name + '<br />' + '当前位置 ' + posStr + '<br />', opts);  // 创建信息窗口对象
+
+                         tid = vm.user.box_info.tid.length > 24 ? vm.user.box_info.tid.substr(0,21)+'...':vm.user.box_info.tid;
+                         sname = vm.user.box_info.siteinfo.name.length > 10 ? vm.user.box_info.siteinfo.name.substr(0,8)+'...':vm.user.box_info.siteinfo.name;
+
+                         divContent = "<div class='tip-all'> <div class='tip-layout'><div class='tip-line'><div class='tip-title'>RFID</div> <div class='tip-value'>#rfid</div></div>    <div class='tip-line'><div class='tip-title'>仓库名称</div> <div class='tip-value'>#user</div></div>      <div class='tip-line'><div class='tip-title'>当前位置</div> <div class='tip-value'>#curpos</div></div>      </div> <div class='tip-trangle' /> </div>";
+                        divContent = divContent.replace('#rfid', tid );
+                        divContent = divContent.replace('#user', sname);
+                        divContent = divContent.replace('#curpos', posStr );
+
                     }else{
                          opts = {
                             width: 100,     // 信息窗口宽度
@@ -328,10 +293,25 @@
                             title: '',  // 信息窗口标题
                             background: '#122341'
                         };
-                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '当前位置：' + posStr + '<br />', opts);  // 创建信息窗口对象
+                        infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '当前位置 ' + posStr + '<br />', opts);  // 创建信息窗口对象
+                         tid = vm.user.box_info.tid.length > 24 ? vm.user.box_info.tid.substr(0,21)+'...':vm.user.box_info.tid;
+                         divContent = "<div class='tip-all'> <div class='tip-layout'><div class='tip-line'><div class='tip-title'>RFID</div> <div class='tip-value'>#rfid</div></div>        <div class='tip-line'><div class='tip-title'>当前位置</div> <div class='tip-value'>#curpos</div></div>      </div> <div class='tip-trangle' /> </div>";
+                        divContent = divContent.replace('#rfid', tid );
+                        divContent = divContent.replace('#curpos', posStr );
+
                     }
-                    infoWindow.addEventListener("close", function () {});
-                    map.openInfoWindow(infoWindow, point);
+                    //infoWindow.addEventListener("close", function () {});
+                    //map.openInfoWindow(infoWindow, point);
+
+
+
+
+                    //var divContent = "<div class='tip-all'> <div class='tip-layout'><div class='tip-line'><div class='tip-title'>RFID</div> <div class='tip-value'>#rfid</div></div>    <div class='tip-line'><div class='tip-title'>仓库名称</div> <div class='tip-value'>#user</div></div>      <div class='tip-line'><div class='tip-title'>当前位置</div> <div class='tip-value'>#curpos</div></div>      </div> <div class='tip-trangle' /> </div>";
+                    //var tid = vm.user.box_info.tid.length > 24 ? vm.user.box_info.tid.substr(0,21)+'...':vm.user.box_info.tid;
+                    //var sname = vm.user.box_info.siteinfo.name.length > 10 ? vm.user.box_info.siteinfo.name.substr(0,8)+'...':vm.user.box_info.siteinfo.name;
+
+                    var infoBox = new BMapLib.InfoBox(map,divContent, {enableAutoPan: true,alignBottom: false});
+                    infoBox.open(point);
                 }
 
                 //if(vm.user.siteinfo != '' && vm.user.siteinfo != null)
@@ -347,7 +327,7 @@
 
 
                     showInfo();
-                    disPoint = new BMap.Point(vm.user.location.longitude, parseFloat(vm.user.location.latitude) + 10);
+                    disPoint = new BMap.Point(vm.user.location.longitude, parseFloat(vm.user.location.latitude)+0.22);
 
                 }
                 map.centerAndZoom(disPoint, 10);

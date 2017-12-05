@@ -12,9 +12,10 @@
                     </a>
                         <span>></span>
 
-                         <span class="name">{{vm.user.name}}</span>
+                         <span class="name">{{vm.user.name.length > 10 ? vm.user.name.substr(0,10)+'...':vm.user.name}}</span>
+                    <span class="location-detail">{{(vm.user.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.latitude).toFixed(2) +'°'  + '/'+(vm.user.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.longitude).toFixed(2)+'°'}}</span>
+                    <span class="location">地址：{{vm.user.location.length > 20 ? vm.user.location.substr(0,20)+'...':vm.user.location}}</span>
 
-                        <span class="location">地址：{{vm.user.location}}</span>
                 </div>
 
                      <div class="panel panel-default   ">
@@ -29,7 +30,7 @@
                                 {{vm.user.allCurrentBoxInfo.availableNum}}/{{vm.user.allCurrentBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.allCurrentBoxInfo.allNum == 0 ? 0 : 100*vm.user.allCurrentBoxInfo.availableNum/vm.user.allCurrentBoxInfo.allNum)+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.allCurrentBoxInfo.allNum == 0 ? 0 :(vm.user.allCurrentBoxInfo.availableNum> vm.user.allCurrentBoxInfo.allNum?100:100*vm.user.allCurrentBoxInfo.availableNum/vm.user.allCurrentBoxInfo.allNum))+'%'}}" >
 
                                 </div>
                             </div>
@@ -42,7 +43,7 @@
                                 {{vm.user.freezerBoxInfo.availableNum}}/{{vm.user.freezerBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.freezerBoxInfo.allNum==0 ? 0:100*vm.user.freezerBoxInfo.availableNum/vm.user.freezerBoxInfo.allNum)+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.freezerBoxInfo.allNum==0 ? 0:(vm.user.freezerBoxInfo.availableNum> vm.user.freezerBoxInfo.allNum?100:100*vm.user.freezerBoxInfo.availableNum/vm.user.freezerBoxInfo.allNum))+'%'}}" >
 
                                 </div>
                             </div>
@@ -55,7 +56,7 @@
                                 {{vm.user.coolerBoxInfo.availableNum}}/{{vm.user.coolerBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.coolerBoxInfo.allNum==0 ? 0:100*vm.user.coolerBoxInfo.availableNum/vm.user.coolerBoxInfo.allNum)+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.coolerBoxInfo.allNum==0 ? 0:(vm.user.coolerBoxInfo.availableNum> vm.user.coolerBoxInfo.allNum?100:100*vm.user.coolerBoxInfo.availableNum/vm.user.coolerBoxInfo.allNum))+'%'}}" >
 
                                 </div>
                             </div>
@@ -68,7 +69,7 @@
                                 {{vm.user.medicalBoxInfo.availableNum}}/{{vm.user.medicalBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.medicalBoxInfo.allNum==0 ? 0:100*vm.user.medicalBoxInfo.availableNum/vm.user.medicalBoxInfo.allNum)+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.medicalBoxInfo.allNum==0 ? 0:(vm.user.medicalBoxInfo.availableNum> vm.user.medicalBoxInfo.allNum?100:100*vm.user.medicalBoxInfo.availableNum/vm.user.medicalBoxInfo.allNum))+'%'}}" >
 
                                 </div>
                             </div>
@@ -81,7 +82,7 @@
                                 {{vm.user.ordinaryBoxInfo.availableNum}}/{{vm.user.ordinaryBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.ordinaryBoxInfo.allNum==0 ? 0:100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum)+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.ordinaryBoxInfo.allNum==0 ? 0:(vm.user.ordinaryBoxInfo.availableNum> vm.user.ordinaryBoxInfo.allNum?100:100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum))+'%'}}" >
 
                                 </div>
                             </div>
@@ -94,7 +95,7 @@
                                 {{vm.user.specialBoxInfo.availableNum}}/{{vm.user.specialBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.ordinaryBoxInfo.allNum==0 ? 0:100*vm.user.ordinaryBoxInfo.availableNum/vm.user.ordinaryBoxInfo.allNum)+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.specialBoxInfo.allNum==0 ? 0:(vm.user.specialBoxInfo.availableNum> vm.user.specialBoxInfo.allNum?100:100*vm.user.specialBoxInfo.availableNum/vm.user.specialBoxInfo.allNum))+'%'}}" >
 
                                 </div>
                             </div>
@@ -102,21 +103,17 @@
                     </div>
 
                     <div class="m-l m-r panel panel-default">
-                        <table  st-table="vm.warehouseHistory" st-safe-src="vm.warehouseHistory" class="table table-bordered table-striped table-hover bg-white text-center">
+                        <table  st-table="vm.warehouseHistory" st-safe-src="vm.warehouseHistory" class="table  table-striped table-hover bg-white text-center">
                             <thead>
                             <tr class="font-bold">
                                 <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                                 <th class="text-center">时间</th>
-                                <th class="text-center">总转入</th>
-                                <th class="text-center">总转出</th>
-                                <th class="text-center">冷藏箱转入</th>
-                                <th class="text-center">冷藏箱转出</th>
-                                <th class="text-center">冷冻箱转入</th>
-                                <th class="text-center">冷冻箱转出</th>
-                                <th class="text-center">医药箱转入</th>
-                                <th class="text-center">医药箱转出</th>
-                                <th class="text-center">普通箱转入</th>
-                                <th class="text-center">普通箱转出</th>
+                                <th class="text-center">总转入/转出</th>
+                                <th class="text-center">冷藏箱转入/转出</th>
+                                <th class="text-center">冷冻箱转入/转出</th>
+                                <th class="text-center">医药箱转入/转出</th>
+                                <th class="text-center">普通箱转入/转出</th>
+                                <th class="text-center">特殊箱转入/转出</th>
                                 <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
                             </tr>
 
@@ -125,18 +122,12 @@
 
                             <tr ng-repeat="item in vm.warehouseHistory">
                                 <td ng-click="vm.goDetail(item)">{{item.date}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputAll}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputAll}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputFreezer}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputFreezer}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputCooler}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputCooler}}</td>
-
-                                <td ng-click="vm.goDetail(item)">{{item.inputMedical}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputMedical}}</td>
-
-                                <td ng-click="vm.goDetail(item)">{{item.inputOrdinary}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.outputOrdinary}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputAll}}/{{item.outputAll}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputFreezer}}/{{item.outputFreezer}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputCooler}}/{{item.outputCooler}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputMedical}}/{{item.outputMedical}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputOrdinary}}/{{item.outputOrdinary}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputSpecial}}/{{item.outputSpecial}}</td>
 
                             </tr>
 

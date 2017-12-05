@@ -8,7 +8,7 @@
     angular.module('smart_container').controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController($timeout,$translate,$location,ApiServer, $state, toastr,$scope) {
+    function MainController(constdata,StorageService, $timeout,$translate,$location,ApiServer, $state, toastr,$scope) {
        /* jshint validthis: true */
        var vm = this;
        var url = $location.absUrl();
@@ -41,6 +41,16 @@
         },
         settings: theme_11
       };
+
+
+
+
+        var userDetailInfo = StorageService.get(constdata.informationKey);
+
+        $scope.avatarUrl = 'images/a0.jpg';
+        if(userDetailInfo != null) {
+            $scope.avatarUrl = userDetailInfo.avatarUrl;
+        }
 
 
       // angular translate

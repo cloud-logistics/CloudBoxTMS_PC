@@ -34,7 +34,12 @@ air-platform-console
 gulp run:dev
 ```
 #### 发布
-
+### 本地发布
 ```
 gulp dist
 ```
+### cdn 七牛发布
+```
+gulp dist-cdn
+```
+

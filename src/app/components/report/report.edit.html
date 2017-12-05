@@ -47,11 +47,11 @@
                             <tbody class="">
 
                             <tr ng-repeat="item in vm.containerReportHistory">
-                                <td ng-click="vm.goDetail(item)">{{item.containerId}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.type}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.startTime | date:'yyyy-MM-dd HH:mm:ss'}}  {{}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.endTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.amount}}</td>
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.containerId}}</td>
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.type}}</td>
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.startTime | date:'yyyy-MM-dd HH:mm:ss'}}  {{}}</td>
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.endTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.amount}}</td>
                             </tr>
 
                             </tbody>

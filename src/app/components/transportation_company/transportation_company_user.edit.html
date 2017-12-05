@@ -55,6 +55,34 @@
 
 
 
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">昵称</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text"
+                               placeholder="昵称" ng-model="vm.user.user_nickname" ng-disabled = "vm.isDetail">
+                    </div>
+
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label m-l-lg font-bold">性别</label>
+                    <div class="col-sm-4">
+                       <!-- <input class="form-control" type="text"
+                               placeholder="性别" ng-model="vm.user.user_gender" ng-disabled = "!vm.isAdd" required>-->
+
+
+                        <select class="form-control font-thin" ng-model="vm.user.user_gender" ng-options="opt.value as opt.title for opt in vm.userGender" ng-disabled="vm.isDetail" ></select>
+
+                    </div>
+
+                </div>
+                <div class="line line-dashed b-b line-lg"></div>
+
+
+
+
 
                 <div  ng-if="vm.isAdd" class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">密码</label>
@@ -157,7 +185,7 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">所属企业</label>
                     <div class="col-sm-4">
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" name="enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail" required></select>
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" name="enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail || vm.isFromCompany" required></select>
 
                     </div>
 
