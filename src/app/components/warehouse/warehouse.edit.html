@@ -35,20 +35,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="warehouse-detail-card warehouse-detail-card-1">
+
+                        <div ng-repeat="item in vm.allInfo.box_counts" class="warehouse-detail-card" ng-class="'warehouse-detail-card-'+(item.box_type.id%5 + 1)">
                             <div class="title">
-                                冷藏箱可用数/总数
+                                {{item.box_type.box_type_name}}可用数/总数
                             </div>
                             <div class="num">
-                                {{vm.user.freezerBoxInfo.availableNum}}/{{vm.user.freezerBoxInfo.allNum}}
+                                {{item.ava_num-item.reserve_num}}/{{item.ava_num}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.freezerBoxInfo.allNum==0 ? 0:(vm.user.freezerBoxInfo.availableNum> vm.user.freezerBoxInfo.allNum?100:100*vm.user.freezerBoxInfo.availableNum/vm.user.freezerBoxInfo.allNum))+'%'}}" >
+                                <div class="progress-percent-bar" style="{{'width:' + (item.ava_num-item.reserve_num==0 ? 0:(item.ava_num-item.reserve_num> item.ava_num?100:100*(item.ava_num-item.reserve_num)/(item.ava_num)))+'%'}}" >
 
                                 </div>
                             </div>
                         </div>
-                        <div class="warehouse-detail-card warehouse-detail-card-2">
+
+
+
+                        <!--<div class="warehouse-detail-card warehouse-detail-card-2">
                             <div class="title">
                                 冷冻箱可用数/总数
                             </div>
@@ -61,6 +65,7 @@
                                 </div>
                             </div>
                         </div>
+                        </ng-repeat>
                         <div class="warehouse-detail-card warehouse-detail-card-3">
                             <div class="title">
                                 医药箱可用数/总数
@@ -100,7 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="m-l m-r panel panel-default">
                         <table  st-table="vm.warehouseHistory" st-safe-src="vm.warehouseHistory" class="table  table-striped table-hover bg-white text-center">
@@ -109,11 +114,14 @@
                                 <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
                                 <th class="text-center">时间</th>
                                 <th class="text-center">总转入/转出</th>
-                                <th class="text-center">冷藏箱转入/转出</th>
+                                <!--<th class="text-center">冷藏箱转入/转出</th>
                                 <th class="text-center">冷冻箱转入/转出</th>
                                 <th class="text-center">医药箱转入/转出</th>
                                 <th class="text-center">普通箱转入/转出</th>
-                                <th class="text-center">特殊箱转入/转出</th>
+                                <th class="text-center">特殊箱转入/转出</th>-->
+                                <th class="text-center" ng-repeat="item in vm.allName">
+                                            {{item}}转入/转出
+                                </th>
                                 <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
                             </tr>
 
@@ -122,12 +130,23 @@
 
                             <tr ng-repeat="item in vm.warehouseHistory">
                                 <td ng-click="vm.goDetail(item)">{{item.date}}</td>
+
+
+
+
                                 <td ng-click="vm.goDetail(item)">{{item.inputAll}}/{{item.outputAll}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputFreezer}}/{{item.outputFreezer}}</td>
+
+
+                                <td ng-repeat = "itemName in vm.allName" ng-click="vm.goDetail(item)">
+                                    {{item[itemName].input}}/{{item[itemName].output}}
+                                </td>
+
+
+                                <!--<td ng-click="vm.goDetail(item)">{{item.inputFreezer}}/{{item.outputFreezer}}</td>
                                 <td ng-click="vm.goDetail(item)">{{item.inputCooler}}/{{item.outputCooler}}</td>
                                 <td ng-click="vm.goDetail(item)">{{item.inputMedical}}/{{item.outputMedical}}</td>
                                 <td ng-click="vm.goDetail(item)">{{item.inputOrdinary}}/{{item.outputOrdinary}}</td>
-                                <td ng-click="vm.goDetail(item)">{{item.inputSpecial}}/{{item.outputSpecial}}</td>
+                                <td ng-click="vm.goDetail(item)">{{item.inputSpecial}}/{{item.outputSpecial}}</td>-->
 
                             </tr>
 

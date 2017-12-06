@@ -136,12 +136,49 @@
                 vm.userHis = response.data.results;
                 //console.log(vm.userHis);
                 vm.warehouseHistory = [];
+                vm.allName = [];
                 if(vm.userHis != null && vm.userHis.length > 0){
+
+                    for(var i = 0; i < vm.userHis.length; i ++){
+                        if(vm.userHis[i].detail && vm.userHis[i].detail.length > 0) {
+                            for (var j = 0; j < vm.userHis[i].detail.length; j++) {
+                                //console.log(vm.allName.indexOf(vm.userHis[i].detail[j].box_type.box_type_name));
+                                if (vm.allName.indexOf(vm.userHis[i].detail[j].box_type.box_type_name) == -1) {
+                                    vm.allName.push(vm.userHis[i].detail[j].box_type.box_type_name);
+                                    console.log(vm.userHis[i].detail[j].box_type.box_type_name);
+                                }
+                            }
+                        }
+
+                    }
+
+
+
+
                     for(var i = 0; i < vm.userHis.length; i ++){
                         vm.warehouseHistory[i] = {};
                         vm.warehouseHistory[i].date = vm.userHis[i].stat_day;
                         vm.warehouseHistory[i].inputAll = vm.userHis[i].total_in;
                         vm.warehouseHistory[i].outputAll = vm.userHis[i].total_out;
+
+
+                        for(var j = 0; j < vm.allName.length; j ++){
+                            vm.warehouseHistory[i][vm.allName[j]] = {};
+
+                            vm.warehouseHistory[i][vm.allName[j]].input = 0;
+                            vm.warehouseHistory[i][vm.allName[j]].output = 0;
+                        }
+
+
+                        if(vm.userHis[i].detail && vm.userHis[i].detail.length > 0) {
+                            //console.log(i+'----'+j+);
+                            for (var j = 0; j < vm.userHis[i].detail.length; j++) {
+                                vm.warehouseHistory[i][vm.userHis[i].detail[j].box_type.box_type_name].input = vm.userHis[i].detail[j].box_in;
+                                vm.warehouseHistory[i][vm.userHis[i].detail[j].box_type.box_type_name].output = vm.userHis[i].detail[j].box_out;
+                            }
+                        }
+
+                       /* vm.warehouseHistory[i].outputFreezer = vm.userHis[i].detail[j].box_out;
 
                         vm.warehouseHistory[i].inputFreezer = 0;
                         vm.warehouseHistory[i].outputFreezer = 0;
@@ -176,9 +213,14 @@
                                 }
                             }
                         }
+                        */
+
+
 
 
                     }
+
+                    console.log(vm.warehouseHistory);
                 }
                 updatePagination(response.data);
 
@@ -361,7 +403,7 @@
                 //console.log(vm.allInfo.box_counts);
                 if(vm.allInfo.box_counts && vm.allInfo.box_counts.length > 0) {
                     for (var j = 0; j < vm.allInfo.box_counts.length; j++) {
-                        if (vm.allInfo.box_counts[j].box_type.id == 1) {
+                        /*if (vm.allInfo.box_counts[j].box_type.box_type_name == 1) {
                             vm.user.freezerBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
                             vm.user.freezerBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
                         } else if (vm.allInfo.box_counts[j].box_type.id == 2) {
@@ -378,13 +420,17 @@
                         } else if (vm.allInfo.box_counts[j].box_type.id == 5) {
                             vm.user.specialBoxInfo.allNum = vm.allInfo.box_counts[j].ava_num;
                             vm.user.specialBoxInfo.availableNum = vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num;
-                        }
+                        }*/
+
+                        vm.user.allCurrentBoxInfo.allNum += vm.allInfo.box_counts[j].ava_num;
+                        vm.user.allCurrentBoxInfo.availableNum += (vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num);
+
                     }
                 }
-                vm.user.allCurrentBoxInfo.allNum = vm.user.freezerBoxInfo.allNum +  vm.user.coolerBoxInfo.allNum
+                /*vm.user.allCurrentBoxInfo.allNum = vm.user.freezerBoxInfo.allNum +  vm.user.coolerBoxInfo.allNum
                     + vm.user.medicalBoxInfo.allNum + vm.user.ordinaryBoxInfo.allNum+ vm.user.specialBoxInfo.allNum;
                 vm.user.allCurrentBoxInfo.availableNum = vm.user.freezerBoxInfo.availableNum +  vm.user.coolerBoxInfo.availableNum
-                    + vm.user.medicalBoxInfo.availableNum + vm.user.ordinaryBoxInfo.availableNum+ vm.user.specialBoxInfo.availableNum;
+                    + vm.user.medicalBoxInfo.availableNum + vm.user.ordinaryBoxInfo.availableNum+ vm.user.specialBoxInfo.availableNum;*/
 
                 //console.log(vm.user);
 
