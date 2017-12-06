@@ -223,18 +223,40 @@
                     event: [
                         {click: vm.onChart}
                     ],
-                    tooltip: {
+                    /*tooltip : {
                         trigger: 'axis',
-                        showDelay: 0, // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
-                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        axisPointer: {
+                            animation: false
                         }
+                    },*/
+
+                    tooltip : {
+                        trigger: 'axis',
+                        //formatter: "{a}: {c}"
+                        formatter : function (params) {
+                            var ret = '';
+                            if(params && params.length > 0) {
+                                ret = params[0].name + '<br/>';
+                                for (var i = 0; i < params.length; i++) {
+                                    ret += params[i].seriesName + ' : ' + params[i].value;
+                                    ret += '<br/>'
+                                }
+                            }
+                            //console.log(params);
+                            return ret;
+                        }
+
+
                     },
+
+
+
+
                     legend: {
                         x: 'left',               // 水平安放位置，默认为全图居中，可选为：
                         y: 'bottom',
                         data: ['该月归还数', '该月金额'],
-                        left: 100
+                        //left: 100
                     },
                     xAxis: [{
                         type: 'category',
@@ -247,8 +269,8 @@
                     }],
                     yAxis: [{
                         type: 'value'
-                    },
-                        {
+                            },
+                            {
                             type: 'value',
                             //show: false
                             splitLine: {

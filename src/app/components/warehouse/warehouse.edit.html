@@ -14,7 +14,7 @@
 
                          <span class="name">{{vm.user.name.length > 10 ? vm.user.name.substr(0,10)+'...':vm.user.name}}</span>
                     <span class="location-detail">{{(vm.user.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.latitude).toFixed(2) +'°'  + '/'+(vm.user.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.longitude).toFixed(2)+'°'}}</span>
-                    <span class="location">地址：{{vm.user.location.length > 20 ? vm.user.location.substr(0,20)+'...':vm.user.location}}</span>
+                    <span class="location">地址：{{vm.user.location.length > 15 ? vm.user.location.substr(0,15)+'...':vm.user.location}}</span>
 
                 </div>
 

@@ -8,7 +8,7 @@
     angular.module('smart_container').controller('MainController', MainController);
 
     /** @ngInject */
-    function MainController(constdata,StorageService, $timeout,$translate,$location,ApiServer, $state, toastr,$scope) {
+    function MainController($rootScope, NetworkService, constdata,StorageService, $timeout,$translate,$location,ApiServer, $state, toastr,$scope) {
        /* jshint validthis: true */
        var vm = this;
        var url = $location.absUrl();
@@ -52,6 +52,23 @@
             $scope.avatarUrl = userDetailInfo.avatarUrl;
         }
 
+
+        $rootScope.$on('to-profile', function(d,data) {
+            userDetailInfo = StorageService.get(constdata.informationKey);
+
+            if(userDetailInfo == null){
+                $state.go('access.signin');
+            }
+            NetworkService.get('rentservice/enterpriseuser/detail/' + userDetailInfo.userId + '/',null,function (response) {
+             var userDetail = response.data;
+                userDetailInfo.avatarUrl = userDetail.avatar_url;
+                StorageService.put(constdata.informationKey,userDetailInfo,24 * 3 * 60 * 60);
+                $scope.avatarUrl = userDetailInfo.avatarUrl;
+
+             },function (response) {
+                toastr.error(response.statusText);
+             });
+        });
 
       // angular translate
         $scope.lang = { isopen: false };

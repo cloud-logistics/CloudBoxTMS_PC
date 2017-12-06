@@ -123,6 +123,10 @@
                         availableNum:0,
                         allNum:0
                     };
+                    vm.items[i].specialBoxInfo = {
+                        availableNum:0,
+                        allNum:0
+                    };
                     vm.items[i].allCurrentBoxInfo = {
                         availableNum:0,
                         allNum:0
@@ -144,14 +148,17 @@
                         } else if (vm.items[i].box_num[j].box_type.id == 4) {
                             vm.items[i].ordinaryBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
                             vm.items[i].ordinaryBoxInfo.availableNum = vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;;
+                        } else if (vm.items[i].box_num[j].box_type.id == 5) {
+                            vm.items[i].specialBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
+                            vm.items[i].specialBoxInfo.availableNum = vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;;
                         }
                     }
                 }
 
                     vm.items[i].allCurrentBoxInfo.allNum = vm.items[i].freezerBoxInfo.allNum +  vm.items[i].coolerBoxInfo.allNum
-                        + vm.items[i].medicalBoxInfo.allNum + vm.items[i].ordinaryBoxInfo.allNum;
+                        + vm.items[i].medicalBoxInfo.allNum + vm.items[i].ordinaryBoxInfo.allNum + vm.items[i].specialBoxInfo.allNum;
                     vm.items[i].allCurrentBoxInfo.availableNum = vm.items[i].freezerBoxInfo.availableNum +  vm.items[i].coolerBoxInfo.availableNum
-                        + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum;
+                        + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum + vm.items[i].specialBoxInfo.availableNum;
 
 
                 }

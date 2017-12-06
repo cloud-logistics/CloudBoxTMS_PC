@@ -143,6 +143,11 @@
         getCompanyDatas();
 
         vm.uploadFile = function (){
+            if(vm.myUploadFile.size > 2000000){
+                toastr.error('图片大小不能超过2MB');
+                return;
+            }
+
             vm.showSpinner = true;
             NetworkService.putFile(vm.myUploadFile.name,vm.myUploadFile,function (response) {
                 toastr.success('上传成功！');

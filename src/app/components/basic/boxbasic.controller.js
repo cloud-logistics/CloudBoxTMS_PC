@@ -30,8 +30,8 @@
         };
 
         vm.containerStatusSpec = {
-            1:'可租用',
-            2:'运输中',
+            1:'可租赁',
+            2:'租赁中',
             3:'不可用'
         };
         vm.containerStatusLabel = {
@@ -153,12 +153,20 @@
 
                 if(vm.items.length > 0){
                     for(var i = 0; i < vm.items.length; i ++){
-                        if(vm.items[i].ava_flag == 'N'){
+                        /*if(rent_statusava_flag == 'N'){
                             vm.items[i].curStatus = 3;
                         }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
                             vm.items[i].curStatus = 2;
                         }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
                             vm.items[i].curStatus = 1;
+                        }*/
+                        vm.items[i].curStatus = 1;
+                        if(vm.items[i].rent_status == 0){
+                            vm.items[i].curStatus = 1;
+                        }else if(vm.items[i].rent_status == 1){
+                            vm.items[i].curStatus = 2;
+                        }else if(vm.items[i].rent_status == 2){
+                            vm.items[i].curStatus = 3;
                         }
                     }
                 }
@@ -305,13 +313,25 @@
 
                 if(vm.items.length > 0){
                     for(var i = 0; i < vm.items.length; i ++){
-                        if(vm.items[i].ava_flag == 'N'){
+
+                        /*if(vm.items[i].ava_flag == 'N'){
                             vm.items[i].curStatus = 3;
                         }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
                             vm.items[i].curStatus = 2;
                         }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
                             vm.items[i].curStatus = 1;
+                        }*/
+
+                        vm.items[i].curStatus = 1;
+                        if(vm.items[i].rent_status == 0){
+                            vm.items[i].curStatus = 1;
+                        }else if(vm.items[i].rent_status == 1){
+                            vm.items[i].curStatus = 2;
+                        }else if(vm.items[i].rent_status == 2){
+                            vm.items[i].curStatus = 3;
                         }
+
+
                     }
                 }
                 //console.log(response.data);

@@ -30,7 +30,7 @@
                         </div>
                         <div class="line line-dashed b-b line-lg"></div>
 
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label class="col-sm-1 control-label m-l-lg font-bold">真实姓名</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text"
@@ -38,7 +38,7 @@
                             </div>
                             <span class="blank-tips" ><i>* </i><i ng-show="form.user_real_name.$invalid">请输入真实姓名</i></span>
                         </div>
-                        <div class="line line-dashed b-b line-lg"></div>
+                        <div class="line line-dashed b-b line-lg"></div>-->
 
 
                         <div  ng-if="vm.isAdd" class="form-group">
@@ -58,11 +58,11 @@
                                 <div class="beauty-upload">
                                     <div class="lcell span5" style="margin:5px 0px;">
                                         <div class="upload">
-                                            <input type="button" class="btn btn-default " value="浏览文件"></input>
-                                            <label  ng-bind="vm.myUploadFile.name" class="label bg-finished"></label>
-                                            <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" />
+                                            <input type="button" class="btn btn-default " value="浏览文件" />
+                                            <label  ng-bind="vm.myUploadFile.viewName" class="label bg-finished"></label>
+                                            <input type="file" file-model = "vm.myUploadFile" class="upload-input-file"  accept="image/*"/>
                                         </div>
-                                        <button class="btn btn-default btn-upload" ng-click="vm.uploadFile()"> <i class="fa fa-check-circle"></i> 上传 </button>
+                                        <button class="btn btn-default btn-upload" ng-click="vm.uploadFile()" ng-disabled="(vm.myUploadFile == null)"> <i class="fa fa-check-circle"></i> 上传 </button>
                                     </div>
 
                                 </div>

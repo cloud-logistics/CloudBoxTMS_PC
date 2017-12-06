@@ -7,7 +7,7 @@
     angular.module('smart_container').controller('ProfileController', ProfileController);
 
     /** @ngInject */
-    function ProfileController($scope,ApiServer,toastr,constdata,$state,NetworkService, StorageService) {
+    function ProfileController($rootScope, $scope,ApiServer,toastr,constdata,$state,NetworkService, StorageService) {
         /* jshint validthis: true */
         var vm = this;
         vm.submitAction = submitAction;
@@ -103,6 +103,11 @@
         function editItem() {
             NetworkService.post(vm.updateBasePath,vm.user,function (response) {
                 toastr.success('操作成功！');
+
+
+
+                $rootScope.$emit('to-profile', 'parent');
+
                 $state.go('app.dashboard');
             },function (response) {
                 toastr.error(response.statusText);
@@ -117,6 +122,10 @@
 
 
         vm.uploadFile = function (){
+            if(vm.myUploadFile.size > 2000000){
+                toastr.error('图片大小不能超过2MB');
+                return;
+            }
             vm.showSpinner = true;
             NetworkService.putFile(vm.myUploadFile.name,vm.myUploadFile,function (response) {
                 toastr.success('上传成功！');
