@@ -28,7 +28,8 @@
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
-        vm.pages = [];
+        vm.pages = ['1'];
+        vm.totalPages = 1;
         vm.limit = 10;
         vm.user = {};
         vm.isAdd = true;
@@ -248,10 +249,7 @@
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username,null,function (response) {
                 vm.user = response.data;
-
-                //vm.user = refItem;
-                //vm.user.siteinfo = null;
-                var disPoint = new BMap.Point(116.404, 39.915);
+                var disPoint,point;
 
                 if(vm.user.box_info.ava_flag == 'N'){
                     vm.user.curStatus = 3;
@@ -260,22 +258,26 @@
                 }else if(vm.user.box_info.ava_flag=='Y' && vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null ){
                     vm.user.curStatus = 1;
                 }
-
-                console.log(vm.user.box_info.siteinfo);
                 function showInfo(){
-                    var opts = {
-                        width: 100,     // 信息窗口宽度
-                        height: 80,     // 信息窗口高度
-                        title: '',  // 信息窗口标题
-                        background: '#122341'
-                    };
+                    var posStr;
                     var infoWindow;
-
-                    var posStr = (vm.user.location.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.location.latitude).toFixed(2)  +'°' + '/'+(vm.user.location.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.location.longitude).toFixed(2)+'°' ;
-
                     var tid = '', sname = '', divContent = '';
-
+                    var opts;
                     if(vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null) {
+
+                        opts = {
+                            width: 100,     // 信息窗口宽度
+                            height: 80,     // 信息窗口高度
+                            title: '',  // 信息窗口标题
+                            background: '#122341'
+                        };
+                        point = new BMap.Point(vm.user.box_info.siteinfo.longitude, vm.user.box_info.siteinfo.latitude);
+                        disPoint = new BMap.Point(vm.user.box_info.siteinfo.longitude, parseFloat(vm.user.box_info.siteinfo.latitude)+0.22);
+                        posStr = (vm.user.box_info.siteinfo.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.box_info.siteinfo.latitude).toFixed(2)  +'°' + '/'+(vm.user.box_info.siteinfo.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.box_info.siteinfo.longitude).toFixed(2)+'°' ;
+                        if(vm.user.box_info.siteinfo.latitude == '0' && vm.user.box_info.siteinfo.longitude == '0' ){
+                            posStr += '<span style="color:#ff0000">(位置异常)</span>';
+                        }
+
                         infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '仓库名称 ' + vm.user.box_info.siteinfo.name + '<br />' + '当前位置 ' + posStr + '<br />', opts);  // 创建信息窗口对象
 
                          tid = vm.user.box_info.tid.length > 24 ? vm.user.box_info.tid.substr(0,21)+'...':vm.user.box_info.tid;
@@ -287,12 +289,19 @@
                         divContent = divContent.replace('#curpos', posStr );
 
                     }else{
-                         opts = {
+                        opts = {
                             width: 100,     // 信息窗口宽度
                             height: 50,     // 信息窗口高度
                             title: '',  // 信息窗口标题
                             background: '#122341'
                         };
+
+                        point = new BMap.Point(vm.user.location.longitude, vm.user.location.latitude);
+                        disPoint = new BMap.Point(vm.user.location.longitude, parseFloat(vm.user.location.latitude)+0.22);
+                        posStr = (vm.user.location.latitude >= 0 ? '北纬':'南纬') + parseFloat(vm.user.location.latitude).toFixed(2)  +'°' + '/'+(vm.user.location.longitude >= 0 ? '东经':'西经') + parseFloat(vm.user.location.longitude).toFixed(2)+'°' ;
+                        if(vm.user.location.latitude == '0' && vm.user.location.longitude == '0' ){
+                            posStr += '<span style="color:#ff0000">(位置异常)</span>';
+                        }
                         infoWindow = new BMap.InfoWindow('RFID ' + vm.user.box_info.tid + '<br />' + '当前位置 ' + posStr + '<br />', opts);  // 创建信息窗口对象
                          tid = vm.user.box_info.tid.length > 24 ? vm.user.box_info.tid.substr(0,21)+'...':vm.user.box_info.tid;
                          divContent = "<div class='tip-all'> <div class='tip-layout'><div class='tip-line'><div class='tip-title'>RFID</div> <div class='tip-value'>#rfid</div></div>        <div class='tip-line'><div class='tip-title'>当前位置</div> <div class='tip-value'>#curpos</div></div>      </div> <div class='tip-trangle' /> </div>";
@@ -300,36 +309,14 @@
                         divContent = divContent.replace('#curpos', posStr );
 
                     }
-                    //infoWindow.addEventListener("close", function () {});
-                    //map.openInfoWindow(infoWindow, point);
-
-
-
-
-                    //var divContent = "<div class='tip-all'> <div class='tip-layout'><div class='tip-line'><div class='tip-title'>RFID</div> <div class='tip-value'>#rfid</div></div>    <div class='tip-line'><div class='tip-title'>仓库名称</div> <div class='tip-value'>#user</div></div>      <div class='tip-line'><div class='tip-title'>当前位置</div> <div class='tip-value'>#curpos</div></div>      </div> <div class='tip-trangle' /> </div>";
-                    //var tid = vm.user.box_info.tid.length > 24 ? vm.user.box_info.tid.substr(0,21)+'...':vm.user.box_info.tid;
-                    //var sname = vm.user.box_info.siteinfo.name.length > 10 ? vm.user.box_info.siteinfo.name.substr(0,8)+'...':vm.user.box_info.siteinfo.name;
 
                     var infoBox = new BMapLib.InfoBox(map,divContent, {enableAutoPan: true,alignBottom: false});
                     infoBox.open(point);
                 }
-
-                //if(vm.user.siteinfo != '' && vm.user.siteinfo != null)
-                {
-
-
-                    var point = new BMap.Point(vm.user.location.longitude, vm.user.location.latitude);  // 创建点坐标
-
-
-                    var mySquare = new SquareOverlay(point, 36, "red");
-                    map.addOverlay(mySquare);
-                    mySquare.addEventListener("click", showInfo);
-
-
-                    showInfo();
-                    disPoint = new BMap.Point(vm.user.location.longitude, parseFloat(vm.user.location.latitude)+0.22);
-
-                }
+                showInfo();
+                var mySquare = new SquareOverlay(point, 36, "red");
+                map.addOverlay(mySquare);
+                //mySquare.addEventListener("click", showInfo);
                 map.centerAndZoom(disPoint, 10);
 
 

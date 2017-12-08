@@ -18,7 +18,8 @@
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
-        vm.pages = [];
+        vm.pages = ['1'];
+        vm.totalPages = 1;
 
         vm.items = [];
         vm.showItems = [];
@@ -198,6 +199,7 @@
         };
 
         function updatePagination(pageination) {
+
             if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;

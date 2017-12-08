@@ -28,7 +28,8 @@
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
-        vm.pages = [];
+        vm.pages = ['1'];
+        vm.totalPages = 1;
         vm.limit = 10;
         vm.user = {};
         vm.isAdd = true;
@@ -289,6 +290,7 @@
                             yAxisIndex: 1,
                             name: '该月金额',
                             type: 'bar',
+                            barWidth : 40,//柱图宽度
                             itemStyle: {normal: {color: '#2ec7c9'}},
                             data: amount
                         }

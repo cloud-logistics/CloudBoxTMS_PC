@@ -77,7 +77,7 @@
                 <div class="search-select-warehouse inline">
                     <select class="search-select-list-warehouse" ng-model="vm.searchWarehouse"  ng-options="opt.id as opt.name for opt in vm.warehouseInfo" ng-disabled="!vm.isWarehouseEnable" ></select>
                 </div>
-                    <button class="search-icon" ng-click="vm.goSearch()">
+                    <button class="search-icon" ng-click="vm.goResetSearch()">
                         <i class="fa fa-search"></i>
                     </button>
                 <input st-search="" ng-model="vm.searchContainerId" ng-keyup="vm.enterEvent($event)"  class=" search-edit search-input font-thin" placeholder="请输入云箱编号" type="text"/>
@@ -116,7 +116,7 @@
                             <td style="vertical-align: middle;">{{item.date_of_production | date:"yyyy-MM-dd"}}</td>
                             <td style="vertical-align: middle;">{{item.battery}}</td>-->
                             <td style="vertical-align: middle;">{{vm.containerStatusSpec[item.curStatus]}}</td>
-                            <td style="vertical-align: middle;">{{item.siteinfo.location}}</td>
+                            <td style="vertical-align: middle;">{{item.siteinfo.name.length > 10 ? item.siteinfo.name.substr(0,10)+'...':item.siteinfo.name}}</td>
                             <td style="vertical-align: middle;">
                                 <span class="bb-edit-btn" ng-click="vm.goDetail(item)">详情</span>
 <!--

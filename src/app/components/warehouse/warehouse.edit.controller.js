@@ -32,7 +32,8 @@
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
-        vm.pages = [];
+        vm.pages = ['1'];
+        vm.totalPages = 1;
         vm.limit = 10;
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;

@@ -20,7 +20,7 @@
             <div style="height: 90px; width: 90px;display: inline;"><img style="height: 90px;width: 90px;" src="images/logo.png"></div>
         </div>-->
 
-        <form role="form" name="form" ng-submit="vm.login()">
+        <form role="form" name="form">
             <div class="body bg-gray">
                 <div class="text-center text-danger" ng-show="vm.authError">
                     &lt;!&ndash;<h5>登录失败（{{vm.authError}})</h5>&ndash;&gt;
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button ng-disabled="vm.isLogining" ng-click="vm.login()" type="submit" class="login-button" ng-disabled='form.$invalid'>
+                    <button ng-click="vm.login()" type="submit" class="login-button" ng-disabled='form.$invalid || vm.user.password==null||vm.user.password=="" || vm.user.username==null||vm.user.username==""'>
                         登录
                     </button>
                 </div>

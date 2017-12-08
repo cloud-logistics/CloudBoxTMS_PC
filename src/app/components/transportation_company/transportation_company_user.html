@@ -37,7 +37,9 @@
             </thead>
             <tbody class="">
 
-            <tr ng-repeat="item in vm.displayedCollection|filter:{role:'user'}">
+
+            <!--filter:{role:'user'}-->
+            <tr ng-repeat="item in vm.displayedCollection">
                 <td ng-click="vm.goDetail(item)">{{item.user_name}}</td>
                <!-- <td ng-click="vm.goDetail(item)">{{item.user_password}}</td>-->
                 <td ng-click="vm.goDetail(item)">

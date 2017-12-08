@@ -14,12 +14,17 @@
         vm.title = '报警监控';
         vm.reports = [];
         vm.queryParams = {};
+
         vm.pageCurrent = 1;
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
-        vm.pages = [];
+        vm.pages = ['1'];
+        vm.totalPages = 1;
         vm.limit = 8;
+
+
+        vm.isSearch = false;
         $scope.transDetail = false;
 
 
@@ -135,18 +140,24 @@
                 vm.goSearch();
             }
         }
+        vm.goResetSearch = function(){
+            vm.pageCurrent = 1;
+            vm.goSearch();
+        }
         vm.goSearch = function(){
+            console.log('is searching...');
+            vm.isSearch = true;
             if(vm.searchContainerId == undefined || vm.searchContainerId == null){
                 vm.searchContainerId = '';
             }
-            NetworkService.post(vm.getBasePath,{
+            NetworkService.post(vm.getBasePath+'?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),{
                 "province_id":vm.searchProvince,
                 "city_id":vm.searchCity,
                 "site_id":vm.searchWarehouse,
                 "ava_flag":"",
-                "box_id":vm.searchContainerId,
+                "box_id":vm.searchContainerId/*,
                 limit:vm.limit,
-                offset:(vm.pageCurrent - 1) * vm.limit,
+                offset:(vm.pageCurrent - 1) * vm.limit,*/
 
             },function (response) {
                 vm.items = response.data.results;
@@ -299,51 +310,52 @@
         }
         function getDatas() {
 
+            if(vm.isSearch ){
+                vm.goSearch();
+            }else {
 
+                NetworkService.post(vm.getBasePath + '?limit=' + vm.limit + '&offset=' + ((vm.pageCurrent - 1) * vm.limit), {
+                    "province_id": 0,
+                    "city_id": 0,
+                    "site_id": 0,
+                    "ava_flag": "",
+                    "box_id": ""
 
-            NetworkService.post(vm.getBasePath+'?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),{
-                "province_id":0,
-                "city_id":0,
-                "site_id":0,
-                "ava_flag":"",
-                "box_id":""
+                }, function (response) {
+                    vm.items = response.data.results;
 
-            },function (response) {
-                vm.items = response.data.results;
+                    if (vm.items.length > 0) {
+                        for (var i = 0; i < vm.items.length; i++) {
 
-                if(vm.items.length > 0){
-                    for(var i = 0; i < vm.items.length; i ++){
+                            /*if(vm.items[i].ava_flag == 'N'){
+                             vm.items[i].curStatus = 3;
+                             }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
+                             vm.items[i].curStatus = 2;
+                             }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
+                             vm.items[i].curStatus = 1;
+                             }*/
 
-                        /*if(vm.items[i].ava_flag == 'N'){
-                            vm.items[i].curStatus = 3;
-                        }else if(vm.items[i].ava_flag=='Y' && (vm.items[i].siteinfo == '' || vm.items[i].siteinfo == null)){
-                            vm.items[i].curStatus = 2;
-                        }else if(vm.items[i].ava_flag=='Y' && vm.items[i].siteinfo != '' && vm.items[i].siteinfo != null ){
                             vm.items[i].curStatus = 1;
-                        }*/
+                            if (vm.items[i].rent_status == 0) {
+                                vm.items[i].curStatus = 1;
+                            } else if (vm.items[i].rent_status == 1) {
+                                vm.items[i].curStatus = 2;
+                            } else if (vm.items[i].rent_status == 2) {
+                                vm.items[i].curStatus = 3;
+                            }
 
-                        vm.items[i].curStatus = 1;
-                        if(vm.items[i].rent_status == 0){
-                            vm.items[i].curStatus = 1;
-                        }else if(vm.items[i].rent_status == 1){
-                            vm.items[i].curStatus = 2;
-                        }else if(vm.items[i].rent_status == 2){
-                            vm.items[i].curStatus = 3;
+
                         }
-
-
                     }
-                }
-                //console.log(response.data);
-                vm.displayedCollection = (vm.items);
+                    //console.log(response.data);
+                    vm.displayedCollection = (vm.items);
 
-                updatePagination(response.data);
-            },function (response) {
-                toastr.error(response.statusText);
-            });
-
-
-            vm.updateProvinceList(0);
+                    updatePagination(response.data);
+                }, function (response) {
+                    toastr.error(response.statusText);
+                });
+                vm.updateProvinceList(0);
+            }
 
         }
 
@@ -381,8 +393,18 @@
         };
 
         function updatePagination(pageination) {
+
+
+
             if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
+                vm.pageCurrent = 1;
+                vm.targetPage = 1;
+                vm.pagePreEnabled = false;
+                vm.pageNextEnabled = false;
+                vm.pages = ['1'];
+                vm.totalPages = 1;
+
                 return;
             }
             var page = parseInt(pageination.offset/pageination.limit +1);

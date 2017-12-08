@@ -18,7 +18,8 @@
         vm.targetPage = 1;
         vm.pagePreEnabled = false;
         vm.pageNextEnabled = false;
-        vm.pages = [];
+        vm.pages = ['1'];
+        vm.totalPages = 1;
         vm.limit = 8;
 
         vm.items = [];
@@ -106,7 +107,7 @@
             if(vm.items.length > 0) {
                 for (var i = 0; i < vm.items.length; i++) {
 
-                    var allNum = 0;
+                    //var allNum = 0;
                     vm.items[i].freezerBoxInfo  = {
                         availableNum:0,
                         allNum:0
@@ -132,9 +133,12 @@
                         allNum:0
                     };
 
-                if(vm.items[i].box_num != null && vm.items[i].box_num.length > 0) {
+                    if(vm.items[i].box_num != null && vm.items[i].box_num.length > 0) {
                     for (var j = 0; j < vm.items[i].box_num.length; j++) {
-                        if (vm.items[i].box_num[j].box_type.id == 1) {
+                        vm.items[i].allCurrentBoxInfo.allNum += vm.items[i].box_num[j].ava_num;
+                        vm.items[i].allCurrentBoxInfo.availableNum += vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;
+
+                        /*if (vm.items[i].box_num[j].box_type.id == 1) {
                             vm.items[i].freezerBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
                             vm.items[i].freezerBoxInfo.availableNum = vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;
                         } else if (vm.items[i].box_num[j].box_type.id == 2) {
@@ -151,14 +155,15 @@
                         } else if (vm.items[i].box_num[j].box_type.id == 5) {
                             vm.items[i].specialBoxInfo.allNum = vm.items[i].box_num[j].ava_num;
                             vm.items[i].specialBoxInfo.availableNum = vm.items[i].box_num[j].ava_num - vm.items[i].box_num[j].reserve_num;;
-                        }
+                        }*/
                     }
                 }
 
-                    vm.items[i].allCurrentBoxInfo.allNum = vm.items[i].freezerBoxInfo.allNum +  vm.items[i].coolerBoxInfo.allNum
+                    /*
+                   vm.items[i].allCurrentBoxInfo.allNum = vm.items[i].freezerBoxInfo.allNum +  vm.items[i].coolerBoxInfo.allNum
                         + vm.items[i].medicalBoxInfo.allNum + vm.items[i].ordinaryBoxInfo.allNum + vm.items[i].specialBoxInfo.allNum;
                     vm.items[i].allCurrentBoxInfo.availableNum = vm.items[i].freezerBoxInfo.availableNum +  vm.items[i].coolerBoxInfo.availableNum
-                        + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum + vm.items[i].specialBoxInfo.availableNum;
+                        + vm.items[i].medicalBoxInfo.availableNum + vm.items[i].ordinaryBoxInfo.availableNum + vm.items[i].specialBoxInfo.availableNum;*/
 
 
                 }
