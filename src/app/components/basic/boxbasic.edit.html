@@ -83,8 +83,8 @@
                                 <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.lease_start_time| date:'yyyy-MM-dd HH:mm'}}</td>
                                 <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.lease_end_time == null ? '至今':(item.lease_end_time| date:'yyyy-MM-dd HH:mm')}}</td>
                                 <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.enterprise.enterprise_name}}</td>
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.off_site.name}}</td>
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.on_site.name==null? '在运未知':item.on_site.name}}</td>
+                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)" title="{{item.off_site.name}}">{{item.off_site.name.length > 10 ? item.off_site.name.substr(0,10)+'...':item.off_site.name}}</td>
+                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)" title="{{item.on_site.name}}">{{item.on_site.name==null? '在运未知':(item.on_site.name.length > 10 ? item.on_site.name.substr(0,10)+'...':item.on_site.name)}}</td>
                             </tr>
 
                             </tbody>

@@ -38,7 +38,7 @@
             <tbody class="">
 
             <tr ng-repeat="item in vm.displayedCollection">
-                <td ng-click="vm.goDetail(item)">{{item.name.length >= 10 ? item.name.substr(0,10)+'...':item.name}}</td>
+                <td ng-click="vm.goDetail(item)" title="{{item.name}}">{{item.name.length >= 10 ? item.name.substr(0,10)+'...':item.name}}</td>
 
                 <td ng-click="vm.goDetail(item)">
                     <!--<label  ng-bind="item.allCurrentBoxInfo.allNum" class="label bg-finished"></label>-->

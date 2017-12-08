@@ -116,7 +116,7 @@
                             <td style="vertical-align: middle;">{{item.date_of_production | date:"yyyy-MM-dd"}}</td>
                             <td style="vertical-align: middle;">{{item.battery}}</td>-->
                             <td style="vertical-align: middle;">{{vm.containerStatusSpec[item.curStatus]}}</td>
-                            <td style="vertical-align: middle;">{{item.siteinfo.name.length > 10 ? item.siteinfo.name.substr(0,10)+'...':item.siteinfo.name}}</td>
+                            <td style="vertical-align: middle;" title="{{item.siteinfo.name}}">{{item.siteinfo.name.length > 10 ? item.siteinfo.name.substr(0,10)+'...':item.siteinfo.name}}</td>
                             <td style="vertical-align: middle;">
                                 <span class="bb-edit-btn" ng-click="vm.goDetail(item)">详情</span>
 <!--
