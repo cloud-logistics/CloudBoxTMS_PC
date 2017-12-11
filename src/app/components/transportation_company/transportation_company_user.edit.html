@@ -171,8 +171,8 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">邮箱</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="email"
-                               placeholder="例如：test@example.com" ng-model="vm.user.user_email" name="user_email" ng-disabled="vm.isDetail">
+                        <input class="form-control" type="text"
+                               placeholder="例如：test@example.com" ng-model="vm.user.user_email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+$/" name="user_email" ng-disabled="vm.isDetail">
                     </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.user_email.$invalid">请输入合法的邮箱</i></span>
 

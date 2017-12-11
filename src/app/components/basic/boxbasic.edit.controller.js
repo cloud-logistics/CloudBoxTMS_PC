@@ -102,8 +102,8 @@
         }
 
         vm.containerStatusSpec = {
-            1:'可租用',
-            2:'运输中',
+            1:'可租赁',
+            2:'租赁中',
             3:'不可用'
         };
         vm.tabItem =
@@ -251,13 +251,25 @@
                 vm.user = response.data;
                 var disPoint,point;
 
-                if(vm.user.box_info.ava_flag == 'N'){
+                /*if(vm.user.box_info.ava_flag == 'N'){
                     vm.user.curStatus = 3;
                 }else if(vm.user.box_info.ava_flag=='Y' && (vm.user.box_info.siteinfo == '' || vm.user.box_info.siteinfo == null)){
                     vm.user.curStatus = 2;
                 }else if(vm.user.box_info.ava_flag=='Y' && vm.user.box_info.siteinfo != '' && vm.user.box_info.siteinfo != null ){
                     vm.user.curStatus = 1;
+                }*/
+
+                vm.user.curStatus = 1;
+                if(vm.user.box_info.rent_status == 0){
+                    vm.user.curStatus = 1;
+                }else if(vm.user.box_info.rent_status == 1){
+                    vm.user.curStatus = 2;
+                }else if(vm.user.box_info.rent_status == 2){
+                    vm.user.curStatus = 3;
                 }
+
+
+
                 function showInfo(){
                     var posStr;
                     var infoWindow;
