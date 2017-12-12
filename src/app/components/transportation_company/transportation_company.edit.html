@@ -32,10 +32,10 @@
                 <div  class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业名称</label>
                         <div class="col-sm-4">
-                            <input  class="form-control" type="text"
+                            <input  class="form-control" type="text" ng-minlength="2" ng-maxlength="24"
                                    placeholder="公司名称" name="enterprise_name" ng-model="vm.user.enterprise_name"  ng-disabled="vm.isDetail"  required>
                         </div>
-                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_name.$invalid">请输入企业名称</i></span>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_name.$invalid">请输入企业名称，长度2-24位</i></span>
                 </div>
                 <div  class="line line-dashed b-b line-lg"></div>
 
@@ -148,8 +148,8 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">企业邮箱</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="email"
-                               placeholder="例如：test@example.com" ng-model="vm.user.enterprise_email" name="enterprise_email"  ng-disabled="vm.isDetail" required>
+                        <input class="form-control" type="text"
+                               placeholder="例如：test@example.com" ng-model="vm.user.enterprise_email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+$/" name="enterprise_email" ng-disabled="vm.isDetail" required>
                     </div>
                     <span class="blank-tips" ><i>* </i><i ng-show="form.enterprise_email.$invalid">请输入合法的企业邮箱</i></span>
                 </div>

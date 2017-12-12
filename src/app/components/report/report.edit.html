@@ -11,7 +11,7 @@
                         <span class="title" ><u><b>报表管理</b></u></span>
                     </a>
                     <span>></span>
-                         <span class="name">{{vm.refItem.enterpriseName}}</span>
+                         <span class="name">{{ vm.refItem.enterpriseName.length > 10 ? vm.refItem.enterpriseName.substr(0,10)+'...':vm.refItem.enterpriseName}}</span>
                 </div>
 
 
@@ -28,30 +28,30 @@
                 <div class="report-month">
                     {{vm.selectedDate | date:'yyyy-MM' }} 详情记录
                 </div>
-                    <div class="report-detail-table m-t panel panel-default">
+                    <div class="bb-table m-t panel panel-default">
                         <table  st-table="vm.containerReportHistory" st-safe-src="vm.containerReportHistory" class="table  table-striped table-hover bg-white text-center">
                             <thead>
-                            <tr class="font-bold">
+
                                 <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                                <th class="text-center">云箱 ID</th>
-                                <th class="text-center">类型</th>
-                                <th class="text-center">开始</th>
-                                <th class="text-center">结束</th>
-                                <th class="text-center">金额</th>
+                                <th >云箱 ID</th>
+                                <th >类型</th>
+                                <th >开始</th>
+                                <th >结束</th>
+                                <th>金额</th>
 
                                 <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
-                            </tr>
+
 
                             </thead>
 
                             <tbody class="">
 
                             <tr ng-repeat="item in vm.containerReportHistory">
-                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.containerId}}</td>
-                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.type}}</td>
-                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.startTime | date:'yyyy-MM-dd HH:mm:ss'}}  {{}}</td>
-                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.endTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)">{{item.amount}}</td>
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)" >{{item.containerId}}</td>
+                                <td title="{{item.type}}" ng-click="vm.goDetail(item)">{{item.type}}</td>
+                                <td title="{{item.offSite.location}} {{item.offSite.name}}" ng-click="vm.goDetail(item)" >{{item.startTime| date:'yyyy-MM-dd HH:mm'}} {{item.offCity}}</td>
+                                <td  title="{{item.onSite.location}} {{item.onSite.name}}" ng-click="vm.goDetail(item)" >{{item.endTime| date:'yyyy-MM-dd HH:mm'}} {{item.onCity}}</td>
+                                <td title="{{item.amount}}" ng-click="vm.goDetail(item)">{{item.amount}}</td>
                             </tr>
 
                             </tbody>

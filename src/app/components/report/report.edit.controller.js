@@ -161,6 +161,11 @@
                             vm.containerReportHistory[i].startTime = tmp[i].lease_start_time;
                             vm.containerReportHistory[i].endTime = tmp[i].lease_end_time;
                             vm.containerReportHistory[i].amount = tmp[i].rent;
+                            vm.containerReportHistory[i].offCity = tmp[i].off_city;
+                            vm.containerReportHistory[i].onCity = tmp[i].on_city;
+                            vm.containerReportHistory[i].onSite = tmp[i].on_site;
+                            vm.containerReportHistory[i].offSite = tmp[i].off_site;
+
 
                         }
                     }
@@ -312,6 +317,10 @@
                         vm.containerReportHistory[i].startTime = tmp[i].lease_start_time;
                         vm.containerReportHistory[i].endTime = tmp[i].lease_end_time;
                         vm.containerReportHistory[i].amount = tmp[i].rent;
+                        vm.containerReportHistory[i].offCity = tmp[i].off_city;
+                        vm.containerReportHistory[i].onCity = tmp[i].on_city;
+                        vm.containerReportHistory[i].onSite = tmp[i].on_site;
+                        vm.containerReportHistory[i].offSite = tmp[i].off_site;
 
                     }
                 }

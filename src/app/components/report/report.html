@@ -38,7 +38,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="item in vm.items track by $index">
-                            <td style="vertical-align: middle;">{{item.enterpriseName}}</td>
+                            <td style="vertical-align: middle;" title="{{item.enterpriseName}}">{{item.enterpriseName.length > 10 ? item.enterpriseName.substr(0,10)+'...':item.enterpriseName}}</td>
                             <td style="vertical-align: middle;">{{item.usingContainerNum}}</td>
                             <td style="vertical-align: middle;">{{item.usedContainerNum}}</td>
                             <td style="vertical-align: middle;">{{item.amount}}</td>
