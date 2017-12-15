@@ -1,6 +1,7 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="WarehouseController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
+    app.settings.dashboard=false;
 ">
 
 
@@ -21,7 +22,7 @@
     <!-- main -->
     <div ng-if="vm.isViewList">
         <div class="bb-table m-l m-r m-t panel panel-default">
-        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table  table-striped table-hover bg-white text-center">
+        <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-striped table-hover m-t">
             <thead>
             <tr class="font-bold">
                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->

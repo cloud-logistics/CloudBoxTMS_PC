@@ -1,5 +1,5 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="BoxBasicController as vm"
-     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;">
+     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;app.settings.dashboard=false;">
     <!-- main -->
     <div class="col">
         <!-- main header -->
@@ -87,8 +87,7 @@
             </div>
 
             <div ng-if="vm.isViewList">
-                <div class="m-l m-r m-t panel panel-default">
-                <div class="row bb-table m-l m-r" style="background-color: #fff;margin-top: 30px">
+                <div class=" bb-table m-l m-r m-t panel panel-default" >
                     <table st-table="vm.items" st-safe-src="vm.items" class="table table-striped table-hover m-t">
                         <thead>
                         <tr>
@@ -128,9 +127,8 @@
                         </tbody>
                     </table>
                 </div>
-                <!--<div auto-pagination pageination="vm.pageination"></div>-->
 
-                </div>
+
                 <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="TransportationCompanyController as vm" ng-init="
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
+    app.settings.dashboard=false;
 ">
     <!-- main -->
     <div class="col">
@@ -17,9 +18,9 @@
             </div>
         </div>
 
-        <div class="m-l m-r m-t panel panel-default">
+        <div class="bb-table  m-l m-r m-t panel panel-default">
         <table
-                st-table="vm.displayedCollection" st-safe-src="vm.items" class="table  table-striped table-hover bg-white text-center">
+                st-table="vm.displayedCollection" st-safe-src="vm.items" class="table  table-striped table-hover m-t">
             <thead>
             <tr style="    text-align: center;
     font-family: PingFangSC-Regular;
