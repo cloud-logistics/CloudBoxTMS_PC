@@ -186,6 +186,12 @@
 
         function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                vm.targetPage = 1;
+                vm.pagePreEnabled = false;
+                vm.pageNextEnabled = false;
+                vm.pages = ['1'];
+                vm.totalPages = 1;
                 // toastr.error('当前无数据哦~');
                 return;
             }
