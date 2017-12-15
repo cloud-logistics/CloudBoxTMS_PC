@@ -12,15 +12,22 @@
         <div  class="view-type inline"><a href ng-class="vm.selectedStyle[!vm.isViewList]" ng-click="vm.selList(false)"><i class="fa fa-th icon-m-r" />方格展示</a></div>
 
         <div class="right-search">
-            <button class="search-icon" ng-click="vm.goSearch()">
+            <button class="search-icon" ng-click="vm.goResetSearch()">
                 <i class="fa fa-search"></i>
             </button>
         <input st-search="" ng-keyup="vm.enterEvent($event)" ng-model="vm.searchWarehouse" class="pull-right search-edit search-input font-thin" placeholder="请输入仓库名称" type="text"/>
         </div>
             <!--<button ng-click="vm.goSearch()" class="pull-right search-button"><i class="fa fa-search" />搜索</button>-->
     </div>
+
+
+
+    <div ng-if="vm.showEmpty" class="user-empty">
+        <span>{{vm.showEmptyInfo}}</span>
+    </div>
+
     <!-- main -->
-    <div ng-if="vm.isViewList">
+    <div ng-if="vm.isViewList && !vm.showEmpty">
         <div class="bb-table m-l m-r m-t panel panel-default">
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-striped table-hover m-t">
             <thead>
@@ -67,13 +74,13 @@
             </tbody>
         </table>
         </div>
-        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-        </div>
-
     </div>
 
 
-    <div ng-if="!vm.isViewList">
+
+
+
+    <div ng-if="!vm.isViewList && !vm.showEmpty">
         <div class="panel panel-default" style="padding-left:20px;">
             <div class="warehouse-grid " ng-class="'warehouse-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.displayedCollection">
                 <div class="title">{{item.name.length > 7 ? item.name.substr(0,6)+'...':item.name}}</div>
@@ -88,9 +95,9 @@
 
             </div>
         </div>
-        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-        </div>
 
+    </div>
+    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
     </div>
 </div>
 <script type="text/ng-template" id="myModalContent.html">

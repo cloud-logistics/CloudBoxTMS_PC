@@ -14,7 +14,7 @@
                 <div class="title inline">报表管理</div>
 
                 <div class="right-search">
-                    <button class="search-icon" ng-click="vm.goSearch()">
+                    <button class="search-icon" ng-click="vm.goResetSearch()">
                         <i class="fa fa-search"></i>
                     </button>
 
@@ -25,7 +25,16 @@
             </div>
 
 
-                <div class=" bb-table m-l m-r m-t panel panel-default" >
+        <div ng-if="vm.showEmpty" class="user-empty">
+            <span>{{vm.showEmptyInfo}}</span>
+        </div>
+
+
+
+
+
+
+        <div ng-if="!vm.showEmpty" class=" bb-table m-l m-r m-t panel panel-default" >
                     <table st-table="vm.items" st-safe-src="vm.items" class="table table-striped table-hover m-t">
                         <thead>
                         <tr>

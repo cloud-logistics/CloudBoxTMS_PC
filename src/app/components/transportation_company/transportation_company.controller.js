@@ -24,6 +24,10 @@
         vm.items = [];
         vm.showItems = [];
 
+
+        vm.showEmpty = true;
+        vm.showEmptyInfo = '暂无企业信息';
+
         vm.goAddItem = goAddItem;
         vm.goEditItem = goEditItem;
         vm.goDetail = goDetail;
@@ -74,7 +78,7 @@
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-                vm.goSearch();
+                vm.goResetSearch();
             }
         }
         vm.confirmDeposit = function(item)
@@ -86,6 +90,10 @@
                 toastr.error(response.statusText);
             });
         }
+        vm.goResetSearch = function(){
+            vm.pageCurrent = 1;
+            vm.goSearch();
+        }
          vm.goSearch = function() {
              //rentservice/enterprise/enterpriseinfo/fuzzy
             //console.log(vm.searchItem);
@@ -96,6 +104,12 @@
              NetworkService.post('rentservice/enterprise/enterpriseinfo/fuzzy?'+'limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
                  console.log(response.data);
                  vm.items = response.data.results;
+                 if(vm.items != null && vm.items.length > 0){
+                     vm.showEmpty = false;
+                 }else{
+                     vm.showEmpty = true;
+                     vm.showEmptyInfo = '没搜到符合条件的结果';
+                 }
                  vm.displayedCollection = (vm.items);
                  updatePagination(response.data);
                  //vm.displayedCollection = [].concat(vm.items);
@@ -114,7 +128,16 @@
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
                     console.log(response.data);
+
                     vm.items = response.data.results;
+
+                    if(vm.items != null && vm.items.length > 0){
+                        vm.showEmpty = false;
+                    }else{
+                        vm.showEmpty = true;
+                        vm.showEmptyInfo = '暂无企业信息';
+                    }
+
                     vm.displayedCollection = (vm.items);
                     updatePagination(response.data);
                     //vm.displayedCollection = [].concat(vm.items);

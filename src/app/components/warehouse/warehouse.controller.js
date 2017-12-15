@@ -40,7 +40,8 @@
         vm.updateBasePath =  'sites/';
         vm.delBasePath =  'sites/';
         vm.isAdmin = false;
-
+        vm.showEmpty = true;
+        vm.showEmptyInfo = '暂无仓库信息';
 
         vm.labelColor = {
             enabled:'bg-success',
@@ -93,7 +94,7 @@
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-                vm.goSearch();
+                vm.goResetSearch();
             }
         }
         vm.searchWarehouse = '';
@@ -173,7 +174,10 @@
             updatePagination(response.data);
         };
 
-
+        vm.goResetSearch = function(){
+            vm.pageCurrent = 1;
+            vm.goSearch();
+        }
 
         function goSearch() {
             vm.isSearch = true;
@@ -185,6 +189,12 @@
                 offset:(vm.pageCurrent - 1) * vm.limit*/
             }
             NetworkService.post('rentservice/site/filter?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
+                if(response.data.results != null && response.data.results.length > 0){
+                    vm.showEmpty = false;
+                }else{
+                    vm.showEmpty = true;
+                    vm.showEmptyInfo = '没搜到符合条件的结果';
+                }
                 vm.processDatas(response);
             },function (response) {
                 vm.authError = response.statusText + '(' + response.status + ')';
@@ -203,6 +213,12 @@
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
                     console.log(response.data);
+                    if(response.data.results != null && response.data.results.length > 0){
+                        vm.showEmpty = false;
+                    }else{
+                        vm.showEmpty = true;
+                        vm.showEmptyInfo = '暂无仓库信息';
+                    }
                     vm.processDatas(response);
                     //vm.displayedCollection = [].concat(vm.items);
                 }, function (response) {

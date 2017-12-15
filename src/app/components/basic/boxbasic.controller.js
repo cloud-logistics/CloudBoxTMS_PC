@@ -28,7 +28,8 @@
         $scope.transDetail = false;
 
 
-
+        vm.showEmpty = true;
+        vm.showEmptyInfo = '暂无云箱信息';
         vm.selectedStyle={
             true:'bg-selected',
             false:'bg-unselected'
@@ -137,7 +138,7 @@
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-                vm.goSearch();
+                vm.goResetSearch();
             }
         }
         vm.goResetSearch = function(){
@@ -161,6 +162,12 @@
 
             },function (response) {
                 vm.items = response.data.results;
+                if(vm.items != null && vm.items.length > 0){
+                    vm.showEmpty = false;
+                }else{
+                    vm.showEmpty = true;
+                    vm.showEmptyInfo = '没搜到符合条件的结果';
+                }
 
                 if(vm.items.length > 0){
                     for(var i = 0; i < vm.items.length; i ++){
@@ -323,7 +330,12 @@
 
                 }, function (response) {
                     vm.items = response.data.results;
-
+                    if(vm.items != null && vm.items.length > 0){
+                        vm.showEmpty = false;
+                    }else{
+                        vm.showEmpty = true;
+                        vm.showEmptyInfo = '暂无云箱信息';
+                    }
                     if (vm.items.length > 0) {
                         for (var i = 0; i < vm.items.length; i++) {
 

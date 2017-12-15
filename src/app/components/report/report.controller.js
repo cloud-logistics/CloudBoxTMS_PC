@@ -23,6 +23,8 @@
         vm.pages = ['1'];
         vm.totalPages = 1;
         vm.limit = 10;
+        vm.showEmpty = true;
+        vm.showEmptyInfo = '暂无报表信息';
 
         vm.selectedStyle={
             true:'bg-selected',
@@ -117,10 +119,13 @@
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-                vm.goSearch();
+                vm.goResetSearch();
             }
         }
-
+        vm.goResetSearch = function(){
+            vm.pageCurrent = 1;
+            vm.goSearch();
+        }
         vm.goSearch = function(){
             vm.isSearch = true;
             console.log(vm.searchItem);
@@ -132,6 +137,12 @@
 
             NetworkService.post('rentservice/boxbill/filtertotalbill?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
                 vm.itemsTmp = response.data.results;
+                if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
+                    vm.showEmpty = false;
+                }else{
+                    vm.showEmpty = true;
+                    vm.showEmptyInfo = '没搜到符合条件的结果';
+                }
                 updatePagination(response.data);
                 vm.items = [];
                 if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
@@ -165,6 +176,13 @@
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
                     vm.itemsTmp = response.data.results;
+                    if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
+                        vm.showEmpty = false;
+                    }else{
+                        vm.showEmpty = true;
+                        vm.showEmptyInfo = '暂无报表信息';
+                    }
+
                     updatePagination(response.data);
                     vm.items = [];
                     if (vm.itemsTmp != null && vm.itemsTmp.length > 0) {

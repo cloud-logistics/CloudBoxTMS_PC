@@ -39,7 +39,8 @@
         vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
         vm.delBasePath =  'rentservice/enterpriseuser/';
         vm.isAdmin = false;
-        vm.showUser = true;
+        vm.showEmpty = true;
+        vm.showEmptyInfo = '该企业暂无用户';
 
         vm.labelColor = {
             enabled:'bg-success',
@@ -101,8 +102,12 @@
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
-                goSearch();
+                vm.goResetSearch();
             }
+        }
+        vm.goResetSearch = function(){
+            vm.pageCurrent = 1;
+            vm.goSearch();
         }
 
         function goSearch() {
@@ -115,6 +120,12 @@
             }
             NetworkService.post('rentservice/enterprise/enterpriseinfo/userfuzzy?'+'limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),param,function (response) {
                 vm.items = response.data.results;
+                if(vm.items != null && vm.items.length > 0){
+                    vm.showEmpty = false;
+                }else{
+                    vm.showEmpty = true;
+                    vm.showEmptyInfo = '没搜到符合条件的结果';
+                }
                 vm.displayedCollection = (vm.items);
                 //vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
@@ -134,9 +145,10 @@
                 }, function (response) {
                     vm.items = response.data.results;
                     if(vm.items != null && vm.items.length > 0){
-                        vm.showUser = true;
+                        vm.showEmpty = false;
                     }else{
-                        vm.showUser = false;
+                        vm.showEmpty = true;
+                        vm.showEmptyInfo = '该企业暂无用户';
                     }
                     vm.displayedCollection = (vm.items);
                     //vm.displayedCollection = [].concat(vm.items);
@@ -206,7 +218,12 @@
         function updatePagination(pageination) {
 
             if (pageination.results == null || pageination.results.length < 1){
-                // toastr.error('当前无数据哦~');
+                vm.pageCurrent = 1;
+                vm.targetPage = 1;
+                vm.pagePreEnabled = false;
+                vm.pageNextEnabled = false;
+                vm.pages = ['1'];
+                vm.totalPages = 1;
                 return;
             }
             var page = parseInt(pageination.offset/pageination.limit +1);
