@@ -39,7 +39,7 @@
         vm.updateBasePath =  'rentservice/enterpriseuser/updateenterpriseuser/';
         vm.delBasePath =  'rentservice/enterpriseuser/';
         vm.isAdmin = false;
-
+        vm.showUser = true;
 
         vm.labelColor = {
             enabled:'bg-success',
@@ -133,6 +133,11 @@
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
                     vm.items = response.data.results;
+                    if(vm.items != null && vm.items.length > 0){
+                        vm.showUser = true;
+                    }else{
+                        vm.showUser = false;
+                    }
                     vm.displayedCollection = (vm.items);
                     //vm.displayedCollection = [].concat(vm.items);
                     updatePagination(response.data);

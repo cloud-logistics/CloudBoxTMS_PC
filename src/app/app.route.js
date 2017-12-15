@@ -5,21 +5,20 @@
     angular
         .module('smart_container')
         .config(routeConfig)
-        .run(function($rootScope, $state, $stateParams,constdata,$location) {
+        .run(function($rootScope, $state, $stateParams,constdata,$location,StorageService) {
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
             $rootScope.pageRoutes = [];
             var count = 0;
-           /* $rootScope.$on('$stateChangeStart',
+            $rootScope.$on('$stateChangeStart',
                 function(event, toState, toParams, fromState, fromParams, options){
-                    console.log(toState.name);
-
                     if(toState.name != 'access.signin'){
-                        $state.go('access.signin');
+                        if(StorageService.get(constdata.token) == null){
+                            event.preventDefault();
+                            $state.go('access.signin');
+                        }
                     }
-                    //$state.go('access.signin');
-
-                })*/
+                })
             $rootScope.$on("$stateChangeSuccess",  function(event, toState, toParams, fromState, fromParams) {
                 // to be used for back button //won't work when page is reloaded.
 

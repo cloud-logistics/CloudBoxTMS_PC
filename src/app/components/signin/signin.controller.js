@@ -22,7 +22,7 @@
 
 
         vm.login = loginAction;
-        vm.logout = logoutAction;
+       // vm.logout = logoutAction;
         vm.username = username;
         vm.gotoRegisterAction = gotoRegisterAction;
         
@@ -47,7 +47,7 @@
                     timestamp:now
                 }
 
-            console.log(user);
+
             ApiServer.userLogin(user,function (response) {
 
 
@@ -103,14 +103,17 @@
             return information.username;
         }
         
-        function logoutAction() {
+        /*function logoutAction() {
+            console.log('bbbb');
+            $state.go('access.signin');
+            console.log('aaaaaaaa');
             $timeout(function () {
                 StorageService.clear(authorizationKey);
                 StorageService.clear(userInfo);
                 StorageService.clear(constdata.token);
             },60);
-            $state.go('access.signin');
-        }
+
+        }*/
 
         //切换语言
         userLanguage == 'zh-cn' ? vm.langChoosen = langChi : vm.langChoosen = langEng

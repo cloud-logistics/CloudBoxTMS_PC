@@ -36,7 +36,6 @@
 
         
         function logoutAction() {
-            console.log('logout....');
             ApiServer.logoutAction();
         }
         

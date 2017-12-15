@@ -33,11 +33,11 @@
                             <thead>
 
                                 <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
-                                <th >云箱 ID</th>
+                                <th>云箱 ID</th>
                                 <th >类型</th>
                                 <th >开始</th>
                                 <th >结束</th>
-                                <th>金额</th>
+                                <th >金额</th>
 
                                 <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
 
@@ -49,9 +49,9 @@
                             <tr ng-repeat="item in vm.containerReportHistory">
                                 <td title="{{item.containerId}}" ng-click="vm.goDetail(item)" >{{item.containerId}}</td>
                                 <td title="{{item.type}}" ng-click="vm.goDetail(item)">{{item.type}}</td>
-                                <td title="{{item.offSite.location}} {{item.offSite.name}}" ng-click="vm.goDetail(item)" >{{item.startTime| date:'yyyy-MM-dd HH:mm'}} {{item.offCity}}</td>
-                                <td  title="{{item.onSite.location}} {{item.onSite.name}}" ng-click="vm.goDetail(item)" >{{item.endTime| date:'yyyy-MM-dd HH:mm'}} {{item.onCity}}</td>
-                                <td title="{{item.amount}}" ng-click="vm.goDetail(item)">{{item.amount}}</td>
+                                <td title="{{item.offSite.location}} {{item.offSite.name}}" ng-click="vm.goDetail(item)" ><div class="report-table-time-area"><div class="report-table-time">{{item.startTime| date:'yyyy-MM-dd HH:mm'}}</div> {{item.offCity}}</div></td>
+                                <td  title="{{item.onSite.location}} {{item.onSite.name}}" ng-click="vm.goDetail(item)" ><div class="report-table-time-area"><div class="report-table-time">{{item.endTime| date:'yyyy-MM-dd HH:mm'}}</div> {{item.onCity}}</div></td>
+                                <td title="{{item.amount}}" ng-click="vm.goDetail(item)">{{item.amount}} <!--<span ng-if="item.isCurDate" style="color:#ff0000">(未入报表)</span>--></td>
                             </tr>
 
                             </tbody>

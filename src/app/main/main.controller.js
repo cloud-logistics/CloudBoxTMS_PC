@@ -93,7 +93,6 @@
                 $state.go('access.signin');
             //},10);
         }*/
-         console.log('ddddddd');
 
     }
 })();

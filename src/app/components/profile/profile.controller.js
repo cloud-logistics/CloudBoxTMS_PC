@@ -25,6 +25,7 @@
         console.log(userInfo);
 
 
+
         vm.userGroup = [
             {
                 title:'超级管理员',
@@ -86,7 +87,7 @@
 
 
 
-        function getCompanyDatas() {
+        /*function getCompanyDatas() {
 
             NetworkService.get(vm.getBaseCompanyPath,{limit:100, offset:0},function (response) {
                 vm.companyInfo = response.data.results;
@@ -97,7 +98,7 @@
                 toastr.error(response.statusText);
             });
         }
-        getCompanyDatas();
+        getCompanyDatas();*/
 
 
         function editItem() {
@@ -141,6 +142,9 @@
 
 
         function getDatas() {
+            if(userInfo == undefined || userInfo.userId == undefined){
+                $state.go('access.signin');
+            }
             NetworkService.get(vm.getBasePath + '/' + userInfo.userId + '/',null,function (response) {
                 vm.user = response.data;
                 vm.user.enterprise_id = vm.user.enterprise;

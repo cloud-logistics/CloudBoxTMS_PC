@@ -29,7 +29,7 @@
                             <form name="form" class="form-horizontal form-validation" role="form" ng-repeat="item in vm.containerItems">
                                     <div class="form-group">
                                         <label class="col-sm-1 control-label m-l-lg font-bold">{{item.box_type_name}}</label>
-                                            <input class="form-control input-edit" type="number" min="0"
+                                            <input class="form-control input-edit" type="number" min="0" step="1" ng-pattern="/^[1-9][0-9]{0,5}$/"
                                                    placeholder="费率" ng-model="item.price" ng-disabled="!item.isEdit" required>
                                             <span>元/小时</span>
                                         <button ng-disabled="!item.isEdit" class="btn btn-cancel" ng-click="vm.cancel(item)"> 取消 </button>

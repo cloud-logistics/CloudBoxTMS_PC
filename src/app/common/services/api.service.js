@@ -141,12 +141,13 @@
         function logoutAction() {
             var authorizationKey = constdata.token;
             var userInfo = constdata.informationKey;
+            $state.go('access.signin');
             $timeout(function () {
                 StorageService.clear(authorizationKey);
                 StorageService.clear(userInfo);
                 StorageService.clear(constdata.token);
             },60);
-            $state.go('access.signin');
+
         }
 
         ////////////用户

@@ -15,7 +15,11 @@
             </div>
         </div>
 
-        <div class="m-l m-r m-t panel panel-default">
+        <div ng-if="!vm.showUser" class="user-empty">
+            <span>该企业暂无用户</span>
+        </div>
+
+        <div ng-if="vm.showUser"class="m-l m-r m-t panel panel-default">
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-bordered table-striped table-hover bg-white text-center">
             <thead>
             <tr>
@@ -75,12 +79,6 @@
             </tbody>
         </table>
         </div>
-
-        <!--<div class="btn-group pagination pull-right padder-lg">-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
-            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
-        <!--</div>-->
         <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
         </div>
         <!-- / tasks -->

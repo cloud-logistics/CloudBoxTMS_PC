@@ -30,7 +30,8 @@
         vm.pageNextEnabled = false;
         vm.pages = ['1'];
         vm.totalPages = 1;
-        vm.limit = 10;
+        vm.targetPage = 1;
+        vm.limit = 8;
         vm.user = {};
         vm.isAdd = true;
         vm.isEdit = false;
@@ -90,6 +91,11 @@
         var type = $stateParams.args.type;
         var username = $stateParams.username;
         vm.refItem = $stateParams.args.data;
+        vm.refItemKey = 'refitemkey'
+        if(vm.refItem != null){
+            StorageService.put(vm.refItemKey,vm.refItem,24 * 7 * 60 * 60);//3 天过期
+        }
+        vm.refItem = StorageService.get(vm.refItemKey);
 
         if (username){
             vm.isAdd = false;
@@ -139,11 +145,20 @@
         function getReportDetailHistory()
         {
 
+            refreshChart();
         }
 
         vm.onChartClick = function(param){
             console.log(param);
             console.log(param.name);
+            vm.limit = 8;
+            vm.targetPage = 1;
+            $timeout(function(){
+                    vm.pageCurrent = 1;
+                }
+,0
+            )
+
             //var year-month =
             $timeout(function () {
                 vm.searchTime = param.name;
@@ -165,10 +180,12 @@
                             vm.containerReportHistory[i].onCity = tmp[i].on_city;
                             vm.containerReportHistory[i].onSite = tmp[i].on_site;
                             vm.containerReportHistory[i].offSite = tmp[i].off_site;
+                           // vm.containerReportHistory[i].isCurDate = isToday(vm.containerReportHistory[i].endTime);
 
 
                         }
                     }
+                    updatePagination(response.data);
 
 
                 },function (response) {
@@ -182,6 +199,21 @@
 
 
 
+        }
+        function isToday(str){
+            var d = new Date(str);
+            var e = new Date();
+            var f = (e - d) / 1000 / 60 / 60 / 24;
+
+            if(d.getFullYear() == e.getFullYear() && d.getMonth() == e.getMonth() && d.getDate()==e.getDate()){
+                return true;
+            }
+            return false;
+            /*if(d == tod){
+                return true;
+            } else {
+                return false;
+            }*/
         }
         function refreshChart()
         {
@@ -261,7 +293,7 @@
                     legend: {
                         x: 'left',               // 水平安放位置，默认为全图居中，可选为：
                         y: 'bottom',
-                        data: ['该月归还数', '该月金额'],
+                        data: ['月归还数', '月金额'],
                         //left: 100
                     },
                     xAxis: [{
@@ -286,14 +318,14 @@
                     series: [
                         {
                             yAxisIndex: 0,
-                            name: '该月归还数',
+                            name: '月归还数',
                             type: 'line',
                             itemStyle: {normal: {color: '#b6a2de'}},
                             data: containerNum
                         },
                         {
                             yAxisIndex: 1,
-                            name: '该月金额',
+                            name: '月金额',
                             type: 'bar',
                             barWidth : 40,//柱图宽度
                             itemStyle: {normal: {color: '#2ec7c9'}},
@@ -306,7 +338,7 @@
             }
 
             vm.containerReportHistory = [];
-            NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,null,function (response) {
+            NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
 
                 var tmp = response.data.results;
                 if(tmp != null && tmp.length > 0){
@@ -321,9 +353,12 @@
                         vm.containerReportHistory[i].onCity = tmp[i].on_city;
                         vm.containerReportHistory[i].onSite = tmp[i].on_site;
                         vm.containerReportHistory[i].offSite = tmp[i].off_site;
+                       // vm.containerReportHistory[i].isCurDate = isToday(vm.containerReportHistory[i].endTime);
+
 
                     }
                 }
+                updatePagination(response.data);
 
 
             },function (response) {

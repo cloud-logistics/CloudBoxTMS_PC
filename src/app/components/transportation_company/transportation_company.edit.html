@@ -93,7 +93,7 @@
                                 <div class="upload">
                                     <input type="button" class="btn btn-default" value="浏览文件" ng-disabled="vm.isDetail" />
                                     <label  ng-bind="vm.myUploadFile.viewName" class="label bg-finished"></label>
-                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" accept="image/*" ng-disabled="vm.isDetail" />
+                                    <input type="file" file-model = "vm.myUploadFile" class="upload-input-file" accept="image/png, image/jpeg, image/gif, image/bmp" ng-disabled="vm.isDetail" />
                                 </div>
                                 <button type="button" class="btn btn-default btn-upload" ng-click="vm.uploadFile()" ng-disabled="vm.isDetail || (vm.myUploadFile == null)" > <i class="fa fa-check"></i> 上传 </button>
 
