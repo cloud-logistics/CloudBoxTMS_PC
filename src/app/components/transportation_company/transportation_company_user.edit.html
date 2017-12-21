@@ -59,8 +59,10 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">昵称</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="昵称" ng-model="vm.user.user_nickname" ng-disabled = "vm.isDetail">
+                               placeholder="昵称" ng-model="vm.user.user_nickname" name="user_nickname" ng-maxlength="20" ng-disabled = "vm.isDetail">
                     </div>
+
+                    <span class="blank-tips" ><i ng-show="form.user_nickname.$invalid">昵称长度不能超过20位</i></span>
 
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
