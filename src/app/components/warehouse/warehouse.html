@@ -60,7 +60,7 @@
                     {{item.allCurrentBoxInfo.availableNum}}
                 </td>
 
-               <td ng-click="vm.goDetail(item)">{{item.location}}</td>
+               <td ng-click="vm.goDetail(item)" title="{{item.location}}">{{item.location.length > 15 ? item.location.substr(0,13)+'...':item.location}}</td>
 
                 <td ng-click="vm.goDetail(item)">{{console.log('aaaa');(item.latitude >= 0 ? '北纬':'南纬') + parseFloat(item.latitude).toFixed(2)+'°'  + '/'+(item.longitude >= 0 ? '东经':'西经') + parseFloat(item.longitude).toFixed(2)+'°' }}</td>
 
@@ -91,7 +91,7 @@
 
 
                 <div class="location ">{{item.latitude > 0 ? '北纬':'南纬'}}{{item.latitude | number:2}}°/{{item.longitude > 0 ? '东经':'西经'}}{{item.longitude|number:2}}°</div>
-                <div class="address ">{{item.location}}</div>
+                <div class="address ">{{item.location.length > 15 ? item.location.substr(0,13)+'...':item.location}}</div>
 
             </div>
         </div>
