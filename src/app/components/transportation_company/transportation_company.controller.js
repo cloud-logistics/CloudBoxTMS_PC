@@ -68,6 +68,8 @@
                 $state.go('app.edit_transportation_company_user',{args:{type:'edit_from_company', enterprise_id:item.enterprise_id,enterprise_name:item.enterprise_name}});
             }else  if(index == 5){
                 $state.go('app.transportation_company_user', {args:{enterprise_id:item.enterprise_id,enterprise_name:item.enterprise_name}});
+            }else  if(index == 6){
+                $state.go('app.booking', {args:{enterprise_id:item.enterprise_id,enterprise_name:item.enterprise_name}});
             }
 
 

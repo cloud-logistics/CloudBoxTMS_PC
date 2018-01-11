@@ -162,6 +162,18 @@
                 params : {args : {}},
                 templateUrl: 'app/components/report/report.edit.html'
             })
+
+            .state('app.booking', {
+                url: 'booking',
+                params : {args : {}},
+                templateUrl: 'app/components/booking/booking.html'
+            })
+            .state('app.edit_booking', {
+                url: 'booking/edit/:username',
+                params : {args : {}},
+                templateUrl: 'app/components/booking/booking.edit.html'
+            })
+
             .state('access', {
                 url: '/access',
                 template: '<div ui-view class="fade-in-right-big smooth"></div>'
