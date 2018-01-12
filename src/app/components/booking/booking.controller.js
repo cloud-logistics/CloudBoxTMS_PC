@@ -24,7 +24,7 @@
         vm.totalPages = 1;
         vm.limit = 10;
         vm.showEmpty = true;
-        vm.showEmptyInfo = '暂无报表信息';
+        vm.showEmptyInfo = '暂无预约信息';
 
         vm.selectedStyle={
             true:'bg-selected',
@@ -42,13 +42,21 @@
             3:'bg-not-available'
         };
 
+        vm.appointStatus = {
+            0:'预约中',
+            1:'已完成',
+            2:'已取消'
+        }
 
 
+        vm.labelColor = {
+            0:'bg-info',
+            1:'bg-success',
+            2:'bg-danger'
+        };
         vm.isViewList = false;
         vm.selList = function (isList) {
             vm.isViewList = isList;
-            console.log('dd');
-
         }
 
 
@@ -56,7 +64,7 @@
 
 
         vm.goDetail= function(item) {
-            $state.go('app.edit_report',{username:item.id, args:{type:'detail', data:item}});
+            $state.go('app.edit_booking',{username:item.appointment_id, args:{type:'detail', data:item}});
 
         };
         $scope.basicUpdate = function(item){
@@ -139,6 +147,7 @@
         }
         vm.goResetSearch = function(){
             vm.pageCurrent = 1;
+            vm.targetPage = vm.pageCurrent;
             vm.goSearch();
         }
         vm.goSearch = function(){
@@ -147,29 +156,20 @@
 
 
             var params = {
-                keyword:vm.searchItem
-            };
+                "enterprise_id":vm.enterprise_id,
+                "keyword":vm.searchItem
+            }
 
-            NetworkService.post('rentservice/boxbill/filtertotalbill?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
-                vm.itemsTmp = response.data.results;
-                if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
+            NetworkService.post('rentservice/appointment/enterpriselist?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
+
+                vm.items = response.data.results;
+                if(vm.items != null && vm.items.length > 0){
                     vm.showEmpty = false;
                 }else{
                     vm.showEmpty = true;
-                    vm.showEmptyInfo = '没搜到符合条件的结果';
+                    vm.showEmptyInfo = '暂无预约信息';
                 }
                 updatePagination(response.data);
-                vm.items = [];
-                if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
-                    for(var i = 0; i < vm.itemsTmp.length; i ++){
-                        vm.items[i] = {};
-                        vm.items[i].id = vm.itemsTmp[i].enterprise_id;
-                        vm.items[i].enterpriseName = vm.itemsTmp[i].enterprise_name;
-                        vm.items[i].usingContainerNum = vm.itemsTmp[i].off_num;
-                        vm.items[i].usedContainerNum = vm.itemsTmp[i].on_num;
-                        vm.items[i].amount = vm.itemsTmp[i].fee;
-                    }
-                }
 
             },function (response) {
                 toastr.error(response.statusText);
@@ -185,31 +185,22 @@
             if(vm.isSearch){
                 vm.goSearch();
             }else {
+                var params = {
+                    "enterprise_id":vm.enterprise_id,
+                    "keyword":""
+                }
                 //http://106.2.20.185:8000/container/api/v1/cloudbox/rentservice/boxbill/realtimebill
-                NetworkService.get('rentservice/boxbill/realtimebill', {
-                    limit: vm.limit,
-                    offset: (vm.pageCurrent - 1) * vm.limit
-                }, function (response) {
-                    vm.itemsTmp = response.data.results;
-                    if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
+               // NetworkService.get('rentservice/boxbill/realtimebill', {
+               NetworkService.post('rentservice/appointment/enterpriselist?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
+                    vm.items = response.data.results;
+                    if(vm.items != null && vm.items.length > 0){
                         vm.showEmpty = false;
                     }else{
                         vm.showEmpty = true;
-                        vm.showEmptyInfo = '暂无报表信息';
+                        vm.showEmptyInfo = '暂无预约信息';
                     }
-
                     updatePagination(response.data);
-                    vm.items = [];
-                    if (vm.itemsTmp != null && vm.itemsTmp.length > 0) {
-                        for (var i = 0; i < vm.itemsTmp.length; i++) {
-                            vm.items[i] = {};
-                            vm.items[i].id = vm.itemsTmp[i].enterprise_id;
-                            vm.items[i].enterpriseName = vm.itemsTmp[i].enterprise_name;
-                            vm.items[i].usingContainerNum = vm.itemsTmp[i].off_num;
-                            vm.items[i].usedContainerNum = vm.itemsTmp[i].on_num;
-                            vm.items[i].amount = vm.itemsTmp[i].fee;
-                        }
-                    }
+
 
                 }, function (response) {
                     toastr.error(response.statusText);

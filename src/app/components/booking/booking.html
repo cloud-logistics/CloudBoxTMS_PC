@@ -43,18 +43,22 @@
                             </th>
                         </tr>
                         <tr>
-                            <th class="text-center">企业名称</th>
-                            <th class="text-center">在运箱数</th>
-                            <th class="text-center">当月归还箱数</th>
-                            <th class="text-center">当月金额</th>
+                            <th class="text-center">预约码</th>
+                            <th class="text-center">状态</th>
+                            <th class="text-center">预约时间</th>
+                            <th class="text-center">取消时间</th>
+
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="item in vm.items track by $index">
-                            <td style="vertical-align: middle;" title="{{item.enterpriseName}}">{{item.enterpriseName.length > 10 ? item.enterpriseName.substr(0,10)+'...':item.enterpriseName}}</td>
-                            <td style="vertical-align: middle;">{{item.usingContainerNum}}</td>
-                            <td style="vertical-align: middle;">{{item.usedContainerNum}}</td>
-                            <td style="vertical-align: middle;">{{item.amount}}</td>
+                            <td style="vertical-align: middle;" title="{{item.appointment_code}}">{{item.appointment_code}}</td>
+                            <td style="vertical-align: middle;">
+                                <label ng-class="vm.labelColor[item.flag]" ng-bind="vm.appointStatus[item.flag]" class="label"></label>
+                            </td>
+                            <td style="vertical-align: middle;">{{item.appointment_time|date:'yyyy-MM-dd:HH:mm:ss'}}</td>
+                            <td style="vertical-align: middle;">{{item.cancel_time|date:'yyyy-MM-dd:HH:mm:ss'}}</td>
+
                             <td style="vertical-align: middle;">
                                 <span class="booking-edit-btn" ng-click="vm.goDetail(item)">详情</span>
 <!--

@@ -124,6 +124,7 @@
         }
         vm.goResetSearch = function(){
             vm.pageCurrent = 1;
+            vm.targetPage = vm.pageCurrent;
             vm.goSearch();
         }
         vm.goSearch = function(){
