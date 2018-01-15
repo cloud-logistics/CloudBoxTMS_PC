@@ -3,19 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f54e1b1d-f388-4121-95d0-34cfa81254d9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" afterPath="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/booking/booking.controller.js" afterPath="$PROJECT_DIR$/src/app/components/booking/booking.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/booking/booking.edit.controller.js" afterPath="$PROJECT_DIR$/src/app/components/booking/booking.edit.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/booking/booking.edit.html" afterPath="$PROJECT_DIR$/src/app/components/booking/booking.edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/booking/booking.html" afterPath="$PROJECT_DIR$/src/app/components/booking/booking.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/report/report.controller.js" afterPath="$PROJECT_DIR$/src/app/components/report/report.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.controller.js" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.controller.js" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.html" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" afterPath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.edit.html" afterPath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/styles/less/app.edit.less" afterPath="$PROJECT_DIR$/src/assets/styles/less/app.edit.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/styles/less/container.less" afterPath="$PROJECT_DIR$/src/assets/styles/less/container.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/report/report.edit.controller.js" afterPath="$PROJECT_DIR$/src/app/components/report/report.edit.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version.txt" afterPath="$PROJECT_DIR$/version.txt" />
     </list>
     <ignored path="operation_platform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,6 +44,46 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="app.constants.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/app.constants.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="report.edit.controller.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="474" column="34" selection-start-line="474" selection-start-column="34" selection-end-line="474" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="warehouse.controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4350">
+              <caret line="290" column="16" selection-start-line="290" selection-start-column="16" selection-end-line="295" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="report.edit.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="28" column="37" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="warehouse.edit.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/components/warehouse/warehouse.edit.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,32 +106,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booking.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/booking/booking.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="14" selection-start-line="12" selection-start-column="12" selection-end-line="29" selection-end-column="14" />
-              <folding>
-                <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="booking.edit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/booking/booking.edit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-              <folding>
-                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.edit.less" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.edit.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/assets/styles/less/app.edit.less">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
@@ -117,26 +121,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
               <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="booking.controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/booking/booking.controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="report.edit.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -188,7 +172,6 @@
         <option value="$PROJECT_DIR$/src/assets/styles/less/app.reset.less" />
         <option value="$PROJECT_DIR$/gulp/prd.js" />
         <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/app/app.constants.js" />
         <option value="$PROJECT_DIR$/src/app/components/warehouse/warehouse.html" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.controller.js" />
         <option value="$PROJECT_DIR$/src/app/app.route.js" />
@@ -200,7 +183,6 @@
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.html" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.html" />
         <option value="$PROJECT_DIR$/src/app/components/report/report.edit.html" />
-        <option value="$PROJECT_DIR$/src/app/components/report/report.edit.controller.js" />
         <option value="$PROJECT_DIR$/src/app/components/booking/booking.controller.js" />
         <option value="$PROJECT_DIR$/src/app/components/booking/booking.html" />
         <option value="$PROJECT_DIR$/src/app/components/booking/booking.edit.html" />
@@ -208,6 +190,8 @@
         <option value="$PROJECT_DIR$/src/assets/styles/less/container.less" />
         <option value="$PROJECT_DIR$/src/assets/styles/less/app.edit.less" />
         <option value="$PROJECT_DIR$/src/app/components/warehouse/warehouse.edit.html" />
+        <option value="$PROJECT_DIR$/src/app/app.constants.js" />
+        <option value="$PROJECT_DIR$/src/app/components/report/report.edit.controller.js" />
       </list>
     </option>
   </component>
@@ -221,8 +205,7 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-21" />
-    <option name="y" value="106" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="790" />
   </component>
@@ -732,15 +715,15 @@
       <workItem from="1513560181940" duration="10499000" />
       <workItem from="1514164885009" duration="4441000" />
       <workItem from="1514863718804" duration="5343000" />
-      <workItem from="1515460424503" duration="14789000" />
+      <workItem from="1515460424503" duration="17943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="503851000" />
+    <option name="totallyTimeSpent" value="507005000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-21" y="106" width="1440" height="790" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="790" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30347222" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -837,13 +820,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/common/directives/emptyTip.html" />
     <entry file="file://$PROJECT_DIR$/src/app/common/directives/ui-emptytip.js" />
-    <entry file="file://$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/report/report.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1815">
@@ -906,14 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1050,16 +1018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="438" column="10" selection-start-line="416" selection-start-column="8" selection-end-line="438" selection-end-column="10" />
-          <folding>
-            <element signature="e#4231#6239#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1074,14 +1032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1153,6 +1103,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="808" column="0" selection-start-line="808" selection-start-column="0" selection-end-line="808" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4350">
+          <caret line="290" column="16" selection-start-line="290" selection-start-column="16" selection-end-line="295" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/report/report.edit.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="474" column="34" selection-start-line="474" selection-start-column="34" selection-end-line="474" selection-end-column="34" />
           <folding />
         </state>
       </provider>

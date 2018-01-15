@@ -145,7 +145,34 @@
         function getReportDetailHistory()
         {
 
-            refreshChart();
+            
+            vm.containerReportHistory = [];
+            NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
+
+                var tmp = response.data.results;
+                if(tmp != null && tmp.length > 0){
+                    for(var i = 0; i < tmp.length; i ++){
+                        vm.containerReportHistory[i] = {};
+                        vm.containerReportHistory[i].containerId = tmp[i].box.deviceid;
+                        vm.containerReportHistory[i].type = tmp[i].box.type.box_type_name;
+                        vm.containerReportHistory[i].startTime = tmp[i].lease_start_time;
+                        vm.containerReportHistory[i].endTime = tmp[i].lease_end_time;
+                        vm.containerReportHistory[i].amount = tmp[i].rent;
+                        vm.containerReportHistory[i].offCity = tmp[i].off_city;
+                        vm.containerReportHistory[i].onCity = tmp[i].on_city;
+                        vm.containerReportHistory[i].onSite = tmp[i].on_site;
+                        vm.containerReportHistory[i].offSite = tmp[i].off_site;
+                        // vm.containerReportHistory[i].isCurDate = isToday(vm.containerReportHistory[i].endTime);
+
+
+                    }
+                }
+                updatePagination(response.data);
+
+
+            },function (response) {
+                toastr.error(response.statusText);
+            });
         }
 
         vm.onChartClick = function(param){
@@ -440,6 +467,12 @@
 
         function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                vm.targetPage = 1;
+                vm.pagePreEnabled = false;
+                vm.pageNextEnabled = false;
+                vm.pages = ['1'];
+                vm.totalPages = 1;
                 // toastr.error('当前无数据哦~');
                 return;
             }
