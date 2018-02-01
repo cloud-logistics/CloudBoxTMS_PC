@@ -87,9 +87,11 @@
                 </div>
             </div>
 
-        <div ng-if="vm.showEmpty" class="user-empty">
+        <div ng-if="vm.showEmpty && !vm.showMainSpinner" class="user-empty">
             <span>{{vm.showEmptyInfo}}</span>
         </div>
+
+        <div ng-if="vm.showMainSpinner" class="user-wait" />
 
 
 

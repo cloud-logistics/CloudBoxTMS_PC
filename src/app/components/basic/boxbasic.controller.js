@@ -30,6 +30,7 @@
 
         vm.showEmpty = true;
         vm.showEmptyInfo = '暂无云箱信息';
+        vm.showMainSpinner = false;
         vm.selectedStyle={
             true:'bg-selected',
             false:'bg-unselected'
@@ -147,7 +148,7 @@
             vm.goSearch();
         }
         vm.goSearch = function(){
-            console.log('is searching...');
+            vm.showMainSpinner = true;
             vm.isSearch = true;
             if(vm.searchContainerId == undefined || vm.searchContainerId == null){
                 vm.searchContainerId = '';
@@ -163,6 +164,7 @@
 
             },function (response) {
                 vm.items = response.data.results;
+                vm.showMainSpinner = false;
                 if(vm.items != null && vm.items.length > 0){
                     vm.showEmpty = false;
                 }else{
@@ -194,6 +196,7 @@
                 //vm.targetPage = vm.pageCurrent = 1;
                 updatePagination(response.data);
             },function (response) {
+                vm.showMainSpinner = false;
                 toastr.error(response.statusText);
             });
 
@@ -321,7 +324,7 @@
             if(vm.isSearch ){
                 vm.goSearch();
             }else {
-
+                vm.showMainSpinner = true;
                 NetworkService.post(vm.getBasePath + '?limit=' + vm.limit + '&offset=' + ((vm.pageCurrent - 1) * vm.limit), {
                     "province_id": 0,
                     "city_id": 0,
@@ -330,6 +333,7 @@
                     "box_id": ""
 
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     vm.items = response.data.results;
                     if(vm.items != null && vm.items.length > 0){
                         vm.showEmpty = false;
@@ -365,6 +369,7 @@
 
                     updatePagination(response.data);
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     toastr.error(response.statusText);
                 });
                 vm.updateProvinceList(0);

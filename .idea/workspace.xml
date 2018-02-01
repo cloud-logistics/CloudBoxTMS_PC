@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f54e1b1d-f388-4121-95d0-34cfa81254d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.constants.js" afterPath="$PROJECT_DIR$/src/app/app.constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/report/report.controller.js" afterPath="$PROJECT_DIR$/src/app/components/report/report.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/report/report.html" afterPath="$PROJECT_DIR$/src/app/components/report/report.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.controller.js" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.html" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.controller.js" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.html" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" afterPath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.html" afterPath="$PROJECT_DIR$/src/app/components/warehouse/warehouse.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/styles/less/app.edit.less" afterPath="$PROJECT_DIR$/src/assets/styles/less/app.edit.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" afterPath="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/basic/boxbasic.html" afterPath="$PROJECT_DIR$/src/app/components/basic/boxbasic.html" />
     </list>
     <ignored path="operation_platform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,16 +28,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
               <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="report.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/report/report.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="30" column="7" selection-start-line="30" selection-start-column="7" selection-end-line="34" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -102,7 +83,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transportation_company_user.controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="transportation_company_user.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
@@ -112,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transportation_company.edit.controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.controller.js">
+      <file leaf-file-name="boxbasic.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/components/basic/boxbasic.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="boxbasic.controller.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="371" column="47" selection-start-line="371" selection-start-column="47" selection-end-line="371" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -166,8 +157,6 @@
         <option value="$PROJECT_DIR$/src/app/components/dashboard/dashboard.html" />
         <option value="$PROJECT_DIR$/src/app/common/directives/emptyTip.html" />
         <option value="$PROJECT_DIR$/src/app/common/directives/ui-emptytip.js" />
-        <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
-        <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.html" />
         <option value="$PROJECT_DIR$/src/app/main/main.html" />
         <option value="$PROJECT_DIR$/src/assets/styles/less/transport_company.less" />
         <option value="$PROJECT_DIR$/src/app/components/config/config.html" />
@@ -198,6 +187,8 @@
         <option value="$PROJECT_DIR$/src/app/components/warehouse/warehouse.html" />
         <option value="$PROJECT_DIR$/src/app/components/warehouse/warehouse.controller.js" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.controller.js" />
+        <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.html" />
+        <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
       </list>
     </option>
   </component>
@@ -466,6 +457,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="basic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="container_lease_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="container_lease_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="lint" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -580,12 +597,12 @@
       <workItem from="1514863718804" duration="5343000" />
       <workItem from="1515460424503" duration="22217000" />
       <workItem from="1516584595206" duration="2130000" />
-      <workItem from="1517194232040" duration="4621000" />
+      <workItem from="1517194232040" duration="4840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="518030000" />
+    <option name="totallyTimeSpent" value="518249000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-35" y="139" width="1440" height="790" extended-state="0" />
@@ -632,7 +649,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -642,7 +659,7 @@
         <state relative-caret-position="285">
           <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -765,6 +782,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/basic/boxbasic.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="371" column="47" selection-start-line="371" selection-start-column="47" selection-end-line="371" selection-end-column="47" />
           <folding />
         </state>
       </provider>
