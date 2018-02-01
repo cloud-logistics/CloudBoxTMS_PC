@@ -25,7 +25,7 @@
         vm.limit = 10;
         vm.showEmpty = true;
         vm.showEmptyInfo = '暂无报表信息';
-
+        vm.showMainSpinner = false;
         vm.selectedStyle={
             true:'bg-selected',
             false:'bg-unselected'
@@ -128,15 +128,14 @@
             vm.goSearch();
         }
         vm.goSearch = function(){
-            vm.isSearch = true;
-            console.log(vm.searchItem);
 
-
+            vm.showMainSpinner = true;
             var params = {
                 keyword:vm.searchItem
             };
 
             NetworkService.post('rentservice/boxbill/filtertotalbill?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
+                vm.showMainSpinner = false;
                 vm.itemsTmp = response.data.results;
                 if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
                     vm.showEmpty = false;
@@ -158,6 +157,7 @@
                 }
 
             },function (response) {
+                vm.showMainSpinner = false;
                 toastr.error(response.statusText);
             });
 
@@ -168,6 +168,7 @@
 
 
         function getDatas() {
+            vm.showMainSpinner = true;
             if(vm.isSearch){
                 vm.goSearch();
             }else {
@@ -176,6 +177,7 @@
                     limit: vm.limit,
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     vm.itemsTmp = response.data.results;
                     if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
                         vm.showEmpty = false;
@@ -198,6 +200,7 @@
                     }
 
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     toastr.error(response.statusText);
                 });
             }

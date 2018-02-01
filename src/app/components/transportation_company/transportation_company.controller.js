@@ -46,6 +46,8 @@
         vm.isAdmin = false;
         vm.limit = 10;
 
+        vm.showMainSpinner = false;
+
         vm.labelColor = {
             1:'bg-success',
             0:'bg-danger'
@@ -101,12 +103,13 @@
              //rentservice/enterprise/enterpriseinfo/fuzzy
             //console.log(vm.searchItem);
              vm.isSearch = true;
+             vm.showMainSpinner = true;
              var params = {
                  keyword:vm.searchItem
              };
              NetworkService.post('rentservice/enterprise/enterpriseinfo/fuzzy?'+'limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
-                 console.log(response.data);
                  vm.items = response.data.results;
+                 vm.showMainSpinner = false;
                  if(vm.items != null && vm.items.length > 0){
                      vm.showEmpty = false;
                  }else{
@@ -117,20 +120,22 @@
                  updatePagination(response.data);
                  //vm.displayedCollection = [].concat(vm.items);
              },function (response) {
+                 vm.showMainSpinner = false;
                  toastr.error(response.statusText);
              });
         };
 
         function getDatas() {
+            vm.showMainSpinner = true;
             if(vm.isSearch ){
                 vm.goSearch();
             }else {
-                console.log(vm.pageCurrent);
                 NetworkService.get(vm.getBasePath, {
+
                     limit: vm.limit,
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
-                    console.log(response.data);
+                    vm.showMainSpinner = false;
 
                     vm.items = response.data.results;
 
@@ -145,6 +150,7 @@
                     updatePagination(response.data);
                     //vm.displayedCollection = [].concat(vm.items);
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     toastr.error(response.statusText);
                 });
             }
@@ -224,7 +230,6 @@
             var page = parseInt(pageination.offset/pageination.limit +1);
             var toalPages = pageination.count % pageination.limit == 0 ?  parseInt(pageination.count / pageination.limit):parseInt(pageination.count / pageination.limit + 1);
             vm.totalPages = toalPages;
-            console.log(page + ';'+ toalPages);
             vm.pageNextEnabled = (vm.pageCurrent ==  toalPages ? false : true);
             vm.pagePreEnabled = (vm.pageCurrent ==  1  ? false : true);
 

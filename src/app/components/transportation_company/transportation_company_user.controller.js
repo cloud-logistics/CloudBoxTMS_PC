@@ -41,7 +41,7 @@
         vm.isAdmin = false;
         vm.showEmpty = true;
         vm.showEmptyInfo = '该企业暂无用户';
-
+        vm.showMainSpinner = false;
         vm.labelColor = {
             enabled:'bg-success',
             locked:'bg-danger',
@@ -113,6 +113,7 @@
 
         function goSearch() {
             console.log(vm.searchItem);
+            vm.showMainSpinner = true;
             vm.isSearch = true;
            // http://127.0.0.1:8000/container/api/v1/cloudbox/rentservice/enterprise/enterpriseinfo/userfuzzy
             var param = {
@@ -120,6 +121,7 @@
                 "enterprise_id":vm.enterprise_id
             }
             NetworkService.post('rentservice/enterprise/enterpriseinfo/userfuzzy?'+'limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),param,function (response) {
+                vm.showMainSpinner = false;
                 vm.items = response.data.results;
                 if(vm.items != null && vm.items.length > 0){
                     vm.showEmpty = false;
@@ -131,6 +133,7 @@
                 //vm.displayedCollection = [].concat(vm.items);
                 updatePagination(response.data);
             },function (response) {
+                vm.showMainSpinner = false;
                 toastr.error(response.statusText);
             });
         };
@@ -139,11 +142,12 @@
             if(vm.isSearch){
                 vm.goSearch();
             }else {
-
+                vm.showMainSpinner = true;
                 NetworkService.get(vm.getBasePath + '/enterprise/' + vm.enterprise_id, {
                     limit: vm.limit,
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     vm.items = response.data.results;
                     if(vm.items != null && vm.items.length > 0){
                         vm.showEmpty = false;
@@ -155,6 +159,7 @@
                     //vm.displayedCollection = [].concat(vm.items);
                     updatePagination(response.data);
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     toastr.error(response.statusText);
                 });
             }

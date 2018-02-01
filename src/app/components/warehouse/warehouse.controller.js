@@ -42,6 +42,7 @@
         vm.isAdmin = false;
         vm.showEmpty = true;
         vm.showEmptyInfo = '暂无仓库信息';
+        vm.showMainSpinner = false;
 
         vm.labelColor = {
             enabled:'bg-success',
@@ -182,7 +183,7 @@
 
         function goSearch() {
             vm.isSearch = true;
-            console.log(vm.searchWarehouse);
+            vm.showMainSpinner = true;
             var params = {
                 site_name:vm.searchWarehouse
                 /*,
@@ -190,14 +191,17 @@
                 offset:(vm.pageCurrent - 1) * vm.limit*/
             }
             NetworkService.post('rentservice/site/filter?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
+                vm.showMainSpinner = false;
                 if(response.data.results != null && response.data.results.length > 0){
                     vm.showEmpty = false;
+
                 }else{
                     vm.showEmpty = true;
                     vm.showEmptyInfo = '没搜到符合条件的结果';
                 }
                 vm.processDatas(response);
             },function (response) {
+                vm.showMainSpinner = false;
                 vm.authError = response.statusText + '(' + response.status + ')';
                 toastr.error(vm.authError);
             });
@@ -208,12 +212,13 @@
             if(vm.isSearch){
                 vm.goSearch();
             }else {
-                console.log(vm.pageCurrent);
+                vm.showMainSpinner = true;
+
                 NetworkService.get(vm.getBasePath, {
                     limit: vm.limit,
                     offset: (vm.pageCurrent - 1) * vm.limit
                 }, function (response) {
-                    console.log(response.data);
+                    vm.showMainSpinner = false;
                     if(response.data.results != null && response.data.results.length > 0){
                         vm.showEmpty = false;
                     }else{
@@ -223,6 +228,7 @@
                     vm.processDatas(response);
                     //vm.displayedCollection = [].concat(vm.items);
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     toastr.error(response.statusText);
                 });
             }

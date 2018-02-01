@@ -1,7 +1,9 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ReportController as vm"
      ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;app.settings.dashboard=false;">
     <!-- main -->
+
     <div class="col panel-default">
+        <!--<span us-spinner spinner-on="vm.showMainSpinner"></span>-->
         <!-- main header -->
         <!--<div class="bg-light lter b-b wrapper-xs">-->
         <!--<div class="row">-->
@@ -10,6 +12,7 @@
         <!--</div>-->
         <!--</div>-->
         <!--</div>-->
+
             <div class="report-head">
                 <div class="title inline">报表管理</div>
 
@@ -25,13 +28,11 @@
             </div>
 
 
-        <div ng-if="vm.showEmpty" class="user-empty">
+        <div ng-if="vm.showEmpty && !vm.showMainSpinner" class="user-empty">
             <span>{{vm.showEmptyInfo}}</span>
         </div>
 
-
-
-
+        <div ng-if="vm.showMainSpinner" class="user-wait" />
 
 
         <div ng-if="!vm.showEmpty" class=" bb-table m-l m-r m-t panel panel-default" >
@@ -61,6 +62,7 @@
                         </tbody>
                     </table>
                 </div>
+
 
                 <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
                 </div>
