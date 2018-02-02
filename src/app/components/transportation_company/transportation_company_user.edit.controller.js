@@ -133,6 +133,16 @@
 
             NetworkService.get(vm.getBaseCompanyPath,{limit:100, offset:0},function (response) {
                 vm.companyInfo = response.data.results;
+                if(vm.companyInfo != null && vm.companyInfo.length > 0) {
+                    for (var i = 0; i < vm.companyInfo.length; i++) {
+                        if(vm.companyInfo[i].enterprise_name.length > 12){
+                            vm.companyInfo[i].shortName = vm.companyInfo[i].enterprise_name.substr(0,12)+'...';
+                        }else{
+                            vm.companyInfo[i].shortName = vm.companyInfo[i].enterprise_name;
+                        }
+
+                    }
+                }
                 //if(vm.isAdd && vm.companyInfo.length > 0){
                   //  vm.user.enterprise_id = vm.companyInfo[0].enterprise_id;
                 //}

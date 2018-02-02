@@ -18,9 +18,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">用户名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="用户名" ng-model="vm.user.user_name" name="user_name" ng-disabled = "!vm.isAdd" required>
+                               placeholder="用户名" ng-model="vm.user.user_name" name="user_name" ng-maxlength="20"  ng-disabled = "!vm.isAdd" required>
                     </div>
-                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_name.$invalid">请输入用户名，提交后无法更改</i></span>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_name.$invalid">请输入用户名，长度不能超过20位，提交后无法更改</i></span>
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
 
@@ -28,9 +28,9 @@
                     <label class="col-sm-1 control-label m-l-lg font-bold">真实姓名</label>
                     <div class="col-sm-4">
                         <input class="form-control" type="text"
-                               placeholder="真实姓名" ng-model="vm.user.user_real_name" name="user_real_name" ng-disabled = "!vm.isAdd" required>
+                               placeholder="真实姓名" ng-model="vm.user.user_real_name" name="user_real_name" ng-maxlength="20"  ng-disabled = "!vm.isAdd" required>
                     </div>
-                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_real_name.$invalid">请输入真实姓名，提交后无法更改</i></span>
+                    <span class="blank-tips" ><i>* </i><i ng-show="form.user_real_name.$invalid">请输入真实姓名，长度不能超过20位，提交后无法更改</i></span>
 
                 </div>
                 <div class="line line-dashed b-b line-lg"></div>
@@ -168,7 +168,7 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label m-l-lg font-bold">所属企业</label>
                     <div class="col-sm-4">
-                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" name="enterprise_id" ng-options="opt.enterprise_id as opt.enterprise_name for opt in vm.companyInfo" ng-disabled="vm.isDetail || vm.isFromCompany" required></select>
+                        <select style="width: 100%;" class="form-control font-thin" ng-model="vm.user.enterprise_id" name="enterprise_id" ng-options="opt.enterprise_id as opt.shortName for opt in vm.companyInfo" ng-disabled="vm.isDetail || vm.isFromCompany" required></select>
 
                     </div>
 

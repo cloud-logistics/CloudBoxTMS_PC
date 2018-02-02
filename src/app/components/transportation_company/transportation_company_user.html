@@ -19,14 +19,15 @@
             <span>{{vm.showEmptyInfo}}</span>
         </div>
 
-        <div ng-if="vm.showMainSpinner" class="user-wait" />
+        <div ng-if="vm.showMainSpinner" class="user-wait" >
+        </div>
 
         <div ng-if="!vm.showEmpty" class="m-l m-r m-t panel panel-default">
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table  table-striped table-hover  text-center">
             <thead>
             <tr>
                 <th colspan="7">
-                    <div class="company-title">公司名称：{{vm.enterprise_name}}</div>
+                    <div class="company-title">公司名称：{{vm.enterprise_name.length > 20 ? vm.enterprise_name.substr(0,20)+'...':vm.enterprise_name}}</div>
                 </th>
             </tr>
             <tr class="font-bold">
@@ -46,16 +47,16 @@
 
             <!--filter:{role:'user'}-->
             <tr ng-repeat="item in vm.displayedCollection">
-                <td ng-click="vm.goDetail(item)">{{item.user_name}}</td>
+                <td title= "{{item.user_name}}" ng-click="vm.goDetail(item)">{{item.user_name.length > 12 ? item.user_name.substr(0,12)+'...':item.user_name}}</td>
                <!-- <td ng-click="vm.goDetail(item)">{{item.user_password}}</td>-->
-                <td ng-click="vm.goDetail(item)">
+                <td title= "{{item.role}}" ng-click="vm.goDetail(item)">
                     <label class="bg-success label" ng-bind="vm.labelContent[item.role]"></label>
                 </td>
-                <td ng-click="vm.goDetail(item)">
+                <td title= "{{item.group}}" ng-click="vm.goDetail(item)">
                     <label class="bg-success label" ng-bind="vm.labelGroupContent[item.group]"></label>
                 </td>
-                <td ng-click="vm.goDetail(item)">{{item.user_phone}}</td>
-                <td ng-click="vm.goDetail(item)">{{item.user_email}}</td>
+                <td title= "{{item.user_phone}}" ng-click="vm.goDetail(item)">{{item.user_phone}}</td>
+                <td title= "{{item.user_email}}" ng-click="vm.goDetail(item)">{{item.user_email.length > 20 ? item.user_email.substr(0,20)+'...':item.user_email}}</td>
 
                 <td>
                     <button class="btn btn-sm btn-info btn-addon" style="width: 80px" ng-click="vm.goDetail(item)"><i class="fa fa-eye"></i>详情</button>
