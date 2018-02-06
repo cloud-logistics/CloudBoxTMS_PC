@@ -97,7 +97,7 @@
 
 
 
-        <div ng-if="vm.isViewList && !vm.showEmpty">
+        <div ng-if="vm.isViewList && !vm.showEmpty && !vm.showMainSpinner">
                 <div class=" bb-table m-l m-r m-t panel panel-default" >
                     <table st-table="vm.items" st-safe-src="vm.items" class="table table-striped table-hover m-t">
                         <thead>
@@ -142,7 +142,7 @@
 
 
 
-        <div ng-if="!vm.isViewList && !vm.showEmpty">
+        <div ng-if="!vm.isViewList && !vm.showEmpty && !vm.showMainSpinner">
             <div class="panel panel-default" style="padding-left:20px;">
                 <div class="container-grid inline" ng-class="'container-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.items">
                     <div class="title">ID {{item.deviceid.length > 16 ? item.deviceid.substr(item.deviceid.length-16,16) : item.deviceid}}</div>

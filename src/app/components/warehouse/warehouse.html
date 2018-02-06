@@ -30,7 +30,7 @@
     </div>
 
     <!-- main -->
-    <div ng-if="vm.isViewList && !vm.showEmpty">
+    <div ng-if="vm.isViewList && !vm.showEmpty && !vm.showMainSpinner" >
         <div class="bb-table m-l m-r m-t panel panel-default">
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table table-striped table-hover m-t">
             <thead>
@@ -83,7 +83,7 @@
 
 
 
-    <div ng-if="!vm.isViewList && !vm.showEmpty">
+    <div ng-if="!vm.isViewList && !vm.showEmpty  && !vm.showMainSpinner">
         <div class="panel panel-default m-l m-r" style="padding-left:20px;">
             <div class="warehouse-grid " ng-class="'warehouse-grid-bg-'+$index" ng-click="vm.goDetail(item)" ng-repeat="item in vm.displayedCollection">
                 <div class="title">{{item.name.length > 7 ? item.name.substr(0,6)+'...':item.name}}</div>
