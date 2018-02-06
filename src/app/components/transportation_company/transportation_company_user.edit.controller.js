@@ -170,10 +170,28 @@
             });
         };
 
+        var formatDateTime = function (date_tmp) {
+            console.log(date_tmp);
+            var date = new Date(date_tmp);
+            console.log(date);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? ('0' + m) : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            var h = date.getHours();
+            h=h < 10 ? ('0' + h) : h;
+            var minute = date.getMinutes();
+            minute = minute < 10 ? ('0' + minute) : minute;
+            var second=date.getSeconds();
+            second=second < 10 ? ('0' + second) : second;
+            return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+        };
         function getTenantItem() {
             NetworkService.get(vm.getBasePath + '/' + username + '/',null,function (response) {
                 vm.user = response.data;
                 vm.user.enterprise_id = vm.user.enterprise;
+                vm.user.register_time = formatDateTime(vm.user.register_time);
             },function (response) {
                 toastr.error(response.statusText);
             });
