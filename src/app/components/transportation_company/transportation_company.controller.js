@@ -172,7 +172,7 @@
 
 
         function removeItem(item) {
-            NetworkService.delete(vm.delBasePath  + '/' + item.enterprise_id,null,function success() {
+            NetworkService.delete(vm.delBasePath  + '/' + item.enterprise_id + '/',null,function success() {
                 var index = vm.items.indexOf(item);
                 toastr.success('删除成功！');
                 getDatas();

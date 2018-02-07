@@ -181,7 +181,7 @@
 
 
         function removeItem(item) {
-            NetworkService.delete(vm.delBasePath  + '/' + item.user_id,null,function success() {
+            NetworkService.delete(vm.delBasePath  + '/' + item.user_id + '/',null,function success() {
                 var index = vm.items.indexOf(item);
                 toastr.success('删除成功！');
                 getDatas();
@@ -270,6 +270,7 @@
 
         vm.tipsInfo = delmodaltip;
         vm.openAlert = function (size,model) {
+            console.log('1111');
             var modalInstance = $uibModal.open({
                 templateUrl: 'myModalContent.html',
                 size: size,
@@ -281,6 +282,7 @@
                 }
             });
             modalInstance.result.then(function (param) {
+                console.log('222');
                 vm.removeItem(model);
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
