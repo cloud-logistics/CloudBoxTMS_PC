@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f54e1b1d-f388-4121-95d0-34cfa81254d9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.controller.js" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/app.constants.js" afterPath="$PROJECT_DIR$/src/app/app.constants.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html" afterPath="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/version.txt" afterPath="$PROJECT_DIR$/version.txt" />
     </list>
     <ignored path="operation_platform.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,8 +47,8 @@
       <file leaf-file-name="transportation_company.edit.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="206" column="81" selection-start-line="206" selection-start-column="68" selection-end-line="206" selection-end-column="81" />
+            <state relative-caret-position="252">
+              <caret line="108" column="26" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -103,7 +104,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transportation_company_user.edit.controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="transportation_company_user.edit.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="144">
@@ -113,11 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.constants.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.constants.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/app.constants.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+            <state relative-caret-position="225">
+              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -149,7 +150,6 @@
         <option value="$PROJECT_DIR$/src/app/common/directives/ui-is-email.js" />
         <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.edit.html" />
         <option value="$PROJECT_DIR$/src/app/main/blocks/header.html" />
-        <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html" />
         <option value="$PROJECT_DIR$/src/app/components/signin/signin.controller.js" />
         <option value="$PROJECT_DIR$/src/app/components/profile/profile.controller.js" />
         <option value="$PROJECT_DIR$/src/app/main/blocks/aside.controller.js" />
@@ -184,13 +184,14 @@
         <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.controller.js" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.html" />
         <option value="$PROJECT_DIR$/src/assets/styles/less/app.edit.less" />
-        <option value="$PROJECT_DIR$/src/app/app.constants.js" />
         <option value="$PROJECT_DIR$/src/app/components/warehouse/warehouse.html" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.html" />
         <option value="$PROJECT_DIR$/src/app/components/basic/boxbasic.html" />
         <option value="$PROJECT_DIR$/src/app/components/report/report.html" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.html" />
         <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company_user.edit.controller.js" />
+        <option value="$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html" />
+        <option value="$PROJECT_DIR$/src/app/app.constants.js" />
       </list>
     </option>
   </component>
@@ -204,8 +205,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="149" />
-    <option name="y" value="103" />
+    <option name="x" value="361" />
+    <option name="y" value="23" />
     <option name="width" value="1043" />
     <option name="height" value="790" />
   </component>
@@ -688,15 +689,15 @@
       <workItem from="1515460424503" duration="22217000" />
       <workItem from="1516584595206" duration="2130000" />
       <workItem from="1517194232040" duration="12103000" />
-      <workItem from="1517901696018" duration="2257000" />
+      <workItem from="1517901696018" duration="3241000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="527769000" />
+    <option name="totallyTimeSpent" value="528753000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="149" y="103" width="1043" height="790" extended-state="0" />
+    <frame x="361" y="23" width="1043" height="790" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2396932" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -913,16 +914,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/warehouse/warehouse.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -963,14 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="206" column="81" selection-start-line="206" selection-start-column="68" selection-end-line="206" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -992,6 +975,24 @@
         <state relative-caret-position="144">
           <caret line="176" column="32" selection-start-line="176" selection-start-column="32" selection-end-line="176" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/transportation_company/transportation_company.edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="108" column="26" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
