@@ -31,7 +31,7 @@
                                 {{vm.user.allCurrentBoxInfo.availableNum}}/{{vm.user.allCurrentBoxInfo.allNum}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (vm.user.allCurrentBoxInfo.allNum == 0 ? 0 :(vm.user.allCurrentBoxInfo.availableNum> vm.user.allCurrentBoxInfo.allNum?100:100*vm.user.allCurrentBoxInfo.availableNum/vm.user.allCurrentBoxInfo.allNum))+'%'}}" >
+                                <div class="progress-percent-bar" ng-style="{'width':vm.allPercent} " >
 
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                 {{item.ava_num-item.reserve_num}}/{{item.ava_num}}
                             </div>
                             <div class="progress-all-bar">
-                                <div class="progress-percent-bar" style="{{'width:' + (item.ava_num-item.reserve_num==0 ? 0:(item.ava_num-item.reserve_num> item.ava_num?100:100*(item.ava_num-item.reserve_num)/(item.ava_num)))+'%'}}" >
+                                <div class="progress-percent-bar" ng-style="vm.getItemColor(item)" >
 
                                 </div>
                             </div>
@@ -154,8 +154,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-                    </div>
+                        <tm-pagination style="float:right;" conf="conf"></tm-pagination>
 
 
 

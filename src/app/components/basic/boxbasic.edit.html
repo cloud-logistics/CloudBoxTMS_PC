@@ -80,18 +80,17 @@
                             <tbody class="">
 
                             <tr ng-repeat="item in vm.containerHistory">
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.lease_start_time| date:'yyyy-MM-dd HH:mm'}}</td>
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)">{{item.lease_end_time == null ? '至今':(item.lease_end_time| date:'yyyy-MM-dd HH:mm')}}</td>
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)" title="{{item.enterprise.enterprise_name}}">{{item.enterprise.enterprise_name.length > 10 ? item.enterprise.enterprise_name.substr(0,10)+'...':item.enterprise.enterprise_name}}</td>
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)" title="{{item.off_site.name}}">{{item.off_site.name.length > 10 ? item.off_site.name.substr(0,10)+'...':item.off_site.name}}</td>
-                                <td style="{{'color:' + (item.lease_end_time == null ? '#4668E7'  : '#000')}}" ng-click="vm.goDetail(item)" title="{{item.on_site.name}}">{{item.on_site.name==null? '在运未知':(item.on_site.name.length > 10 ? item.on_site.name.substr(0,10)+'...':item.on_site.name)}}</td>
+                                <td ng-style="vm.getColor(item)" ng-click="vm.goDetail(item)">{{item.lease_start_time| date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td ng-style="vm.getColor(item)" ng-click="vm.goDetail(item)">{{item.lease_end_time == null ? '至今':(item.lease_end_time| date:'yyyy-MM-dd HH:mm')}}</td>
+                                <td ng-style="vm.getColor(item)" ng-click="vm.goDetail(item)" title="{{item.enterprise.enterprise_name}}">{{item.enterprise.enterprise_name.length > 10 ? item.enterprise.enterprise_name.substr(0,10)+'...':item.enterprise.enterprise_name}}</td>
+                                <td ng-style="vm.getColor(item)" ng-click="vm.goDetail(item)" title="{{item.off_site.name}}">{{item.off_site.name.length > 10 ? item.off_site.name.substr(0,10)+'...':item.off_site.name}}</td>
+                                <td ng-style="vm.getColor(item)" ng-click="vm.goDetail(item)" title="{{item.on_site.name}}">{{item.on_site.name==null? '在运未知':(item.on_site.name.length > 10 ? item.on_site.name.substr(0,10)+'...':item.on_site.name)}}</td>
                             </tr>
 
                             </tbody>
                         </table>
                     </div>
-                    <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-                    </div>
+                    <tm-pagination style="float:right;" conf="conf"></tm-pagination>
 
 </div>
 

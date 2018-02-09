@@ -17,12 +17,22 @@
         $scope.transDetail = false;
 
         vm.pageCurrent = 1;
-        vm.targetPage = 1;
-        vm.pagePreEnabled = false;
-        vm.pageNextEnabled = false;
-        vm.pages = ['1'];
-        vm.totalPages = 1;
         vm.limit = 10;
+        $scope.conf = {
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            pagesLength: 15,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){
+                vm.limit = $scope.conf.itemsPerPage;
+                vm.pageCurrent = $scope.conf.currentPage;
+                getDatas();
+            }
+        };
+
+
+
         vm.showEmpty = true;
         vm.showEmptyInfo = '暂无报表信息';
         vm.showMainSpinner = false;
@@ -123,8 +133,8 @@
             }
         }
         vm.goResetSearch = function(){
-            vm.pageCurrent = 1;
-            vm.targetPage = vm.pageCurrent;
+            $scope.conf.currentPage = 1;
+            vm.pageCurrent  = 1;
             vm.goSearch();
         }
         vm.goSearch = function(){
@@ -133,6 +143,7 @@
             var params = {
                 keyword:vm.searchItem
             };
+            vm.isSearch = true;
 
             NetworkService.post('rentservice/boxbill/filtertotalbill?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
                 vm.showMainSpinner = false;
@@ -240,7 +251,7 @@
             return false;
         };
 
-        function updatePagination(pageination) {
+        /*function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
                 vm.pageCurrent = 1;
                 vm.targetPage = 1;
@@ -279,9 +290,19 @@
                 }
             }
 
+        }*/
+
+        function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                $scope.conf.currentPage = 1;
+                $scope.conf.totalItems = 0;
+                return;
+            }
+
+            $scope.conf.totalItems = pageination.count;
+
         }
-
-
 
         getDatas();
 

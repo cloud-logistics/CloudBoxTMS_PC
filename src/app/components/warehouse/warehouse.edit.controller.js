@@ -28,13 +28,22 @@
         vm.isAdd = true;
         vm.isEdit = false;
         vm.isDetail = false;
+
         vm.pageCurrent = 1;
-        vm.targetPage = 1;
-        vm.pagePreEnabled = false;
-        vm.pageNextEnabled = false;
-        vm.pages = ['1'];
-        vm.totalPages = 1;
         vm.limit = 10;
+        $scope.conf = {
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            pagesLength: 15,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){
+                vm.limit = $scope.conf.itemsPerPage;
+                vm.pageCurrent = $scope.conf.currentPage;
+                getDatas();
+            }
+        };
+
         vm.getTenantItem = getTenantItem;
         vm.submitAction = submitAction;
         vm.backAction = backAction;
@@ -117,7 +126,20 @@
         vm.warehouseHistory = [];
 
 
-
+        vm.getItemColor = function(item)
+        {
+            return {
+                width: (item.ava_num - item.reserve_num == 0 ? 0 : (item.ava_num - item.reserve_num > item.ava_num ? 100 : 100 * (item.ava_num - item.reserve_num) / (item.ava_num))) + '%'
+            }
+        }
+        vm.allPercent = '60%';
+        vm.getAllColor = function(allCurrentBoxInfo)
+        {
+            return
+            {
+                width:(allCurrentBoxInfo.allNum == 0 ? 0 :(allCurrentBoxInfo.availableNum> allCurrentBoxInfo.allNum?100:100*allCurrentBoxInfo.availableNum/allCurrentBoxInfo.allNum))+'%'
+            }
+        }
 
         //vm.reqBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/transportasion_company';
         vm.addBasePath =  'rentservice/enterprise/enterpriseinfo/addenterpriseinfo/';
@@ -146,7 +168,7 @@
                                 //console.log(vm.allName.indexOf(vm.userHis[i].detail[j].box_type.box_type_name));
                                 if (vm.allName.indexOf(vm.userHis[i].detail[j].box_type.box_type_name) == -1) {
                                     vm.allName.push(vm.userHis[i].detail[j].box_type.box_type_name);
-                                    console.log(vm.userHis[i].detail[j].box_type.box_type_name);
+                                    //console.log(vm.userHis[i].detail[j].box_type.box_type_name);
                                 }
                             }
                         }
@@ -221,7 +243,7 @@
 
                     }
 
-                    console.log(vm.warehouseHistory);
+                   // console.log(vm.warehouseHistory);
                 }
                 updatePagination(response.data);
 
@@ -426,6 +448,10 @@
                         vm.user.allCurrentBoxInfo.allNum += vm.allInfo.box_counts[j].ava_num;
                         vm.user.allCurrentBoxInfo.availableNum += (vm.allInfo.box_counts[j].ava_num - vm.allInfo.box_counts[j].reserve_num);
 
+
+
+                        vm.allPercent = (vm.user.allCurrentBoxInfo.allNum == 0 ? 0 :(vm.user.allCurrentBoxInfo.availableNum> vm.user.allCurrentBoxInfo.allNum?100:100*vm.user.allCurrentBoxInfo.availableNum/vm.user.allCurrentBoxInfo.allNum))+'%';
+
                     }
                 }
                 /*vm.user.allCurrentBoxInfo.allNum = vm.user.freezerBoxInfo.allNum +  vm.user.coolerBoxInfo.allNum
@@ -517,6 +543,18 @@
 
         function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                $scope.conf.currentPage = 1;
+                $scope.conf.totalItems = 0;
+                return;
+            }
+
+            $scope.conf.totalItems = pageination.count;
+
+        }
+
+        /*function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;
             }
@@ -549,7 +587,7 @@
                 }
             }
 
-        }
+        }*/
 
     }
 

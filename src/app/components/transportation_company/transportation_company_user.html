@@ -22,7 +22,7 @@
         <div ng-if="vm.showMainSpinner" class="user-wait" >
         </div>
 
-        <div ng-if="!vm.showEmpty" class="m-l m-r m-t panel panel-default">
+        <div ng-if="!vm.showEmpty  && !vm.showMainSpinner" class="m-l m-r m-t panel panel-default">
         <table  st-table="vm.displayedCollection" st-safe-src="vm.items" class="table  table-striped table-hover  text-center">
             <thead>
             <tr>
@@ -82,9 +82,7 @@
             </tbody>
         </table>
         </div>
-        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-        </div>
-        <!-- / tasks -->
+        <tm-pagination style="float:right;" conf="conf"></tm-pagination>
     </div>
 </div>
 <script type="text/ng-template" id="myModalContent.html">

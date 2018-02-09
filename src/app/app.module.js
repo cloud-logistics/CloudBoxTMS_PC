@@ -32,7 +32,8 @@
             'datePicker',
             'moment-picker',
             'angularSpinner',
-             'angular-md5'
+             'angular-md5',
+            'ngPagination'
 
     ]);
 

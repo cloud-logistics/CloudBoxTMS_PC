@@ -2,9 +2,11 @@
     app.settings.asideFolded = false;
     app.settings.asideDock = false;
     app.settings.dashboard=false;
-">
+"
+style="overflow-x:scroll;overflow-y:hidden;"
+>
     <!-- main -->
-    <div class="col panel-default">
+    <div class="col panel-default" style="overflow-x:scroll;overflow-y:auto;">
         <div class="transport-company-head">
             <button ng-click="vm.goAddItem()" class="add-enterprise-button"
             >添加企业</button>
@@ -109,14 +111,11 @@
         </table>
         </div>
 
-        <!--<div class="btn-group pagination pull-right padder-lg">-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.preAction()" ng-disabled= !vm.pagePreEnabled>Previous</button>-->
-            <!--<button type="button" class="btn btn-default" ng-repeat="page in vm.pages" ng-click="vm.goPage(page)" ng-disabled= vm.pageCurrentState(page)>{{page}}</button>-->
-            <!--<button type="button" class="btn btn-default" ng-click="vm.nextAction()" ng-disabled= !vm.pageNextEnabled>Next</button>-->
-        <!--</div>-->
-        <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
-        </div>
-        <!-- / tasks -->
+       <!-- <div data-ng-include=" 'app/main/blocks/pageflip.html' " >
+        </div>-->
+
+        <tm-pagination style="float:right;" conf="conf"></tm-pagination>
+
     </div>
 </div>
 <script type="text/ng-template" id="myModalContent.html">

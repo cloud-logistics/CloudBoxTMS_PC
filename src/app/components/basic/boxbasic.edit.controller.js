@@ -20,17 +20,24 @@
     });
 
     /** @ngInject */
-    function BoxBasicEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
+    function BoxBasicEditController($scope,NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
         vm.pageCurrent = 1;
-        vm.targetPage = 1;
-        vm.pagePreEnabled = false;
-        vm.pageNextEnabled = false;
-        vm.pages = ['1'];
-        vm.totalPages = 1;
         vm.limit = 10;
+        $scope.conf = {
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            pagesLength: 15,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){
+                vm.limit = $scope.conf.itemsPerPage;
+                vm.pageCurrent = $scope.conf.currentPage;
+                getDatas();
+            }
+        };
         vm.user = {};
         vm.isAdd = true;
         vm.isEdit = false;
@@ -99,6 +106,12 @@
         }
         if(type && type=='detail'){
             vm.isDetail = true;
+        }
+
+        vm.getColor = function(item){
+            return {
+                color: (item.lease_end_time == null ? '#4668E7'  : '#000')
+            }
         }
 
         vm.containerStatusSpec = {
@@ -409,7 +422,19 @@
             return false;
         };
 
+
         function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                $scope.conf.currentPage = 1;
+                $scope.conf.totalItems = 0;
+                return;
+            }
+
+            $scope.conf.totalItems = pageination.count;
+
+        }
+        /*function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
                 // toastr.error('当前无数据哦~');
                 return;
@@ -443,7 +468,7 @@
                 }
             }
 
-        }
+        }*/
 
     }
 

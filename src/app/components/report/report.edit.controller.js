@@ -20,18 +20,24 @@
     });
 
     /** @ngInject */
-    function ReportEditController(NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr,$timeout) {
+    function ReportEditController($scope,NetworkService,StorageService,constdata,i18n,$rootScope,$stateParams,toastr,$timeout) {
         /* jshint validthis: true */
         var vm = this;
         vm.authError = null;
         vm.pageCurrent = 1;
-        vm.targetPage = 1;
-        vm.pagePreEnabled = false;
-        vm.pageNextEnabled = false;
-        vm.pages = ['1'];
-        vm.totalPages = 1;
-        vm.targetPage = 1;
-        vm.limit = 8;
+        vm.limit = 10;
+        $scope.conf = {
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            pagesLength: 15,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){
+                vm.limit = $scope.conf.itemsPerPage;
+                vm.pageCurrent = $scope.conf.currentPage;
+                getDatas();
+            }
+        };
         vm.user = {};
         vm.isAdd = true;
         vm.isEdit = false;
@@ -146,11 +152,12 @@
         {
 
             
-            vm.containerReportHistory = [];
+
             NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,{limit:vm.limit, offset:(vm.pageCurrent - 1) * vm.limit},function (response) {
 
                 var tmp = response.data.results;
                 if(tmp != null && tmp.length > 0){
+                    vm.containerReportHistory = [];
                     for(var i = 0; i < tmp.length; i ++){
                         vm.containerReportHistory[i] = {};
                         vm.containerReportHistory[i].containerId = tmp[i].box.deviceid;
@@ -176,8 +183,8 @@
         }
 
         vm.onChartClick = function(param){
-            console.log(param);
-            console.log(param.name);
+            //console.log(param);
+            //console.log(param.name);
             vm.limit = 8;
             vm.targetPage = 1;
             $timeout(function(){
@@ -190,7 +197,7 @@
             $timeout(function () {
                 vm.searchTime = param.name;
                 vm.selectedDate = param.name.substr(0,7);
-                console.log(vm.searchTime);
+                //console.log(vm.searchTime);
                 vm.containerReportHistory = [];
                 NetworkService.get('rentservice/boxbill/detail/' + username+'/' + vm.selectedDate,null,function (response) {
 
@@ -465,7 +472,19 @@
             return false;
         };
 
+
         function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                $scope.conf.currentPage = 1;
+                $scope.conf.totalItems = 0;
+                return;
+            }
+
+            $scope.conf.totalItems = pageination.count;
+
+        }
+        /*function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
                 vm.pageCurrent = 1;
                 vm.targetPage = 1;
@@ -505,7 +524,7 @@
                 }
             }
 
-        }
+        }*/
 
     }
 

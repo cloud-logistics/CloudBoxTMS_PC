@@ -15,12 +15,19 @@
         vm.authError = null;
 
         vm.pageCurrent = 1;
-        vm.targetPage = 1;
-        vm.pagePreEnabled = false;
-        vm.pageNextEnabled = false;
-        vm.pages = ['1'];
-        vm.totalPages = 1;
-        vm.limit = 8;
+        vm.limit = 10;
+        $scope.conf = {
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            pagesLength: 15,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){
+                vm.limit = $scope.conf.itemsPerPage;
+                vm.pageCurrent = $scope.conf.currentPage;
+                getDatas();
+            }
+        };
 
         vm.items = [];
         vm.showItems = [];
@@ -176,8 +183,8 @@
         };
 
         vm.goResetSearch = function(){
-            vm.pageCurrent = 1;
-            vm.targetPage = vm.pageCurrent;
+            $scope.conf.currentPage = 1;
+            vm.pageCurrent  = 1;
             vm.goSearch();
         }
 
@@ -292,7 +299,20 @@
             return false;
         };
 
+
         function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                $scope.conf.currentPage = 1;
+                $scope.conf.totalItems = 0;
+                return;
+            }
+
+            $scope.conf.totalItems = pageination.count;
+
+        }
+
+        /*function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
                 vm.pageCurrent = 1;
                 vm.targetPage = 1;
@@ -331,7 +351,7 @@
                 }
             }
 
-        }
+        }*/
 
         getDatas();
 
