@@ -4,7 +4,8 @@
     <div class="regular" ng-switch-when="admin">
 
         <li>
-            <a href class="auto" ui-sref="app.dashboard">
+            <!--<a href class="auto" ui-sref="app.dashboard">-->
+            <a href class="auto" ui-sref="app.containeroverview">
                   <!--<span class="pull-right text-muted hidden-folded">
                     <i class="fa fa-fw fa-angle-right text"></i>
                     <i class="fa fa-fw fa-angle-down text-active"></i>
@@ -14,7 +15,7 @@
             </a>
 
         <!--containeroverview、siteoverview html are not finished   write by cwl  -->
-        <ul class="nav" style="display:none;">
+        <ul class="nav nav-sub">
             <li ui-sref-active="active">
                 <a ui-sref="app.containeroverview" class="active1">
                     <span>云箱概览</span>
@@ -29,102 +30,74 @@
         </ul>
     </li>
 
-        
+
+
+
+
         <li>
-            <a href class="auto" ui-sref="app.transportation_company">
-                  <!--<span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>-->
-                <!--<b class="badge bg-info pull-right">5</b>--> 
+            <a href class="auto" ui-sref="app.report">
                 <img src="images/icon_report.svg" width="20px" height="20px" style="margin-right: 10px"/>
                 <span class="font-bold hidden-folded">租赁中心</span>
             </a>
-
-
-           <!-- <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.transportation_company">
-                        <span>运输企业</span>
-                    </a>
-                </li>
-            </ul>-->
-
-            <!-- allorders payment accountpaid usingbox settlement finishedbox  are not done   wirte by cwl-->
-            <ul class="nav"  style="display:none;">
+            <ul class="nav nav-sub ">
                     <li ui-sref-active="active">
-                        <a ui-sref="app.allorders" class="active2">
+                        <a ui-sref="app.allorders">
                             <span>全部订单</span>
                         </a>
                     </li>
-                    <!--<li ui-sref-active="active">-->
-                        <!--<a ui-sref="app.instantlocation" class="active2">-->
-                            <!--<span>实时位置</span>-->
-                        <!--</a>-->
-                    <!--</li>-->
                     <li ui-sref-active="active">
-                        <a ui-sref="app.payment" class="active2">
+                        <a ui-sref="app.payment">
                             <span>待付款</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="app.accountpaid" class="active2">
+                        <a ui-sref="app.accountpaid">
                             <span>已付款</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="app.usingbox" class="active2">
+                        <a ui-sref="app.usingbox">
                             <span>用箱中</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="app.settlement" class="active2">
+                        <a ui-sref="app.settlement">
                             <span>结算中</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                            <a ui-sref="app.finishedbox" class="active2">
+                            <a ui-sref="app.finishedbox">
                                 <span>已完成</span>
                             </a>
                         </li>
                 </ul>
 
         </li>
+
+
+
+
         <li>
-            <a href class="auto" ui-sref="app.report">
-                  <!--<span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>-->
-                <!--<b class="badge bg-info pull-right">5</b>-->
+            <a href class="auto" ui-sref="app.transportation_company">
                 <img src="images/icon_my_company.svg" width="20px" height="20px" style="margin-right: 10px"/>
                 <span class="font-bold hidden-folded">租户管理</span>
             </a>
-           <!-- <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.warehouse">
-                        <span>仓库信息</span>
-                    </a>
-                </li>
-
-            </ul>-->
-            <!-- allleaseholders  spicespirit are not done   wirte by cwl-->  
-            <ul class="nav"  style="display:none;">
+            <ul class="nav nav-sub" >
                     <li ui-sref-active="active">
-                        <a ui-sref="app.allleaseholders" class="active3">
+                        <a ui-sref="app.allleaseholders">
                             <span>全部租户</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                            <a ui-sref="app.spicespirit" class="active3">
+                            <a ui-sref="app.spicespirit">
                                 <span>麻辣诱惑</span>
                             </a>
                         </li>
             </ul>
-
-
-
         </li>
+
+
+
         <li>
             <a href class="auto" ui-sref="app.boxbasic">
 
@@ -132,24 +105,15 @@
                 <img src="images/icon_container_basic.svg" width="20px" height="20px" style="margin-right: 10px"/>
                 <span class="font-bold hidden-folded">云箱管理</span>
             </a>
-           <!-- <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.boxbasic">
-                        <span>云箱信息</span>
-                    </a>
-                </li>
 
-
-            </ul>-->
-              <!-- allsmartbox  boxdetail are not done   wirte by cwl--> 
-            <ul class="nav"  style="display:none;">
+            <ul class="nav nav-sub">
                     <li ui-sref-active="active">
-                        <a ui-sref="app.allsmartbox" class="active3">
+                        <a ui-sref="app.allsmartbox">
                             <span>全部云箱</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                            <a ui-sref="app.boxdetail" class="active3">
+                            <a ui-sref="app.boxdetail">
                                 <span>云箱详情</span>
                             </a>
                         </li>
@@ -164,44 +128,20 @@
                     <i class="fa fa-fw fa-angle-down text-active"></i>
                   </span>-->
                 <!--<b class="badge bg-info pull-right">5</b>--> 
-                <a href class="auto">
+                <a href class="auto" ui-sref="app.warehouse">
                 <img src="images/icon_warehouse.svg" width="20px" height="20px" style="margin-right: 10px"/>
                 <span class="font-bold hidden-folded" >仓库管理</span>
             </a>
-            <!--<ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.report">
-                        <span>企业报表</span>
-                    </a>
-                </li>
-            </ul>
-
-
-            <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.report">
-                        <span>仓库报表</span>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.report">
-                        <span>云箱报表</span>
-                    </a>
-                </li>
-            </ul>-->
 
             <!-- allsmartbox  boxdetail are not done   wirte by cwl--> 
-            <ul class="nav"  style="display:none;">
+            <ul class="nav nav-sub">
                     <li ui-sref-active="active">
-                        <a ui-sref="app.warehouse" class="active4">
+                        <a ui-sref="app.warehouse">
                             <span>全部仓库</span>
                         </a>
                     </li>
                     <li ui-sref-active="active">
-                            <a ui-sref="app.webdevtec" class="active4">
+                            <a ui-sref="app.webdevtec">
                                 <span>仓库详情</span>
                             </a>
                         </li>
@@ -227,264 +167,6 @@
 
     </div>
 
-
-
-
-
-
-    <div class="regular" ng-switch-when="carrier">
-        <!--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-            <span>业务</span>
-        </li>-->
-        <li>
-            <a href class="auto" ui-sref="app.dashboard">
-                  <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <!--<b class="badge bg-info pull-right">5</b>-->
-                <!--<i class="glyphicon glyphicon-list icon text-success"></i>-->
-                <!--<span class="pull-left text-muted">-->
-                <img src="images/icon_dashboard.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href class="auto" ui-sref="app.overview">
-                  <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <!--<b class="badge bg-info pull-right">5</b>-->
-                <img src="images/icon_overview.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">云箱概览</span>
-            </a>
-        </li>
-        <li>
-            <a href class="auto">
-                  <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <!--<b class="badge bg-info pull-right">5</b>-->
-                <img src="images/icon_monitor.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">云箱监控</span>
-            </a>
-            <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.realtime">
-                        <span>实时报文</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.instantlocation">
-                        <span>实时位置</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.historylocation">
-                        <span>历史轨迹</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.alert">
-                        <span>报警监控</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.basicinfo">
-                        <span>基础信息查询</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.history">
-                        <span>历史报文</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.boxstatus">
-                        <span>云箱状态汇总</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.robots">
-                        <span>机器人监控</span>
-                    </a>
-                </li>
-            </ul>
-
-        </li>
-        <li>
-            <a href class="auto">
-                  <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <!--<b class="badge bg-info pull-right">5</b>-->
-                <img src="images/icon_basic.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">云箱信息管理</span>
-            </a>
-            <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.boxbasic">
-                        <span>基础信息管理</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.boxparam">
-                        <span>安全参数设置</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.boxalert">
-                        <span>报警处理设置</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.boxmalfun">
-                        <span>故障库设置</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-        <!--<li class="line dk"></li>-->
-        <!--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-            <span>查询</span>
-        </li>-->
-        <li ui-sref-active="active">
-            <a ui-sref="app.mylease">
-                <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <img src="images/icon_lease.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">共享管理</span>
-            </a>
-        </li>
-        <li>
-            <a href class="auto">
-                  <span class="pull-right text-muted hidden-folded">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <!--<b class="badge bg-info pull-right">5</b>-->
-                <img src="images/icon_ana.svg" width="20px" height="20px" style="margin-right: 10px"/>
-                <span class="font-bold hidden-folded">数据预测分析</span>
-            </a>
-            <ul class="nav nav-sub dk">
-                <li ui-sref-active="active">
-                    <a ui-sref="app.allhist">
-                        <span>整体历史数据</span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="app.sitehist">
-                        <span>站点历史数据</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </div>
-    <div class="cargoagent" ng-switch-when="cargoagent">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-            <span>业务</span>
-        </li>
-        <li>
-            <a href class="auto" ui-sref="app.goodorder">
-                  <span class="pull-right text-muted">
-                    <i class="fa fa-fw fa-angle-right text"></i>
-                    <i class="fa fa-fw fa-angle-down text-active"></i>
-                  </span>
-                <i class="glyphicon glyphicon-list icon text-success"></i>
-                <span class="font-bold">订单管理</span>
-            </a>
-        </li>
-        <!--<li ui-sref-active="active">-->
-        <!--<a ui-sref="app.goodstorages">-->
-        <!--<i class="glyphicon glyphicon-th-large icon text-info-dker"></i>-->
-        <!--<span class="font-bold">仓库管理</span>-->
-        <!--</a>-->
-        <!--</li>-->
-
-        <li class="line dk"></li>
-
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-            <span>查询</span>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="app.company({type:'carrier'})">
-                <i class="glyphicon glyphicon-compressed icon"></i>
-                <span class="font-bold">拖车公司</span>
-            </a>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="app.company({type:'shipper'})">
-                <i class="glyphicon glyphicon-globe icon"></i>
-                <span class="font-bold">船运公司</span>
-            </a>
-        </li>
-    </div>
-    <div class="shipper" ng-switch-when="shipper">
-        <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-            <span>业务</span>
-        </li>
-        <li>
-            <a href class="auto" ui-sref="app.shiporder">
-      <span class="pull-right text-muted">
-        <i class="fa fa-fw fa-angle-right text"></i>
-        <i class="fa fa-fw fa-angle-down text-active"></i>
-      </span>
-                <!--<b class="badge bg-info pull-right">35</b>-->
-                <i class="glyphicon glyphicon-list icon text-success"></i>
-                <span class="font-bold">订单管理</span>
-            </a>
-            <!--<ul class="nav nav-sub dk">-->
-            <!--<li class="nav-sub-header">-->
-            <!--<a href>-->
-            <!--<span>Dashboard</span>-->
-            <!--</a>-->
-            <!--</li>-->
-            <!--<li ui-sref-active="active">-->
-            <!--<a ui-sref="app.dashboard-v1">-->
-            <!--<b class="label bg-black pull-right">3</b>-->
-            <!--<span>待处理</span>-->
-            <!--</a>-->
-            <!--</li>-->
-            <!--<li ui-sref-active="active">-->
-            <!--<a ui-sref="app.dashboard-v1">-->
-            <!--<b class="label bg-black pull-right">32</b>-->
-            <!--<span>进行中</span>-->
-            <!--</a>-->
-            <!--</li>-->
-            <!--<li ui-sref-active="active">-->
-            <!--<a ui-sref="app.dashboard-v2">-->
-            <!--<b class="label bg-black pull-right">N</b>-->
-            <!--<span>已完成</span>-->
-            <!--</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-        </li>
-
-        <li ui-sref-active="active">
-            <a ui-sref="app.containers">
-                <i class="glyphicon glyphicon-align-center icon text-info-lter"></i>
-                <span class="font-bold">集装箱管理</span>
-            </a>
-        </li>
-        <li ui-sref-active="active">
-            <a ui-sref="app.shippingschedule">
-                <i class="glyphicon glyphicon-tint icon text-info-lter"></i>
-                <span class="font-bold">航次管理</span>
-            </a>
-        </li>
-        <!--<li ui-sref-active="active">-->
-        <!--<a ui-sref="app.mail.list">-->
-        <!--<i class="glyphicon glyphicon-user icon text-info-lter"></i>-->
-        <!--<span class="font-bold">账户管理</span>-->
-        <!--</a>-->
-        <!--</li>-->
-    </div>
     <div class="" ng-switch-default>加载中...</div>
 </ul>
 <!-- / list -->
