@@ -109,6 +109,17 @@
                 templateUrl: 'app/components/basic/boxbasic.html'
             })
 
+            .state('app.containeroverview',{
+                url: 'containeroverview',
+                templateUrl: 'app/components/monitor/containeroverview.html'
+            })
+
+
+            .state('app.siteoverview',{
+                url: 'siteoverview',
+                templateUrl: 'app/components/monitor/siteoverview.html'
+            })
+
             .state('app.edit_boxbasic', {
                 url: 'boxbasic/edit/:username',
                 params : {args : {}},

@@ -49,6 +49,7 @@
 
 
             ApiServer.userLogin(user,function (response) {
+                // debugger
 
 
                 var result = response.data;

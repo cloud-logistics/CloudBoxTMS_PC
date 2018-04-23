@@ -53,6 +53,9 @@
             getIssueInfoManage: getIssueInfoManage,
             getRepairInfoManage: getRepairInfoManage,
 
+         
+            getDistribution:getDistribution,
+
             isAuthed: isAuthed,
             roleType: roleType,
             info: info,
@@ -138,6 +141,15 @@
                 return information;
             }
         }
+
+           //获取分布信息数据
+           function getDistribution(opt){
+            NetworkService.get(constdata.api.distribution,null,opt.success,opt.error)
+        }
+
+
+
+
         function logoutAction() {
             var authorizationKey = constdata.token;
             var userInfo = constdata.informationKey;

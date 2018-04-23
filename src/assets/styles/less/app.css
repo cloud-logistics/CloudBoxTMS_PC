@@ -1,0 +1,8 @@
+.mapview {
+    min-height: calc(90vh);
+    min-width: 750px;
+    overflow-x: scroll;
+  }
+  .embeded_mapview {
+    min-height: 400px;
+  }
