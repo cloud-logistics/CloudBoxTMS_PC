@@ -1,0 +1,229 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderController as vm"
+     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;app.settings.dashboard=false;">
+    <!-- main -->
+
+    <div class="col panel-default">
+        <!--<span us-spinner spinner-on="vm.showMainSpinner"></span>-->
+        <!-- main header -->
+        <!--<div class="bg-light lter b-b wrapper-xs">-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+        <!--<h1 class="font-thin h3 text-black m-l m-t-sm">{{vm.title}}</h1>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+            <div class="order-head">
+                <div class="title inline">全部订单 ></div>
+
+                <div class="right-search">
+                    <button class="search-icon" ng-click="vm.goResetSearch()">
+                        <i class="fa fa-search"></i>
+                    </button>
+
+                <input st-search="" ng-model="vm.searchItem"  ng-keyup="vm.enterEvent($event)"  class="search-order-edit font-thin" placeholder="输入租户名、仓库名或订单编号搜索" type="text"/>
+                <!--<button ng-click="vm.goSearch()" class=" search-button"><i class="fa fa-search" />搜索</button>-->
+
+
+                    <button class="order-button" ng-click="vm.addOrder()">
+                       + 预约下单
+                    </button>
+
+                </div>
+
+
+            </div>
+           <div class="order-search-zone">
+
+               <div class="search-line">
+                   <div class="search-label inline">租户名称</div>
+                   <div class="search-select-order-name inline">
+                       <select class="search-select-list-order-name" ng-model="vm.searchProvince" value="租户名称"></select>
+                   </div>
+                   <div class="search-label inline">创建时间</div>
+                   <div class="search-time inline" >
+                       <input class="search-time-input " type="text"/>
+                   </div>
+                   <div class="inline">--</div>
+                   <div class="search-time inline" >
+                       <input class="search-time-input " type="text"/>
+                   </div>
+
+                   <div class="search-label inline">计费模式</div>
+                   <div class="search-select-order-name inline">
+                       <select class="search-select-list-order-name" ng-model="vm.searchProvince" value="租户名称"></select>
+                   </div>
+
+               </div>
+
+
+
+               <div class="searh-line">
+                   <div class="search-label inline">发往仓库</div>
+                   <div class="search-select-order-name inline">
+                       <select class="search-select-list-order-name" ng-model="vm.searchProvince" value="租户名称"></select>
+                   </div>
+
+
+                   <div class="search-label inline">交易状态</div>
+                   <div class="search-select-order-name inline">
+                       <select class="search-select-list-order-name" ng-model="vm.searchProvince" value="租户名称"></select>
+                   </div>
+
+                   <div class="search-label inline">押金状态</div>
+                   <div class="search-select-order-name inline">
+                       <select class="search-select-list-order-name" ng-model="vm.searchProvince" value="租户名称"></select>
+                   </div>
+
+
+
+
+               </div>
+
+
+               <div class="searh-line">
+                   <button class="order-search-button" ng-click="vm.addOrder()">
+                       搜索
+                   </button>
+
+               </div>
+
+
+
+
+
+           </div>
+
+
+
+
+        <div ng-if="!vm.showEmpty && !vm.showMainSpinner">
+            <div class="order-detail-info">
+            <div class="order-header">
+                订单编号： 9232343232323 创建时间： 2018-03-32 15:06
+            </div>
+            <div class="order-content">
+                <div class="order-spec inline">
+                    <div class="warehouse-name">
+                        塔尖仓库
+                    </div>
+                    <div class="tenant-name">
+                        租户：麻辣诱惑
+                    </div>
+                </div>
+
+                <div class="all-box-type inline">
+                    <div class="box-type ">
+                        <div class="cold-box inline">
+                            冷藏云箱
+                        </div>
+                        <div class="box-number inline">
+                            X1
+                        </div>
+                    </div>
+
+                    <div class="box-type ">
+                        <div class="freeze-box inline">
+                            冷冻云箱
+                        </div>
+                        <div class="box-number inline">
+                            X1
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="fee-spec inline">
+                    <div class="fee-num">
+                        ¥5652.00
+                    </div>
+                    <div class="fee-type">
+                        (部分退还)
+                    </div>
+                </div>
+
+                <div class="box-type-spec inline">
+                    <div class="box-type-1">
+                        待归还(1/2)
+                    </div>
+                    <div class="box-type-1">
+                        已归还(1/2)
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+            <div class="order-detail-info">
+                <div class="order-header">
+                    订单编号： 9232343232323   创建时间： 2018-03-32 15:06
+                </div>
+                <div class="order-content">
+                    <div class="order-spec inline">
+                        <div class="warehouse-name">
+                            塔尖仓库
+                        </div>
+                        <div class="tenant-name">
+                            租户：麻辣诱惑
+                        </div>
+                    </div>
+
+                    <div class="all-box-type inline">
+                        <div class="box-type ">
+                            <div class="cold-box inline">
+                                冷藏云箱
+                            </div>
+                            <div class="box-number inline">
+                                X1
+                            </div>
+                        </div>
+
+                        <div class="box-type ">
+                            <div class="freeze-box inline">
+                                冷冻云箱
+                            </div>
+                            <div class="box-number inline">
+                                X1
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="fee-spec inline">
+                        <div class="fee-num">
+                            ¥5652.00
+                        </div>
+                        <div class="fee-type">
+                            (部分退还)
+                        </div>
+                    </div>
+
+                    <div class="box-type-spec inline">
+                        <div class="box-type-1">
+                            待归还(1/2)
+                        </div>
+                        <div class="box-type-1">
+                            已归还(1/2)
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="vm.showEmpty && !vm.showMainSpinner" class="user-empty">
+            <span>{{vm.showEmptyInfo}}</span>
+        </div>
+
+        <div ng-if="vm.showMainSpinner" class="user-wait" >
+        </div>
+
+
+
+
+        <tm-pagination style="float:right;" conf="conf"></tm-pagination>
+    </div>
+
+</div>
+

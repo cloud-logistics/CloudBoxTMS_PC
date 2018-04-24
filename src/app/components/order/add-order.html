@@ -1,0 +1,206 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderController as vm"
+     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;app.settings.dashboard=false;">
+    <!-- main -->
+
+    <div class="col panel-default">
+        <!--<span us-spinner spinner-on="vm.showMainSpinner"></span>-->
+        <!-- main header -->
+        <!--<div class="bg-light lter b-b wrapper-xs">-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+        <!--<h1 class="font-thin h3 text-black m-l m-t-sm">{{vm.title}}</h1>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+            <div class="order-head">
+                <div class="title inline">全部订单 > 预约下单</div>
+
+
+            </div>
+
+
+
+           <div class="order-add-zone">
+               <div class="order-add-title ">
+                   确认收货仓库
+               </div>
+               <div class="order-add-line">
+               <div class="order-add-star inline">
+                   *
+               </div>
+               <div class="order-add-label inline">
+                   收货仓库
+               </div>
+
+               <div class="order-add-list  inline">
+                   <select class="order-add-list-input" ng-model="vm.searchProvince" value="租户名称"></select>
+               </div>
+
+               <div class="order-add-new  inline">
+                   [添加新仓库]
+               </div>
+               </div>
+           </div>
+
+        <div class="order-add-zone">
+            <div class="order-add-title inline">
+                选择租户
+            </div>
+            <div class="order-add-line">
+            <div class="order-add-star inline">
+                *
+            </div>
+            <div class="order-add-label inline">
+                租户名称
+            </div>
+
+
+                <div class="order-add-list  inline">
+                    <select class="order-add-list-input" ng-model="vm.searchProvince" value="租户名称"></select>
+                </div>
+
+            <div class="order-add-new  inline">
+                [添加新租户]
+            </div>
+                </div>
+        </div>
+
+
+
+
+       <div class="box-add-zone">
+
+           <div class="box-add-title">
+               箱单详细
+           </div>
+           <div class="box-add-table">
+
+
+
+               <div class="box-add-num inline">
+                <div class="box-add-table-title">
+                    用箱数量
+                </div>
+
+                   <div class="box-type-info">
+                       <div class="box-add-type-line">
+                           <div class="box-add-type-icon inline">冷藏云箱</div>
+                           <div class="box-add-type-spec inline">冷藏型云箱</div>
+                       </div>
+
+                       <div class="box-add-num-line">
+                           <div class="box-add-num-star inline">*</div>
+                           <div class="box-add-num-label inline">租赁数量</div>
+                           <button class="box-change-num-btn">-</button>
+                           <input class="box-type-num" value="2" type="text">
+                           <button class="box-change-num-btn">+</button>
+
+                       </div>
+                   </div>
+
+                   <div class="box-type-info">
+                       <div class="box-add-type-line">
+                           <div class="box-add-type-icon inline">冷冻云箱</div>
+                           <div class="box-add-type-spec inline">冷冻型云箱</div>
+                       </div>
+
+                       <div class="box-add-num-line">
+                           <div class="box-add-num-star inline">*</div>
+                           <div class="box-add-num-label inline">租赁数量</div>
+                           <button class="box-change-num-btn">-</button>
+                           <input class="box-type-num" type="text" value="2">
+                           <button class="box-change-num-btn">+</button>
+
+                       </div>
+                   </div>
+
+
+               </div>
+
+
+
+
+
+
+               <div class="box-add-time inline remove-inline-space">
+
+                   <div class="box-add-table-title ">
+                       用箱时间
+                   </div>
+
+
+
+
+
+
+               </div>
+
+               <div class="box-add-price inline remove-inline-space">
+                   <div class="box-add-table-title ">
+                       价格表
+                   </div>
+                   <div class="box-add-price-table">
+                       <div class="box-add-price-time inline">
+                           半年租
+                       </div>
+                       <div class="box-add-price-info inline">
+                           <div class="box-add-price-define">
+                               201元/箱/月
+                           </div>
+                           <div class="box-add-price-spec">
+                               (一次性押金324元／箱)
+                           </div>
+                       </div>
+
+                   </div>
+
+
+
+
+               </div>
+
+               <div class="box-add-deposit inline remove-inline-space">
+
+                   <div class="box-add-table-title ">
+                       押金小计
+                   </div>
+                   <div class="box-add-price-num">
+                       ¥56.00
+                   </div>
+                   <div class="box-add-price-num">
+                       ¥128.00
+                   </div>
+               </div>
+               <div class="box-add-rent inline remove-inline-space">
+
+                   <div class="box-add-table-title ">
+                       租金小计
+                   </div>
+                   <div class="box-add-price-num">
+                       ¥324.00
+                   </div>
+                   <div class="box-add-price-num">
+                       ¥68.00
+                   </div>
+               </div>
+           </div>
+
+
+       </div>
+
+        <div ng-if="vm.showEmpty && !vm.showMainSpinner" class="user-empty">
+            <span>{{vm.showEmptyInfo}}</span>
+        </div>
+
+        <div ng-if="vm.showMainSpinner" class="user-wait" >
+        </div>
+
+
+
+
+        <tm-pagination style="float:right;" conf="conf"></tm-pagination>
+    </div>
+
+</div>
+

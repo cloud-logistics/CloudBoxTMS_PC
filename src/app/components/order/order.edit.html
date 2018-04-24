@@ -1,0 +1,63 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderEditController as vm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+">
+    <!-- main -->
+                    <span us-spinner spinner-on="vm.showSpinner"></span>
+
+
+                <div class="report-guide-bar">
+                    <a href class="auto" ui-sref="app.report">
+                        <span class="title" ><u><b>报表管理</b></u></span>
+                    </a>
+                    <span>></span>
+                         <span class="name">{{ vm.refItem.enterpriseName.length > 10 ? vm.refItem.enterpriseName.substr(0,10)+'...':vm.refItem.enterpriseName}}</span>
+                </div>
+
+
+            <div ng-if="!vm.showChart" class="report-chart empty-tips">
+                <span>该企业暂无月报表统计数据</span>
+            </div>
+                <div ng-if="vm.showChart" class="report-chart"  e-chart e-data="vm.reportOption" >
+                </div>
+
+                <!--<div class="panel-body">
+                    <div style="height: 340px; background:#fff;"  e-chart e-data="vm.reportOption">ddd</div>
+                </div>-->
+
+                <div class="report-month">
+                    {{vm.selectedDate | date:'yyyy-MM' }} 详情记录
+                </div>
+                    <div class="bb-table m-l m-r m-t panel panel-default">
+                        <table  st-table="vm.containerReportHistory" st-safe-src="vm.containerReportHistory" class="table table-striped table-hover m-t">
+                            <thead>
+
+                                <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                                <th>云箱 ID</th>
+                                <th >类型</th>
+                                <th >开始</th>
+                                <th >结束</th>
+                                <th >金额</th>
+
+                                <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+
+
+                            </thead>
+
+                            <tbody class="">
+
+                            <tr ng-repeat="item in vm.containerReportHistory">
+                                <td title="{{item.containerId}}" ng-click="vm.goDetail(item)" >{{item.containerId}}</td>
+                                <td title="{{item.type}}" ng-click="vm.goDetail(item)">{{item.type}}</td>
+                                <td title="{{item.offSite.location}} {{item.offSite.name}}" ng-click="vm.goDetail(item)" ><div class="report-table-time-area"><div class="report-table-time">{{item.startTime| date:'yyyy-MM-dd HH:mm'}}</div> {{item.offCity}}</div></td>
+                                <td  title="{{item.onSite.location}} {{item.onSite.name}}" ng-click="vm.goDetail(item)" ><div class="report-table-time-area"><div class="report-table-time">{{item.endTime| date:'yyyy-MM-dd HH:mm'}}</div> {{item.onCity}}</div></td>
+                                <td title="{{item.amount}}" ng-click="vm.goDetail(item)">{{item.amount}} <!--<span ng-if="item.isCurDate" style="color:#ff0000">(未入报表)</span>--></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+    <tm-pagination style="float:right;" conf="conf"></tm-pagination>
+
+</div>
+

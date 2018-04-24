@@ -4,10 +4,10 @@
 (function () {
     'use strict';
 
-    angular.module('smart_container').controller('BookingController', BookingController);
+    angular.module('smart_container').controller('OrderController', OrderController);
 
     /** @ngInject */
-    function BookingController(constdata, StorageService,NetworkService, $stateParams, ApiServer, toastr, $state, $timeout, $interval, $scope, optionsTransFunc) {
+    function OrderController(constdata, NetworkService, $stateParams, ApiServer, toastr, $state, $timeout, $interval, $scope, optionsTransFunc) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -17,15 +17,25 @@
         $scope.transDetail = false;
 
         vm.pageCurrent = 1;
-        vm.targetPage = 1;
-        vm.pagePreEnabled = false;
-        vm.pageNextEnabled = false;
-        vm.pages = ['1'];
-        vm.totalPages = 1;
         vm.limit = 10;
-        vm.showEmpty = true;
-        vm.showEmptyInfo = '暂无预约信息';
+        $scope.conf = {
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            pagesLength: 15,
+            perPageOptions: [10, 20, 30, 40, 50],
+            onChange: function(){
+                vm.limit = $scope.conf.itemsPerPage;
+                vm.pageCurrent = $scope.conf.currentPage;
+                getDatas();
+            }
+        };
 
+
+
+        vm.showEmpty = true;
+        vm.showEmptyInfo = '暂无报表信息';
+        vm.showMainSpinner = false;
         vm.selectedStyle={
             true:'bg-selected',
             false:'bg-unselected'
@@ -42,29 +52,24 @@
             3:'bg-not-available'
         };
 
-        vm.appointStatus = {
-            0:'预约中',
-            1:'已完成',
-            2:'已取消'
-        }
 
 
-        vm.labelColor = {
-            0:'bg-info',
-            1:'bg-success',
-            2:'bg-danger'
-        };
         vm.isViewList = false;
         vm.selList = function (isList) {
             vm.isViewList = isList;
+            console.log('dd');
+
         }
 
 
 
-
+        vm.addOrder = function()
+        {
+            $state.go('app.add-order',{});
+        }
 
         vm.goDetail= function(item) {
-            $state.go('app.edit_booking',{username:item.appointment_id, args:{type:'detail', data:item}});
+            $state.go('app.edit_report',{username:item.id, args:{type:'detail', data:item}});
 
         };
         $scope.basicUpdate = function(item){
@@ -124,21 +129,6 @@
         vm.searchWarehouse = 1;
         vm.isSearch = false;
         vm.searchItem = '';
-
-        vm.infoKey = 'all.bookingInfo';
-
-        if($stateParams.args.enterprise_id != null){
-            var entInfo = {
-                enterprise_id:$stateParams.args.enterprise_id,
-                enterprise_name:$stateParams.args.enterprise_name
-            }
-            StorageService.put(vm.infoKey, entInfo, 24 * 3 * 60 * 60);
-        }
-        var storeInfo = StorageService.get(vm.infoKey);
-        vm.enterprise_id = storeInfo.enterprise_id;
-        vm.enterprise_name = storeInfo.enterprise_name;
-
-
         vm.enterEvent = function(e){
             var keycode = window.event?e.keyCode:e.which;
             if(keycode==13){
@@ -146,32 +136,42 @@
             }
         }
         vm.goResetSearch = function(){
-            vm.pageCurrent = 1;
-            vm.targetPage = vm.pageCurrent;
+            $scope.conf.currentPage = 1;
+            vm.pageCurrent  = 1;
             vm.goSearch();
         }
         vm.goSearch = function(){
-            vm.isSearch = true;
-            console.log(vm.searchItem);
 
-
+            vm.showMainSpinner = true;
             var params = {
-                "enterprise_id":vm.enterprise_id,
-                "keyword":vm.searchItem
-            }
+                keyword:vm.searchItem
+            };
+            vm.isSearch = true;
 
-            NetworkService.post('rentservice/appointment/enterpriselist?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
-
-                vm.items = response.data.results;
-                if(vm.items != null && vm.items.length > 0){
+            NetworkService.post('rentservice/boxbill/filtertotalbill?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
+                vm.showMainSpinner = false;
+                vm.itemsTmp = response.data.results;
+                if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
                     vm.showEmpty = false;
                 }else{
                     vm.showEmpty = true;
-                    vm.showEmptyInfo = '暂无预约信息';
+                    vm.showEmptyInfo = '没搜到符合条件的结果';
                 }
                 updatePagination(response.data);
+                vm.items = [];
+                if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
+                    for(var i = 0; i < vm.itemsTmp.length; i ++){
+                        vm.items[i] = {};
+                        vm.items[i].id = vm.itemsTmp[i].enterprise_id;
+                        vm.items[i].enterpriseName = vm.itemsTmp[i].enterprise_name;
+                        vm.items[i].usingContainerNum = vm.itemsTmp[i].off_num;
+                        vm.items[i].usedContainerNum = vm.itemsTmp[i].on_num;
+                        vm.items[i].amount = vm.itemsTmp[i].fee;
+                    }
+                }
 
             },function (response) {
+                vm.showMainSpinner = false;
                 toastr.error(response.statusText);
             });
 
@@ -182,27 +182,39 @@
 
 
         function getDatas() {
+            vm.showMainSpinner = true;
             if(vm.isSearch){
                 vm.goSearch();
             }else {
-                var params = {
-                    "enterprise_id":vm.enterprise_id,
-                    "keyword":""
-                }
                 //http://106.2.20.185:8000/container/api/v1/cloudbox/rentservice/boxbill/realtimebill
-               // NetworkService.get('rentservice/boxbill/realtimebill', {
-               NetworkService.post('rentservice/appointment/enterpriselist?limit='+vm.limit+'&offset='+((vm.pageCurrent - 1) * vm.limit),params,function (response) {
-                    vm.items = response.data.results;
-                    if(vm.items != null && vm.items.length > 0){
+                NetworkService.get('rentservice/boxbill/realtimebill', {
+                    limit: vm.limit,
+                    offset: (vm.pageCurrent - 1) * vm.limit
+                }, function (response) {
+                    vm.showMainSpinner = false;
+                    vm.itemsTmp = response.data.results;
+                    if(vm.itemsTmp != null && vm.itemsTmp.length > 0){
                         vm.showEmpty = false;
                     }else{
                         vm.showEmpty = true;
-                        vm.showEmptyInfo = '暂无预约信息';
+                        vm.showEmptyInfo = '暂无报表信息';
                     }
-                    updatePagination(response.data);
 
+                    updatePagination(response.data);
+                    vm.items = [];
+                    if (vm.itemsTmp != null && vm.itemsTmp.length > 0) {
+                        for (var i = 0; i < vm.itemsTmp.length; i++) {
+                            vm.items[i] = {};
+                            vm.items[i].id = vm.itemsTmp[i].enterprise_id;
+                            vm.items[i].enterpriseName = vm.itemsTmp[i].enterprise_name;
+                            vm.items[i].usingContainerNum = vm.itemsTmp[i].off_num;
+                            vm.items[i].usedContainerNum = vm.itemsTmp[i].on_num;
+                            vm.items[i].amount = vm.itemsTmp[i].fee;
+                        }
+                    }
 
                 }, function (response) {
+                    vm.showMainSpinner = false;
                     toastr.error(response.statusText);
                 });
             }
@@ -242,7 +254,7 @@
             return false;
         };
 
-        function updatePagination(pageination) {
+        /*function updatePagination(pageination) {
             if (pageination.results == null || pageination.results.length < 1){
                 vm.pageCurrent = 1;
                 vm.targetPage = 1;
@@ -281,9 +293,19 @@
                 }
             }
 
+        }*/
+
+        function updatePagination(pageination) {
+            if (pageination.results == null || pageination.results.length < 1){
+                vm.pageCurrent = 1;
+                $scope.conf.currentPage = 1;
+                $scope.conf.totalItems = 0;
+                return;
+            }
+
+            $scope.conf.totalItems = pageination.count;
+
         }
-
-
 
         getDatas();
 

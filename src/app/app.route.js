@@ -174,15 +174,21 @@
                 templateUrl: 'app/components/report/report.edit.html'
             })
 
-            .state('app.booking', {
-                url: 'booking',
+            .state('app.order', {
+                url: 'order',
                 params : {args : {}},
-                templateUrl: 'app/components/booking/booking.html'
+                templateUrl: 'app/components/order/order.html'
             })
-            .state('app.edit_booking', {
-                url: 'booking/edit/:username',
+            .state('app.edit_order', {
+                url: 'order/edit/:username',
                 params : {args : {}},
-                templateUrl: 'app/components/booking/booking.edit.html'
+                templateUrl: 'app/components/order/order.edit.html'
+            })
+
+            .state('app.add-order', {
+                url: 'add-order',
+                params : {args : {}},
+                templateUrl: 'app/components/order/add-order.html'
             })
 
             .state('access', {
