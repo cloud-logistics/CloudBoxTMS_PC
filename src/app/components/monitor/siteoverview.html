@@ -3,6 +3,7 @@
     <!-- main -->
     <div class="col">
         <div class="" style="position: relative">
+
             <div class="floating-panel-overview">
               <div class="title">
                 仓库总数
@@ -11,7 +12,25 @@
                 {{site_num}}
               </div>
             </div>
+
+           
+
+              <div  class= "siteoverview-head">
+                <div class="right-search">
+                  <button  class="search-icon"   ng-click="vm.goResetSearch()">
+                      <i class="fa fa-search"></i>
+                  </button>
+
+                  <input st-search="" ng-keyup="vm.enterEvent($event)" ng-model="vm.searchWarehouse"  placeholder="搜索仓库" type="text"/>
+                </div>
+              </div>
+
+
+
             <div id="siteoverview" class="mapview" style="min-height:calc(100vh - 50px)"></div>
+
+
+            
         </div>
     </div>
 </div>
