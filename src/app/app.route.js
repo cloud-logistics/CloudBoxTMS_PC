@@ -191,6 +191,28 @@
                 templateUrl: 'app/components/order/add-order.html'
             })
 
+            .state('app.appoint-order', {
+                url: 'appoint-order',
+                params:{args : {status:'nopay'}},
+                //params : {args : {}},
+                templateUrl: 'app/components/order/order-detail.html'
+            })
+
+
+            .state('app.pay-order', {
+                url: 'appoint-order',
+                params : {args : {status:'pay'}},
+                //params : {args : {}},
+                templateUrl: 'app/components/order/order-detail.html'
+            })
+
+            .state('app.order-inuse', {
+                url: 'order-inuse',
+                params : {args : {status:'inuse'}},
+                //params : {args : {}},
+                templateUrl: 'app/components/order/order-detail-using.html'
+            })
+
             .state('access', {
                 url: '/access',
                 template: '<div ui-view class="fade-in-right-big smooth"></div>'

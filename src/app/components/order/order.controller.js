@@ -61,6 +61,77 @@
 
         };
 
+
+        vm.allProgress = [
+            {
+                title:'已预约',
+                isActive:true
+            },
+            {
+                title:'已接单',
+                isActive:false
+            },
+            {
+                title:'已交箱',
+                isActive:false
+            },
+            {
+                title:'派送中',
+                isActive:false
+            },
+            {
+                title:'使用中',
+                isActive:false
+            },
+            {
+                title:'待归还',
+                isActive:false
+            },
+            {
+                title:'已归还',
+                isActive:false
+            }
+
+
+
+        ];
+        vm.payTitle = "待付款";
+        vm.isPay = false;
+        var status = $stateParams.args.status;
+        if(status && status=='nopay'){
+            vm.payTitle = "待付款";
+            vm.isPay = false;
+
+            vm.allProgress[1].isActive = false;
+            vm.allProgress[2].isActive = false;
+
+
+
+
+
+        }else if(status && status=='pay'){
+            vm.payTitle = "收款成功";
+            vm.isPay = true;
+
+
+            vm.allProgress[1].isActive = true;
+
+        }else if(status && status=='inuse'){
+            vm.payTitle = "收款成功";
+
+            vm.isPay = true;
+
+            vm.allProgress[1].isActive = true;
+            vm.allProgress[2].isActive = true;
+
+
+
+
+
+        }
+
+
+
         vm.sel = function(oper){
             for(var i = 0; i < vm.tabBoxPriceItem.length; i ++){
                 if(vm.tabBoxPriceItem[i].id == oper){
@@ -94,11 +165,30 @@
                 }
             ];
 
+
+
+
+
+
         vm.addOrder = function()
         {
             $state.go('app.add-order',{});
-        }
 
+        }
+        vm.appointOrder = function()
+        {
+            vm.payTitle = "待付款";
+            vm.isPay = false;
+            vm.allProgress[1].isActive = false;
+            $state.go('app.appoint-order',{});
+        }
+        vm.payOrder = function()
+        {
+            vm.payTitle = "收款成功";
+            vm.isPay = true　;
+            vm.allProgress[1].isActive = true;
+
+        }
         vm.goDetail= function(item) {
             $state.go('app.edit_report',{username:item.id, args:{type:'detail', data:item}});
 

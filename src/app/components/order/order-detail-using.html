@@ -1,0 +1,180 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderController as vm"
+     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;app.settings.dashboard=false;">
+    <!-- main -->
+
+    <div class="col panel-default">
+        <!--<span us-spinner spinner-on="vm.showMainSpinner"></span>-->
+        <!-- main header -->
+        <!--<div class="bg-light lter b-b wrapper-xs">-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+        <!--<h1 class="font-thin h3 text-black m-l m-t-sm">{{vm.title}}</h1>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+            <div class="order-head">
+                <div class="title inline">全部订单 > 进行中 >订单3232232234</div>
+
+            </div>
+
+
+
+           <div class="order-progress-zone">
+               <div class="order-progress-desc ">
+                   订单编号: 9323332323    创建时间：2030-03-23 14:03
+               </div>
+               <div class="order-progress-bar">
+                   <div ng-repeat="item in vm.allProgress" class="progress-unit inline">
+                    <div class="progress-unit-title">
+                        {{item.title}}
+                    </div>
+                       <div class="progress-unit-graph">
+                       <div class="progress-unit-circle inline " ng-class="{'progress-active':item.isActive}">
+
+                       </div>
+                       <div class="progress-unit-line-left inline" ng-class="{'progress-active':item.isActive, 'progress-hide':$index == vm.allProgress.length-1}">
+
+                       </div>
+                       <div class="progress-unit-line-right inline " ng-class="{'progress-active':vm.allProgress[$index+1].isActive, 'progress-hide':$index == vm.allProgress.length-1}">
+
+                       </div>
+                       </div>
+
+                       <div class="progress-unit-time ">
+                           2038-08-22 18:07
+                       </div>
+                   </div>
+
+
+               </div>
+
+
+
+           </div>
+
+
+           <div class="order-detail-zone">
+
+
+               <div class="order-detail inline">
+                   <div class="detail-title">订单详情</div>
+                   <div class="detail-desc">
+                       <div class="detail-label inline">
+                           租户名称
+                       </div>
+                       <div class="detail-content inline">
+                           北京热辣生活
+                       </div>
+                   </div>
+                   <div class="detail-desc">
+                       <div class="detail-label inline">
+                           租户名称
+                       </div>
+                       <div class="detail-content inline">
+                           北京热辣生活
+                       </div>
+                   </div>
+                   <div class="detail-desc">
+                       <div class="detail-label inline">
+                               收货仓库
+                       </div>
+                       <div class="detail-content inline">
+                           陕西西安北极熊仓库
+                       </div>
+                   </div>
+                   <div class="detail-desc">
+                       <div class="detail-label inline">
+                           用箱要求
+                       </div>
+                       <div class="detail-content inline">
+                           冷藏云箱1只
+                       </div>
+                   </div>
+                   <div class="detail-desc">
+                       <div class="detail-label inline">
+                           租赁周期
+                       </div>
+                       <div class="detail-content inline">
+                           66天
+                       </div>
+                   </div>
+                   <div class="detail-desc">
+                       <div class="detail-label inline">
+                        预计期限
+                       </div>
+                       <div class="detail-content inline">
+                           2018-08-30 15:22
+                       </div>
+                   </div>
+               </div>
+
+               <div class="order-pay inline">
+                   <div class="pay-title">{{vm.payTitle}}</div>
+                   <div class="pay-num">¥5652.00</div>
+                   <div class="pay-num-desc">订单总金额(含押金)</div>
+                   <div class="pay-desc">
+                       <div class="pay-label inline">
+                           租户单价/箱／天
+                       </div>
+                       <div class="pay-content inline">
+                           13.80
+                       </div>
+                   </div>
+                   <div class="pay-desc">
+                       <div class="pay-label inline">
+                           租赁数量
+                       </div>
+                       <div class="pay-content inline">
+                           冷藏型  X1
+                       </div>
+                   </div>
+                   <div class="pay-desc">
+                       <div class="pay-label inline">
+                           租赁周期
+                       </div>
+                       <div class="pay-content inline">
+                           180天
+                       </div>
+                   </div>
+
+                   <div class="pay-desc">
+                       <div class="pay-label inline">
+                           押金金额/箱
+                       </div>
+                       <div class="pay-content inline">
+                           342.00
+                       </div>
+                   </div>
+
+                   <div class="pay-stat">
+                       共2件云箱 小计：<span>¥5652.00</span>
+                   </div>
+
+               </div>
+
+           </div>
+
+        <div ng-if="!vm.isPay" class="box-detail-zone-appointment">
+
+
+            <button class="real-order-appointment" ng-click="vm.payOrder()">已付款，接受订单</button>
+        </div>
+
+
+        <div ng-if="vm.showEmpty && !vm.showMainSpinner" class="user-empty">
+            <span>{{vm.showEmptyInfo}}</span>
+        </div>
+
+        <div ng-if="vm.showMainSpinner" class="user-wait" >
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>
+
