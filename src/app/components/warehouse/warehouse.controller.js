@@ -181,6 +181,7 @@
 
             updatePagination(response.data);
         };
+        
 
         vm.goResetSearch = function(){
             $scope.conf.currentPage = 1;
@@ -231,8 +232,10 @@
                     }else{
                         vm.showEmpty = true;
                         vm.showEmptyInfo = '暂无仓库信息';
+
                     }
                     vm.processDatas(response);
+                 
                     //vm.displayedCollection = [].concat(vm.items);
                 }, function (response) {
                     vm.showMainSpinner = false;
