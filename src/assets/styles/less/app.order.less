@@ -512,7 +512,7 @@
 .box-add-zone{
   background: #FFFFFF;
   //box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.07);
-  height:350px;
+  height:365px;
   margin:15px 50px;
   width:1200px;
   padding:0px 0px;
@@ -527,7 +527,7 @@
   .box-add-table{
     border:solid #f0f0f0 1px;
     margin:8px 30px;
-    height:280px;
+    height:305px;
     width:1056px;
   }
 
@@ -550,7 +550,7 @@
   border-right:solid #f0f0f0 1px;
   width:250px;
 
-  height:280px;
+  height:303px;
   vertical-align:top;
 }
   .box-add-type-line{
@@ -603,28 +603,29 @@
   .box-add-time{
     border-right:solid #f0f0f0 1px;
     width:250px;
-    height:280px;
+    height:303px;
     vertical-align:top;
   }
 
   .box-add-price{
     border-right:solid #f0f0f0 1px;
     width:250px;
-    height:280px;
+    height:303px;
     vertical-align:top;
   }
 
   .box-add-deposit{
     border-right:solid #f0f0f0 1px;
     width:150px;
-    height:280px;
+    height:303px;
     vertical-align:top;
   }
 
   .box-add-rent{
     //border-right:solid #f0f0f0 1px;
+    border-right:solid #f0f0f0 1px;
     width:150px;
-    height:280px;
+    height:303px;
     vertical-align:top;
   }
 
@@ -644,14 +645,166 @@
 
   .box-add-price-table{
     border:solid #f0f0f0 1px;
-    height:80px;
+    height:70px;
+    position: relative;
+    top:15px;
+    left:10px;
+    width:220px;
+    margin-top:12px;
   }
 
 
   .box-add-price-time{
-    font-color:#000;
+    color:#000;
+    border-right:solid #f0f0f0 1px;
+    width:46px;
+    padding: 5px 15px;
+    height:70px;
+    margin:0 auto;
 
   }
 
+  .box-add-price-info{
+    position: relative;
+    vertical-align:top;
+    left:8px;
+    top:5px;
+  }
 
+  .box-add-price-define {
+    color:#000;
+    font-size:20px;
+    font-weight:bold;
+  }
+
+  .box-add-price-spec {
+    color:#aaadaf;
+    font-size:14px;
+    font-weight:bold;
+    position: relative;
+    top:5px;
+  }
+
+}
+
+
+
+
+
+
+.tab-page{
+
+
+  position: relative;
+  top: 32px;
+  margin: 0 auto;
+  width: 98%;
+  left:15px;
+  .day-rent-input{
+    color:#000;
+    font-size:18px;
+    position: relative;
+    left:60px;
+    top:30px;
+
+  }
+  .day-rent-input-edit{
+    width:50px;
+    height:40px;
+    text-align:center;
+    color:#000;
+    font-size:18px;
+  }
+
+}
+.tab-page ul{
+  font-size:0px;
+  margin:0;
+  padding:0;
+  list-style: none;
+  /* background-color: #fff;*/
+  display:inline-block;
+  border-bottom: 1px solid #ddd;
+  border-bottom:none;
+  position: relative;
+  top:-8px;
+}
+
+.tab-page li{
+  font-size:14px;
+  margin:0px 3px;
+  list-style: none;
+  display:inline-block;
+  /*border: 1px solid #ddd;
+  border-bottom:none;*/
+  border:none;
+}
+.tab-page li a{
+  padding:11px 15px;
+
+}
+/*.config-platform li a:focus{
+
+    border: 1px solid #ddd;
+    border-bottom:none;
+    background-color: #fff!important;
+}*/
+
+.tab-active{
+
+  border: 1px solid #ddd;
+  border-bottom:none;
+  background-color: #fff!important;
+}
+
+.tab-page li a:hover{
+  border-color: #dee5e7;
+  background-color: #dee5e7;
+}
+
+.tab-page .tab-container{
+
+  border:solid 1px #dee5e7;
+  //border-top-width: 0;
+  background-color: #fff;
+  //border-top:none;
+  width:82.5%;
+  //height:520px;
+  margin-left: 3px;
+  height:160px;
+
+}
+
+
+
+.box-add-zone-appointment{
+  float:right;
+  margin-right:280px;
+  .box-add-button-info{
+    color:#000;
+    font-size:22px;
+    span{
+      color:#ff0000;
+    }
+
+  }
+  .box-add-button-deposit{
+    color:#adb3b5;
+    font-size:18px;
+    span{
+      color:#adb3b5;
+    }
+  }
+  .add-order-appointment{
+    position: relative;
+    top:-10px;
+    left:5px;
+    font-size:30px;
+    color:#ffffff;
+    font-weight:bold;
+    background-color: #ff0000;
+    width:190px;
+    height:70px;
+
+  }
 }

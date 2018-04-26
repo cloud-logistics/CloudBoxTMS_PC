@@ -59,9 +59,40 @@
             vm.isViewList = isList;
             console.log('dd');
 
-        }
+        };
 
+        vm.sel = function(oper){
+            for(var i = 0; i < vm.tabBoxPriceItem.length; i ++){
+                if(vm.tabBoxPriceItem[i].id == oper){
+                    vm.tabBoxPriceItem[i].active = true;
+                }else{
+                    vm.tabBoxPriceItem[i].active = false;
+                }
+            }
+            vm.curSel = oper;
+        };
 
+        vm.tabBoxPriceItem =
+            [{
+                title:'日租',
+                active:true,
+                id:1
+
+            },
+                {
+                    title:'月租',
+                    active:false,
+                    id:2
+
+                }
+                ,
+                {
+                    title:'半年租',
+                    active:false,
+                    id:3
+
+                }
+            ];
 
         vm.addOrder = function()
         {

@@ -129,7 +129,60 @@
                        用箱时间
                    </div>
 
+                   <div class="tab-page">
+                   <ul>
+                       <li ng-repeat="tab in vm.tabBoxPriceItem">
+                           <a href ng-click="vm.sel(tab.id)" ng-class="{'tab-active':tab.active}">{{tab.title}}</a>
+                       </li>
 
+                   </ul>
+
+
+
+
+                       <div class="tab-container">
+
+                           <div class="plat-mgr" ng-show="vm.tabBoxPriceItem[0].active">
+                                <div class="day-rent-zone">
+                                    <div class="day-rent-input">
+                                        <input class="day-rent-input-edit" type="text" value="2">
+                                        天
+                                    </div>
+                                </div>
+
+                           </div>
+
+
+                           <div class="plat-mgr" ng-show="vm.tabBoxPriceItem[1].active">
+
+                               <div class="day-rent-zone">
+                                   <div class="day-rent-input">
+                                       <input class="day-rent-input-edit" type="text" value="2">
+                                       月
+                                   </div>
+                               </div>
+
+                           </div>
+
+                           <div class="plat-mgr" ng-show="vm.tabBoxPriceItem[2].active">
+
+                               <div class="day-rent-zone">
+                                   <div class="day-rent-input">
+                                       <input class="day-rent-input-edit" type="text" value="2">
+                                       年
+                                   </div>
+                               </div>
+
+                           </div>
+
+
+                       </div>
+
+
+
+
+
+                   </div>
 
 
 
@@ -152,6 +205,37 @@
                                (一次性押金324元／箱)
                            </div>
                        </div>
+
+                   </div>
+
+                   <div class="box-add-price-table">
+                       <div class="box-add-price-time inline">
+                           月租
+                       </div>
+                       <div class="box-add-price-info inline">
+                           <div class="box-add-price-define">
+                               518元/箱/月
+                           </div>
+                           <div class="box-add-price-spec">
+                               (一次性押金324元／箱)
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="box-add-price-table">
+
+                       <div class="box-add-price-time inline">
+                           日租
+                       </div>
+                       <div class="box-add-price-info inline">
+                           <div class="box-add-price-define">
+                               518元/箱/月
+                           </div>
+                           <div class="box-add-price-spec">
+                               (一次性押金324元／箱)
+                           </div>
+                       </div>
+
 
                    </div>
 
@@ -189,6 +273,20 @@
 
        </div>
 
+        <div class="box-add-zone-appointment">
+
+            <div class="box-add-button-info inline">
+                <div class="box-add-button-all-price">
+                    箱单总金额：<span>¥739.20</span>
+                </div>
+                <div class="box-add-button-deposit">
+                    含押金金额：<span>¥684.00</span>
+                </div>
+            </div>
+            <button class="add-order-appointment">预约下单</button>
+        </div>
+
+
         <div ng-if="vm.showEmpty && !vm.showMainSpinner" class="user-empty">
             <span>{{vm.showEmptyInfo}}</span>
         </div>
@@ -199,7 +297,8 @@
 
 
 
-        <tm-pagination style="float:right;" conf="conf"></tm-pagination>
+
+
     </div>
 
 </div>
