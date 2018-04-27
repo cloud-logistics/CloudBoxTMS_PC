@@ -50,12 +50,16 @@
 
         }
 
+        vm.enterEvent = function(e){
+            var keycode = window.event?e.keyCode:e.which;
+            if(keycode==13){
+                vm.goResetSearch();
+            }
+        }
 
 
-        function goSearch() {
-           
-         
-            
+
+        function goSearch() {    
             var j =0 ;
             
             for(var i=0; i< vm.displayedWarehouse.length; i++){
@@ -84,33 +88,22 @@
                  //var mapCenter1 = {lat:vm.displayedSearchWarehouse[0].latitude, lng: vm.displayedSearchWarehouse[0].longitude};
                  // alert(mapCenter1.lat);
                 var myCenter1 = new google.maps.LatLng(vm.displayedSearchWarehouse[0].latitude,vm.displayedSearchWarehouse[0].longitude);
-                 map.setCenter(myCenter1,8);
-                 //map.panTo(mapCenter1, 6);
-                  
-                
-                   
-                
-                
+                 
+                // map.panTo(myCenter1, 15);
+                map.setZoom(8);
+                map.setCenter(myCenter1);
+
+               // alert(map.getZoom());
                 //map = MapService.map_init("siteoverview", mapCenter1 ,"terrain", 6);
                 //alert( vm.displayedSearchWarehouse[0].longitude);
                 //vm.displaySites();
                     
             }else{
-
-                alert("没有该仓库");
+                toastr.error("没有对应仓库");
+               
             }
 
         };
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -125,6 +118,7 @@
                     icon:"http://ozv4m1lo0.bkt.clouddn.com/assets/images/icon_warehouse_bd.svg",
                     map: map
                 });
+                 
 
 
             
@@ -133,25 +127,39 @@
                         var displayedWarehouseAddress = vm.displayedWarehouse[i].location.length > 15 ? vm.displayedWarehouse[i].location.substr(2,6):vm.displayedWarehouse[i].location;
                      
                        
-                        var content = '<div ng-click="goDetail(vm.displayedWarehouse[i])"  style="color:black;text-align:center;width:250px; height: 100px;">'+
-                        '<strong>'+ displayedWarehouseAddress+ vm.displayedWarehouse[i].name+'</strong>'+
+                        var content = '<div class="marker-title ">'+
 
-                            '<div>'+ 
-                                '<div>'+vm.displayedWarehouse[i].allCurrentBoxInfo.availableNum + '/' +vm.displayedWarehouse[i].allCurrentBoxInfo.allNum+
-                                '</div>'+
+                                        '<div class="marker-title-header inline" style="color:black; text-align:center；">'+
+                                        '<strong style="font-size:14px ">'+ displayedWarehouseAddress+ vm.displayedWarehouse[i].name+'</strong>'+
+                                        '</div>'+
 
-                                '<div>'+
-                               " 可用／总数"+
-                                '</div>'+
+                                      '<div class="marker-box-type " style=" margin: 5px 5px; width:200; height:50px;">'+ 
+                                            '<div class="marker-cold-box inline">'+
+                                           
+                                                '<strong>' +"冷藏云箱"+'</strong>'+
+                                            '</div>'+
+                                        
+                                             '<div class="marker-box-number inline">'+ '<span style= " color:blue;" >' +'<strong>'+vm.displayedWarehouse[i].allCurrentBoxInfo.availableNum + '</strong>'+'</span>' + '/' +vm.displayedWarehouse[i].allCurrentBoxInfo.allNum+'<br/>'+
+                                             " 可用／总数"+
+                                             '</div>'+
+                                            '<div class="marker-freeze-box inline">'+
+                                                '<strong>' +"冷冻云箱"+'</strong>'+
+                                            '</div>'+
 
-                            '</div>' +
+                                            '<div class="marker-box-number inline">'+'<span style= " color:blue;" >' +'<strong>'+vm.displayedWarehouse[i].allCurrentBoxInfo.availableNum + '</strong>'+'</span>'+'/' +vm.displayedWarehouse[i].allCurrentBoxInfo.allNum+'<br/>'+
+                                            " 可用／总数"+
+                                            '</div>'+
+                                            
+                                      '</div>' +
 
-                            '<div id="address">'+
 
-                            vm.displayedWarehouse[i].location+
-                            '</div>'+     
+                                     '<div id="address">'+
+                                            vm.displayedWarehouse[i].location+
+                                    '</div>'+
 
-                        '</div>';
+                        '</div>';   
+
+                       
 
                         infowindow.setContent( content);
                         infowindow.open(map, marker);

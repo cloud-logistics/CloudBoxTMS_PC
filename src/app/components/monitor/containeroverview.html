@@ -11,6 +11,17 @@
                 {{container_num}}
               </div>
             </div>
+
+            <div  class= "siteoverview-head">
+              <div class="right-search">
+                <button  class="search-icon"   ng-click="vm.goResetSearch()">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <input st-search="" ng-keyup="vm.enterEvent($event)" ng-model="vm.searchbox"  placeholder="搜索云箱" type="text"/>
+              </div>
+            </div>
+
             <div id="containeroverview" class="mapview" style="min-height:calc(100vh - 50px)"></div>
         </div>
     </div>
