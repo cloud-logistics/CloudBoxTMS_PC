@@ -32,7 +32,6 @@
         };
 
 
-
         vm.showEmpty = true;
         vm.showEmptyInfo = '暂无报表信息';
         vm.showMainSpinner = false;
@@ -51,6 +50,52 @@
             2:'bg-transporting',
             3:'bg-not-available'
         };
+
+
+        vm.boxDetailInfo = [
+            {
+                id:'1232323',
+                type:'冷藏云箱',
+                temperature:'23.2',
+                position:'陕西西安',
+                outTime:'2012-11-11 14:22',
+                returnTime:'2012-11-11 14:22',
+                elapse:'180天18小时23分',
+                status:'待归还',
+
+
+                planUseTime:'100天18小时23分',
+                feeModel:'日租 13.8元／天 押金324元／箱',
+                planRent:'¥23.5',
+                realRent:'¥43.5',
+                toAddRent:'¥20.0'
+
+
+            },
+            {
+                id:'1232323',
+                type:'冷藏云箱',
+                temperature:'23.2',
+                position:'陕西西安',
+                outTime:'2012-11-11 14:22',
+                returnTime:'2012-11-11 14:22',
+                elapse:'180天18小时23分',
+                status:'已归还',
+                planUseTime:'100天18小时23分',
+                feeModel:'日租 13.8元／天 押金324元／箱',
+                planRent:'¥23.5',
+                realRent:'¥43.5',
+                toAddRent:'¥20.0'
+
+
+            }
+
+
+
+
+        ];
+
+
 
 
 
@@ -124,7 +169,14 @@
             vm.allProgress[1].isActive = true;
             vm.allProgress[2].isActive = true;
 
+            var map = new BMap.Map("map-order",{minZoom:1,maxZoom:10});
+            var point = new BMap.Point(116.404, 39.915);  // 创建点坐标
+            map.centerAndZoom(point, 15);
+            map.enableScrollWheelZoom(true);
 
+
+
+        }else if(status && status=='paid'){
 
 
 
@@ -173,6 +225,11 @@
         vm.addOrder = function()
         {
             $state.go('app.add-order',{});
+
+        }
+        vm.goPaidOrder = function()
+        {
+            $state.go('app.order-paid',{args:{status:'paid'}});
 
         }
         vm.appointOrder = function()

@@ -212,7 +212,12 @@
                 //params : {args : {}},
                 templateUrl: 'app/components/order/order-detail-using.html'
             })
-
+            .state('app.order-paid', {
+                url: 'order-paid',
+                params : {args : {status:'paid'}},
+                //params : {args : {}},
+                templateUrl: 'app/components/order/order-pay.html'
+            })
             .state('access', {
                 url: '/access',
                 template: '<div ui-view class="fade-in-right-big smooth"></div>'

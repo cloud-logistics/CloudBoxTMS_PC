@@ -1,0 +1,126 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="OrderController as vm"
+     ng-init="app.settings.asideFolded = false;app.settings.asideDock = false;app.settings.dashboard=false;">
+    <!-- main -->
+
+    <div class="col panel-default">
+        <!--<span us-spinner spinner-on="vm.showMainSpinner"></span>-->
+        <!-- main header -->
+        <!--<div class="bg-light lter b-b wrapper-xs">-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+        <!--<h1 class="font-thin h3 text-black m-l m-t-sm">{{vm.title}}</h1>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+            <div class="order-head">
+                <div class="title inline">全部订单 > 进行中 >订单3232232234 > 还箱结算</div>
+
+            </div>
+
+
+
+
+
+        <div class="panel panel-default" style="width:1050px;margin-left:100px;margin-top:5px;">
+            <table  st-table="vm.boxDetailInfo" st-safe-src="vm.boxDetailInfo" class="table  table-striped table-hover bg-white text-center">
+                <thead>
+                <tr class="" style="font-size:12px; font-weight:normal;">
+                    <!-- <th class="text-center">{{'login.USERNAME' | T}}</th>-->
+                    <th class="text-center">云箱ID</th>
+                    <th class="text-center">型号</th>
+                    <th class="text-center">实时状态</th>
+
+                    <th class="text-center">出库时间</th>
+                    <th class="text-center">归还时间</th>
+
+                    <th class="text-center">预计使用</th>
+
+
+                    <th class="text-center">实际使用</th>
+
+                    <th class="text-center">计费模式</th>
+                    <th class="text-center">预计租金</th>
+                    <th class="text-center">实际租金</th>
+                    <th class="text-center">需补缴</th>
+
+                    <th class="text-center"></th>
+
+                    <!-- <th class="text-center">{{'u.OPERATE' | T}}</th>-->
+                </tr>
+
+                </thead>
+                <tbody class="">
+
+                <tr ng-repeat="item in vm.boxDetailInfo">
+                    <td >{{item.id}}</td>
+                    <td ><div style="background-color: #00caff; width:40px;">{{item.type}}</div></td>
+                    <td >{{item.status}}</td>
+
+                    <td >{{item.outTime}}</td>
+                    <td >{{item.returnTime}}</td>
+                    <td >{{item.planUseTime}}</td>
+
+                    <td >{{item.elapse}}</td>
+
+                    <td >{{item.feeModel}}</td>
+                    <td >{{item.planRent}}</td>
+                    <td ><div style="color:#ff0000; font-size:16px;">{{item.realRent}}</div></td>
+                    <td ><div style="color:#ff0000; font-size:16px;">{{item.toAddRent}}</div></td>
+
+
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="paid-stat">
+
+            <div class="paid-box">
+                <div class="paid-box-title inline">
+                    还箱件数
+                </div>
+                <div class="paid-box-all-type inline">
+                <div class="paid-box-type ">
+                    冷藏型<span>X1</span>
+                </div>
+                <div class="paid-box-type ">
+                    冷冻型<span>X1</span>
+                </div>
+                    <div class="paid-box-type ">
+                        &nbsp&nbsp&nbsp&nbsp总计<span> &nbsp2</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="deposit-refund-all">
+            <div class="deposit-refund">
+                <div class="paid-box-title inline">应退押金</div>
+                <div class="paid-price-num inline">683.00</div>
+            </div>
+            <div class="deposit-refund">
+                <div class="paid-box-title inline">需补缴金额</div>
+                <div class="paid-price-num inline">13.80</div>
+            </div>
+            <div class="deposit-refund">
+                <div class="paid-box-title inline">实际退还</div>
+                <div class="paid-price-num inline">117.80</div>
+            </div>
+            </div>
+
+
+            <div class="final-paid">
+                结算退还金额 <span>¥117.80</span><button>结算</button>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
