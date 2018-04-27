@@ -51,7 +51,6 @@
             ApiServer.userLogin(user,function (response) {
                 // debugger
 
-
                 var result = response.data;
 
                 var sessionId = result.sessionid;
@@ -90,6 +89,7 @@
 
 
             },function (err) {
+
                 console.log(err);
                 var errInfo = '登录失败：' + err.statusText;
                 toastr.error(errInfo);

@@ -8,15 +8,12 @@ style="overflow-x:scroll;overflow-y:hidden;"
     <!-- main -->
     <div class="col panel-default" style="overflow-x:scroll;overflow-y:auto;">
         <div class="transport-company-head">
-            <button ng-click="vm.goAddItem()" class="add-enterprise-button"
-            >添加企业</button>
+            <button ng-click="vm.goAddItem()" class="add-enterprise-button">添加企业</button>
             <div class="right-search">
             <button class="search-icon" ng-click="vm.goResetSearch()">
                 <i class="fa fa-search"></i>
             </button>
             <input st-search="" ng-keyup="vm.enterEvent($event)" ng-model="vm.searchItem" class="pull-right search-edit search-input font-thin" placeholder="请输入公司名称" type="text">
-
-            </input>
             </div>
         </div>
 
@@ -55,8 +52,7 @@ style="overflow-x:scroll;overflow-y:hidden;"
                <!-- <td ng-click="vm.goDetail(item)">{{item.role}}</td>-->
 
                 <td ng-click="vm.goDetail(item)">
-                    <label ng-class="vm.labelColor[item.enterprise_deposit_status]" ng-bind="vm.labelContent[item.enterprise_deposit_status
-]" class="label"></label>
+                    <label ng-class="vm.labelColor[item.enterprise_deposit_status]" ng-bind="vm.labelContent[item.enterprise_deposit_status]" class="label"></label>
                 </td>
 
                 <td ng-click="vm.goDetail(item)">{{item.enterprise_deposit_status == 0 ? '--' : item.enterprise_deposit}}</td>
@@ -83,7 +79,7 @@ style="overflow-x:scroll;overflow-y:hidden;"
 
                     <div class="btn-group " >
                         <div class="oper-group">
-                        <button type="button" class=" transport-company-oper-button  ">  操作</button>
+                        <button type="button" class=" transport-company-oper-button dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  操作</button>
                         <button type="button" class=" transport-company-oper-button-dropdown dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>

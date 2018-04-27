@@ -387,7 +387,6 @@
         }
 
         function userLogin(param,successHandler,failedHandler) {
-            console.log("user login");
             NetworkService.post(constdata.api.auth+'salt', param,successHandler,failedHandler);
         }
         function userRefresh(successHandler,failedHandler) {

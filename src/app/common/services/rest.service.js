@@ -159,18 +159,18 @@
             newResponse.status = response.status;
             newResponse.statusText = '服务器出错，请稍后再试';
 
-                if (response.data && response.data.message) {
-                    newResponse.statusText = response.data.message;
+            if (response.data && response.data.message) {
+                newResponse.statusText = response.data.message;
+            }
+            if (response.data && response.data.status) {
+                newResponse.status = response.status;
+            }
+            if (response.data && response.data.code) {
+                newResponse.code = response.data.code;
 
-                }
-                if (response.data && response.data.status) {
-                    newResponse.status = response.status;
-                }
-                if (response.data && response.data.code) {
-                    newResponse.code = response.data.code;
+            }
 
-                }
-            if(response.data.code == '0401'){
+            if(response.data && response.data.code === '0401'){
                 toastr.error(response.data.message);
                 $state.go('access.signin');
             }else if (failedHandler){
